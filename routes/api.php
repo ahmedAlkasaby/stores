@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Auth\RestPasswordController;
 use App\Http\Controllers\Api\Auth\VerfiedController;
+use App\Http\Controllers\Api\WishListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,9 @@ Route::group(['prefix'=>'auth','middleware'=>'userLangApi'],function(){
     Route::post('forget/password',[ForgetPasswordController::class,'ForgetPassword']);
     Route::post('rest/password',[RestPasswordController::class,'RestPassword']);
 });
+
+Route::group(['middleware'=>['auth-api','userLangApi']],function(){
+    Route::apiResource('wishlists',WishListController::class)->only(['index','store','destroy']);
+});
+
+

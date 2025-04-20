@@ -1,0 +1,72 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\StoreType;
+use Illuminate\Database\Seeder;
+
+class StoreSeeder extends Seeder
+{
+    public function run(): void
+    {
+        for ($i = 1; $i < 6; $i++) {
+            $storeType = StoreType::create([
+                'name' => [
+                    'en' => 'Store Type ' . $i,
+                    'ar' => 'نوع المتجر ' . $i,
+                ],
+                'description' => [
+                    'en' => 'Description for Store Type ' . $i,
+                    'ar' => 'وصف لنوع المتجر ' . $i,
+                ],
+                'image' => 'storeTypes/storeTypeDefoult.jpg',
+            ]);
+
+            for ($j = 1; $j <= 10; $j++) {
+                $store = $storeType->stores()->create([
+                    'name' => [
+                        'en' => 'Store ' . $j,
+                        'ar' => 'متجر ' . $j,
+                    ],
+                    'description' => [
+                        'en' => 'Description for Store ' . $j,
+                        'ar' => 'وصف للمتجر ' . $j,
+                    ],
+                    'address' => 'Address for Store ' . $j,
+                    'image' => 'storeTypes/storeTypeDefoult.jpg',
+                ]);
+
+                for ($k = 1; $k <= 10; $k++) {
+                    $category = $store->categories()->create([
+                        'name' => [
+                            'en' => 'Category ' . $k,
+                            'ar' => 'فئة ' . $k,
+                        ],
+                        'description' => [
+                            'en' => 'Description for Category ' . $k, 
+                            'ar' => 'وصف للفئة ' . $k,
+                        ],
+                        'image' => 'storeTypes/storeTypeDefoult.jpg',
+                    ]);
+
+                    for ($l = 1; $l <= 50; $l++) {
+                        $category->products()->create([
+                            'name' => [
+                                'en' => 'Product ' . $l,
+                                'ar' => 'منتج ' . $l,
+                            ],
+                            'description' => [
+                                'en' => 'Description for Product ' . $l,
+                                'ar' => 'وصف للمنتج ' . $l,
+                            ],
+                            'image' => 'storeTypes/storeTypeDefoult.jpg',
+                            'price' => 100,
+                            'qty' => fake()->numberBetween(100, 1000),
+                            'store_id' => $category->store_id,
+                        ]);
+                    }
+                }
+            }
+        }
+    }
+}

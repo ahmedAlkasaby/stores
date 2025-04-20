@@ -27,6 +27,10 @@ class Category extends MainModel
     {
         return $this->belongsTo(Store::class, 'store_id', 'id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
 }
 
 
