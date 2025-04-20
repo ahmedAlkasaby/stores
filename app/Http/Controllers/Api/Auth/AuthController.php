@@ -35,7 +35,7 @@ class AuthController extends MainController
         ->notify((new VerfyEmail($request->email))->delay(now()->addMinutes(1)));
 
 
-        return $this->messageSuccess('send otp successfully',202);
+        return $this->messageSuccess('send otp successfully');
     }
 
 
@@ -95,7 +95,7 @@ class AuthController extends MainController
 
         $user=User::find($auth->id);
 
-       
+
 
         return $this->sendData([
             'user' => new UserResource($user),
@@ -111,6 +111,6 @@ class AuthController extends MainController
 
     public function logout(Request $request){
         Auth::guard('api')->logout();
-        return $this->sendData([], 'Successfully logged out');
+        return $this->messageSuccess('Successfully logged out');
     }
 }
