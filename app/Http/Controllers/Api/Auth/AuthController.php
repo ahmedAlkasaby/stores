@@ -80,9 +80,6 @@ class AuthController extends MainController
         $validator=Validator::make($request->all(),[
             'email'=>'required|email|exists:users,email',
             'password'=>'required|min:8',
-            'token'=>'required|string',
-            'device_type'=>'required|string|in:android,huawei,apple',
-            'imei'=>'required|string'
         ]);
 
         if($validator->fails()){
@@ -98,11 +95,7 @@ class AuthController extends MainController
 
         $user=User::find($auth->id);
 
-        $user->devices()->updateOrCreate([
-            'token' => $request->token,
-            'device_type' => $request->device_type,
-            'imei' => $request->imei
-        ]);
+       
 
         return $this->sendData([
             'user' => new UserResource($user),
