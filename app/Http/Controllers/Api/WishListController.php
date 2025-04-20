@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WishListController extends Controller
+class WishListController extends MainController
 {
 
     public function index(Request $request)
@@ -20,18 +20,54 @@ class WishListController extends Controller
             'message' => 'Wishlists retrieved successfully',
             'data' => $wishlists,
         ]);
-
     }
 
+    public function toggle(Request $request)
+    {
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $product=$user->wishlists()->where('product_id',$request->product_id)->first();
+        if($product){
+            $user->wishlists()->detach($request->product_id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Product removed from wishlist',
+            ]);
+        }else{
+            $user->wishlists()->attach($request->product_id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Product added to wishlist',
+            ]);
+        }
+    }
 
     public function store(Request $request)
     {
-
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $user->wishlists()->attach($request->product_id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Product added to wishlist',
+        ]);
     }
 
-
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $user->wishlists()->detach($request->product_id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Product removed from wishlist',
+        ]);
     }
+
+
+
+
+
+
+
 }
