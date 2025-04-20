@@ -22,4 +22,5 @@ return [
     'send_code_successfully'=>'Send Code Successfully',
     'register_successfully'=>'Register Successfully',
     'login_successfully'=>'Login Successfully',
+    'unauthenticated'=>'Unauthenticated',
 ];
