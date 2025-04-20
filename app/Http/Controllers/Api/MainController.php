@@ -17,7 +17,7 @@ class MainController extends Controller
         ], 200);
     }
 
-    public function sendError($message='error', $errorMessages = [], $code = 404)
+    public function sendError($message='error', $errorMessages = [], $code = 403)
     {
         return response()->json([
             'success' => false,
