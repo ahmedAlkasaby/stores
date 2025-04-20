@@ -32,19 +32,17 @@ class RestPasswordController extends MainController
         $user=User::where('email',$request->email)->first();
 
         if (Hash::check($request->password,$user->password)) {
-            return $this->massageError('كلمة المرور الجديدة لا يجب أن تكون مطابقة لكلمة المرور الحالية',400);
+            return $this->messageError(__('passwords.must_new_password_not_equal_old_password'),400);
         }
 
         $otp=$this->otp->validate($request->email,$request->code);
 
         if($otp->status==true){
 
-            User::where('email',$request->email)->update([
-               'password'=>Hash::make($request->password)
-            ]);
-            return $this->sendData(null, 'Rest Password Successfully');
+            User::where('email',$request->email)->update($request->only('password'));
+            return $this->messageSuccess( __('passwords.reset_password_successfully'));
         }else{
-            return $this->massageError($otp->message,400);
+            return $this->messageError($otp->message,400);
         }
     }
 }
