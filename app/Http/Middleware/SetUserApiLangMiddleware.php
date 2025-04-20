@@ -16,10 +16,19 @@ class SetUserApiLangMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $auth=Auth::guard('api')->user();
-        if($auth){
-            app()->setLocale($auth->lang);
+        $lang=app()->getLocale();
+
+        if($request->header('lang')){
+            $lang=$request->header('lang');
         }
+
+        $auth=Auth::guard('api')->user();
+        if($auth && $auth->lang != $lang){
+            $lang=$auth->lang;
+        }
+
+        app()->setLocale($lang);
+
         return $next($request);
     }
 }

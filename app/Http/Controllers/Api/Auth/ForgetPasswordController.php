@@ -31,7 +31,7 @@ class ForgetPasswordController extends MainController
 
         $user->notify(new ForgetPasswordNotification());
 
-        return $this->sendData([], 'send code successfully');
+        return $this->messageSuccess( __('auth.send_code_successfully'));
     }
 
 

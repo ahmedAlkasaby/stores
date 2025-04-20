@@ -35,7 +35,7 @@ class AuthController extends MainController
         ->notify((new VerfyEmail($request->email))->delay(now()->addMinutes(1)));
 
 
-        return $this->messageSuccess('send otp successfully');
+        return $this->messageSuccess(__('auth.send_code_successfully'));
     }
 
 
@@ -69,7 +69,7 @@ class AuthController extends MainController
                 'token' => $token,
                 'type' => 'bearer',
             ]
-        ], 'Register Successfully');
+        ], __('auth.register_successfully'));
     }
 
 
@@ -103,7 +103,7 @@ class AuthController extends MainController
                 'token' => $token,
                 'type' => 'bearer',
             ]
-        ], 'user login successfully');
+        ], __('auth.login_successfully'));
 
     }
 
@@ -111,6 +111,6 @@ class AuthController extends MainController
 
     public function logout(Request $request){
         Auth::guard('api')->logout();
-        return $this->messageSuccess('Successfully logged out');
+        return $this->messageSuccess(__('auth.logout'));
     }
 }

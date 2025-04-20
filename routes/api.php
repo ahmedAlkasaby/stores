@@ -24,13 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix'=>'auth'],function(){
+Route::group(['prefix'=>'auth','middleware'=>'userLangApi'],function(){
     Route::post('register/check',[AuthController::class, 'check_register']);
     Route::post('register',[AuthController::class,'register']);
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout'])->middleware('auth-api');
-    Route::post('email/verfied',[VerfiedController::class,'verfiedEmail']);
-    Route::post('email/verfied/resendCode',[VerfiedController::class,'resendCode']);
     Route::post('forget/password',[ForgetPasswordController::class,'ForgetPassword']);
     Route::post('rest/password',[RestPasswordController::class,'RestPassword']);
 });
