@@ -16,6 +16,12 @@ class MainController extends Controller
             'data'    => $data,
         ], 200);
     }
+    public function messageSuccess($message ,$code=200){
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+        ], $code);
+    }
 
     public function sendError($message='error', $errorMessages = [], $code = 403)
     {

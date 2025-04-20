@@ -30,11 +30,12 @@ class AuthController extends MainController
            return $this->sendError('error',$validator->errors(),403);
         }
 
+
         Notification::route('mail', $request->email)
         ->notify((new VerfyEmail($request->email))->delay(now()->addMinutes(1)));
 
 
-        return $this->sendData(null,'send otp successfully');
+        return $this->messageSuccess('send otp successfully',202);
     }
 
 
@@ -42,13 +43,11 @@ class AuthController extends MainController
     public function register(Request $request){
 
         $validator=Validator::make($request->all(),[
+            'first_name'=>'required|string|max:255',
+            'last_name'=>'required|string|max:255',
             'email'=>'required|email|unique:users|max:255|string',
             'password'=>'required|confirmed|min:8|string',
             'code'=>'required',
-            'token'=>'required|string',
-            'device_type'=>'required|string|in:android,huawei,apple',
-            'imei'=>'required|string',
-
         ]);
 
         if($validator->fails()){
@@ -58,23 +57,7 @@ class AuthController extends MainController
 
 
         if($otp->status==true){
-            $user = User::create([
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'email_verified_at'=>now(),
-                'role'=>'doner',
-                'is_admin'=>0,
-
-            ]);
-
-            $user->addRole('doner');
-
-            $user->devices()->create([
-                'token'=>$request->token,
-                'device_type'=>$request->device_type,
-                'imei'=>$request->imei
-            ]);
-
+            $user = User::create($request->all());
             $token = Auth::guard('api')->login($user);
         }else{
             return $this->messageError($otp->message,400);
