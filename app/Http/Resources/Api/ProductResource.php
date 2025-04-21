@@ -20,10 +20,12 @@ class ProductResource extends JsonResource
             'description' => $this->descriptionLang(),
             'image' => url($this->image),
             'price' => $this->price,
+            'qty' => $this->qty,
             'store' => new StoreResource($this->whenLoaded('store')),
             'category' => new CategoryResource($this->whenLoaded('category')),
             'store_type' => new StoreTypeResource($this->whenLoaded('storeType')),
             'in_wishlists'=> $this->checkProductInWishlists(),
+            'qty_in_cart'=> $this->qtyInCart(),
         ];
     }
 }

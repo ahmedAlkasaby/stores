@@ -2,26 +2,30 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
-class DestroyWishlistRequest extends FormRequest
+class StoreCartItemsRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+
     public function rules(): array
     {
+
         return [
-            'product_id' => [
+            'product_id' => ['required', 'exists:products,id'],
+            'qty' => [
                 'required',
-                'exists:products,id',
-                Rule::exists('wishlists', 'product_id')->where(function ($query) {
-                    return $query->where('user_id', Auth::guard('api')->id());
-                }),
+                'integer',
+                'min:1',
+               
             ],
         ];
     }
@@ -31,6 +35,11 @@ class DestroyWishlistRequest extends FormRequest
         return [
             'product_id.required' => __('validation.product_required'),
             'product_id.exists'   => __('validation.product_exists'),
+            'qty.required' => __('validation.qty_required'),
+            'qty.integer' => __('validation.qty_integer'),
+            'qty.min' => __('validation.qty_min'),
+
         ];
     }
+
 }

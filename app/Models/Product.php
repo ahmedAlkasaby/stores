@@ -89,17 +89,16 @@ class Product extends MainModel
     }
 
 
-    // public function checkProductInWishlists()
-    // {
-    //     $auth=Auth::guard('api')->user();
-    //     $user=User::find($auth->id);
-    //     if(!$user){
-    //         return false;
-    //     }
-    //     $product= $this->wishlists()->where('user_id', $user->id)->exists();
-    //     return $product;
-
-    // }
+    public function qtyInCart(): int
+    {
+        $userId = Auth::guard('api')->id();
+        if ($userId) {
+            return CartItem::where('product_id', $this->id)
+                ->where('user_id', $userId)
+                ->sum('qty');
+        }
+        return 0;
+    }
 
     public function checkProductInWishlists(): bool
     {

@@ -235,6 +235,11 @@ return [
     'sort_by_in'=>'The sort by field must be one of the following: latest, oldest, highest_price, lowest_price',
     'min_price_numeric'=>'The min price field must be a number',
     'max_price_numeric'=>'The max price field must be a number',
+    'qty_required'=>'The qty field is required',
+    'qty_integer'=>'The qty field must be an integer',
+    'qty_min'=>'The qty field must be greater than or equal to 1',
+    'qty_max_available'=>'The qty field must be less than or equal to :qty',
+    'qty_greater_than_stock'=>'The qty field must be less than or equal to the product stock',
 
 
 
