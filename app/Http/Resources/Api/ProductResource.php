@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
             'category' => new CategoryResource($this->whenLoaded('category')),
             'store_type' => new StoreTypeResource($this->whenLoaded('storeType')),
             'in_wishlists'=> $this->checkProductInWishlists(),
+            'qty_in_cart'=> $this->qtyInCart(),
         ];
     }
 }

@@ -4,9 +4,11 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Auth\RestPasswordController;
 use App\Http\Controllers\Api\Auth\VerfiedController;
+use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\WishListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -37,6 +39,7 @@ Route::group(['prefix'=>'auth','middleware'=>'userLangApi'],function(){
 Route::group(['middleware'=>['auth-api','userLangApi']],function(){
     Route::get('wishlists',[WishListController::class,'index']);
     Route::post('wishlists',[WishListController::class,'toggle']);
+    Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
 });
 
 
