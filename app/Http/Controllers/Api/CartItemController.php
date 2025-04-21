@@ -7,14 +7,13 @@ use App\Http\Requests\Api\StoreCartItemsRequest;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class CartItemController extends MainController
 {
 
     public function index()
     {
-        //
+        
     }
 
 
