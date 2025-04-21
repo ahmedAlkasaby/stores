@@ -18,14 +18,12 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->nameLang(),
             'description' => $this->descriptionLang(),
-            'image' => url($this->image),
+            'image' => asset($this->image),
             'price' => $this->price,
-            'qty' => $this->qty,
             'store' => new StoreResource($this->whenLoaded('store')),
             'category' => new CategoryResource($this->whenLoaded('category')),
             'store_type' => new StoreTypeResource($this->whenLoaded('storeType')),
             'in_wishlists'=> $this->checkProductInWishlists(),
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }
 }

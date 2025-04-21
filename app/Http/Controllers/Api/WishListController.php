@@ -18,7 +18,7 @@ class WishListController extends MainController
     {
         $auth=Auth::guard('api')->user();
         $user=User::find($auth->id);
-        $wishlists=$user->wishlists()->with(['store','category'])->filter($request)->paginate(10);
+        $wishlists=$user->wishlists()->filter($request)->paginate(10);
 
         return $this->sendData(new ProductCollection($wishlists), __('site.wishlists'));
     }

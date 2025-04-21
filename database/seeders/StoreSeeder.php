@@ -19,7 +19,7 @@ class StoreSeeder extends Seeder
                     'en' => 'Description for Store Type ' . $i,
                     'ar' => 'وصف لنوع المتجر ' . $i,
                 ],
-                'image' => 'storeTypes/storeTypeDefoult.jpg',
+                'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
             ]);
 
             for ($j = 1; $j <= 10; $j++) {
@@ -33,7 +33,7 @@ class StoreSeeder extends Seeder
                         'ar' => 'وصف للمتجر ' . $j,
                     ],
                     'address' => 'Address for Store ' . $j,
-                    'image' => 'storeTypes/storeTypeDefoult.jpg',
+                    'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                 ]);
 
                 for ($k = 1; $k <= 10; $k++) {
@@ -46,7 +46,7 @@ class StoreSeeder extends Seeder
                             'en' => 'Description for Category ' . $k,
                             'ar' => 'وصف للفئة ' . $k,
                         ],
-                        'image' => 'storeTypes/storeTypeDefoult.jpg',
+                        'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                     ]);
 
                     for ($l = 1; $l <= 50; $l++) {
@@ -59,7 +59,7 @@ class StoreSeeder extends Seeder
                                 'en' => 'Description for Product ' . $l,
                                 'ar' => 'وصف للمنتج ' . $l,
                             ],
-                            'image' => 'storeTypes/storeTypeDefoult.jpg',
+                            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                             'qty' => 100,
                             'price' => fake()->numberBetween(100, 1000),
                             'store_id' => $category->store_id,
