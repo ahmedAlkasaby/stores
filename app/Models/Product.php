@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
+
 
 
 class Product extends MainModel
@@ -25,6 +27,15 @@ class Product extends MainModel
     {
         return $this->belongsTo(Store::class, 'store_id', 'id');
     }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
+    }
+
+
+
+
 
     public function scopeFilter($query, $request = null)
     {
@@ -75,6 +86,25 @@ class Product extends MainModel
         }
 
         return $query;
+    }
+
+
+    // public function checkProductInWishlists()
+    // {
+    //     $auth=Auth::guard('api')->user();
+    //     $user=User::find($auth->id);
+    //     if(!$user){
+    //         return false;
+    //     }
+    //     $product= $this->wishlists()->where('user_id', $user->id)->exists();
+    //     return $product;
+
+    // }
+
+    public function checkProductInWishlists(): bool
+    {
+        $userId = Auth::guard('api')->id();
+        return $userId && $this->wishlists()->where('user_id', $userId)->exists();
     }
 
 
