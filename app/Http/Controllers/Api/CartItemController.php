@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreCartItemsRequest;
+use App\Http\Resources\Api\CartItemCollection;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\User;
@@ -13,7 +14,9 @@ class CartItemController extends MainController
 
     public function index()
     {
-        
+        $auth=Auth()->guard('api')->user();
+        $cartItems = CartItem::with('product')->where('user_id', $auth->id)->paginate(10);
+        return $this->sendData(new CartItemCollection($cartItems), __('site.cart_items'));
     }
 
 

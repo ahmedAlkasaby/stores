@@ -6,4 +6,5 @@ return [
     'wishlists' => 'قائمة المفضلة',
     'cart_item_updated' => 'تم تحديث المنتج في السلة',
     'cart_item_added' => 'تم إضافة المنتج إلى السلة',
+    'cart_items' => 'عناصر السلة',
 ];
