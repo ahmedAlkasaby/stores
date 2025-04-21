@@ -62,6 +62,11 @@ class CartItemController extends MainController
 
     public function destroy(string $id)
     {
-        //
+        $cartItem = CartItem::find($id);
+        if (!$cartItem) {
+            return $this->messageError(__('site.cart_item_not_found'));
+        }
+        $cartItem->delete();
+        return $this->messageSuccess(__('site.cart_item_deleted'));
     }
 }
