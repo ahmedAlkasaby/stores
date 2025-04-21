@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ProductRequest;
 use App\Http\Requests\Api\StoreWishlistRequest;
 use App\Http\Requests\Api\ToggleWishlistRequest;
+use App\Http\Resources\Api\ProductCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +19,8 @@ class WishListController extends MainController
         $auth=Auth::guard('api')->user();
         $user=User::find($auth->id);
         $wishlists=$user->wishlists()->with(['store','category'])->filter($request)->paginate(10);
-        return response()->json([
-            'status' => true,
-            'message' => 'Wishlists retrieved successfully',
-            'data' => $wishlists,
-        ]);
+
+        return $this->sendData(new ProductCollection($wishlists), __('site.wishlists'));
     }
 
     public function toggle(ToggleWishlistRequest $request)
