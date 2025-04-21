@@ -43,7 +43,7 @@ class StoreSeeder extends Seeder
                             'ar' => 'فئة ' . $k,
                         ],
                         'description' => [
-                            'en' => 'Description for Category ' . $k, 
+                            'en' => 'Description for Category ' . $k,
                             'ar' => 'وصف للفئة ' . $k,
                         ],
                         'image' => 'storeTypes/storeTypeDefoult.jpg',
@@ -60,8 +60,8 @@ class StoreSeeder extends Seeder
                                 'ar' => 'وصف للمنتج ' . $l,
                             ],
                             'image' => 'storeTypes/storeTypeDefoult.jpg',
-                            'price' => 100,
-                            'qty' => fake()->numberBetween(100, 1000),
+                            'qty' => 100,
+                            'price' => fake()->numberBetween(100, 1000),
                             'store_id' => $category->store_id,
                         ]);
                     }

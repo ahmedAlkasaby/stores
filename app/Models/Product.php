@@ -30,9 +30,12 @@ class Product extends MainModel
     {
         $request = $request ?? request();
 
+        $query->latest();
+
         if ($request->filled('search')) {
-            $query->where('name->ar', 'like', '%' . $request->search . '%')
-                  ->orWhere('name->en', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%')
+                  ->orWhere('price', 'like', '%' . $request->search . '%');
         }
 
         if ($request->filled('store_type_id')) {
@@ -47,6 +50,28 @@ class Product extends MainModel
 
         if ($request->filled('category_id')) {
             $query->where('category_id', $request->category_id);
+        }
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+        if ($request->filled('sort_by')) {
+            switch ($request->sort_by) {
+                case 'latest':
+                    $query->latest();
+                    break;
+                case 'oldest':
+                    $query->oldest();
+                    break;
+                case 'highest_price':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'lowest_price':
+                    $query->orderBy('price', 'asc');
+                    break;
+            }
         }
 
         return $query;

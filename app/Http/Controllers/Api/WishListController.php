@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ProductRequest;
 use App\Http\Requests\Api\StoreWishlistRequest;
 use App\Http\Requests\Api\ToggleWishlistRequest;
 use App\Models\User;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class WishListController extends MainController
 {
 
-    public function index(Request $request)
+    public function index(ProductRequest $request)
     {
         $auth=Auth::guard('api')->user();
         $user=User::find($auth->id);

@@ -228,6 +228,13 @@ return [
    'product_required'=>'The product field is required',
    'product_exists'=>'The product field does not exist' ,
    'product_unique_in_wishlist'=>'The product field is already in the wishlist',
+    'search_string'=>'The search field must be a string',
+    'category_exists'=>'The category field does not exist',
+    'store_exists'=>'The store field does not exist',
+    'store_type_exists'=>'The store type field does not exist',
+    'sort_by_in'=>'The sort by field must be one of the following: latest, oldest, highest_price, lowest_price',
+    'min_price_numeric'=>'The min price field must be a number',
+    'max_price_numeric'=>'The max price field must be a number',
 
 
 

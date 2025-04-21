@@ -223,6 +223,13 @@ return [
    'product_required'=>'حقل المنتج مطلوب',
    'product_exists'=>'حقل المنتج غير موجود',
    'product_unique_in_wishlist'=>'حقل المنتج موجود مسبقًا في قائمة الرغبات',
+    'search_string'=>'حقل البحث يجب أن يكون نصًا',
+    'category_exists'=>'حقل الفئة غير موجود',
+    'store_exists'=>'حقل المتجر غير موجود',
+    'store_type_exists'=>'حقل نوع المتجر غير موجود',
+    'sort_by_in'=>'حقل الترتيب غير موجود',
+    'min_price_numeric'=>'حقل السعر الأدنى يجب أن يكون رقمًا',
+    'max_price_numeric'=>'حقل السعر الأقصى يجب أن يكون رقمًا',
 
 
 ];
