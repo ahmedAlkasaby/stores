@@ -19,6 +19,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // main seeders you must run
+        $this->call([
+            StatusOrderSeeder::class,
+            PaymentSeeder::class,
+        ]);
+
         $this->call([
             StoreSeeder::class,
         ]);
