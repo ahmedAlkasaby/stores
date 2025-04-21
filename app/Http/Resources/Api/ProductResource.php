@@ -18,7 +18,7 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->nameLang(),
             'description' => $this->descriptionLang(),
-            'image' => asset($this->image),
+            'image' => url($this->image),
             'price' => $this->price,
             'store' => new StoreResource($this->whenLoaded('store')),
             'category' => new CategoryResource($this->whenLoaded('category')),
