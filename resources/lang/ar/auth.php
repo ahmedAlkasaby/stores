@@ -23,6 +23,7 @@ return [
     'send_code_successfully'=>'تم ارسال الكود بنجاح',
     'register_successfully'=>'تم التسجيل بنجاح',
     'login_successfully'=>'تم تسجيل الدخول بنجاح',
-    
+    'unauthenticated'=>'غير مسجل دخول ',
+
 ];
 

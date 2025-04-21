@@ -23,7 +23,7 @@ class ApiAuthMiddleware
 
         }else{
             return response()->json([
-                'message'=>'Not Auth'
+                'message'=>__('auth.unauthenticated'),
             ], 401);
         }
 

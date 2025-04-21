@@ -225,145 +225,16 @@ return [
 
     // validaation mesaages
 
-    'name_required' => 'The name is required.',
-    'name_string' => 'The name must be a string.',
-    'name_unique' => 'The name must be a unique.',
-    'display_name_required' => 'The display name is required.',
-    'display_name_string' => 'The display name must be a string.',
-    'display_name_unique' => 'The display name must be a unique.',
-    'permissions_array' => 'The permissions must be an array.',
-    'permissions_required' => 'The permissions field is required.',
-    'the_name_required' => 'The name field is required.',
-    'the_name_string' => 'The name must be a valid string.',
-    'the_phone_required' => 'The phone field is required.',
-    'the_phone_string' => 'The phone must be a valid string.',
-    'the_phone_unique' => 'The phone number is already registered.',
-    'the_phone_regex' => 'The phone number must be a valid Egyptian number, consisting of 11 digits and starting with 01.',
-    'the_password_required' => 'The password field is required.',
-    'the_password_confirmed' => 'The password confirmation does not match.',
-    'the_password_min' => 'The password must be at least 8 characters long.',
-    'the_password_max' => 'The password must not exceed 32 characters.',
-    'the_role_id_required' => 'The role field is required.',
-    'the_role_id_exists' => 'The selected role does not exist.',
-    'the_phone_required' => 'The phone number is required.',
-    'the_phone_string' => 'The phone number must be a valid string.',
-    'the_phone_regex' => 'The phone number must be a valid Egyptian number with 11 digits starting with 01.',
-    'the_phone_unique' => 'The phone number is already registered.',
-    'the_name_required' => 'The name is required.',
-    'the_name_string' => 'The name must be a valid string.',
-    'the_name_max' => 'The name must not exceed 50 characters.',
-    'the_gender_required' => 'The gender is required.',
-    'the_gender_in' => 'The selected gender is invalid.',
-    'the_region_id_required' => 'The region is required.',
-
-    'name_en_required' => 'The English name is required.',
-    'name_en_string' => 'The English name must be a valid string.',
-    'name_en_max' => 'The English name must not exceed 50 characters.',
-    'name_en_regex' => 'The English name must contain only English letters.',
-    'name_en_unique' => 'The English name is already in use.',
-
-    'name_ar_required' => 'The Arabic name is required.',
-    'name_ar_string' => 'The Arabic name must be a valid string.',
-    'name_ar_max' => 'The Arabic name must not exceed 50 characters.',
-    'name_ar_regex' => 'The Arabic name must contain only Arabic letters.',
-    'name_ar_unique' => 'The Arabic name is already in use.',
-
-    'description_en_nullable' => 'The English description can be nullable.',
-    'description_en_string' => 'The English description must be a valid string.',
-    'description_en_max' => 'The English description must not exceed 250 characters.',
-    'description_en_regex' => 'The English discription must contain only English letters.',
-
-    'description_ar_nullable' => 'The Arabic description can be nullable.',
-    'description_ar_string' => 'The Arabic description must be a valid string.',
-    'description_ar_max' => 'The Arabic description must not exceed 250 characters.',
-    'description_ar_regex' => 'The Arabic description must contain only Arabic letters.',
-
-    'active_required' => 'The active status is required.',
-
-    'name_en_required' => 'The English name is required.',
-    'name_en_string' => 'The English name must be a valid string.',
-    'name_en_max' => 'The English name must not exceed 50 characters.',
-    'name_en_regex' => 'The English name must contain only English letters.',
-
-    'name_ar_required' => 'The Arabic name is required.',
-    'name_ar_string' => 'The Arabic name must be a valid string.',
-    'name_ar_max' => 'The Arabic name must not exceed 50 characters.',
-    'name_ar_regex' => 'The Arabic name must contain only Arabic letters.',
-
-    'description_en_nullable' => 'The English description can be nullable.',
-    'description_en_string' => 'The English description must be a valid string.',
-    'description_en_max' => 'The English description must not exceed 250 characters.',
-    'description_en_regex' => 'The English description must contain only English letters.',
-
-    'description_ar_nullable' => 'The Arabic description can be nullable.',
-    'description_ar_string' => 'The Arabic description must be a valid string.',
-    'description_ar_max' => 'The Arabic description must not exceed 250 characters.',
-    'description_ar_regex' => 'The Arabic description must contain only Arabic letters.',
-
-    'category_id_required' => 'The category field is required.',
-    'category_id_exists' => 'The selected category does not exist.',
-    'unit_price'=>'Unit Price',
-
-    'name_required' => 'The name field is required.',
-    'name_string' => 'The name must be a string.',
-    'phone_regex' => 'The phone number is invalid.',
-    'phone_unique' => 'The phone number already exists.',
-
-    'password_confirmed' => 'The password confirmation does not match.',
-    'password_min' => 'The password must be at least 8 characters long.',
-
-    'title_ar_required' => 'The Arabic title is required.',
-    'title_ar_string' => 'The Arabic title must be a string.',
-    'title_ar_regex' => 'The Arabic title format is invalid.',
-
-    'title_en_required' => 'The English title is required.',
-    'title_en_string' => 'The English title must be a string.',
-    'title_en_regex' => 'The English title format is invalid.',
-
-    'description_ar_nullable' => 'The Arabic description is optional.',
-    'description_ar_string' => 'The Arabic description must be a string.',
-    'description_ar_min' => 'The Arabic description must be at least 10 characters long.',
-    'description_ar_max' => 'The Arabic description may not be greater than 500 characters.',
-
-    'description_en_nullable' => 'The English description is optional.',
-    'description_en_string' => 'The English description must be a string.',
-    'description_en_min' => 'The English description must be at least 10 characters long.',
-    'description_en_max' => 'The English description may not be greater than 500 characters.',
-
-    'priority_in' => 'The priority must be one of the valid values.',
-    'repeating_in' => 'The repeating must be one of the valid values.',
-
-    'region_id_required' => 'The region is required.',
-    'region_id_exists' => 'The region does not exist.',
-
-    'volunteer_id_required' => 'The volunteer ID is required.',
-    'volunteer_id_exists' => 'The volunteer does not exist.',
-
-    'category_case_id_required' => 'The category case ID is required.',
-    'category_case_id_exists' => 'The category case does not exist.',
-
-    'items_required_without' => 'Items are required when no items are present.',
-    'items_item_id_required_without' => 'The item ID is required when no items are present.',
-    'items_item_id_exists' => 'The item ID does not exist.',
-    'items_amount_required_without' => 'The amount is required when no items are present.',
-    'items_amount_numeric' => 'The amount must be a number.',
-    'items_amount_min' => 'The amount must be at least 1.',
-
-    'price_required_without' => 'The price is required when no items are present.',
-    'price_numeric' => 'The price must be a number.',
-    'price_min' => 'The price must be at least 0.',
-
-    'images_image' => 'The image must be valid.',
-    'images_mimes' => 'The image extension is invalid.',
-    'images_max' => 'The image may not be greater than 2MB.',
-    'you_cant_enter_both_price_and_items'=>'You can\'t enter both price and items.',
-
-    'token_required' => 'The token is required.',
-    'token_string' => 'The token must be a string.',
-    'device_type_required' =>'the device type is required',
-    'device_type_in' => 'The device type must be one of the following: android, huawei, apple.',
-    'imei_required' => 'The IMEI is required.',
-
+   'product_required'=>'The product field is required',
+   'product_exists'=>'The product field does not exist' ,
+   'product_unique_in_wishlist'=>'The product field is already in the wishlist',
+    'search_string'=>'The search field must be a string',
+    'category_exists'=>'The category field does not exist',
+    'store_exists'=>'The store field does not exist',
+    'store_type_exists'=>'The store type field does not exist',
+    'sort_by_in'=>'The sort by field must be one of the following: latest, oldest, highest_price, lowest_price',
+    'min_price_numeric'=>'The min price field must be a number',
+    'max_price_numeric'=>'The max price field must be a number',
 
 
 

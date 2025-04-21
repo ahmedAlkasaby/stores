@@ -35,7 +35,8 @@ Route::group(['prefix'=>'auth','middleware'=>'userLangApi'],function(){
 });
 
 Route::group(['middleware'=>['auth-api','userLangApi']],function(){
-    Route::apiResource('wishlists',WishListController::class)->only(['index','store','destroy']);
+    Route::get('wishlists',[WishListController::class,'index']);
+    Route::post('wishlists',[WishListController::class,'toggle']);
 });
 
 

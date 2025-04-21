@@ -16,7 +16,7 @@ class MainModel extends Model
     ];
 
 
-    public function nameLangApi($lang = null)
+    public function nameLang($lang = null)
     {
         $data = $this->name;
         if ($lang === null) {
@@ -28,7 +28,7 @@ class MainModel extends Model
         return $data[$lang] ?? null;
     }
 
-    public function descriptionLangApi($lang = null)
+    public function descriptionLang($lang = null)
     {
         $data = $this->description;
         if ($lang === null) {
