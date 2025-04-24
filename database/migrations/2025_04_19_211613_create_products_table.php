@@ -13,13 +13,52 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
+            $table->string('link')->unique();
+
             $table->text('name');
             $table->longText('description')->nullable();
+            // image
             $table->string('image');
-            $table->decimal('price', 10, 2);
-            $table->integer('qty');
+            $table->string('video')->nullable();
+            $table->string('background')->nullable();
+            $table->string('color')->nullable();
+
+            // price
+            $table->decimal('price', 10, 2)->default(0);
+           
+
+            //order limit
+            $table->decimal('start', 10, 2)->default(1);
+            $table->decimal('skip', 10, 2)->default(1);
+            $table->decimal('order_limit', 10, 2)->default(1);
+            $table->decimal('max_order', 10, 2)->default(1);
+
+            // stock
+            $table->decimal('stock_amount', 10, 2)->default(0);
+            $table->decimal('max_amount', 10, 2)->default(0);
+
+            // status
+            $table->boolean('active')->default(true);
+            $table->boolean('feature')->default(false);
+
+            // dates
+            $table->dateTime('date_start')->nullable();
+            $table->dateTime('date_expire')->nullable();
+            $table->time('day_start')->nullable();
+            $table->time('day_end')->nullable();
+
+            // relations
             $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();
+            $table->foreignId('size_id')->nullable()->constrained('sizes')->nullOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained('products')->nullOnDelete();
+
+            // order
+            $table->integer('order_id')->nullable();
+
+
             $table->timestamps();
         });
     }

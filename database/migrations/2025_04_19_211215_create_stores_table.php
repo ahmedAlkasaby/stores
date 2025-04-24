@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('address');
             $table->string('image');
+            $table->boolean('active')->default(true);
             $table->foreignId('store_type_id')->constrained('store_types')->onDelete('cascade');
             $table->timestamps();
         });
