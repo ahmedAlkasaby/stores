@@ -5,8 +5,10 @@ use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Auth\RestPasswordController;
 use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\StoreTypeController;
 use App\Http\Controllers\Api\WishListController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -24,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('store_types',StoreTypeController::class)->only(['index','show']);
 
 
 Route::group(['prefix'=>'auth','middleware'=>'userLangApi'],function(){

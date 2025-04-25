@@ -22,7 +22,7 @@ class StoreSeeder extends Seeder
                 'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
             ]);
 
-            for ($j = 1; $j <= 10; $j++) {
+            for ($j = 1; $j <= 11; $j++) {
                 $store = $storeType->stores()->create([
                     'name' => [
                         'en' => 'Store ' . $j,
@@ -36,36 +36,36 @@ class StoreSeeder extends Seeder
                     'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                 ]);
 
-                for ($k = 1; $k <= 10; $k++) {
-                    $category = $store->categories()->create([
-                        'name' => [
-                            'en' => 'Category ' . $k,
-                            'ar' => 'فئة ' . $k,
-                        ],
-                        'description' => [
-                            'en' => 'Description for Category ' . $k,
-                            'ar' => 'وصف للفئة ' . $k,
-                        ],
-                        'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-                    ]);
+                // for ($k = 1; $k <= 10; $k++) {
+                //     $category = $store->categories()->create([
+                //         'name' => [
+                //             'en' => 'Category ' . $k,
+                //             'ar' => 'فئة ' . $k,
+                //         ],
+                //         'description' => [
+                //             'en' => 'Description for Category ' . $k,
+                //             'ar' => 'وصف للفئة ' . $k,
+                //         ],
+                //         'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                //     ]);
 
-                    for ($l = 1; $l <= 50; $l++) {
-                        $category->products()->create([
-                            'name' => [
-                                'en' => 'Product ' . $l,
-                                'ar' => 'منتج ' . $l,
-                            ],
-                            'description' => [
-                                'en' => 'Description for Product ' . $l,
-                                'ar' => 'وصف للمنتج ' . $l,
-                            ],
-                            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-                            'qty' => 100,
-                            'price' => fake()->numberBetween(100, 1000),
-                            'store_id' => $category->store_id,
-                        ]);
-                    }
-                }
+                //     for ($l = 1; $l <= 50; $l++) {
+                //         $category->products()->create([
+                //             'name' => [
+                //                 'en' => 'Product ' . $l,
+                //                 'ar' => 'منتج ' . $l,
+                //             ],
+                //             'description' => [
+                //                 'en' => 'Description for Product ' . $l,
+                //                 'ar' => 'وصف للمنتج ' . $l,
+                //             ],
+                //             'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                //             'qty' => 100,
+                //             'price' => fake()->numberBetween(100, 1000),
+                //             'store_id' => $category->store_id,
+                //         ]);
+                //     }
+                // }
             }
         }
     }

@@ -79,19 +79,22 @@ class Product extends MainModel
 
 
 
-    public function scopeFilter($query, $request = null)
+    public function scopeFilter($query, $request = null,$type_app='app')
     {
         $request = $request ?? request();
 
         // فلترة المنتجات الأساسية فقط
-        $query->whereNull('parent_id');
-        $query->where('active', true);
-        $query->where('date_start', '<=', now());
-        $query->where('date_expire', '>=', now());
-        $query->where('day_start', '<=', now()->format('H:i:s'));
-        $query->where('day_end', '>=', now()->format('H:i:s'));
 
-        
+        if( $type_app == 'app' ){
+            $query->whereNull('parent_id');
+            $query->where('active', true);
+            $query->where('date_start', '<=', now());
+            $query->where('date_expire', '>=', now());
+            $query->where('day_start', '<=', now()->format('H:i:s'));
+            $query->where('day_end', '>=', now()->format('H:i:s'));
+        }
+
+
 
         // ترتيب افتراضي حسب order_id
         $query->orderByDesc('order_id');

@@ -24,6 +24,10 @@ class Store extends MainModel
     {
         return $this->hasMany(Category::class, 'store_id', 'id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'store_id', 'id');
+    }
 
 
 }
