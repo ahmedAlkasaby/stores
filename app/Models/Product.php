@@ -75,31 +75,20 @@ class Product extends MainModel
         return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
     }
 
-
-
-
-
-    public function scopeFilter($query, $request = null,$type_app='app')
+    public function scopeApplyBasicFilters($query, $request, $type_app)
     {
-        $request = $request ?? request();
+        return $query
+            ->where('parent_id', $type_app == 'app' ? null : $request->parent_id)
+            ->where('active', $type_app == 'app' ? true : $request->active)
+            ->where('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
+            ->where('date_expire', '>=', $type_app == 'app' ? now() : $request->date_expire)
+            ->where('day_start', '<=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_start)
+            ->where('day_end', '>=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_end)
+            ->orderBy('order_id', 'asc');
+    }
 
-        // فلترة المنتجات الأساسية فقط
-
-        if( $type_app == 'app' ){
-            $query->whereNull('parent_id');
-            $query->where('active', true);
-            $query->where('date_start', '<=', now());
-            $query->where('date_expire', '>=', now());
-            $query->where('day_start', '<=', now()->format('H:i:s'));
-            $query->where('day_end', '>=', now()->format('H:i:s'));
-        }
-
-
-
-        // ترتيب افتراضي حسب order_id
-        $query->orderByDesc('order_id');
-
-        // البحث
+    public function scopeApplySearch($query, $request)
+    {
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -109,26 +98,37 @@ class Product extends MainModel
             });
         }
 
-        // فلترة حسب نوع المتجر
+        return $query;
+    }
+
+    public function scopeApplyStoreFilters($query, $request)
+    {
         if ($request->filled('store_type_id')) {
             $query->whereHas('store.storeType', function ($q) use ($request) {
                 $q->where('id', $request->store_type_id);
             });
         }
 
-        // فلترة حسب المتجر
         if ($request->filled('store_id')) {
             $query->where('store_id', $request->store_id);
         }
 
-        // فلترة حسب التصنيف (Many to Many)
+        return $query;
+    }
+
+    public function scopeApplyCategoryFilter($query, $request)
+    {
         if ($request->filled('category_id')) {
             $query->whereHas('categories', function ($q) use ($request) {
                 $q->where('category_id', $request->category_id);
             });
         }
 
-        // السعر
+        return $query;
+    }
+
+    public function scopeApplyPriceFilters($query, $request)
+    {
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->min_price);
         }
@@ -137,16 +137,20 @@ class Product extends MainModel
             $query->where('price', '<=', $request->max_price);
         }
 
-        // حالات عامة
-        if ($request->filled('active')) {
-            $query->where('active', $request->active);
-        }
+        return $query;
+    }
 
+    public function scopeApplyFeatureFilter($query, $request)
+    {
         if ($request->filled('feature')) {
             $query->where('feature', $request->feature);
         }
 
-        // الترتيب
+        return $query;
+    }
+
+    public function scopeApplySorting($query, $request)
+    {
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
                 case 'latest':
@@ -166,6 +170,26 @@ class Product extends MainModel
 
         return $query;
     }
+
+
+
+
+
+
+    public function scopeFilter($query, $request = null, $type_app = 'app')
+    {
+        $request = $request ?? request();
+
+        return $query
+            ->applyBasicFilters($request, $type_app)
+            ->applySearch($request)
+            ->applyStoreFilters($request)
+            ->applyCategoryFilter($request)
+            ->applyPriceFilters($request)
+            ->applyFeatureFilter($request)
+            ->applySorting($request);
+    }
+
 
 
 

@@ -12,6 +12,8 @@ class Category extends MainModel
         'image',
         'parent_id',
         'store_id',
+        'active',
+        'order_id'
     ];
 
 

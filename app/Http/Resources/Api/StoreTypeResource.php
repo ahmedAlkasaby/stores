@@ -22,7 +22,9 @@ class StoreTypeResource extends JsonResource
             'description' => $this->descriptionLang(),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
-            'stores_count' => $this->stores_count,
+            'stores_count' => $this->when(isset($this->store_count),$this->stores_count),
+            'categories_count' => $this->when(isset($this->categories_count), $this->categories_count),
+
         ];
 
     }

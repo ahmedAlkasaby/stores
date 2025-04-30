@@ -36,36 +36,55 @@ class StoreSeeder extends Seeder
                     'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                 ]);
 
-                // for ($k = 1; $k <= 10; $k++) {
-                //     $category = $store->categories()->create([
-                //         'name' => [
-                //             'en' => 'Category ' . $k,
-                //             'ar' => 'فئة ' . $k,
-                //         ],
-                //         'description' => [
-                //             'en' => 'Description for Category ' . $k,
-                //             'ar' => 'وصف للفئة ' . $k,
-                //         ],
-                //         'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-                //     ]);
+                for ($k = 1; $k <= 10; $k++) {
+                    // parent categories
+                    $categoryParent = $store->categories()->create([
+                        'name' => [
+                            'en' => 'Category ' . $k,
+                            'ar' => 'فئة ' . $k,
+                        ],
+                        'description' => [
+                            'en' => 'Description for Category ' . $k,
+                            'ar' => 'وصف للفئة ' . $k,
+                        ],
+                        'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                    ]);
 
-                //     for ($l = 1; $l <= 50; $l++) {
-                //         $category->products()->create([
-                //             'name' => [
-                //                 'en' => 'Product ' . $l,
-                //                 'ar' => 'منتج ' . $l,
-                //             ],
-                //             'description' => [
-                //                 'en' => 'Description for Product ' . $l,
-                //                 'ar' => 'وصف للمنتج ' . $l,
-                //             ],
-                //             'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-                //             'qty' => 100,
-                //             'price' => fake()->numberBetween(100, 1000),
-                //             'store_id' => $category->store_id,
-                //         ]);
-                //     }
-                // }
+                    // child categories
+                    for ($l = 1; $l <= 5; $l++) {
+                        $categoryChild = $categoryParent->children()->create([
+                            'name' => [
+                                'en' => 'Sub Category ' . $l,
+                                'ar' => 'فئة فرعية ' . $l,
+                            ],
+                            'description' => [
+                                'en' => 'Description for Sub Category ' . $l,
+                                'ar' => 'وصف للفئة الفرعية ' . $l,
+                            ],
+                            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                            'store_id' => $store->id,
+                        ]);
+
+                    }
+
+
+                    // for ($l = 1; $l <= 50; $l++) {
+                    //     $category->products()->create([
+                    //         'name' => [
+                    //             'en' => 'Product ' . $l,
+                    //             'ar' => 'منتج ' . $l,
+                    //         ],
+                    //         'description' => [
+                    //             'en' => 'Description for Product ' . $l,
+                    //             'ar' => 'وصف للمنتج ' . $l,
+                    //         ],
+                    //         'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                    //         'qty' => 100,
+                    //         'price' => fake()->numberBetween(100, 1000),
+                    //         'store_id' => $category->store_id,
+                    //     ]);
+                    // }
+                }
             }
         }
     }
