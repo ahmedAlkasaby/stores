@@ -78,7 +78,7 @@ class AuthController extends MainController
     public function login(Request $request){
 
         $validator=Validator::make($request->all(),[
-            'email'=>'required|email|exists:users,email',
+            'email'=>'required|email|string',
             'password'=>'required|min:8',
         ]);
 
@@ -89,7 +89,7 @@ class AuthController extends MainController
         $credentials = $request->only('email', 'password');
         $token=Auth::guard('api')->attempt($credentials);
         if (!$token) {
-            return $this->messageError('Unauthorized', 400);
+            return $this->messageError(__('auth.invalid_credentials'), 400);
         }
         $auth = Auth::guard('api')->user();
 

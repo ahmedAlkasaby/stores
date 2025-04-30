@@ -12,6 +12,8 @@ class Category extends MainModel
         'image',
         'parent_id',
         'store_id',
+        'active',
+        'order_id'
     ];
 
 
@@ -29,7 +31,7 @@ class Category extends MainModel
     }
     public function products()
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
+        return $this->belongsToMany(Product::class);
     }
 }
 
