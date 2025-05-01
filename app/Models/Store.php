@@ -62,12 +62,6 @@ class Store extends MainModel
                 case 'oldest':
                     $query->orderBy('order_id', 'asc');
                     break;
-                case 'highest_price':
-                    $query->orderBy('price', 'desc');
-                    break;
-                case 'lowest_price':
-                    $query->orderBy('price', 'asc');
-                    break;
             }
         }
 

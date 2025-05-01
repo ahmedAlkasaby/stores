@@ -12,4 +12,5 @@ return [
     'cart_item_deleted' => 'Product removed from cart',
     'not_found_store_type' => 'Sorry, store type not found',
     'not_found_store' => 'Sorry, store not found',
+    'not_found_category' => 'Sorry, category not found',
 ];
