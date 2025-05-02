@@ -40,7 +40,7 @@ class Product extends MainModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class,'category_product','product_id','category_id')->withTimestamps();
     }
 
 
@@ -78,7 +78,6 @@ class Product extends MainModel
     public function scopeApplyBasicFilters($query, $request, $type_app)
     {
         return $query
-            ->where('parent_id', $type_app == 'app' ? null : $request->parent_id)
             ->where('active', $type_app == 'app' ? true : $request->active)
             ->where('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
             ->where('date_expire', '>=', $type_app == 'app' ? now() : $request->date_expire)

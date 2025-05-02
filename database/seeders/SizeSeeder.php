@@ -26,7 +26,6 @@ class SizeSeeder extends Seeder
                 'name' => ['en' => 'Extra Large', 'ar' => 'كبير جدا'],
                 'description' => ['en' => 'Extra Large size', 'ar' => 'حجم كبير جدا'],
             ],
-            // أضف باقي البيانات هنا
         ];
 
         foreach ($sizes as $size) {
