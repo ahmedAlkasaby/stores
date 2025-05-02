@@ -8,6 +8,8 @@ use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */
@@ -23,6 +25,6 @@ class PaymentSeeder extends Seeder
                 'ar' => 'الدفع عند الاستلام',
            ],
         ]);
-       
+
     }
 }
