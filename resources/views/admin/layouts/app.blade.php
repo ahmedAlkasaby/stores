@@ -52,10 +52,10 @@
     @else
     @include('admin.layouts.foots.foot')
     @endif
-    <script>
+    {{-- <script>
         const change_Theme = "{{ route('admin.theme.change') }}";
         const change_Language = "{{ route('admin.lang.change') }}";
-    </script>
+    </script> --}}
 </body>
 
 </html>
