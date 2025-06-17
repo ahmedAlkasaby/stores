@@ -40,7 +40,7 @@ class Product extends MainModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class,'category_product','product_id','category_id')->withTimestamps();
     }
 
 
@@ -48,6 +48,15 @@ class Product extends MainModel
     {
         return $this->belongsTo(Store::class, 'store_id', 'id');
     }
+
+    public function storeType()
+    {
+        return $this->hasOneThrough(StoreType::class,Store::class, 'id', 'id', 'store_id', 'store_type_id');
+    }
+
+
+
+
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id', 'id');
@@ -78,7 +87,6 @@ class Product extends MainModel
     public function scopeApplyBasicFilters($query, $request, $type_app)
     {
         return $query
-            ->where('parent_id', $type_app == 'app' ? null : $request->parent_id)
             ->where('active', $type_app == 'app' ? true : $request->active)
             ->where('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
             ->where('date_expire', '>=', $type_app == 'app' ? now() : $request->date_expire)
@@ -181,7 +189,7 @@ class Product extends MainModel
         $request = $request ?? request();
 
         return $query
-            ->applyBasicFilters($request, $type_app)
+            // ->applyBasicFilters($request, $type_app)
             ->applySearch($request)
             ->applyStoreFilters($request)
             ->applyCategoryFilter($request)
@@ -193,7 +201,7 @@ class Product extends MainModel
 
 
 
-    public function qtyInCart(): int
+    public function countInCart(): int
     {
         $userId = Auth::guard('api')->id();
         if ($userId) {
@@ -204,10 +212,28 @@ class Product extends MainModel
         return 0;
     }
 
+    public function checkProductInCart(): bool
+    {
+        $userId = Auth::guard('api')->id();
+        return $userId && CartItem::where('product_id', $this->id)->where('user_id', $userId)->exists();
+    }
+
     public function checkProductInWishlists(): bool
     {
         $userId = Auth::guard('api')->id();
         return $userId && $this->wishlists()->where('user_id', $userId)->exists();
+    }
+
+    public function productIdInCart(): int
+    {
+        $userId = Auth::guard('api')->id();
+        if ($userId) {
+            return CartItem::where('product_id', $this->id)
+                ->where('user_id', $userId)
+                ->pluck('id')
+                ->first();
+        }
+        return 0;
     }
 
 

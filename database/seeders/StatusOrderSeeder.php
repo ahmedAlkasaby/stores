@@ -8,6 +8,8 @@ use Illuminate\Database\Seeder;
 
 class StatusOrderSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */

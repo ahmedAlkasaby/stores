@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            UnitSeeder::class,
+            SizeSeeder::class,
             StoreSeeder::class,
         ]);
     }
