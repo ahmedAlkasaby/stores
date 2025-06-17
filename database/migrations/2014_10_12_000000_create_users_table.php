@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('lang',['ar','en'])->default('en');
+            $table->enum('theme',['light','dark'])->default('light');
             $table->enum('type',['admin','client','delivery'])->default('client');
             $table->timestamps();
         });
