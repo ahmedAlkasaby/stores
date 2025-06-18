@@ -20,4 +20,9 @@ class AuthController extends Controller
 
         return redirect()->back()->withErrors(['email' => __('auth.failed')]);
     }
+
+    public function logout(){
+        auth()->logout();
+        return redirect()->route('dashboard.login.view');
+    }
 }

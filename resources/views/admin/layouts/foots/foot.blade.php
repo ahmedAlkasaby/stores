@@ -22,6 +22,6 @@
     @yield('jsFiles')
     <!-- Main JS -->
     <script src="{{ url('admin/assets/js/main.js') }}"></script>
-    <script src="{{ url('admin/assets/js/themeskin.js') }}"></script>
+    {{-- <script src="{{ url('admin/assets/js/themeskin.js') }}"></script> --}}
     @yield('mainFiles')
     <!-- Page JS -->

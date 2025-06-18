@@ -31,7 +31,7 @@
         <li class="menu-item @if (isset($class) && $class == 'home') active @endif">
             <a href="" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div data-i18n="Email">{{ __('Home') }}</div>
+                <div >{{ __('site.home') }}</div>
             </a>
         </li>
    </ul>

@@ -15,6 +15,8 @@
 <link rel="stylesheet" href={{ url('admin/assets/vendor/fonts/flag-icons.css') }}/>
 
 <!-- Core CSS -->
+
+
 @if ( $admin_theme_style =='dark' )
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/core-dark.css') }}" />
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/theme-default-dark.css') }}" />
@@ -22,9 +24,11 @@
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/core.css') }}" />
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/theme-semi-dark.css') }}" />
 @else
-<link rel="stylesheet" href="{{ url('admin/assets/vendor/cadmin/ss/'.$admin_dir.'/core.css') }}" />
+<link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/core.css') }}" />
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/theme-default.css') }}" />
 @endif
+<link rel="stylesheet" href="{{ asset('admin/assets/css/demo.css') }}" />
+
 
 {{-- <link rel="stylesheet" href="{{ url('admin/assets/css/systemira.css') }}" /> --}}
 <!-- Vendors CSS -->
@@ -41,7 +45,7 @@
 <script src="{{ url('admin/assets/vendor/js/helpers.js') }}"></script>
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-<script src="{{ url('admin/assets/vendor/js/template-customizer.js') }}"></script>
+{{-- <script src="{{ url('admin/assets/vendor/js/template-customizer.js') }}"></script> --}}
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="{{ url('admin/assets/js/config.js') }}"></script>
