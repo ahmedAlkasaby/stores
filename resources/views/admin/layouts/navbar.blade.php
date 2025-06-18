@@ -16,16 +16,22 @@
                     <i class="ti ti-language rounded-circle ti-md"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
+                    @if (auth()->user()->lang=='ar')
                     <li>
-                        <a class="dropdown-item" href="">
-                            <span class="align-middle">__('site.english')</span>
+                        <a class="dropdown-item" href="{{ route('dashboard.profile.change.lang',['lang' => 'en']) }}">
+                            <span class="align-middle">{{ __('site.english')}}</span>
                         </a>
                     </li>
+
+                    @endif
+                    @if (auth()->user()->lang=='en')
+
                     <li>
-                        <a class="dropdown-item" href="">
-                            <span class="align-middle">__('site.arabic')</span>
+                        <a class="dropdown-item" href="{{ route('dashboard.profile.change.lang',['lang' => 'ar']) }}">
+                            <span class="align-middle">{{__('site.arabic')}}</span>
                         </a>
                     </li>
+                    @endif
 
 
 
@@ -40,17 +46,17 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                     <li>
-                      <a class="dropdown-item" href="">
+                      <a class="dropdown-item" href="{{ route('dashboard.profile.change.theme',['theme' => 'light']) }}">
                         <span class="align-middle"><i class="ti ti-sun me-2"></i>{{ __('site.light') }}</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="">
+                      <a class="dropdown-item" href="{{ route('dashboard.profile.change.theme',['theme' => 'dark']) }}">
                         <span class="align-middle"><i class="ti ti-sun me-2"></i>{{ __('site.dark') }}</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="">
+                      <a class="dropdown-item" href="{{ route('dashboard.profile.change.theme',['theme' => 'semi_dark']) }}">
                         <span class="align-middle"><i class="ti ti-sun me-2"></i>{{ __('site.semi_dark') }}</span>
                       </a>
                     </li>
