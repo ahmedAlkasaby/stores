@@ -240,6 +240,13 @@ return [
     'qty_min'=>'The qty field must be greater than or equal to 1',
     'qty_max_available'=>'The qty field must be less than or equal to :qty',
     'qty_greater_than_stock'=>'The qty field must be less than or equal to the product stock',
+    'email_required'=>'The email field is required',
+    'email_email'=>'The email field must be a valid email address',
+    'email_invalid'=>'The email field is invalid',
+    'password_required'=>'The password field is required',
+    'password_min'=>'The password field must be at least :min characters',
+    'password_max'=>'The password field must not exceed :max characters',
+
 
 
 

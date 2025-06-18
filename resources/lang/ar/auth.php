@@ -25,6 +25,7 @@ return [
     'login_successfully'=>'تم تسجيل الدخول بنجاح',
     'unauthenticated'=>'غير مسجل دخول ',
     'invalid_credentials'=>'بيانات الاعتماد غير صحيحة',
+    'logout_successfully'=>'تم تسجيل الخروج بنجاح',
 
 ];
 

@@ -24,4 +24,5 @@ return [
     'login_successfully'=>'Login Successfully',
     'unauthenticated'=>'Unauthenticated',
     'invalid_credentials'=>'Invalid Credentials',
+    'logout_successfully'=>'Logout Successfully',
 ];

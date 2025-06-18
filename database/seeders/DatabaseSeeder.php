@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,23 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(LaratrustSeeder::class);
+        $user=User::create([
+           'first_name'=>'Ahmed',
+           'last_name'=>'Alkasaby',
+           'email'=>'alkasaby145@gmail.com',
+           'password'=>'ahmed145',
+           'lang'=>'en',
+           'theme'=>'light',
+           'type'=>'admin'
+       ]);
+       $user->addRole('super_admin');
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // main seeders you must run
-        $this->call([
-            StatusOrderSeeder::class,
-            PaymentSeeder::class,
-        ]);
-
-        $this->call([
-            UnitSeeder::class,
-            SizeSeeder::class,
-            StoreSeeder::class,
-        ]);
     }
 }
