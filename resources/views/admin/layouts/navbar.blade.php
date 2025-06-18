@@ -40,20 +40,21 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                        <span class="align-middle"><i class="ti ti-sun me-2"></i>Light</span>
+                      <a class="dropdown-item" href="">
+                        <span class="align-middle"><i class="ti ti-sun me-2"></i>{{ __('site.light') }}</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                        <span class="align-middle"><i class="ti ti-moon me-2"></i>Dark</span>
+                      <a class="dropdown-item" href="">
+                        <span class="align-middle"><i class="ti ti-sun me-2"></i>{{ __('site.dark') }}</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                        <span class="align-middle"><i class="ti ti-device-desktop me-2"></i>System</span>
+                      <a class="dropdown-item" href="">
+                        <span class="align-middle"><i class="ti ti-sun me-2"></i>{{ __('site.semi_dark') }}</span>
                       </a>
                     </li>
+
                   </ul>
                 </li>
             <!-- / Style Switcher-->
@@ -101,10 +102,5 @@
         </ul>
     </div>
 
-    <!-- Search Small Screens -->
-    <div class="navbar-search-wrapper search-input-wrapper d-none">
-        <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
-            aria-label="Search..." />
-        <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
-    </div>
+
 </nav>

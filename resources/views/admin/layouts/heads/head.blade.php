@@ -20,7 +20,7 @@
 @if ( $admin_theme_style =='dark' )
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/core-dark.css') }}" />
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/theme-default-dark.css') }}" />
-@elseif($admin_theme_style =='semi-dark')
+@elseif($admin_theme_style =='semi_dark')
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/core.css') }}" />
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/theme-semi-dark.css') }}" />
 @else
