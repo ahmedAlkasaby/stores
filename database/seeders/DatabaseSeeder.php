@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $this->call(LaratrustSeeder::class);
+        $user=User::create([
            'first_name'=>'Ahmed',
            'last_name'=>'Alkasaby',
            'email'=>'alkasaby145@gmail.com',
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
            'theme'=>'light',
            'type'=>'admin'
        ]);
+       $user->addRole('super_admin');
 
     }
 }
