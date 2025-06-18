@@ -16,7 +16,7 @@ class CartItemController extends MainController
     public function index()
     {
         $auth=Auth()->guard('api')->user();
-        $cartItems = CartItem::with('product')->where('user_id', $auth->id)->paginate(10);
+        $cartItems = CartItem::with('product')->where('user_id', $auth->id)->paginate($this->perPage);
         return $this->sendData(new CartItemCollection($cartItems), __('site.cart_items'));
     }
 

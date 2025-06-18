@@ -19,9 +19,13 @@ class CategoryResource extends JsonResource
             'name' => $this->nameLang(),
             'description' => $this->descriptionLang(),
             'image' => url($this->image),
-            'store' => new StoreResource($this->whenLoaded('store')),
             'products_count' => $this->when(isset($this->products_count), $this->products_count),
-            'products' => new ProductCollection($this->whenLoaded('products')),
+            'active' => $this->active,
+            'order_id' => $this->order_id,
+            'parent_id'=>$this->parent_id,
+            'store_id' => $this->store_id,
+            'store' => new StoreResource($this->whenLoaded('store')),
+            'children' => CategoryResource::collection($this->whenLoaded('children')),
         ];
     }
 }

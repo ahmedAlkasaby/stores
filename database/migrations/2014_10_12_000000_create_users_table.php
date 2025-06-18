@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('lang')->default('en');
+            $table->enum('lang',['ar','en'])->default('en');
+            $table->enum('theme',['light','dark'])->default('light');
+            $table->enum('type',['admin','client','delivery'])->default('client');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
