@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\HomeController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -12,9 +14,7 @@ Route::group(['middleware'=>'guest'], function () {
 });
 
 Route::group(['middleware'=>['auth','admin']],function(){
-    Route::get('/',function(){
-        return __('site.dashboard');
-    })->name('home');
+    Route::get('/',[HomeController::class, 'index'])->name('home');
     Route::get('logout', function () {
         auth()->logout();
         return redirect()->route('dashboard.login.view')->with('success', __('auth.logout_successfully'));

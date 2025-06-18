@@ -6,6 +6,8 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\View;
+
 
 class AdminMiddleware
 {
@@ -20,6 +22,11 @@ class AdminMiddleware
 
         if($auth && $auth->type =='admin'){
             app()->setLocale($auth->lang);
+             View::share([
+            'admin_language' => $auth->lang,
+            'admin_dir' => $auth->lang == 'ar' ? 'rtl' : 'ltr',
+            'admin_theme_style' =>$auth->theme,
+        ]);
             return $next($request);
         }else{
             auth()->logout();

@@ -18,7 +18,7 @@
 
 <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar" data-url="{{ route('admin.index') }}" data-language="{{ $admin_language ?? 'en' }}" data-user="{{ $user_id ?? 0 }}">
+    <div class="layout-wrapper layout-content-navbar" data-url="{{ route('dashboard.home') }}" data-language="{{ $admin_language ?? 'en' }}" data-user="{{ $user_id ?? 0 }}">
         <div class="layout-container">
 
             {{--include('admin.layouts.header')--}}

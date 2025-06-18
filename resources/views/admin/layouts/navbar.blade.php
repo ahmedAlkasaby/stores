@@ -138,7 +138,8 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-chart-bar fs-4"></i>
                                 </span>
-                                <a href="{{ route('admin.index') }}" class="stretched-link">{{ __('Dashboard') }}</a>
+                                <a href="{{ route('dashboard.home.index') }}" class="stretched-link">{{ __('Dashboard')
+                                    }}</a>
                                 <small class="text-muted mb-0">{{ __('User Profile') }}</small>
                             </div>
                             @if (auth()->user()->isAbleTo($access_all_perms))
@@ -415,7 +416,7 @@
                         @if (isset($user_account) && $user_account->image != null)
                         <img src="{{ $user_account->image }}" class="h-auto rounded-circle" alt="User Image">
                         @else
-                        <img src="{{ asset('assets/img/avatars/1.png') }}" class="h-auto rounded-circle"
+                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" class="h-auto rounded-circle"
                             alt="User Image">
                         @endif
                     </div>
@@ -483,7 +484,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-item"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             style="cursor: pointer;">
@@ -494,7 +495,7 @@
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">{{ __('Log Out') }}</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
             <!--/ User -->

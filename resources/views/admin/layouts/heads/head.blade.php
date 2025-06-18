@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/css/'.$admin_dir.'/theme-default.css') }}" />
 @endif
 
-<link rel="stylesheet" href="{{ url('admin/assets/css/systemira.css') }}" />
+{{-- <link rel="stylesheet" href="{{ url('admin/assets/css/systemira.css') }}" /> --}}
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/libs/node-waves/node-waves.css') }}" />
 <link rel="stylesheet" href="{{ url('admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
