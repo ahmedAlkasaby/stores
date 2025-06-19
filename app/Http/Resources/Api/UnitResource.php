@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class UnitResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,14 +18,8 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->nameLang(),
             'description' => $this->descriptionLang(),
-            'image' => url($this->image),
-            'products_count' => $this->when(isset($this->products_count), $this->products_count),
             'active' => $this->active,
-            'order_id' => $this->order_id,
-            'parent_id'=>$this->parent_id,
-            'store_id' => $this->store_id,
-            'store' => new StoreResource($this->whenLoaded('store')),
-            'children' => CategoryResource::collection($this->whenLoaded('children')),
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }
 }

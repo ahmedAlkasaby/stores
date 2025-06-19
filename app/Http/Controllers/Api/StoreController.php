@@ -14,7 +14,7 @@ class StoreController extends MainController
 
     public function index(StoreRequest $request)
     {
-        $stores=Store::with('storeType')->withCount(['categories','products'])->filter($request)->paginate(10);
+        $stores=Store::with('storeType')->withCount(['categories','products'])->filter($request)->paginate($this->perPage);
         return $this->sendData(new StoreCollection($stores));
     }
 

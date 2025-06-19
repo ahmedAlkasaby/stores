@@ -2,11 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
+use App\Models\Size;
 use App\Models\StoreType;
+use App\Models\Unit;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class StoreSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     public function run(): void
     {
         for ($i = 1; $i < 6; $i++) {
@@ -67,23 +74,114 @@ class StoreSeeder extends Seeder
 
                     }
 
+                    //products parent and children
 
-                    // for ($l = 1; $l <= 50; $l++) {
-                    //     $category->products()->create([
-                    //         'name' => [
-                    //             'en' => 'Product ' . $l,
-                    //             'ar' => 'منتج ' . $l,
-                    //         ],
-                    //         'description' => [
-                    //             'en' => 'Description for Product ' . $l,
-                    //             'ar' => 'وصف للمنتج ' . $l,
-                    //         ],
-                    //         'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-                    //         'qty' => 100,
-                    //         'price' => fake()->numberBetween(100, 1000),
-                    //         'store_id' => $category->store_id,
-                    //     ]);
-                    // }
+
+                    for ($l = 1; $l <= 5; $l++) {
+                        $productsParent=Product::create([
+                             'code' => fake()->unique()->numberBetween(1000000, 9999999),
+                            'link' =>'Product-' . Str::uuid(),
+                            'name' => [
+                                'en' => 'Product ' . $l,
+                                'ar' => 'منتج ' . $l,
+                            ],
+                            'description' => [
+                                'en' => 'Description for Product ' . $l,
+                                'ar' => 'وصف للمنتج ' . $l,
+                            ],
+                            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                            'order_limit' => 1,
+                            'max_order' => 10,
+
+                            'stock_amount' => 100,
+                            'max_amount' => fake()->numberBetween(50,100),
+                            'feature' => rand(0, 1),
+                            'price' => fake()->numberBetween(100, 1000),
+                            'date_start'=> now(),
+                            'date_expire'=> now()->addDays(100),
+                            'day_start'=> now()->format('H:i:s'),
+                            'day_end'=> now()->addHours(5)->format('H:i:s'),
+                            'unit_id' => Unit::inRandomOrder()->first()->id,
+                            'brand_id' => null,
+                            'size_id' => null,
+                            'parent_id' => null,
+                            'store_id' => $store->id,
+                        ]);
+                        $productsParent->categories()->attach([$categoryChild->id,$categoryParent->id]);
+
+                        for ($m = 1; $m <= 5; $m++) {
+                            $productsChild=Product::create([
+                                 'code' => fake()->unique()->numberBetween(1000000, 9999999),
+                                'link' =>'Product-' . Str::uuid(),
+                                'name' => [
+                                    'en' => 'Product ' . $m,
+                                    'ar' => 'منتج ' . $m,
+                                ],
+                                'description' => [
+                                    'en' => 'Description for Product ' . $m,
+                                    'ar' => 'وصف للمنتج ' . $m,
+                                ],
+                                'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                                'order_limit' => 1,
+                                'max_order' => 10,
+
+                                'stock_amount' => 100,
+                                'max_amount' => fake()->numberBetween(50,100),
+                                'feature' => rand(0, 1),
+                                'price' => fake()->numberBetween(100, 1000),
+                                'date_start'=> now(),
+                                'date_expire'=> now()->addDays(100),
+                                'day_start'=> now()->format('H:i:s'),
+                                'day_end'=> now()->addHours(5)->format('H:i:s'),
+                                'unit_id' => Unit::inRandomOrder()->first()->id,
+                                'brand_id' => null,
+                                'size_id' => Size::inRandomOrder()->first()->id,
+                                'parent_id' => $productsParent->id,
+                                'store_id' => $store->id,
+                            ]);
+
+                           $productsChild->categories()->attach([$categoryChild->id,$categoryParent->id]);
+                        }
+                    }
+
+                    // products without children
+                    for($f=1;$f<=50;$f++){
+                        $productsParent=Product::create([
+                            'code' => fake()->unique()->numberBetween(1000000, 9999999),
+                            'link' =>'Product-' . Str::uuid(),
+                            'name' => [
+                                'en' => 'Product ' . $f,
+                                'ar' => 'منتج ' . $f,
+                            ],
+                            'description' => [
+                                'en' => 'Description for Product ' . $f,
+                                'ar' => 'وصف للمنتج ' . $f,
+                            ],
+                            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                            'order_limit' => 1,
+                            'max_order' => 10,
+
+                            'stock_amount' => 100,
+                            'max_amount' => fake()->numberBetween(50,100),
+                            'feature' => rand(0, 1),
+                            'price' => fake()->numberBetween(100, 1000),
+                            'date_start'=> now(),
+                            'date_expire'=> now()->addDays(100),
+                            'day_start'=> now()->format('H:i:s'),
+                            'day_end'=> now()->addHours(5)->format('H:i:s'),
+                            'unit_id' => Unit::inRandomOrder()->first()->id,
+                            'brand_id' => null,
+                            'size_id' => null,
+                            'parent_id' => null,
+                            'store_id' => $store->id,
+
+                        ]);
+                        $productsParent->categories()->attach([$categoryChild->id]);
+                    }
+
+
+
+
                 }
             }
         }

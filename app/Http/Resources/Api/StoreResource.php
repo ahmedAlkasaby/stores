@@ -24,7 +24,9 @@ class StoreResource extends JsonResource
             'categories_count' => $this->when(isset($this->categories_count), $this->categories_count),
             'active' => $this->active,
             'order_id' => $this->order_id,
+            'store_type_id' => $this->store_type_id,
             'store_type' => new StoreTypeResource($this->whenLoaded('storeType')),
+
         ];
     }
 }
