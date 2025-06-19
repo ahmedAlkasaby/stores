@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\RestPasswordController;
 use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\StoreTypeController;
 use App\Http\Controllers\Api\WishListController;
@@ -22,6 +23,7 @@ Route::group(['middleware'=>'userLangApi'],function(){
     Route::apiResource('store_types',StoreTypeController::class)->only(['index','show']);
     Route::apiResource('stores',StoreController::class)->only(['index','show']);
     Route::apiResource('categories',CategoryController::class)->only(['index','show']);
+    // Route::apiResource('products',ProductController::class)->only(['index','show']);
     Route::group(['prefix'=>'auth'],function(){
         Route::post('register/check',[AuthController::class, 'check_register']);
         Route::post('register',[AuthController::class,'register']);
