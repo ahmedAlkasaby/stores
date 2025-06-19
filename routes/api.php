@@ -18,12 +18,23 @@ use Illuminate\Support\Facades\Route;
 
 
 
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/
+
 
 Route::group(['middleware'=>'userLangApi'],function(){
     Route::apiResource('store_types',StoreTypeController::class)->only(['index','show']);
     Route::apiResource('stores',StoreController::class)->only(['index','show']);
     Route::apiResource('categories',CategoryController::class)->only(['index','show']);
-    // Route::apiResource('products',ProductController::class)->only(['index','show']);
+    Route::apiResource('products',ProductController::class)->only(['index','show']);
     Route::group(['prefix'=>'auth'],function(){
         Route::post('register/check',[AuthController::class, 'check_register']);
         Route::post('register',[AuthController::class,'register']);
