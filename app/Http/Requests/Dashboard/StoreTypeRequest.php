@@ -11,7 +11,7 @@ class StoreTypeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,10 @@ class StoreTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_ar' => 'required|string|regex:/^[\p{Arabic}\s]+$/u',
-            'name_en' => 'required|string|regex:/^[A-Za-z\s]+$/',
-            'description_en' => 'required|integer|exists:cities,id',
-            'description_ar' => 'required|integer|exists:cities,id',
+            'name_ar' => 'required|string',
+            'name_en' => 'required|string',
+            'description_en' => 'required|string',
+            'description_ar' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
@@ -46,7 +46,7 @@ class StoreTypeRequest extends FormRequest
             'description_ar.required' => 'Description in Arabic is required',
             'description_ar.integer' => 'Description in Arabic must be an integer',
             'description_ar.exists' => 'Description in Arabic must exist in the cities table',
-            
+
             'image.image' => 'Image must be an image file',
         ];
     }

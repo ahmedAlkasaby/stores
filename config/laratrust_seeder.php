@@ -15,11 +15,12 @@ return [
         'super_admin' => [
             'roles' => 'c,r,u,d',
             'users' => 'c,r,u,d',
+            
         ],
         'admin' => [
             'users' => 'c,r,u',
         ],
-      
+
     ],
 
     'permissions_map' => [
