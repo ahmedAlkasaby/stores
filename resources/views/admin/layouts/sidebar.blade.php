@@ -34,7 +34,7 @@
                 <div >{{ __('site.home') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (isset($class) && $class == 'store_type') active @endif">
+        <li class="menu-item @if (isset($class) && $class == 'store_types') active @endif">
             <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div >{{ __('site.store_type') }}</div>

@@ -13,9 +13,7 @@ class StoreTypeController extends MainController
 
     protected $storeTypeService;
 
-    /**
-     * Display a listing of the resource.
-     */
+
     public function __construct(StoreTypeService $storeTypeService)
     {
         parent::__construct();
@@ -28,17 +26,13 @@ class StoreTypeController extends MainController
         return view('admin.store_type.index', compact('storeTypes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('admin.store_type.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreTypeRequest $request)
     {
         $imageUrl = $this->storeTypeService->uploadImage($request->file('image'));
@@ -57,26 +51,20 @@ class StoreTypeController extends MainController
         return redirect()->route('dashboard.store_type.index')->with('success', 'Store type created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         $storeType = StoreType::findOrFail($id);
         return view('admin.store_type.edit', compact('storeType'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(StoreTypeRequest $request, string $id)
     {
         $storeType = StoreType::findOrFail($id);
@@ -101,9 +89,7 @@ class StoreTypeController extends MainController
         return redirect()->route('dashboard.store_type.index')->with('success', 'Store type updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         $storeType = StoreType::findOrFail($id);
