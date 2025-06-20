@@ -52,13 +52,14 @@
                         @if($show_content ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
-                            'text_name' => 'content_en',
+                            'text_name' => 'description_en',
                             'text_value' => $content_en ?? null,
                             'label_name' => __('English Content'),
                             'not_req' => true,
                             'text_id' => 'my-textarea'])
                         </div>
                         @endif
+
                         @if($show_address ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
@@ -69,6 +70,12 @@
                             'text_id' => 'my-textarea',])
                         </div>
                         @endif
+                        @if($show_image ?? false)
+                        @include('admin.layouts.forms.fields.file',[
+                        'image' => $image ?? null
+                        ])
+                        @endif
+
 
                     </div>
                 </div>
@@ -98,7 +105,7 @@
                         @if($show_content ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
-                            'text_name' => 'content_ar',
+                            'text_name' => 'description_ar',
                             'text_value' => $content_ar ?? null,
                             'label_name' => __('Arabic Content'),
                             'not_req' => true,
@@ -116,6 +123,6 @@
                             ])
                         </div>
                         @endif
-
                     </div>
+
                 </div>

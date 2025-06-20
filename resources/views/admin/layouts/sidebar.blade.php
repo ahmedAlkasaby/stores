@@ -29,9 +29,15 @@
 
    <ul class="menu-inner py-1">
         <li class="menu-item @if (isset($class) && $class == 'home') active @endif">
-            <a href="" class="menu-link">
+            <a href="{{ route('dashboard.home') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div >{{ __('site.home') }}</div>
+            </a>
+        </li>
+        <li class="menu-item @if (isset($class) && $class == 'store_type') active @endif">
+            <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div >{{ __('site.store_type') }}</div>
             </a>
         </li>
    </ul>

@@ -24,6 +24,14 @@ class DatabaseSeeder extends Seeder
            'type'=>'admin'
        ]);
        $user->addRole('super_admin');
-
+        $this->call([
+            StoreSeeder::class,
+        ]);
+        
+        // \App\Models\User::factory(10)->create();
+        // \App\Models\Post::factory(10)->create();
+        // \App\Models\Comment::factory(10)->create();
+        // \App\Models\Category::factory(10)->create();
+        // \App\Models\Tag::factory(10)->create();
     }
 }

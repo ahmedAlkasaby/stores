@@ -1,5 +1,5 @@
 @php
-$route_name = getRouteName($route_type ?? null);
+$route_name = $route_type ?? 'dashboard';
 $add_class = '';
 $route_method = 'PATCH';
 $is_validate = 'yes';

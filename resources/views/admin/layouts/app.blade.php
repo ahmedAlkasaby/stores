@@ -20,9 +20,9 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar" data-url="{{ route('dashboard.home') }}" data-language="{{ $admin_language ?? 'en' }}" data-user="{{ $user_id ?? 0 }}">
         <div class="layout-container">
+            @include('admin.layouts.sidebar')
 
             {{--include('admin.layouts.header')--}}
-            @include('admin.layouts.sidebar')
             <div class="layout-page">
                 @include('admin.layouts.navbar')
                 <!-- Content wrapper -->
