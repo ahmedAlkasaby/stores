@@ -1,99 +1,15 @@
-<div class="justify-content-between dt-layout-table">
-    <div class="d-md-flex justify-content-between align-items-center dt-layout-full table-responsive">
-        <table class="datatables table dataTable dtr-column collapsed">
-            <thead class="border-top">
-                <tr>
-                    <th>ID</th>
-                    <th class="text-lg-center">@lang('site.name')</th>
-                    <th class="text-lg-center">@lang('site.image')</th>
-                    <th class="text-lg-center">@lang('site.action')</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if($storeTypes->count() > 0)
+@include('admin.layouts.table.header')
+@include('admin.layouts.table.thead_info', [
+'columns' => ['ID', 'site.name', 'site.image', 'site.action']
+])
 
-                @foreach ($storeTypes as $storeType)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td class="text-lg-center">{{ $storeType->nameLang() }}</td>
-
-                    {{-- image --}}
-                    <td class="text-center">
-                        @if ($storeType->image)
-                        <img src="{{ asset('storage/' . $storeType->image) }}" alt="{{ $storeType->nameLang() }}"
-                            class="rounded-circle" width="50" height="50">
-                        @else
-                        <img src="{{ asset('images/default.png') }}" alt="{{ $storeType->nameLang() }}"
-                            class="rounded-circle" width="50" height="50">
-                        @endif
-                    </td>
-                    {{-- action --}}
-                    <td class="text-lg-center">
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="ti ti-dots-vertical"></i>
-                            </button>
-                            <div class="dropdown-menu">
-
-                                {{-- @endif --}}
-                                @if(Route::is('dashboard.store_types.deleted'))
-                                <li>
-                                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal{{ $storeType->id }}">
-                                        <i class="ti ti-trash me-1"></i> @lang('site.delete_forever')
-                                    </button>
-                                    <a class="dropdown-item"
-                                        href="{{ route('dashboard.store_types.restore', $storeType->id) }}">
-                                        <i class="ti ti-rotate-clockwise me-1"></i> @lang('site.restore')
-                                    </a>
-                                </li>
-                                    @else
-                                <li>
-                                    {{-- @if (auth()->user()->hasPermission('categories-update')) --}}
-                                    <a class="dropdown-item"
-                                        href="{{ route('dashboard.store_types.edit', $storeType->id) }}">
-                                        <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
-                                    </a>
-                                    {{-- @else --}}
-                                    <button disabled class="dropdown-item" disabled>
-                                        <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
-                                    </button>
-                                    {{-- @endif --}}
-
-                                    {{-- @if (auth()->user()->hasPermission('categories-delete')) --}}
-                                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal{{ $storeType->id }}">
-                                        <i class="ti ti-trash me-1"></i> @lang('site.delete')
-                                    </button>
-                                    {{-- @else --}}
-                                    <button class="dropdown-item" disabled>
-                                        <i class="ti ti-trash me-1"></i> @lang('site.delete')
-                                    </button>
-                                </li>
-                                @endif
-                                </li>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-                @include('admin.layouts.modals.delete', [
-                "id" => $storeType->id,
-                "main_name" => "dashboard.store_types",
-                "name" => "store_type",
-                "foreDelete" => $foreDelete ?? false,
-                ])
-
-                @endforeach
-                @else
-                <tr>
-                    <td colspan="5" class="text-center">@lang('site.there_is_no_data')</td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
-        <div class="m-3">
-            {{ $storeTypes->links() }}
-        </div>
-    </div>
-</div>
+<tbody>
+    @if($storeTypes->count() > 0)
+    @each("admin.store_type.includes.data", $storeTypes, 'storeType')
+    @else
+    @include('admin.layouts.table.empty',[$number=5])
+    @endif
+</tbody>
+</table>
+@include('admin.layouts.table.paginate')
+@include('admin.layouts.table.footer')

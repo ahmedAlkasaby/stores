@@ -70,11 +70,7 @@
                             'text_id' => 'my-textarea',])
                         </div>
                         @endif
-                        @if($show_image ?? false)
-                        @include('admin.layouts.forms.fields.file',[
-                        'image' => $image ?? null
-                        ])
-                        @endif
+
 
 
                     </div>

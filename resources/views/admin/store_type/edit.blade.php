@@ -24,7 +24,9 @@
 "name_en"=> $storeType->nameLang('en') ,
 "content_ar"=> $storeType->descriptionLang('ar') ?? null,
 "content_en"=> $storeType->descriptionLang('en') ?? null,
-"image" => $storeType->image,
+])
+@include('admin.layouts.forms.fields.file',[
+'image' => $storeType->image ?? null
 ])
 
 @include("admin.layouts.forms.footer")

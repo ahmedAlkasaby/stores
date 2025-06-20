@@ -3,21 +3,24 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Models\StoreType;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Requests\Dashboard\StoreTypeRequest;
 use App\Models\Store;
+use App\Services\StoreTypeService;
 
 class StoreTypeController extends MainController
 {
+
+    protected $storeTypeService;
+
     /**
      * Display a listing of the resource.
      */
-    public function __construct()
+    public function __construct(StoreTypeService $storeTypeService)
     {
         parent::__construct();
         $this->setClass('store_types');
+        $this->storeTypeService = $storeTypeService;
     }
     public function index()
     {
@@ -38,7 +41,7 @@ class StoreTypeController extends MainController
      */
     public function store(StoreTypeRequest $request)
     {
-        $imageUrl = $request->file('image')->store('store_types', 'public');
+        $imageUrl = $this->storeTypeService->uploadImage($request->file('image'));
         StoreType::create([
             'name' => [
                 "ar" => $request->name_ar,
@@ -79,8 +82,8 @@ class StoreTypeController extends MainController
         $storeType = StoreType::findOrFail($id);
         $imageUrl = "";
         if ($request->hasFile('image')) {
-            unlink("uploads/" . $storeType->image);
-            $imageUrl = $request->file('image')->store('store_types', 'public');
+            $this->storeTypeService->deleteImage($storeType->image);
+            $imageUrl = $this->storeTypeService->uploadImage($request->file('image'));
         }
 
         $storeType->update([
@@ -122,7 +125,7 @@ class StoreTypeController extends MainController
     {
         $storeType = StoreType::withTrashed()->findOrFail($sliderId);
         if ($storeType->image) {
-            unlink( $storeType->image);
+            $this->storeTypeService->deleteImage($storeType->image);
         }
         $storeType->forceDelete();
         return back();

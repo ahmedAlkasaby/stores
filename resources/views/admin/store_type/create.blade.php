@@ -16,9 +16,10 @@
 @include('admin.layouts.forms.head',[
 "show_name"=> true,
 "show_content"=> true,
-"show_image"=> true,
 ])
-
+@include('admin.layouts.forms.fields.file',[
+'image' => $image ?? null
+])
 @include("admin.layouts.forms.footer")
 @include('admin.layouts.forms.close')
 </div>
