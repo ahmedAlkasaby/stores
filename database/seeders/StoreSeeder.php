@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Store;
@@ -45,6 +46,23 @@ class StoreSeeder extends Seeder
                 'store_type_id' => 1,
                 "address" => 'Address for Store ' . $i,
             ]);
+            for($j = 1; $j <= 5; $j++) {
+                
+                Category::create([
+                    'name' => [
+                        'en' => 'Category ' . $j,
+                        'ar' => 'فئة ' . $j,
+                    ],
+                    'description' => [
+                        'en' => 'Description for Category ' . $j,
+                        'ar' => 'وصف لفئة ' . $j,
+                    ],
+                    'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                    'store_id' => $i,
+                    'active' => true,
+                    "order_id" => $j,
+                ]);
+            }
 
         // }
         // for($i = 1; $i < 6; $i++){

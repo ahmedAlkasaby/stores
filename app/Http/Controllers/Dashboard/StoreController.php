@@ -121,6 +121,9 @@ class StoreController extends MainController
      */
     public function destroy(string $id)
     {
+        if(Store::find($id)->products()->count() > 0 || Store::find($id)->categories()->count() > 0){
+            return redirect()->route('dashboard.stores.index')->with('error', __('site.store_has_products'));
+        }
         $store = Store::findOrFail($id);
         if ($store->image) {
             $this->imageService->deleteImage($store->image);

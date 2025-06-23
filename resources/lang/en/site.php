@@ -123,4 +123,10 @@ return [
     "store_deleted_successfully" => 'Store deleted successfully',
     "store_restored_successfully" => 'Store restored successfully',
     "store_force_deleted_successfully" => 'Store force deleted successfully',
+
+    "show"=> "Show",
+    "category_has_products"=> "Category has products",
+    "brand_has_products"=> "Brand has products",
+    "store_has_products"=> "Store has products",
+    "category_parent" => "Category Parent",
 ];

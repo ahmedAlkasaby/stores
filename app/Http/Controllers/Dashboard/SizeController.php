@@ -96,6 +96,9 @@ class SizeController extends MainController
      */
     public function destroy(string $id)
     {
+        if(Size::find($id)->products()->count() > 0){
+            return redirect()->route('dashboard.sizes.index')->with('error', __('site.size_has_products'));
+        }
         $size = Size::findOrFail($id);
         $size->delete();
         return redirect()->route('dashboard.sizes.index')->with('success', __('site.size_deleted'));

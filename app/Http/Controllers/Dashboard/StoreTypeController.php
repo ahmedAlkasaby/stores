@@ -35,7 +35,6 @@ class StoreTypeController extends MainController
 
     public function store(StoreTypeRequest $request)
     {
-        dd($request->all());
         $imageUrl = "";
 
         if ($request->hasFile('image')) {

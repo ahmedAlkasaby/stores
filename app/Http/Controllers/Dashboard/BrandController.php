@@ -117,6 +117,9 @@ class BrandController extends MainController
      */
     public function destroy(string $id)
     {
+        if(Brand::find($id)->products()->count() > 0){
+            return redirect()->route('dashboard.brands.index')->with('error', __('site.brand_has_products'));
+        }
         $brand = Brand::findOrFail($id);
         $brand->delete();
         return redirect()->route('dashboard.brands.index')->with('success', __('site.brand_deleted_successfully'));

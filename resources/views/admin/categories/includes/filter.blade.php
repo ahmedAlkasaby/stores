@@ -1,4 +1,4 @@
-@include('admin.layouts.modals.filter.header',["model"=>"stores"])
+@include('admin.layouts.modals.filter.header',["model"=>"categories"])
 
 {{-- Search by Image --}}
 
@@ -36,10 +36,19 @@
     </select>
 </div>
 @include("admin.layouts.forms.fields.select",[
-'select_name' => 'store_type_id',
-'select_function' =>  ["all" => __("site.all")] + $storeTypes->mapWithKeys(fn($storeType) => [$storeType->id => $storeType->nameLang()])->toArray()
+'select_name' => 'store_id',
+'select_function' =>  ["all" => __("site.all")] + $stores->mapWithKeys(fn($store) => [$store->id => $store->nameLang()])->toArray()
 ?? null,
-'select_value' => old('store_type_id') ?? request('store_type_id'),
+'select_value' => old('store') ?? request('store'),
+'select_class' => 'select2',
+'select2' => true,
+"not_req"=> true,
+])
+@include("admin.layouts.forms.fields.select",[
+'select_name' => 'parent_id',
+'select_function' =>  ["null" => __("site.null")] + $allCategories->mapWithKeys(fn($category) => [$category->id => $category->nameLang()])->toArray()
+?? null,
+'select_value' => old('parent_id') ?? request('parent_id'),
 'select_class' => 'select2',
 'select2' => true,
 "not_req"=> true,
@@ -54,7 +63,7 @@
 
 {{-- buttons --}}
 @include('admin.layouts.modals.filter.buttons',
-['model' => 'stores'])
+['model' => 'categories'])
 
 {{-- Footer --}}
 @include('admin.layouts.modals.filter.footer')

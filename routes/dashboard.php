@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\StoreTypeController;
 
 
@@ -55,4 +56,10 @@ Route::group(['middleware'=>['auth','admin']],function(){
     Route::get('stores/restore/{store}', [StoreController::class, 'restore'])->name('stores.restore');
     Route::delete('stores/force_delete/{store}', [StoreController::class, 'forceDelete'])->name('stores.force_delete');
     Route::get('stores/toggle_active/{store}', [StoreController::class, 'toggleActive'])->name('stores.toggle');
+
+    // Resource routes for categories
+    Route::resource('categories', CategoryController::class);
+    Route::get('categories/restore/{category}', [CategoryController::class, 'restore'])->name('categories.restore');
+    Route::delete('categories/force_delete/{category}', [CategoryController::class, 'forceDelete'])->name('categories.force_delete');
+    Route::get('categories/toggle_active/{category}', [CategoryController::class, 'toggleActive'])->name('categories.toggle');
     });
