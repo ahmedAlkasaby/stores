@@ -45,29 +45,37 @@
                 </li>
                 @else
                 <li>
-                    {{-- @if (auth()->user()->hasPermission('categories-update')) --}}
+                    @if (auth()->user()->hasPermission('brands.update'))
                     <a class="dropdown-item" href="{{ route('dashboard.brands.edit', $brand->id) }}">
                         <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                     </a>
-                    {{-- @else --}}
+                    @else
                     <button disabled class="dropdown-item" disabled>
                         <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                     </button>
-                    {{-- @endif --}}
-
-                    {{-- @if (auth()->user()->hasPermission('categories-delete')) --}}
+                    @endif
+                    @if (auth()->user()->hasPermission('brands.read'))
+                    <a class="dropdown-item" href="{{ route('dashboard.brands.show', $brand->id) }}">
+                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
+                    </a>
+                    @else
+                    <button disabled class="dropdown-item" disabled>
+                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
+                    </button>
+                    @endif
+                    @if (auth()->user()->hasPermission('brands.delete'))
                     <button class="dropdown-item delete-btn" data-bs-toggle="modal"
                         data-bs-target="#deleteModal{{ $brand->id }}">
                         <i class="ti ti-trash me-1"></i> @lang('site.delete')
                     </button>
-                    {{-- @else --}}
+                    @else
                     <button class="dropdown-item" disabled>
                         <i class="ti ti-trash me-1"></i> @lang('site.delete')
                     </button>
-                </li>
-                @endif
+                    @endif
                 </li>
             </div>
+            @endif
         </div>
     </td>
 </tr>

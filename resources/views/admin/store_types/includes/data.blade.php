@@ -42,7 +42,15 @@
                         <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                     </button>
                     @endif
-
+                     @if (auth()->user()->hasPermission('store_types.read'))
+                    <a class="dropdown-item" href="{{ route('dashboard.store_types.show', $storeType->id) }}">
+                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
+                    </a>
+                    @else
+                    <button disabled class="dropdown-item" disabled>
+                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
+                    </button>
+                    @endif
                     @if (auth()->user()->hasPermission('store_types.delete'))
                     <button class="dropdown-item delete-btn" data-bs-toggle="modal"
                         data-bs-target="#deleteModal{{ $storeType->id }}">

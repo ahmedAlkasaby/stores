@@ -60,7 +60,8 @@ class StoreTypeController extends MainController
 
     public function show(string $id)
     {
-        //
+        $storeType = StoreType::findOrFail($id);
+        return view('admin.store_types.show', compact('storeType'));
     }
 
 

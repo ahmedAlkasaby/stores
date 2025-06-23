@@ -57,7 +57,8 @@ class UnitController extends MainController
      */
     public function show(string $id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        return view('admin.units.show', compact('unit'));
     }
 
     /**

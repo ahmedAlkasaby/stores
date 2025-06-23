@@ -23,6 +23,7 @@
 'number_name' => 'order_id',
 "min" => 0,
 "placeholder" => __('site.order_id'),
+'label_req' => true
 ])
 <div class="col-md-6 mt-3">
     @include('admin.layouts.forms.active')

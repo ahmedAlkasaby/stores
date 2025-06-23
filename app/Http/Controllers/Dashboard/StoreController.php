@@ -70,7 +70,9 @@ class StoreController extends MainController
      */
     public function show(string $id)
     {
-        //
+        $store = Store::with('storeType')->findOrFail($id);
+        $storeTypes = StoreType::all();
+        return view('admin.stores.show', compact('store', 'storeTypes'));
     }
 
     /**

@@ -66,7 +66,8 @@ class BrandController extends MainController
      */
     public function show(string $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        return view('admin.brands.show', compact('brand'));
     }
 
     /**

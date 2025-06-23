@@ -114,4 +114,13 @@ return [
     'unit_restored_successfully' => 'Unit restored successfully',
     'unit_force_deleted_successfully' => 'Unit force deleted successfully',
     'unit_toggled_successfully' => 'Unit toggled successfully',
+
+    "address" => "Address",
+    "store_type_id" => "Store Type ID",
+    "store_status_updated_successfully"=> 'Store status updated successfully',
+    "store_created_successfully" => 'Store created successfully',
+    "store_updated_successfully" => 'Store updated successfully',
+    "store_deleted_successfully" => 'Store deleted successfully',
+    "store_restored_successfully" => 'Store restored successfully',
+    "store_force_deleted_successfully" => 'Store force deleted successfully',
 ];

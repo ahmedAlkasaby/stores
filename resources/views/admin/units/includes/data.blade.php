@@ -35,7 +35,7 @@
                 </li>
                 @else
                 <li>
-                    @if (auth()->user()->hasPermission('units-update'))
+                    @if (auth()->user()->hasPermission('units.update'))
                     <a class="dropdown-item" href="{{ route('dashboard.units.edit', $unit->id) }}">
                         <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                     </a>
@@ -44,8 +44,17 @@
                         <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                     </button>
                     @endif
+                    @if (auth()->user()->hasPermission('units.read'))
+                    <a class="dropdown-item" href="{{ route('dashboard.units.show', $unit->id) }}">
+                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
+                    </a>
+                    @else
+                    <button disabled class="dropdown-item" disabled>
+                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
+                    </button>
+                    @endif
 
-                    @if (auth()->user()->hasPermission('units-delete'))
+                    @if (auth()->user()->hasPermission('units.delete'))
                     <button class="dropdown-item delete-btn" data-bs-toggle="modal"
                         data-bs-target="#deleteModal{{ $unit->id }}">
                         <i class="ti ti-trash me-1"></i> @lang('site.delete')

@@ -117,4 +117,13 @@ return [
     'unit_restored_successfully' => 'تم استعادة الوحدة بنجاح',
     'unit_force_deleted_successfully' => 'تم حذف الوحدة نهائيًا بنجاح',
     'unit_toggled_successfully' => 'تم تغيير حالة الوحدة بنجاح',
+
+    "address" => "العنوان",
+    "store_type_id" => "معرف نوع المتجر",
+    "store_status_updated_successfully" => 'تم تحديث حالة المتجر بنجاح',
+    "store_created_successfully" => 'تم إنشاء المتجر بنجاح',
+    "store_updated_successfully" => 'تم تحديث المتجر بنجاح',
+    "store_deleted_successfully" => 'تم حذف المتجر بنجاح',
+    "store_restored_successfully" => 'تم استعادة المتجر بنجاح',
+    "store_force_deleted_successfully" => 'تم حذف المتجر نهائيًا بنجاح',
 ];

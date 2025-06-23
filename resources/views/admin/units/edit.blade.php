@@ -33,7 +33,7 @@
 "min" => 0,
 "placeholder" => __('site.order_id'),
 'number_value' => $unit->order_id ?? null,
-
+'label_req' => true
 ])
 <div class="col-md-6 mt-3">
     @include('admin.layouts.forms.active',["var"=> $unit])

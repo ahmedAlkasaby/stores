@@ -1,18 +1,20 @@
 @extends('admin.layouts.app')
-@section('title', __('site.store_types'))
+@section('title', __('site.units'))
 @section('styles')
 <link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
 @endsection
 @section('content')
+@include('admin.layouts.messages.success')
+@include('admin.layouts.messages.displayErrors')
 @include('admin.layouts.forms.edit', [
-'table' => 'store_types',
-'route_type' => 'dashboard', 
-'form_method' => 'PATCH', 
+'table' => 'units',
+'route_type' => 'dashboard',
+'form_method' => 'PATCH',
 'form_class' => 'custom-form-class',
-'form_status' => 'update', 
-'model' => $storeType, 
-'model_id' => $storeType->id, 
-'enctype' => true, 
+'form_status' => 'update',
+'model' => $unit,
+'model_id' => $unit->id,
+'enctype' => true,
 ])
 
 
@@ -20,21 +22,29 @@
 "show_name"=> true,
 "show_content"=> true,
 "show_image"=> true,
-"name_ar"=> $storeType->nameLang('ar') ,
-"name_en"=> $storeType->nameLang('en') ,
-"content_ar"=> $storeType->descriptionLang('ar') ?? null,
-"content_en"=> $storeType->descriptionLang('en') ?? null,
+"name_ar"=> $unit->nameLang('ar') ,
+"name_en"=> $unit->nameLang('en') ,
+"content_ar"=> $unit->descriptionLang('ar') ?? null,
+"content_en"=> $unit->descriptionLang('en') ?? null,
 ])
-@include('admin.layouts.forms.fields.file',[
-'image' => $storeType->image ?? null
+@include('admin.layouts.forms.fields.number',
+[
+'number_name' => 'order_id',
+"min" => 0,
+"placeholder" => __('site.order_id'),
+'number_value' => $unit->order_id ?? null,
+
 ])
+<div class="col-md-6 mt-3">
+    @include('admin.layouts.forms.active',["var"=> $unit])
+</div>
+
 
 @include("admin.layouts.forms.footer")
 @include('admin.layouts.forms.close')
 </div>
 @section('jsFiles')
 <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-<script src="{{ asset('js/showImage.js') }}"></script>
 @endsection
 @section('mainFiles')
 <script src="{{asset("admin/assets/js/form-wizard-numbered.js")}}"></script>
