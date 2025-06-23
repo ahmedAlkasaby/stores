@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Store extends MainModel
 {
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'description',
@@ -38,10 +40,10 @@ class Store extends MainModel
         $request=$request??request();
 
         $query->orderBy('order_id','asc');
-
+        if($type_app=='app')
         $query->where('active', $type_app=='app' ? 1 : $request->active);
 
-
+        
 
         if ($request->has('search')) {
             $query->where(function($q) use($request){
@@ -64,6 +66,25 @@ class Store extends MainModel
                     break;
             }
         }
+        if ($request->filled('active') && $request->active != 'all' && $type_app != 'app') {
+            $query->where('active', $request->active);
+        }
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+        if ($request->filled('address')) {
+            $query->where('address', 'like', '%' . $request->address . '%');
+        }
+
+        if ($request->filled('order_id')) {
+            $query->where('order_id', $request->order_id);
+        }
+
+        if ($request->has('deleted') && $request->deleted == 1) {
+            $query->onlyTrashed();
+        }
+
 
 
        return $query;

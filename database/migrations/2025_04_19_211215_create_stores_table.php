@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->foreignId('store_type_id')->constrained('store_types')->onDelete('cascade');
             $table->integer('order_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

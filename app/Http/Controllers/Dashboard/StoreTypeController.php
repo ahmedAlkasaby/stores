@@ -6,84 +6,80 @@ use App\Models\StoreType;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Requests\Dashboard\StoreTypeRequest;
 use App\Models\Store;
-use App\Services\StoreTypeService;
+use App\Services\ImageHandlerService;
 
 class StoreTypeController extends MainController
 {
 
-    protected $storeTypeService;
+    protected $imageService;
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function __construct(StoreTypeService $storeTypeService)
+
+    public function __construct(ImageHandlerService $imageService)
     {
         parent::__construct();
         $this->setClass('store_types');
-        $this->storeTypeService = $storeTypeService;
+        $this->imageService = $imageService;
     }
     public function index()
     {
         $storeTypes = StoreType::filter(request(), "dashboard")->paginate($this->perPage);
-        return view('admin.store_type.index', compact('storeTypes'));
+        return view('admin.store_types.index', compact('storeTypes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        return view('admin.store_type.create');
+        return view('admin.store_types.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreTypeRequest $request)
     {
-        $imageUrl = $this->storeTypeService->uploadImage($request->file('image'));
+        dd($request->all());
+        $imageUrl = "";
+
+        if ($request->hasFile('image')) {
+            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
+        }
+
         StoreType::create([
             'name' => [
                 "ar" => $request->name_ar,
                 "en" => $request->name_en,
             ],
-            'description_' => [
+            'description' => [
                 "ar" => $request->description_ar,
                 "en" => $request->description_en,
             ],
             'image' => $imageUrl,
         ]);
 
-        return redirect()->route('dashboard.store_type.index')->with('success', 'Store type created successfully');
+        return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_created_successfully'));
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         $storeType = StoreType::findOrFail($id);
-        return view('admin.store_type.edit', compact('storeType'));
+        return view('admin.store_types.edit', compact('storeType'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(StoreTypeRequest $request, string $id)
     {
         $storeType = StoreType::findOrFail($id);
         $imageUrl = "";
         if ($request->hasFile('image')) {
-            $this->storeTypeService->deleteImage($storeType->image);
-            $imageUrl = $this->storeTypeService->uploadImage($request->file('image'));
+            if ($storeType->image) {
+                $this->imageService->deleteImage($storeType->image);
+            }
+            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
         }
 
         $storeType->update([
@@ -91,29 +87,22 @@ class StoreTypeController extends MainController
                 "ar" => $request->name_ar,
                 "en" => $request->name_en,
             ],
-            'description_' => [
+            'description' => [
                 "ar" => $request->description_ar,
                 "en" => $request->description_en,
             ],
             'image' => $imageUrl,
         ]);
 
-        return redirect()->route('dashboard.store_type.index')->with('success', 'Store type updated successfully');
+        return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_updated_successfully'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         $storeType = StoreType::findOrFail($id);
         $storeType->delete();
-        return redirect()->route('dashboard.store_types.index')->with('success', 'Store type deleted successfully');
-    }
-    public function deleted()
-    {
-        $storeTypes = StoreType::onlyTrashed()->filter(request("search"), true, "dashboard")->paginate(50);
-        return view("admin.store_type.deleted", compact("storeTypes"));
+        return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_deleted_successfully'));
     }
     public function restore($sliderId)
     {
@@ -121,13 +110,14 @@ class StoreTypeController extends MainController
         $storeType->restore();
         return back();
     }
+    
     public function forceDelete($sliderId)
     {
         $storeType = StoreType::withTrashed()->findOrFail($sliderId);
         if ($storeType->image) {
-            $this->storeTypeService->deleteImage($storeType->image);
+            $this->imageService->deleteImage($storeType->image);
         }
         $storeType->forceDelete();
-        return back();
+        return back()->with('success', __('site.store_type_deleted_successfully'));
     }
 }

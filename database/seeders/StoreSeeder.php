@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\Store;
 use App\Models\StoreType;
 use App\Models\Unit;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,18 +18,48 @@ class StoreSeeder extends Seeder
 
     public function run(): void
     {
+        StoreType::create([
+            'name' => [
+                'en' => 'Default Store Type',
+                'ar' => 'نوع المتجر الافتراضي',
+            ],
+            'description' => [
+                'en' => 'This is the default store type.',
+                'ar' => 'هذا هو نوع المتجر الافتراضي.',
+            ],
+            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+        ]);
         for($i = 1; $i < 6; $i++){
-            $storeType = StoreType::create([
+            Store::create([
                 'name' => [
-                    'en' => 'Store Type ' . $i,
+                    'en' => 'unit Type ' . $i,
                     'ar' => 'نوع المتجر ' . $i,
                 ],
                 'description' => [
-                    'en' => 'Description for Store Type ' . $i,
+                    'en' => 'Description for unit Type ' . $i,
                     'ar' => 'وصف لنوع المتجر ' . $i,
                 ],
                 'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                'active' => true,
+                "order_id" => $i,
+                'store_type_id' => 1,
+                "address" => 'Address for Store ' . $i,
             ]);
+
+        // }
+        // for($i = 1; $i < 6; $i++){
+        //      Size::create([
+        //         'name' => [
+        //             'en' => 'Store Type ' . $i,
+        //             'ar' => 'نوع المتجر ' . $i,
+        //         ],
+        //         'description' => [
+        //             'en' => 'Description for Store Type ' . $i,
+        //             'ar' => 'وصف لنوع المتجر ' . $i,
+        //         ],
+        //         'active' => true,
+        //         "order_id" => $i,
+        //     ]);
 
         }
         // for ($i = 1; $i < 6; $i++) {

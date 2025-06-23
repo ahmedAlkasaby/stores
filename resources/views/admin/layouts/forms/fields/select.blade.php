@@ -26,6 +26,6 @@ $array_control['id'] = $select_id;
 }
 @endphp
 @include('admin.layouts.forms.fields.form-group-head', ['field_name' => $field_name])
-@include('admin.layouts.forms.fields.label',['label_default'=>__("Active")])
+@include('admin.layouts.forms.fields.label',['label_default'=>__("site.".$field_name)])
 {!! Form::select($field_name, $select_function ?? statusType(), $select_value ?? null, $array_control) !!}
 @include('admin.layouts.forms.fields.form-group-foot', ['field_name' => $field_name])

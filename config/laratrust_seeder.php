@@ -15,6 +15,11 @@ return [
         'super_admin' => [
             'roles' => 'c,r,u,d',
             'users' => 'c,r,u,d',
+            "units" => 'c,r,u,d',
+            "brands" => 'c,r,u,d',
+            "store_types" => 'c,r,u,d',
+            "sizes" => 'c,r,u,d',
+            "stores" => 'c,r,u,d',
         ],
         'admin' => [
             'users' => 'c,r,u',

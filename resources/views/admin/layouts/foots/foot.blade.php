@@ -18,7 +18,6 @@
 
 <script src="{{ url('admin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 <script src="{{ url('admin/assets/vendor/libs/swiper/swiper.js') }}"></script>
-<script src="{{ url('admin/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 @yield('jsFiles')
 <!-- Main JS -->
 <script src="{{ url('admin/assets/js/main.js') }}"></script>

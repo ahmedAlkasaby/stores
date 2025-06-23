@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->integer('order_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
