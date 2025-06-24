@@ -126,4 +126,5 @@ return [
     "store_deleted_successfully" => 'تم حذف المتجر بنجاح',
     "store_restored_successfully" => 'تم استعادة المتجر بنجاح',
     "store_force_deleted_successfully" => 'تم حذف المتجر نهائيًا بنجاح',
+    'show' => 'عرض',
 ];
