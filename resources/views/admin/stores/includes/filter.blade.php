@@ -43,13 +43,6 @@
 'select_class' => 'select2',
 'select2' => true,
 ])
-<div class="col-md-6">
-    <label for="deleted" class="form-label">{{ __('site.trash') }}</label>
-    <select name="deleted" id="deleted" class="form-select">
-        <option value="1" @selected(request('deleted')==='1' )>{{ __('site.deleted') }}</option>
-        <option value="0" @selected(request('deleted')==='0' )>{{ __('site.not_deleted') }}</option>
-    </select>
-</div>
 
 {{-- buttons --}}
 @include('admin.layouts.modals.filter.buttons',
