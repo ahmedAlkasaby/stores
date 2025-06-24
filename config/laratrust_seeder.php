@@ -23,6 +23,8 @@ return [
         ],
         'admin' => [
             'users' => 'i,sh,s,u,d,a',
+            "store_types" => 'i,u,d',
+
         ],
 
     ],

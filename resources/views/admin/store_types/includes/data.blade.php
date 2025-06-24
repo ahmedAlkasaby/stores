@@ -12,6 +12,15 @@
             width="50" height="50">
         @endif
     </td>
+
+     {{-- active --}}
+    @include('admin.layouts.tables.active', [
+    "model" => "store_types",
+    "item" => $storeType,
+    "param" => "storeType"
+    ])
+
+
     {{-- action --}}
     @include('admin.layouts.tables.actions', [
     "model" => "store_types",
