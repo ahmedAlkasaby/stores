@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('name');
             $table->longText('description')->nullable();
             $table->string('address');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('store_type_id')->constrained('store_types')->onDelete('cascade');
             $table->integer('order_id')->nullable();

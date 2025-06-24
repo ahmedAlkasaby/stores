@@ -10,7 +10,7 @@
                 @if (isset($edit))
 
                 @if (auth()->user()->hasPermission($model.'.update'))
-                <a class="dropdown-item" href="{{ route('dashboard.store_types.edit', $storeType->id) }}">
+                <a class="dropdown-item" href="{{ route('dashboard.'.$model.'.edit', $item->id) }}">
                     <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                 </a>
                 @else
@@ -24,7 +24,7 @@
                 @if (isset($show))
 
                 @if (auth()->user()->hasPermission($model.'.show'))
-                <a class="dropdown-item" href="{{ route('dashboard.store_types.show', $storeType->id) }}">
+                <a class="dropdown-item" href="{{ route('dashboard.'.$model.'.show', $item->id) }}">
                     <i class="ti ti-eye me-1"></i> @lang('site.show')
                 </a>
                 @else
@@ -39,7 +39,7 @@
 
                 @if (auth()->user()->hasPermission($model.'.delete'))
                 <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                    data-bs-target="#deleteModal{{ $storeType->id }}">
+                    data-bs-target="#deleteModal{{ $item->id }}">
                     <i class="ti ti-trash me-1"></i> @lang('site.delete')
                 </button>
                 @else

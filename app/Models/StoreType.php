@@ -20,6 +20,11 @@ class StoreType extends MainModel
     {
         return $this->hasMany(Store::class, 'store_type_id', 'id');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 

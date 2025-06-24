@@ -27,6 +27,7 @@
     "edit" => true,
     "show" => true,
     "delete" => true,
+    "item" => $storeType,
     ])
 </tr>
 
