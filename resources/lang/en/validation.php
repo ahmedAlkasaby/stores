@@ -360,6 +360,13 @@ return [
     'images_mimes' => 'The image extension is invalid.',
     'images_max' => 'The image may not be greater than 2MB.',
     'you_cant_enter_both_price_and_items' => 'You can\'t enter both price and items.',
+    'image_image' => 'The image must be a valid image file.',
+    'image_mimes' => 'The image must be a file of type: jpeg, png, jpg, gif, svg.',
+    'image_max' => 'The image may not be greater than 2048 kilobytes.',
+    'image_required' => 'The image field is required.',
+    'image_dimensions' => 'The image dimensions are invalid. The width and height must be at least 100 pixels and at most 1000 pixels.',
+    'image_size' => 'The image size must be at least 100x100 pixels and at most 1000x100 pixels.',
+    'image_valid' => 'The image must be a valid image file.',
 
 
 

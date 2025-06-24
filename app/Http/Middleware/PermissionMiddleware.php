@@ -26,8 +26,15 @@ class PermissionMiddleware
             return $next($request);
         }
 
+        $routeName = Str::replaceFirst('dashboard.', '', $routeName);
+
+
+
         if (Str::endsWith($routeName, '.edit')) {
             $routeName = Str::replaceLast('.edit', '.update', $routeName);
+        }
+        if (Str::endsWith($routeName, '.create')) {
+            $routeName = Str::replaceLast('.create', '.store', $routeName);
         }
 
         $auth = auth()->user();
@@ -38,6 +45,7 @@ class PermissionMiddleware
             $permissionExists = DB::table('permissions')->where('name', $routeName)->exists();
 
             if (!$permissionExists) {
+
                 return $next($request);
             }
 

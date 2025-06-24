@@ -12,9 +12,12 @@
                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                 @endif
                 @endforeach
-                <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#addNewAddress">
-                        Show
-                      </button>
+                 <button class="btn btn-primary" style="flex-shrink: 0;" type="submit">
+                    <span>
+                        <i class="ti ti-filter me-0 me-sm-1"></i>
+                        <span class="d-none d-sm-inline-block">@lang('site.search')</span>
+                    </span>
+                </button>
             </form>
 
         </div>
@@ -22,7 +25,7 @@
     <div class="d-flex align-items-center">
 
 
-        @if (auth()->user()->hasPermission($model.'.create'))
+        @if (auth()->user()->hasPermission($model.'.store'))
 
 
         <a href="{{ route("dashboard.".$model.'.create') }}"
@@ -41,23 +44,7 @@
             </span>
         </button>
         @endif
-        @if (!request()->has('deleted')|| request('deleted') === "0")
-        <a href="{{ route('dashboard.'.$model.'.index', ['deleted' => 1]) }}"
-            class="btn btn-secondary add-new btn-primary ms-2 waves-effect waves-light">
-            <span>
-                <i class="ti ti-trash me-0 me-sm-1 ti-xs"></i>
-                <span class="d-none d-sm-inline-block">@lang('site.deleted')</span>
-            </span>
-        </a>
-        @else
-        <a href="{{ route('dashboard.'.$model.'.index') }}"
-            class="btn btn-secondary add-new btn-primary ms-2 waves-effect waves-light">
-            <span>
-                <i class="ti ti-list me-0 me-sm-1 ti-xs"></i>
-                <span class="d-none d-sm-inline-block">@lang('site.all')</span>
-            </span>
-        </a>
-        @endif
+
         @if($filter==true)
         <button type="button" class="btn btn-secondary add-new btn-primary ms-2 waves-effect waves-light"
             data-bs-toggle="modal" data-bs-target="#addNewAddress">{{ __('site.filter') }}</button>

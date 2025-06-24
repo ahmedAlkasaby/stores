@@ -20,18 +20,7 @@
             </button>
             <div class="dropdown-menu">
 
-                {{-- @endif --}}
-                @if (request()->has('deleted'))
-                <li>
-                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $storeType->id }}">
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete_forever')
-                    </button>
-                    <a class="dropdown-item" href="{{ route('dashboard.store_types.restore', $storeType->id) }}">
-                        <i class="ti ti-rotate-clockwise me-1"></i> @lang('site.restore')
-                    </a>
-                </li>
-                @else
+
                 <li>
                     @if (auth()->user()->hasPermission('store_types.update'))
                     <a class="dropdown-item" href="{{ route('dashboard.store_types.edit', $storeType->id) }}">
@@ -42,7 +31,7 @@
                         <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
                     </button>
                     @endif
-                     @if (auth()->user()->hasPermission('store_types.read'))
+                     @if (auth()->user()->hasPermission('store_types.show'))
                     <a class="dropdown-item" href="{{ route('dashboard.store_types.show', $storeType->id) }}">
                         <i class="ti ti-eye me-1"></i> @lang('site.Show')
                     </a>
@@ -62,7 +51,7 @@
                     </button>
                     @endif
                 </li>
-                @endif
+                
                 </li>
             </div>
         </div>

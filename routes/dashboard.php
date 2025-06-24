@@ -29,8 +29,7 @@ Route::group(['middleware'=>['auth','admin','check.permission']],function(){
     });
     // Resource routes for store types
         Route::resource('store_types', StoreTypeController::class);
-        Route::get('store_types/restore/{store_type}', [StoreTypeController::class, 'restore'])->name('store_types.restore');
-        Route::delete('store_types/force_delete/{store_type}', [StoreTypeController::class, 'forceDelete'])->name('store_types.force_delete');
+        Route::get('store_types/active/{storeType}', [StoreTypeController::class, 'active'])->name('store_types.active');
 
     // Resource routes for sizes
         Route::resource('sizes', SizeController::class);
