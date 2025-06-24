@@ -20,14 +20,14 @@ Route::group(['middleware'=>'guest'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login.login');
 });
 
-Route::group(['middleware'=>['auth','admin']],function(){
+Route::group(['middleware'=>['auth','admin','check.permission']],function(){
     Route::get('/',[HomeController::class, 'index'])->name('home');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::group(['prefix'=>'profile'], function () {
         Route::get('change_lang/{lang}', [ProfileController::class, 'changeLang'])->name('profile.change.lang');
         Route::get('change_theme/{theme}', [ProfileController::class, 'changeTheme'])->name('profile.change.theme');
     });
-    // Resource routes for store types 
+    // Resource routes for store types
         Route::resource('store_types', StoreTypeController::class);
         Route::get('store_types/restore/{store_type}', [StoreTypeController::class, 'restore'])->name('store_types.restore');
         Route::delete('store_types/force_delete/{store_type}', [StoreTypeController::class, 'forceDelete'])->name('store_types.force_delete');
