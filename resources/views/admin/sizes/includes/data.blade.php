@@ -11,16 +11,7 @@
             </button>
         </a>
     </td>
-    {{-- image --}}
-    <td class="text-end">
-        @if ($brand->image)
-        <img src="{{ asset( $brand->image) }}" alt="{{ $brand->nameLang() }}" class="rounded-circle" width="50"
-            height="50">
-        @else
-        <img src="{{ asset('images/default.png') }}" alt="{{ $brand->nameLang() }}" class="rounded-circle"
-            width="50" height="50">
-        @endif
-    </td>
+   
     {{-- action --}}
     <td class="text-lg-end">
         <div class="dropdown">

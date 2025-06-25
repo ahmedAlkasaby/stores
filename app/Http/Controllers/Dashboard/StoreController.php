@@ -92,12 +92,8 @@ class StoreController extends MainController
     {
         $imgUrl = "";
         $store = Store::findOrFail($id);
-        if ($request->hasFile('image')) {
-            if ($store->image) {
-                $this->imageService->deleteImage($store->image);
-            }
-            $imgUrl = $this->imageService->uploadImage($request->file('image'), 'stores');
-        }
+        $imageUrl = $this->imageService->editImage($request, $store);
+
         $store->update([
             'name' => [
                 "ar" => $request->name_ar,
@@ -121,9 +117,6 @@ class StoreController extends MainController
      */
     public function destroy(string $id)
     {
-        if(Store::find($id)->products()->count() > 0 || Store::find($id)->categories()->count() > 0){
-            return redirect()->route('dashboard.stores.index')->with('error', __('site.store_has_products'));
-        }
         $store = Store::findOrFail($id);
         if ($store->image) {
             $this->imageService->deleteImage($store->image);

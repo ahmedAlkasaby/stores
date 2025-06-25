@@ -33,7 +33,7 @@
                         @if($show_name ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.text', [
-                            'text_name' => 'name_en',
+                            'text_name' => 'name[en]',
                             'text_value' => $name_en ?? null,
                             'label_name' => __("site.english_name"),
                             'label_req' => true])
@@ -52,7 +52,7 @@
                         @if($show_content ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
-                            'text_name' => 'description_en',
+                            'text_name' => 'description[en]',
                             'text_value' => $content_en ?? null,
                             'label_name' => __('site.english_content'),
                             'not_req' => true,
@@ -82,7 +82,7 @@
                         @if($show_name ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.text', [
-                            'text_name' => 'name_ar',
+                            'text_name' => 'name[ar]',
                             'text_value' => $name_ar ?? null,
                             'label_name' => __("site.arabic_name"),
                             'label_req' => true])
@@ -101,7 +101,7 @@
                         @if($show_content ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
-                            'text_name' => 'description_ar',
+                            'text_name' => 'description[ar]',
                             'text_value' => $content_ar ?? null,
                             'label_name' => __('site.arabic_content'),
                             'not_req' => true,

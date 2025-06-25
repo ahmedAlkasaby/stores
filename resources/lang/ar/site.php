@@ -126,4 +126,14 @@ return [
     "store_deleted_successfully" => 'تم حذف المتجر بنجاح',
     "store_restored_successfully" => 'تم استعادة المتجر بنجاح',
     "store_force_deleted_successfully" => 'تم حذف المتجر نهائيًا بنجاح',
+
+    "addition" => "الاضافة",
+    "additions" => "الاضافات",
+    "addition_created_successfully" => 'تم إنشاء الاضافة بنجاح',
+    "addition_updated_successfully" => 'تم تحديث الاضافة بنجاح',
+    "addition_deleted_successfully" => 'تم حذف الاضافة بنجاح',
+    "addition_restored_successfully" => 'تم استعادة الاضافة بنجاح',
+    "addition_force_deleted_successfully" => 'تم حذف الاضافة نهائيًا بنجاح',
+    "show" => "اظهار",
+    "addition_status_updated_successfully" => 'تم تحديث حالة الاضافة بنجاح',
 ];

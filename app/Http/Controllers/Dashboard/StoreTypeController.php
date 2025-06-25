@@ -35,6 +35,7 @@ class StoreTypeController extends MainController
 
     public function store(StoreTypeRequest $request)
     {
+        dd($request->all());
         $imageUrl = "";
 
         if ($request->hasFile('image')) {
@@ -75,12 +76,8 @@ class StoreTypeController extends MainController
     {
         $storeType = StoreType::findOrFail($id);
         $imageUrl = "";
-        if ($request->hasFile('image')) {
-            if ($storeType->image) {
-                $this->imageService->deleteImage($storeType->image);
-            }
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
-        }
+        $imageUrl = $this->imageService->editImage($request, $storeType);
+
 
         $storeType->update([
             'name' => [
@@ -110,7 +107,7 @@ class StoreTypeController extends MainController
         $storeType->restore();
         return back();
     }
-    
+
     public function forceDelete($sliderId)
     {
         $storeType = StoreType::withTrashed()->findOrFail($sliderId);

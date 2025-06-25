@@ -85,15 +85,8 @@ class BrandController extends MainController
     public function update(Request $request, string $id)
     {
         $brand = Brand::findOrFail($id);
-        $imageUrl = $brand->image ?? "";
+        $imageUrl = $this->imageService->editImage($request, $brand);
 
-        if ($request->hasFile('image')) {
-            // Delete the old image if it exists
-            if ($imageUrl) {
-                $this->imageService->deleteImage($imageUrl);
-            }
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'brands');
-        }
 
         $brand->update([
             "name" => [
@@ -117,9 +110,6 @@ class BrandController extends MainController
      */
     public function destroy(string $id)
     {
-        if(Brand::find($id)->products()->count() > 0){
-            return redirect()->route('dashboard.brands.index')->with('error', __('site.brand_has_products'));
-        }
         $brand = Brand::findOrFail($id);
         $brand->delete();
         return redirect()->route('dashboard.brands.index')->with('success', __('site.brand_deleted_successfully'));

@@ -1,6 +1,5 @@
 @include('admin.layouts.modals.filter.header',["model"=>"stores"])
 
-{{-- Search by Image --}}
 
 
 

@@ -16,4 +16,17 @@ class ImageHandlerService
     {
         Storage::disk('public')->delete($path);
     }
+
+    public function editImage($request, $obj){
+        $imageUrl = "";
+        if ($request->hasFile('image')) {
+            if($obj->image){
+                $this->deleteImage($obj->image);
+            }
+            $imageUrl = $this->uploadImage($request->file('image'), 'objs');
+        }else{
+            $imageUrl = $obj->image;
+        }
+        return $imageUrl;
+    }
 }

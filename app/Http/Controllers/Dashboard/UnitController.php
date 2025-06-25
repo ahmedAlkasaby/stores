@@ -97,9 +97,6 @@ class UnitController extends MainController
      */
     public function destroy(string $id)
     {
-        if(Unit::find($id)->products()->count() > 0){
-            return redirect()->route('dashboard.units.index')->with('error', __('site.unit_has_products'));
-        }
         $unit = Unit::findOrFail($id);
         $unit->delete();
         return redirect()->route('dashboard.units.index')->with('success', __('site.unit_deleted_successfully'));

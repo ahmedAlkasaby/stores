@@ -63,11 +63,10 @@
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.store') }}</div>
             </a>
-        </li>
-        <li class="menu-item @if (Route::is("dashboard.categories.*") ) active @endif">
-            <a href="{{ route('dashboard.categories.index') }}" class="menu-link">
+        </li><li class="menu-item @if (Route::is("dashboard.additions.*") ) active @endif">
+            <a href="{{ route('dashboard.additions.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>{{ __('site.category') }}</div>
+                <div>{{ __('site.addition') }}</div>
             </a>
         </li>
 

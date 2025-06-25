@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('site.categories'))
+@section('title', __('site.additions'))
 @section('styles')
 <link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
 <link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
@@ -9,13 +9,13 @@
 @include('admin.layouts.messages.success')
 @include('admin.layouts.messages.displayErrors')
 @include('admin.layouts.forms.edit', [
-'table' => 'categories',
+'table' => 'additions',
 'route_type' => 'dashboard',
 'form_method' => 'PATCH',
 'form_class' => 'custom-form-class',
 'form_status' => 'update',
-'model' => $category,
-'model_id' => $category->id,
+'model' => $addition,
+'model_id' => $addition->id,
 'enctype' => true,
 ])
 
@@ -24,42 +24,40 @@
 "show_name"=> true,
 "show_content"=> true,
 "show_image"=> true,
-"name_ar"=> $category->nameLang('ar') ,
-"name_en"=> $category->nameLang('en') ,
-"content_ar"=> $category->descriptionLang('ar') ?? null,
-"content_en"=> $category->descriptionLang('en') ?? null,
+"name_ar"=> $addition->nameLang('ar') ,
+"name_en"=> $addition->nameLang('en') ,
+"content_ar"=> $addition->descriptionLang('ar') ?? null,
+"content_en"=> $addition->descriptionLang('en') ?? null,
 ])
 @include('admin.layouts.forms.fields.number',
 [
 'number_name' => 'order_id',
 "min" => 0,
 "placeholder" => __('site.order_id'),
-'number_value' => $category->order_id ?? null,
+'number_value' => $addition->order_id ?? null,
+
+])@include('admin.layouts.forms.fields.number',
+[
+'number_name' => 'price',
+"min" => 0,
+"placeholder" => __('site.price'),
+'number_value' => $addition->price ?? 0,
 
 ])
 
 @include("admin.layouts.forms.fields.select",[
-'select_name' => 'store_id',
-'select_function' => $stores->mapWithKeys(fn($store) => [$store->id => $store->nameLang()])->toArray()
-?? null,
-'select_value' => $category->store_id ?? null,
-'select_class' => 'select2',
-'select2' => true,
-])
-@include("admin.layouts.forms.fields.select",[
-'select_name' => 'parent_id',
-'select_function' => [ "null" => __("site.null")] + $categories->mapWithKeys(fn($category) => [$category->id => $category->nameLang()])->toArray()
-?? null,
-'select_value' => $category->parent_id ?? null,
+'select_name' => 'type',
+'select_function' => ["free" => __("site.free"), "paid" => __("site.paid")],
+'select_value' => $addition->type ?? null,
 'select_class' => 'select2',
 'select2' => true,
 ])
 <div class="col-md-6 mt-3">
-    @include('admin.layouts.forms.active',["var"=> $category])
+    @include('admin.layouts.forms.active',["var"=> $addition])
 </div>
 
 @include('admin.layouts.forms.fields.file',[
-'image' => $category->image ?? null
+'image' => $addition->image ?? null
 ])
 @include("admin.layouts.forms.footer")
 @include('admin.layouts.forms.close')

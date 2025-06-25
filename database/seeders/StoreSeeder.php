@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Addition;
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Store;
@@ -19,6 +19,23 @@ class StoreSeeder extends Seeder
 
     public function run(): void
     {
+        for($i = 1; $i < 6; $i++){
+            Addition::create([
+                'name' => [
+                    'en' => 'unit Type ' . $i,
+                    'ar' => 'نوع المتجر ' . $i,
+                ],
+                'description' => [
+                    'en' => 'Description for unit Type ' . $i,
+                    'ar' => 'وصف لنوع المتجر ' . $i,
+                ],
+                'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                'active' => true,
+                "order_id" => $i,
+                "type" => "free"
+                
+            ]);
+        }
         StoreType::create([
             'name' => [
                 'en' => 'Default Store Type',
@@ -46,38 +63,23 @@ class StoreSeeder extends Seeder
                 'store_type_id' => 1,
                 "address" => 'Address for Store ' . $i,
             ]);
-            for($j = 1; $j <= 5; $j++) {
-                
-                Category::create([
-                    'name' => [
-                        'en' => 'Category ' . $j,
-                        'ar' => 'فئة ' . $j,
-                    ],
-                    'description' => [
-                        'en' => 'Description for Category ' . $j,
-                        'ar' => 'وصف لفئة ' . $j,
-                    ],
-                    'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-                    'store_id' => $i,
-                    'active' => true,
-                    "order_id" => $j,
-                ]);
-            }
+        }
 
-        // }
-        // for($i = 1; $i < 6; $i++){
-        //      Size::create([
-        //         'name' => [
-        //             'en' => 'Store Type ' . $i,
-        //             'ar' => 'نوع المتجر ' . $i,
-        //         ],
-        //         'description' => [
-        //             'en' => 'Description for Store Type ' . $i,
-        //             'ar' => 'وصف لنوع المتجر ' . $i,
-        //         ],
-        //         'active' => true,
-        //         "order_id" => $i,
-        //     ]);
+        
+        for($i = 1; $i < 6; $i++){
+             Size::create([
+                'name' => [
+                    'en' => 'Store Type ' . $i,
+                    'ar' => 'نوع المتجر ' . $i,
+                ],
+                'description' => [
+                    'en' => 'Description for Store Type ' . $i,
+                    'ar' => 'وصف لنوع المتجر ' . $i,
+                ],
+                'active' => true,
+                "order_id" => $i,
+            ]);
+        }
 
         }
         // for ($i = 1; $i < 6; $i++) {
@@ -250,4 +252,4 @@ class StoreSeeder extends Seeder
         //     }
         // }
     }
-}
+

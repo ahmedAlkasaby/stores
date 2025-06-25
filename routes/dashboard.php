@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\SizeController;
@@ -8,7 +9,6 @@ use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\Dashboard\ProfileController;
-use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\StoreTypeController;
 
 
@@ -57,9 +57,9 @@ Route::group(['middleware'=>['auth','admin']],function(){
     Route::delete('stores/force_delete/{store}', [StoreController::class, 'forceDelete'])->name('stores.force_delete');
     Route::get('stores/toggle_active/{store}', [StoreController::class, 'toggleActive'])->name('stores.toggle');
 
-    // Resource routes for categories
-    Route::resource('categories', CategoryController::class);
-    Route::get('categories/restore/{category}', [CategoryController::class, 'restore'])->name('categories.restore');
-    Route::delete('categories/force_delete/{category}', [CategoryController::class, 'forceDelete'])->name('categories.force_delete');
-    Route::get('categories/toggle_active/{category}', [CategoryController::class, 'toggleActive'])->name('categories.toggle');
+    // Resource routes for addtions
+    Route::resource('additions', AdditionController::class);
+    Route::get('additions/restore/{addition}', [AdditionController::class, 'restore'])->name('additions.restore');
+    Route::delete('additions/force_delete/{addition}', [AdditionController::class, 'forceDelete'])->name('additions.force_delete');
+    Route::get('additions/toggle_active/{addition}', [AdditionController::class, 'toggleActive'])->name('additions.toggle');
     });

@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('site.categories'))
+@section('title', __('site.additions'))
 @section('styles')
 <link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
 <link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
@@ -7,14 +7,14 @@
 <link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/select2/select2.css")}}" />
 <!-- For date picker -->
 @endsection
-@section('content')
 @include("admin.layouts.messages.displayErrors")
+@section('content')
 @include('admin.layouts.forms.create', [
 'form_method' => 'POST',
 'form_class' => 'needs-validation',
 'form_status' => 'store',
-'table' => 'dashboard.categories',
-'model_id' => $category->id ?? null,
+'table' => 'dashboard.additions',
+'model_id' => $addition->id ?? null,
 'enctype' => true
 ])
 
@@ -27,32 +27,27 @@
 'number_name' => 'order_id',
 "min" => 0,
 "placeholder" => __('site.order_id'),
-'number_value' => $category->order_id ?? null,
+])@include('admin.layouts.forms.fields.number',
+[
+'number_name' => 'price',
+"min" => 0,
+"placeholder" => __('site.price'),
+'number_value' => $addition->price ?? 0,
 
 ])
 
 @include("admin.layouts.forms.fields.select",[
-'select_name' => 'store_id',
-'select_function' => $stores->mapWithKeys(fn($store) => [$store->id => $store->nameLang()])->toArray()
-?? null,
-'select_value' => $category->store_id ?? null,
-'select_class' => 'select2',
-'select2' => true,
-])
-@include("admin.layouts.forms.fields.select",[
-'select_name' => 'parent_id',
-'select_function' => [ "null" => __("site.null")] + $categories->mapWithKeys(fn($category) => [$category->id => $category->nameLang()])->toArray()
-?? null,
-'select_value' => $category->parent_id ?? null,
+'select_name' => 'type',
+'select_function' => ["free" => __("site.free"), "paid" => __("site.paid")],
+'select_value' => $addition->type ?? null,
 'select_class' => 'select2',
 'select2' => true,
 ])
 <div class="col-md-6 mt-3">
     @include('admin.layouts.forms.active')
 </div>
-
 @include('admin.layouts.forms.fields.file',[
-'image' => $category->image ?? null
+'image' => $image ?? null
 ])
 @include("admin.layouts.forms.footer")
 @include('admin.layouts.forms.close')

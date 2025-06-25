@@ -19,8 +19,9 @@ return [
             "brands" => 'c,r,u,d',
             "store_types" => 'c,r,u,d',
             "sizes" => 'c,r,u,d',
-            "categories" => 'c,r,u,d',
             "stores" => 'c,r,u,d',
+            "additions" => 'c,r,u,d',
+            "categories" => 'c,r,u,d',
         ],
         'admin' => [
             'users' => 'c,r,u',

@@ -124,9 +124,13 @@ return [
     "store_restored_successfully" => 'Store restored successfully',
     "store_force_deleted_successfully" => 'Store force deleted successfully',
 
-    "show"=> "Show",
-    "category_has_products"=> "Category has products",
-    "brand_has_products"=> "Brand has products",
-    "store_has_products"=> "Store has products",
-    "category_parent" => "Category Parent",
+    "addition" => "Addition",
+    "additions" => "Additions",
+    "addition_created_successfully" => 'Addition created successfully',
+    "addition_updated_successfully" => 'Addition updated successfully',
+    "addition_deleted_successfully" => 'Addition deleted successfully',
+    "addition_restored_successfully" => 'Addition restored successfully',
+    "addition_force_deleted_successfully" => 'Addition force deleted successfully',
+    "show" => "Show",
+    "addition_status_updated_successfully" => 'Addition status updated successfully',
 ];
