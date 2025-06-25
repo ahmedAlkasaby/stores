@@ -368,6 +368,16 @@ return [
     'image_size' => 'The image size must be at least 100x100 pixels and at most 1000x100 pixels.',
     'image_valid' => 'The image must be a valid image file.',
 
+    'address_string' => 'The address must be a string.',
+    'address_max' => 'The address may not be greater than 1000 characters.',
+    'store_type_id_exists' => 'The selected store type is invalid.',
+    'store_type_id_required' => 'The store type is required.',
+    'order_id_integer' => 'The order ID must be an integer.',
+    'order_id_min' => 'The order ID must be at least 0.',
+    'order_id_max' => 'The order ID must not exceed 9999999999999999.',
+    'address_required' => 'The address field is required.',
+
+
 
 
 

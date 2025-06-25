@@ -1,5 +1,4 @@
 <tr>
-    <td class="text-lg-end">{{ $storeType->id }}</td>
     <td class="text-lg-end">{{ $storeType->nameLang() }}</td>
 
     {{-- image --}}

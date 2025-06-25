@@ -31,40 +31,28 @@ class StoreController extends MainController
 
     public function create()
     {
-        $storeTypes = StoreType::all();
+        $storeTypes = StoreType::active()->get();
         return view('admin.stores.create', compact('storeTypes'));
     }
 
 
     public function store(StoreRequest $request)
     {
-        $imageUrl = "";
         if ($request->hasFile('image')) {
             $imageUrl = $this->imageService->uploadImage($request->file('image'), 'stores');
         }
+        $data= $request->except('image');
+        $data['image'] = $imageUrl ?? null;
 
-        Store::create([
-            'name' => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en,
-            ],
-            'description' => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en,
-            ],
-            'address' => $request->address,
-            'image' => $imageUrl,
-            'store_type_id' => $request->store_type_id,
-            'active' => $request->active ? 1 : 0,
-            'order_id' => $request->order_id ?? 0,
-        ]);
+        Store::create($data);
+
         return redirect()->route('dashboard.stores.index')->with('success', __('site.store_created_successfully'));
     }
 
     public function show(string $id)
     {
         $store = Store::with('storeType')->findOrFail($id);
-        $storeTypes = StoreType::all();
+        $storeTypes = StoreType::active()->get();
         return view('admin.stores.show', compact('store', 'storeTypes'));
     }
 
@@ -72,14 +60,13 @@ class StoreController extends MainController
     public function edit(string $id)
     {
         $store = Store::findOrFail($id);
-        $storeTypes = StoreType::all();
+        $storeTypes = StoreType::active()->get();
         return view('admin.stores.edit', compact('store', 'storeTypes'));
     }
 
 
     public function update(StoreRequest $request, string $id)
     {
-        $imgUrl = "";
         $store = Store::findOrFail($id);
         if ($request->hasFile('image')) {
             if ($store->image) {
@@ -87,21 +74,11 @@ class StoreController extends MainController
             }
             $imgUrl = $this->imageService->uploadImage($request->file('image'), 'stores');
         }
-        $store->update([
-            'name' => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en,
-            ],
-            'description' => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en,
-            ],
-            'address' => $request->address,
-            'image' => $imgUrl ?: $store->image,
-            'store_type_id' => $request->store_type_id,
-            'active' => $request->active ? 1 : 0,
-            'order_id' => $request->order_id ?? 0,
-        ]);
+        $data = $request->except('image');
+        $data['image'] = $imgUrl ?? $store->image;
+
+        $store->update($data);
+
         return redirect()->route('dashboard.stores.index')->with('success', __('site.store_updated_successfully'));
     }
 

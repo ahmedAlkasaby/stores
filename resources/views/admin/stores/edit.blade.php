@@ -53,9 +53,7 @@
 'select_class' => 'select2',
 'select2' => true,
 ])
-<div class="col-md-6 mt-3">
-    @include('admin.layouts.forms.active',["var"=> $store])
-</div>
+
 
 @include('admin.layouts.forms.fields.file',[
 'image' => $store->image ?? null

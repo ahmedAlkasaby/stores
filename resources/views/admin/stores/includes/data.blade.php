@@ -1,5 +1,5 @@
 <tr>
-    <td class="text-lg-end">{{ $store->id }}</td>
+
     <td class="text-lg-end">{{ $store->nameLang() }}</td>
     <td class="text-lg-end">{{ $store->address }}</td>
     <td class="text-lg-end">{{ $store->order_id?? 0 }}</td>

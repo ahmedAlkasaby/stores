@@ -1,15 +1,5 @@
 @include('admin.layouts.modals.filter.header',["model"=>"stores"])
 
-{{-- Search by Image --}}
-
-
-
-{{-- Search by Order ID --}}
-<div class="col-md-6">
-    <label for="order_id" class="form-label">{{ __('site.order_id') }}</label>
-    <input type="text" name="order_id" id="order_id" class="form-control" value="{{ request('order_id') }}"
-        placeholder="{{ __('site.order_id') }}">
-</div>
 
 {{-- Search by Name --}}
 <div class="col-md-6">
@@ -35,18 +25,21 @@
         <option value="0" @selected(request('active')==='0' )>{{ __('site.not_active') }}</option>
     </select>
 </div>
+
+
 @include("admin.layouts.forms.fields.select",[
 'select_name' => 'store_type_id',
-'select_function' => $storeTypes->mapWithKeys(fn($storeType) => [$storeType->id => $storeType->nameLang()])->toArray()
+'select_function' =>  ["all" => __("site.all")] + $storeTypes->mapWithKeys(fn($storeType) => [$storeType->id => $storeType->nameLang()])->toArray()
 ?? null,
-'select_value' => $store->store_type_id ?? null,
+'select_value' => old('store_type_id') ?? request('store_type_id'),
 'select_class' => 'select2',
 'select2' => true,
+"not_req"=> true,
 ])
 
+
 {{-- buttons --}}
-@include('admin.layouts.modals.filter.buttons',
-['model' => 'stores'])
+@include('admin.layouts.modals.filter.buttons',['model' => 'stores'])
 
 {{-- Footer --}}
 @include('admin.layouts.modals.filter.footer')
