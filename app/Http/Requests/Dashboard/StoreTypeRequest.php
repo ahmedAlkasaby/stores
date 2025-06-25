@@ -22,30 +22,36 @@ class StoreTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_ar' => 'required|string',
-            'name_en' => 'required|string',
-            'description_en' => 'required|string',
-            'description_ar' => 'required|string',
+            'name.ar' => 'required|string|max:255',
+            'name.en' => 'required|string|max:255',
+            'description.en' => 'nullable|string|max:500',
+            'description.ar' => 'nullable|string|max:500',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
      public function messages(){
         return [
-            'name_ar.required' => __("validation.name_ar_required"),
-            'name_ar.string' => __("validation.name_ar_string"),
-            // 'name_ar.regex' => 'Name in Arabic must contain only Arabic characters',
+            'name.ar.required' => __("validation.name_ar_required"),
+            'name.ar.string' => __("validation.name_ar_string"),
+            'name.ar.max' => __("validation.name_ar_max"),
 
-            'name_en.required' => __("validation.name_en_required"),
-            'name_en.string' => __("validation.name_en_string"),
-            // 'name_en.regex' => 'Name in English must contain only English characters',
+            'name.en.required' => __("validation.name_en_required"),
+            'name.en.string' => __("validation.name_en_string"),
+            'name.en.max' => __("validation.name_en_max"),
 
-            'description_en.required' => __("validation.description_en_required"),
-            'description_en.string' => __("validation.description_en_string"),
 
-            'description_ar.required' => __("validation.description_ar_required"),
-            'description_ar.string' => __("validation.description_ar_string"),
-            
+            'description.en.max' => __("validation.description_en_max"),
+            'description.en.required' => __("validation.description_en_required"),
+            'description.en.string' => __("validation.description_en_string"),
+
+            'description.ar.max' => __("validation.description_ar_max"),
+            'description.ar.required' => __("validation.description_ar_required"),
+            'description.ar.string' => __("validation.description_ar_string"),
+
             'image.image' => __("validation.image_image"),
+            'image.mimes' => __("validation.image_mimes"),
+            'image.max' => __("validation.image_max"),
+            'image.required' => __("validation.image_required"),
         ];
     }
 }

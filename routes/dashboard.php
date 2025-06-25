@@ -20,17 +20,21 @@ Route::group(['middleware'=>'guest'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login.login');
 });
 
-Route::group(['middleware'=>['auth','admin']],function(){
+Route::group(['middleware'=>['auth','admin','check.permission']],function(){
     Route::get('/',[HomeController::class, 'index'])->name('home');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::group(['prefix'=>'profile'], function () {
         Route::get('change_lang/{lang}', [ProfileController::class, 'changeLang'])->name('profile.change.lang');
         Route::get('change_theme/{theme}', [ProfileController::class, 'changeTheme'])->name('profile.change.theme');
     });
-    // Resource routes for store types 
+    // Resource routes for store types
         Route::resource('store_types', StoreTypeController::class);
-        Route::get('store_types/restore/{store_type}', [StoreTypeController::class, 'restore'])->name('store_types.restore');
-        Route::delete('store_types/force_delete/{store_type}', [StoreTypeController::class, 'forceDelete'])->name('store_types.force_delete');
+        Route::get('store_types/active/{storeType}', [StoreTypeController::class, 'active'])->name('store_types.active');
+
+    // Resource routes for stores
+        Route::resource('stores', StoreController::class);
+        Route::get('stores/active/{store}', [StoreController::class, 'active'])->name('stores.active');
+
 
     // Resource routes for sizes
         Route::resource('sizes', SizeController::class);
@@ -50,9 +54,5 @@ Route::group(['middleware'=>['auth','admin']],function(){
     Route::delete('units/force_delete/{unit}', [UnitController::class, 'forceDelete'])->name('units.force_delete');
     Route::get('units/toggle_active/{unit}', [UnitController::class, 'toggleActive'])->name('units.toggle');
 
-    // Resource routes for stores
-    Route::resource('stores', StoreController::class);
-    Route::get('stores/restore/{store}', [StoreController::class, 'restore'])->name('stores.restore');
-    Route::delete('stores/force_delete/{store}', [StoreController::class, 'forceDelete'])->name('stores.force_delete');
-    Route::get('stores/toggle_active/{store}', [StoreController::class, 'toggleActive'])->name('stores.toggle');
+
     });

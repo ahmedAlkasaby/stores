@@ -6,7 +6,7 @@
 @include('admin.layouts.messages.success')
 @include('admin.layouts.messages.displayErrors')
 <div class="card">
-    @include('admin.layouts.header_of_table',['filter'=>false,'model'=>'sizes'])
+    @include('admin.layouts.tables.header_of_table',['filter'=>false,'model'=>'sizes'])
     @include('admin.sizes.includes.table')
 </div>
 </div>

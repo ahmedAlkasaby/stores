@@ -11,53 +11,14 @@
             </button>
         </a>
     </td>
-   
+
     {{-- action --}}
-    <td class="text-lg-end">
-        <div class="dropdown">
-            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                <i class="ti ti-dots-vertical"></i>
-            </button>
-            <div class="dropdown-menu">
-
-                {{-- @endif --}}
-                @if (request()->has('deleted'))
-                <li>
-                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $size->id }}">
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete_forever')
-                    </button>
-                    <a class="dropdown-item" href="{{ route('dashboard.sizes.restore', $size->id) }}">
-                        <i class="ti ti-rotate-clockwise me-1"></i> @lang('site.restore')
-                    </a>
-                </li>
-                @else
-                <li>
-                    @if (auth()->user()->hasPermission('categories-update'))
-                    <a class="dropdown-item" href="{{ route('dashboard.sizes.edit', $size->id) }}">
-                        <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
-                    </a>
-                    @else
-                    <button disabled class="dropdown-item" disabled>
-                        <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
-                    </button>
-                    @endif
-
-                    {{-- @if (auth()->user()->hasPermission('categories-delete')) --}}
-                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $size->id }}">
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete')
-                    </button>
-                    {{-- @else --}}
-                    <button class="dropdown-item" disabled>
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete')
-                    </button>
-                </li>
-                @endif
-                </li>
-            </div>
-        </div>
-    </td>
+    @include('admin.layouts.tables.actions', [
+    "model" => "sizes",
+    "edit" => true,
+    "show" => true,
+    "delete" => true,
+    ])
 </tr>
 
 @include('admin.layouts.modals.delete', [

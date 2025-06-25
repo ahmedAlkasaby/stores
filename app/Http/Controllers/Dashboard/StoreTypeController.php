@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Requests\Dashboard\StoreTypeRequest;
 use App\Models\Store;
 use App\Services\ImageHandlerService;
+use Illuminate\Http\Request;
 
 class StoreTypeController extends MainController
 {
@@ -35,24 +36,13 @@ class StoreTypeController extends MainController
 
     public function store(StoreTypeRequest $request)
     {
-        dd($request->all());
-        $imageUrl = "";
-
         if ($request->hasFile('image')) {
             $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
         }
+        $data=$request->except('image');
+        $data['image'] = $imageUrl;
 
-        StoreType::create([
-            'name' => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en,
-            ],
-            'description' => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en,
-            ],
-            'image' => $imageUrl,
-        ]);
+        StoreType::create($data);
 
         return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_created_successfully'));
     }
@@ -75,7 +65,6 @@ class StoreTypeController extends MainController
     public function update(StoreTypeRequest $request, string $id)
     {
         $storeType = StoreType::findOrFail($id);
-        $imageUrl = "";
         if ($request->hasFile('image')) {
             if ($storeType->image) {
                 $this->imageService->deleteImage($storeType->image);
@@ -83,17 +72,11 @@ class StoreTypeController extends MainController
             $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
         }
 
-        $storeType->update([
-            'name' => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en,
-            ],
-            'description' => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en,
-            ],
-            'image' => $imageUrl,
-        ]);
+        $data = $request->except('image');
+        if (isset($imageUrl)) {
+            $data['image'] = $imageUrl;
+        }
+        $storeType->update($data);
 
         return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_updated_successfully'));
     }
@@ -105,20 +88,10 @@ class StoreTypeController extends MainController
         $storeType->delete();
         return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_deleted_successfully'));
     }
-    public function restore($sliderId)
+    public function active(StoreType $storeType)
     {
-        $storeType = StoreType::withTrashed()->findOrFail($sliderId);
-        $storeType->restore();
+        $storeType->active = !$storeType->active;
+        $storeType->save();
         return back();
-    }
-    
-    public function forceDelete($sliderId)
-    {
-        $storeType = StoreType::withTrashed()->findOrFail($sliderId);
-        if ($storeType->image) {
-            $this->imageService->deleteImage($storeType->image);
-        }
-        $storeType->forceDelete();
-        return back()->with('success', __('site.store_type_deleted_successfully'));
     }
 }
