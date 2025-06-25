@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="{{ $admin_language }}"
-    data-theme="theme-default"
-    dir="{{ $admin_dir }}"
+<html lang="{{ $admin_language }}" data-theme="theme-default" dir="{{ $admin_dir }}"
     data-template="vertical-menu-template-no-customizer"
     class="{{$admin_theme_style}}-style layout-navbar-fixed layout-menu-fixed layout-compact">
 
@@ -18,7 +16,8 @@
 
 <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar" data-url="{{ route('dashboard.home') }}" data-language="{{ $admin_language ?? 'en' }}" data-user="{{ $user_id ?? 0 }}">
+    <div class="layout-wrapper layout-content-navbar" data-url="{{ route('dashboard.home.index') }}"
+        data-language="{{ $admin_language ?? 'en' }}" data-user="{{ $user_id ?? 0 }}">
         <div class="layout-container">
             @include('admin.layouts.sidebar')
 

@@ -38,7 +38,7 @@ return [
     "image" => "الصورة",
     "store_type" => "نوع المتجر",
     "store_types" => "أنواع المتاجر",
-    "store" => "المتجر",
+    "store" => "انشاء",
     "stores" => "المتاجر",
     "category" => "الفئة",
     "categories" => "الفئات",
@@ -127,5 +127,12 @@ return [
     "store_restored_successfully" => 'تم استعادة المتجر بنجاح',
     "store_force_deleted_successfully" => 'تم حذف المتجر نهائيًا بنجاح',
     'show' => 'عرض',
-    'role' => 'الدور'
+    'role' => 'الدور',
+    'display_name' => 'اسم العرض',
+    'permissions' => 'الصلاحيات',
+    'permission' => 'الصلاحية',
+    'index' => 'عرض',
+    'select_all' => 'تحديد الكل',
+    'update' => 'تحديث',
+
 ];

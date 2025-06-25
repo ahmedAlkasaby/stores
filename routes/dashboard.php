@@ -23,7 +23,7 @@ Route::group(['middleware'=>'guest'], function () {
 });
 
 Route::group(['middleware'=>['auth','admin','check.permission']],function(){
-    Route::get('/',[HomeController::class, 'index'])->name('home');
+    Route::get('/',[HomeController::class, 'index'])->name('home.index');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::group(['prefix'=>'profile'], function () {
         Route::get('change_lang/{lang}', [ProfileController::class, 'changeLang'])->name('profile.change.lang');

@@ -13,13 +13,21 @@ return [
 
     'roles_structure' => [
         'super_admin' => [
-            'roles' => 'i,sh,s,u,d,a',
-            'users' => 'i,sh,s,u,d,a',
-            "units" => 'i,sh,s,u,d,a',
-            "brands" => 'i,sh,s,u,d,a',
-            "store_types" => 'i,sh,s,u,d,a',
-            "sizes" => 'i,sh,s,u,d,a',
-            "stores" => 'i,sh,s,u,d,a',
+            'roles' => 'i,sh,s,u,a,d',
+            'users' => 'i,sh,s,u,a,d',
+            "units" => 'i,sh,s,u,a,d',
+            "brands" => 'i,sh,s,u,a,d',
+
+            "store_types" => 'i,sh,s,u,a,d',
+            "sizes" => 'i,sh,s,u,a,d',
+            "stores" => 'i,sh,s,u,a,d',
+            "categories" => 'i,sh,s,u,a,d',
+            "products" => 'i,sh,s,u,a,d',
+            'Additions' => 'i,sh,s,u,a,d',
+            'wishlists'=>'i,sh',
+            'home' => 'i',
+
+
         ],
         'admin' => [
             'users' => 'i,sh,s,u,d,a',

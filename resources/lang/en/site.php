@@ -125,4 +125,10 @@ return [
     "store_force_deleted_successfully" => 'Store force deleted successfully',
     'show' => 'Show',
     'role' => 'Role',
+    'display_name' => 'Display Name',
+    'permissions' => 'Permissions',
+    'permission' => 'Permission',
+    'index' => 'Index',
+    'select_all' => 'Select All',
+    'update' => 'Update',
 ];
