@@ -7,7 +7,6 @@
     @include('admin.layouts.tables.actions', [
     "model" => "roles",
     "edit" => true,
-    "show" => true,
     "delete" => true,
     "item" => $role,
     ])

@@ -37,7 +37,7 @@
 
                 @if (isset($delete))
 
-                @if (auth()->user()->hasPermission($model.'.delete'))
+                @if (auth()->user()->hasPermission($model.'.destroy'))
                 <button class="dropdown-item delete-btn" data-bs-toggle="modal"
                     data-bs-target="#deleteModal{{ $item->id }}">
                     <i class="ti ti-trash me-1"></i> @lang('site.delete')

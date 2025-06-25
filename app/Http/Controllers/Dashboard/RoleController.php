@@ -64,6 +64,11 @@ class RoleController extends MainController
 
     public function destroy(string $id)
     {
-        //
+        $role=Role::findOrFail($id);
+        if($role->users->count() > 0){
+            return redirect()->back()->with('error', __('site.cant_delete_role_with_users'));
+        }
+        $role->delete();
+        return back();
     }
 }

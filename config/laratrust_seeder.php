@@ -41,7 +41,7 @@ return [
         'i' => 'index',
         's' => 'store',
         'u' => 'update',
-        'd' => 'delete',
+        'd' => 'destroy',
         'a'=>'active',
         'sh' => 'show',
     ],

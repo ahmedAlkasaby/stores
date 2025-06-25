@@ -45,14 +45,12 @@ class PermissionMiddleware
             $permissionExists = DB::table('permissions')->where('name', $routeName)->exists();
 
             if (!$permissionExists) {
-                dd('permission not found');
-
                 return $next($request);
             }
 
             abort(403, __('auth.not_permission_for_this_action'));
         }
-        
+
 
         return $next($request);
     }
