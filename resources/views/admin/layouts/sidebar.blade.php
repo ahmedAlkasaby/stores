@@ -40,6 +40,12 @@
                 <div>{{ __('site.store_type') }}</div>
             </a>
         </li>
+        <li class="menu-item @if (Route::is("dashboard.stores.*") ) active @endif">
+            <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.store') }}</div>
+            </a>
+        </li>
         <li class="menu-item @if (Route::is("dashboard.sizes.*") )active @endif">
             <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
@@ -58,12 +64,7 @@
                 <div>{{ __('site.unit') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.stores.*") ) active @endif">
-            <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>{{ __('site.store') }}</div>
-            </a>
-        </li>
+
 
     </ul>
 </aside>
