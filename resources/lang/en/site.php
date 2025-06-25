@@ -131,4 +131,9 @@ return [
     'index' => 'Index',
     'select_all' => 'Select All',
     'update' => 'Update',
+
+    'added_successfully' => 'Added successfully',
+    'updated_successfully' => 'Updated successfully',
+    'deleted_successfully' => 'Deleted successfully',
+    'cant_delete_role_with_users' => 'You cannot delete a role that has users assigned to it',
 ];

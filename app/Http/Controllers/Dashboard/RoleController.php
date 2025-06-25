@@ -69,6 +69,6 @@ class RoleController extends MainController
             return redirect()->back()->with('error', __('site.cant_delete_role_with_users'));
         }
         $role->delete();
-        return back();
+        return back()->with('success', __('site.deleted_successfully'));
     }
 }
