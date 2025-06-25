@@ -28,42 +28,62 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item @if (Route::is("dashboard.home") )active @endif">
+
+        <li class="menu-item @if ($class=='home') active @endif">
             <a href="{{ route('dashboard.home') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.home') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.store_types.*") )active @endif">
+        @if (auth()->user()->hasPermission('store_types.index'))
+        <li class="menu-item @if ($class=='store_types') active @endif">
             <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.store_type') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.stores.*") ) active @endif">
-            <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>{{ __('site.store') }}</div>
-            </a>
-        </li>
-        <li class="menu-item @if (Route::is("dashboard.sizes.*") )active @endif">
-            <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>{{ __('site.size') }}</div>
-            </a>
-        </li>
-        <li class="menu-item @if (Route::is("dashboard.brands.*") ) active @endif">
-            <a href="{{ route('dashboard.brands.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>{{ __('site.brand') }}</div>
-            </a>
-        </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('stores.index'))
+        <li class="menu-item @if ($class=='stores') active @endif">
+             <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                 <div>{{ __('site.store') }}</div>
+             </a>
+         </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('brands.index'))
+        <li class="menu-item @if ($class=='brands') active @endif">
+             <a href="{{ route('dashboard.brands.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                 <div>{{ __('site.brand') }}</div>
+             </a>
+         </li>
+        @endif
+
+         @if (auth()->user()->hasPermission('units.index'))
         <li class="menu-item @if (Route::is("dashboard.units.*") ) active @endif">
             <a href="{{ route('dashboard.units.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.unit') }}</div>
             </a>
         </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('sizes.index'))
+        <li class="menu-item @if ($class=='sizes') active @endif">
+             <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                 <div>{{ __('site.size') }}</div>
+             </a>
+         </li>
+        @endif
+
+
+
+
+
 
 
     </ul>
