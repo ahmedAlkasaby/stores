@@ -1,14 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
-use App\Http\Controllers\Dashboard\HomeController;
-use App\Http\Controllers\Dashboard\SizeController;
-use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\BrandController;
-use App\Http\Controllers\Dashboard\StoreController;
+use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SizeController;
+use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\dashboard\StoreTypeController;
+use App\Http\Controllers\Dashboard\UnitController;
+use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -27,6 +29,9 @@ Route::group(['middleware'=>['auth','admin','check.permission']],function(){
         Route::get('change_lang/{lang}', [ProfileController::class, 'changeLang'])->name('profile.change.lang');
         Route::get('change_theme/{theme}', [ProfileController::class, 'changeTheme'])->name('profile.change.theme');
     });
+    // Resource routes for roles
+        Route::resource('roles', RoleController::class);
+
     // Resource routes for store types
         Route::resource('store_types', StoreTypeController::class);
         Route::get('store_types/active/{storeType}', [StoreTypeController::class, 'active'])->name('store_types.active');
@@ -34,7 +39,6 @@ Route::group(['middleware'=>['auth','admin','check.permission']],function(){
     // Resource routes for stores
         Route::resource('stores', StoreController::class);
         Route::get('stores/active/{store}', [StoreController::class, 'active'])->name('stores.active');
-
 
     // Resource routes for sizes
         Route::resource('sizes', SizeController::class);

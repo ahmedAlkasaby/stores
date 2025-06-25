@@ -124,4 +124,5 @@ return [
     "store_restored_successfully" => 'Store restored successfully',
     "store_force_deleted_successfully" => 'Store force deleted successfully',
     'show' => 'Show',
+    'role' => 'Role',
 ];

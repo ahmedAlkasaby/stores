@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends MainController
@@ -13,12 +14,15 @@ class RoleController extends MainController
         $this->setClass('roles');
     }
 
-    public function index() {}
+    public function index() {
+        $roles=Role::paginate($this->perPage);
+        return view('admin.roles.index',compact('roles'));
+    }
 
 
     public function create()
     {
-        //
+        
     }
 
     /**

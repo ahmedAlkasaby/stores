@@ -35,6 +35,14 @@
                 <div>{{ __('site.home') }}</div>
             </a>
         </li>
+        @if (auth()->user()->hasPermission('roles.index'))
+        <li class="menu-item @if ($class=='roles') active @endif">
+            <a href="{{ route('dashboard.roles.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.role') }}</div>
+            </a>
+        </li>
+        @endif
         @if (auth()->user()->hasPermission('store_types.index'))
         <li class="menu-item @if ($class=='store_types') active @endif">
             <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
