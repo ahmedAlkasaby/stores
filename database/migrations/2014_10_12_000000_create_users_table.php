@@ -16,12 +16,15 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('lang',['ar','en'])->default('en');
             $table->enum('theme',['light','dark'])->default('light');
             $table->enum('type',['admin','client','delivery'])->default('client');
             $table->boolean('active')->default(true);
+            $table->boolean('vip')->default(true);
+            $table->boolean('notify')->default(true);
             $table->timestamps();
         });
     }
