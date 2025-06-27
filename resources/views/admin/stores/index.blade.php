@@ -13,7 +13,7 @@
 @include('admin.layouts.messages.success')
 @include('admin.layouts.messages.displayErrors')
 <div class="card">
-    @include('admin.layouts.tables.header_of_table',['filter'=>true,'model'=>'stores'])
+   
     @include('admin.stores.includes.table')
 </div>
 </div>
