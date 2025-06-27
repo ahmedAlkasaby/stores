@@ -11,12 +11,16 @@
                 <small>{{ $user->email }}</small>
             </div>
         </div>
-      
+
     </td>
 
     <td>{{ $user->phone }}</td>
-    <td>{{ $user->type }}</td>
-    <td>{{ $user->active }}</td>
+    <td>{{ __('site.'.$user->type) }}</td>
+    @include('admin.layouts.tables.active', [
+    "model" => "users",
+    "item" => $user,
+    "param" => "user"
+    ])
 
     {{-- action --}}
     @include('admin.layouts.tables.actions', [

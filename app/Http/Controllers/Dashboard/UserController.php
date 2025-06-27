@@ -62,4 +62,11 @@ class UserController extends MainController
     {
         //
     }
+
+     public function active(User $user)
+    {
+        $user->active = !$user->active;
+        $user->save();
+        return back();
+    }
 }

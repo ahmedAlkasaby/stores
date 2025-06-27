@@ -34,6 +34,8 @@ Route::group(['middleware'=>['auth','admin','check.permission']],function(){
         Route::resource('roles', RoleController::class);
     // Resource routes for users
         Route::resource('users', UserController::class);
+        Route::get('users/active/{user}', [UserController::class, 'active'])->name('users.active');
+
 
     // Resource routes for store types
         Route::resource('store_types', StoreTypeController::class);
