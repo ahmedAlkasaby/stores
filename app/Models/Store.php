@@ -40,10 +40,12 @@ class Store extends MainModel
         $request=$request??request();
 
         $query->orderBy('order_id','asc');
-        if($type_app=='app')
-        $query->where('active', $type_app=='app' ? 1 : $request->active);
 
-        
+        if($request->has('active') && $request->active !=='all'){
+            $query->where('active', $type_app=='app' ? 1 : $request->active);
+        }
+
+
 
         if ($request->has('search')) {
             $query->where(function($q) use($request){
@@ -52,7 +54,7 @@ class Store extends MainModel
                    ->orWhere('address','like','%'.$request->search.'%');
             });
         }
-        if ($request->has('store_type_id')) {
+        if ($request->has('store_type_id') && $request->store_type_id !=='all') {
             $query->where('store_type_id', $request->store_type_id);
         }
 
@@ -66,9 +68,7 @@ class Store extends MainModel
                     break;
             }
         }
-        if ($request->filled('active') && $request->active != 'all' && $type_app != 'app') {
-            $query->where('active', $request->active);
-        }
+
 
         if ($request->filled('name')) {
             $query->where('name', 'like', '%' . $request->name . '%');
@@ -80,11 +80,6 @@ class Store extends MainModel
         if ($request->filled('order_id')) {
             $query->where('order_id', $request->order_id);
         }
-
-        if ($request->has('deleted') && $request->deleted == 1) {
-            $query->onlyTrashed();
-        }
-
 
 
        return $query;

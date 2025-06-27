@@ -1,4 +1,4 @@
-@include('admin.layouts.table.header',['TitleTable'=>'site.stores'])
+@include('admin.layouts.table.header',['TitleTable'=>__('site.stores'),'routeToCreate' => route('dashboard.stores.create'),'filter' => true])
 @include('admin.layouts.table.thead_info', [
 'columns' => [ 'site.name',"site.address" ,"site.order_id","site.store_type","site.image",'site.status', 'site.action']
 ])

@@ -57,7 +57,7 @@
         <li class="menu-item @if ($class=='stores') active @endif">
             <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>{{ __('site.store') }}</div>
+                <div>{{ __('site.stores') }}</div>
             </a>
         </li>
         @endif

@@ -19,8 +19,8 @@
 {{-- Active Status --}}
 <div class="col-md-6">
     <label for="active" class="form-label">{{ __('site.status') }}</label>
-    <select name="active" id="active" class="form-select">
-        <option value="all">{{ __('site.both') }}</option>
+    <select name="active"  class="form-select">
+        <option value='all' @selected(request('active')==='')>{{ __('site.both') }}</option>
         <option value="1" @selected(request('active')==='1' )>{{ __('site.active') }}</option>
         <option value="0" @selected(request('active')==='0' )>{{ __('site.not_active') }}</option>
     </select>
