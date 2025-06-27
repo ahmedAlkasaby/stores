@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
-@section('title', __('site.stores'))
+@section('title', __('site.roles'))
 
 @section('styles')
-
+@include('admin.layouts.table.datatablesCss')
 @endsection
 
 @section('content')
@@ -11,7 +11,6 @@
 <div class="card">
     @include('admin.roles.includes.table')
 </div>
-
 @endsection
 
 
