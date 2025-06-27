@@ -138,5 +138,14 @@ return [
     'updated_successfully' => 'تم التحديث بنجاح',
     'deleted_successfully' => 'تم الحذف بنجاح',
     'cant_delete_role_with_users' => 'لا يمكن حذف الدور لأنه مرتبط بمستخدمين',
+    'users' => 'المستخدمين',
+    'admins' => 'المشرفين',
+    'client' => 'العميل',
+    'clients' => 'العملاء',
+    'delivery' => 'عامل التوصيل',
+    'deliveries' => 'عمال التوصيل',
+    'user' => 'المستخدم',
+    'type' => 'النوع',
+    'phone' => 'الهاتف',
 
 ];

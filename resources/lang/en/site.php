@@ -136,4 +136,13 @@ return [
     'updated_successfully' => 'Updated successfully',
     'deleted_successfully' => 'Deleted successfully',
     'cant_delete_role_with_users' => 'You cannot delete a role that has users assigned to it',
+    'users' => 'Users',
+    'admins' => 'Admins',
+    'client' => 'Client',
+    'clients' => 'Clients',
+    'delivery' => 'Delivery',
+    'deliveries' => 'Deliveries',
+    'user' => 'User',
+    'type' => 'Type',
+    'phone' => 'Phone',
 ];
