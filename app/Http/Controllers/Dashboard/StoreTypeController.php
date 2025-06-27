@@ -37,9 +37,9 @@ class StoreTypeController extends MainController
     public function store(StoreTypeRequest $request)
     {
         if ($request->hasFile('image')) {
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
+            $imageUrl = $this->imageService->uploadImage('store_types', $request);
         }
-        $data=$request->except('image');
+        $data = $request->except('image');
         $data['image'] = $imageUrl;
 
         StoreType::create($data);
@@ -65,26 +65,20 @@ class StoreTypeController extends MainController
     public function update(StoreTypeRequest $request, string $id)
     {
         $storeType = StoreType::findOrFail($id);
-        if ($request->hasFile('image')) {
-            if ($storeType->image) {
-                $this->imageService->deleteImage($storeType->image);
-            }
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'store_types');
-        }
-
+        $imgUrl = $this->imageService->editImage($request, $storeType, 'storeTypes');
         $data = $request->except('image');
-        if (isset($imageUrl)) {
-            $data['image'] = $imageUrl;
-        }
+        $data['image'] = $imgUrl ?? $storeType->image;
         $storeType->update($data);
 
         return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_updated_successfully'));
     }
 
 
-    public function destroy(string $id)
+    public function destroy(StoreType $storeType)
     {
-        $storeType = StoreType::findOrFail($id);
+        if($storeType->stores()->count() > 0){
+            return back()->with('error', __('site.store_type_has_stores'));
+        }
         $storeType->delete();
         return redirect()->route('dashboard.store_types.index')->with('success', __('site.store_type_deleted_successfully'));
     }

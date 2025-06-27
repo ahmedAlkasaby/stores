@@ -24,9 +24,10 @@ class StoreRequest extends FormRequest
         return [
             'name.ar' => 'required|string|max:255',
             'name.en' => 'required|string|max:255',
+            'address.ar' => 'required|string|max:255',
+            'address.en' => 'required|string|max:255',
             'description.en' => 'nullable|string|max:500',
             'description.ar' => 'nullable|string|max:500',
-            'address' => 'required|string|max:1000',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'store_type_id' => 'nullable|exists:store_types,id',
             'order_id' => 'nullable|integer|min:0',

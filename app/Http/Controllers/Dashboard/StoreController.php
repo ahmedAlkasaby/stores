@@ -38,12 +38,10 @@ class StoreController extends MainController
 
     public function store(StoreRequest $request)
     {
-        if ($request->hasFile('image')) {
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'stores');
-        }
-        $data= $request->except('image');
-        $data['image'] = $imageUrl ?? null;
+        $imageUrl = $this->imageService->uploadImage('stores', $request);
 
+        $data = $request->except('image');
+        $data['image'] = $imageUrl ?? null;
         Store::create($data);
 
         return redirect()->route('dashboard.stores.index')->with('success', __('site.store_created_successfully'));
@@ -68,12 +66,9 @@ class StoreController extends MainController
     public function update(StoreRequest $request, string $id)
     {
         $store = Store::findOrFail($id);
-        if ($request->hasFile('image')) {
-            if ($store->image) {
-                $this->imageService->deleteImage($store->image);
-            }
-            $imgUrl = $this->imageService->uploadImage($request->file('image'), 'stores');
-        }
+
+        $imgUrl = $this->imageService->editImage($request, $store, 'stores');
+
         $data = $request->except('image');
         $data['image'] = $imgUrl ?? $store->image;
 
@@ -83,12 +78,9 @@ class StoreController extends MainController
     }
 
 
-    public function destroy(string $id)
+    public function destroy(Store $store)
     {
-        $store = Store::findOrFail($id);
-        if ($store->image) {
-            $this->imageService->deleteImage($store->image);
-        }
+        $this->imageService->deleteImage($store->image);
         $store->delete();
         return redirect()->route('dashboard.stores.index')->with('success', __('site.store_deleted_successfully'));
     }

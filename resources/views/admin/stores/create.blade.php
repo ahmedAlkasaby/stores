@@ -21,6 +21,7 @@
 @include('admin.layouts.forms.head',[
 "show_name"=> true,
 "show_content"=> true,
+"show_address"=> true,
 ])
 @include('admin.layouts.forms.fields.number',
 [
@@ -28,13 +29,7 @@
 "min" => 0,
 "placeholder" => __('site.order_id'),
 ])
-<div class="col-sm-12 mt-2">
-    @include('admin.layouts.forms.fields.text', [
-    'text_name' => 'address',
-    'text_value' => null,
-    'label_name' => __("site.address"),
-    'label_req' => true])
-</div>
+
 @include("admin.layouts.forms.fields.select",[
 'select_name' => 'store_type_id',
 'select_function' => $storeTypes->mapWithKeys(fn($storeType) => [$storeType->id => $storeType->nameLang()])->toArray()

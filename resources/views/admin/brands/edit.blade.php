@@ -33,9 +33,14 @@
 'number_value' => $brand->order_id ?? null,
 
 ])
-<div class="col-md-6 mt-3">
-    @include('admin.layouts.forms.active',["var"=> $brand])
-</div>
+
+    @include('admin.layouts.forms.fields.select', [
+        'select_name' => 'active',
+        'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
+        'select_value' => $brand->active ?? null,
+        'select_class' => 'select2',
+        'select2' => true,
+    ])
 @include('admin.layouts.forms.fields.file',[
 'image' => $brand->image ?? null
 ])

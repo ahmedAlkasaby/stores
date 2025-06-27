@@ -19,6 +19,7 @@ class Store extends MainModel
         'order_id',
     ];
 
+
     public function storeType()
     {
         return $this->belongsTo(StoreType::class, 'store_type_id', 'id');
@@ -32,29 +33,38 @@ class Store extends MainModel
     {
         return $this->hasMany(Product::class, 'store_id', 'id');
     }
+    public function addressLang($lang = null)
+    {
+        $data = $this->name;
+        if ($lang === null) {
+            $user = Auth::guard('api')->user();
+            $langUser = $user ? $user->lang : app()->getLocale();
+            $defaultLang = app()->getLocale();
+            return $data[$langUser] ?? $data[$defaultLang] ?? null;
+        }
+        return $data[$lang] ?? null;
+    }
 
 
-    public function scopeFilter($query, $request=null,$type_app='app')
+    public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 
-        $request=$request??request();
+        $request = $request ?? request();
 
-        $query->orderBy('order_id','asc');
-        if($type_app=='app')
-        $query->where('active', $type_app=='app' ? 1 : $request->active);
+        $query->orderBy('order_id', 'asc');
+        if ($type_app == 'app')
+            $query->where('active', $type_app == 'app' ? 1 : $request->active);
 
-        
+
 
         if ($request->has('search')) {
-            $query->where(function($q) use($request){
-                $q->where('name','like','%'.$request->search.'%')
-                   ->orWhere('description','like','%'.$request->search.'%')
-                   ->orWhere('address','like','%'.$request->search.'%');
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%')
+                    ->orWhere('address', 'like', '%' . $request->search . '%');
             });
         }
-        if ($request->has('store_type_id')) {
-            $query->where('store_type_id', $request->store_type_id);
-        }
+
 
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
@@ -80,6 +90,10 @@ class Store extends MainModel
         if ($request->filled('order_id')) {
             $query->where('order_id', $request->order_id);
         }
+        if ($request->filled('store_type_id') && $request->store_type_id !== 'all') {
+            $query->where('store_type_id', $request->store_type_id);
+        }
+
 
         if ($request->has('deleted') && $request->deleted == 1) {
             $query->onlyTrashed();
@@ -87,11 +101,6 @@ class Store extends MainModel
 
 
 
-       return $query;
+        return $query;
     }
-
-
-
-
 }
-

@@ -27,6 +27,7 @@ class MainModel extends Model
         }
         return $data[$lang] ?? null;
     }
+    
 
     public function descriptionLang($lang = null)
     {

@@ -28,6 +28,9 @@
 "name_en"=> $store->nameLang('en') ,
 "content_ar"=> $store->descriptionLang('ar') ?? null,
 "content_en"=> $store->descriptionLang('en') ?? null,
+"show_address" => true
+"address_ar" => $store->addressLang('ar') ?? null,
+"address_en" => $store->addressLang('en') ?? null
 ])
 @include('admin.layouts.forms.fields.number',
 [

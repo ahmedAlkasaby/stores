@@ -43,7 +43,7 @@ class StoreSeeder extends Seeder
                 'active' => true,
                 "order_id" => $i,
                 'store_type_id' => 1,
-                "address" => 'Address for Store ' . $i,
+                "address" => "address" . $i,
             ]);
 
         // }

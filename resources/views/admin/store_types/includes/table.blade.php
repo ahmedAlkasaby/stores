@@ -1,6 +1,6 @@
 @include('admin.layouts.table.header')
 @include('admin.layouts.table.thead_info', [
-'columns' => [ 'site.name', 'site.image', 'site.status','site.action']
+'columns' => [ "site.id",'site.name', 'site.image', 'site.status','site.action']
 ])
 
 <tbody>

@@ -1,10 +1,10 @@
 <tr>
 
-    <td class="text-lg-end">{{ $store->nameLang() }}</td>
-    <td class="text-lg-end">{{ $store->address }}</td>
-    <td class="text-lg-end">{{ $store->order_id?? 0 }}</td>
-    <td class="text-lg-end">{{ $store->storeType->nameLang()?? 0 }}</td>
-    <td class="text-end">
+    <td class="text-lg-center">{{ $store->nameLang() }}</td>
+    <td class="text-lg-center">{{ $store->address }}</td>
+    <td class="text-lg-center">{{ $store->order_id?? 0 }}</td>
+    <td class="text-lg-center">{{ $store->storeType->nameLang()?? 0 }}</td>
+    <td class="text-center">
         @if ($store->image)
         <img src="{{ asset( $store->image) }}" alt="{{ $store->nameLang() }}" class="rounded-circle" width="50"
             height="50">

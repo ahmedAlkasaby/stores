@@ -20,6 +20,9 @@ class Brand extends MainModel
     // {
     //     return $value ? asset('storage/' . $value) : null;
     // }
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 

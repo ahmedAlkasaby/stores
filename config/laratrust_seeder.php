@@ -20,6 +20,8 @@ return [
             "store_types" => 'i,sh,s,u,d,a',
             "sizes" => 'i,sh,s,u,d,a',
             "stores" => 'i,sh,s,u,d,a',
+            "additions" => 'i,sh,s,u,d,a',
+            "categories" => 'i,sh,s,u,d,a',
         ],
         'admin' => [
             'users' => 'i,sh,s,u,d,a',

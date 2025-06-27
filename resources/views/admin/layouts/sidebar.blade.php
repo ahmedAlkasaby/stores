@@ -1,7 +1,7 @@
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="{{url('/dashboard')}}" class="app-brand-link">
+        <a href="{{ url('/dashboard') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -28,40 +28,52 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item @if (Route::is("dashboard.home") )active @endif">
+        <li class="menu-item @if (Route::is('dashboard.home')) active @endif">
             <a href="{{ route('dashboard.home') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.home') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.store_types.*") )active @endif">
+        <li class="menu-item @if (Route::is('dashboard.store_types.*')) active @endif">
             <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.store_type') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.sizes.*") )active @endif">
+        <li class="menu-item @if (Route::is('dashboard.sizes.*')) active @endif">
             <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.size') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.brands.*") ) active @endif">
+        <li class="menu-item @if (Route::is('dashboard.brands.*')) active @endif">
             <a href="{{ route('dashboard.brands.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.brand') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.units.*") ) active @endif">
+        <li class="menu-item @if (Route::is('dashboard.units.*')) active @endif">
             <a href="{{ route('dashboard.units.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.unit') }}</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::is("dashboard.stores.*") ) active @endif">
+        <li class="menu-item @if (Route::is('dashboard.stores.*')) active @endif">
             <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>{{ __('site.store') }}</div>
+            </a>
+        </li>
+        <li class="menu-item @if (Route::is('dashboard.additions.*')) active @endif">
+            <a href="{{ route('dashboard.additions.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.addition') }}</div>
+            </a>
+        </li>
+        <li class="menu-item @if (Route::is('dashboard.categories.*')) active @endif">
+            <a href="{{ route('dashboard.categories.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.category') }}</div>
             </a>
         </li>
 

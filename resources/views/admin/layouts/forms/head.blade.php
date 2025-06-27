@@ -63,7 +63,7 @@
                         @if($show_address ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
-                            'text_name' => 'address_en',
+                            'text_name' => 'address[en]',
                             'text_value' => $address_en ?? null,
                             'label_name' => __('site.english_address'),
                             'not_req' => true,
@@ -111,7 +111,7 @@
                         @if($show_address ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.textarea', [
-                            'text_name' => 'address_ar',
+                            'text_name' => 'address[ar]',
                             'text_value' => $address_ar ?? null,
                             'label_name' => __('site.arabic_address'),
                             'not_req' => true,

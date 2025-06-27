@@ -1,4 +1,4 @@
- <td class="text-lg-end">
+ <td class="text-lg-center">
         @if (auth()->user()->hasPermission($model.'.active'))
         <a href="{{ route('dashboard.'.$model.'.active', [$param => $item->id]) }}">
             <button type="button"

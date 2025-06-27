@@ -22,10 +22,10 @@ class BrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name_ar" => "required|string|max:255",
-            "name_en" => "required|string|max:255",
-            "description_en" => "nullable|string|max:1000",
-            "description_ar" => "nullable|string|max:1000",
+            "name.ar" => "required|string|max:255",
+            "name.en" => "required|string|max:255",
+            "description.en" => "nullable|string|max:1000",
+            "description.ar" => "nullable|string|max:1000",
             "active" => "boolean",
             "order_id" => "nullable|integer",
             "image" => "nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048",
@@ -34,10 +34,10 @@ class BrandRequest extends FormRequest
     public function messages(): array
     {
         return [
-            "name_ar.required" => __("validation.name_ar_required"),
-            "name_en.required" => __("validation.name_en_required"),
-            "description_en.max" => __("validation.description_en_max", ["max" => 1000]),
-            "description_ar.max" => __("validation.description_ar_max", ["max" => 1000]),
+            "name.ar.required" => __("validation.name_ar_required"),
+            "name.en.required" => __("validation.name_en_required"),
+            "description.en.max" => __("validation.description_en_max", ["max" => 1000]),
+            "description.ar.max" => __("validation.description_ar_max", ["max" => 1000]),
             "active.boolean" => __("validation.active_boolean"),
             "order_id.exists" => __("validation.order_id_required"),
             "image.image" => __("validation.image_image"),

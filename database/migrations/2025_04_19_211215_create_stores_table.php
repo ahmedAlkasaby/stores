@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->longText('description')->nullable();
-            $table->string('address');
+            $table->text('address');
             $table->string('image')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('store_type_id')->constrained('store_types')->onDelete('cascade');

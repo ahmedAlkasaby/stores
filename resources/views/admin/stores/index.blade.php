@@ -20,10 +20,11 @@
 @include('admin.stores.includes.filter')
 
 @section('mainFiles')
-<script src="{{asset(" admin/assets/js/modal-add-new-address.js")}}"></script>
+<script src="{{asset("admin/assets/js/modal-add-new-address.js")}}"></script>
+
 @endsection
 @section('jsFiles')
-<script src="{{asset(" admin/assets/vendor/libs/select2/select2.js")}}"></script>
+<script src="{{asset("admin/assets/vendor/libs/select2/select2.js")}}"></script>
 
 
 @endsection
