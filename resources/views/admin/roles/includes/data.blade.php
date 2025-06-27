@@ -1,7 +1,7 @@
 <tr>
 
-    <td class="text-lg-end">{{ $role->name }}</td>
-    <td class="text-lg-end">{{ $role->display_name }}</td>
+    <td >{{ $role->name }}</td>
+    <td >{{ $role->display_name }}</td>
 
     {{-- action --}}
     @include('admin.layouts.tables.actions', [

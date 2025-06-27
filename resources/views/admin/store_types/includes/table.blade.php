@@ -1,4 +1,4 @@
-@include('admin.layouts.table.header')
+@include('admin.layouts.table.header',['TitleTable' => 'site.store_types'])
 @include('admin.layouts.table.thead_info', [
 'columns' => [ 'site.name', 'site.image', 'site.status','site.action']
 ])

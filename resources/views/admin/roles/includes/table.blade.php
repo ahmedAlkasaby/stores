@@ -1,7 +1,7 @@
-@include('admin.layouts.table.header')
+@include('admin.layouts.table.header',['TitleTable' => 'site.roles'])
 @include('admin.layouts.table.thead_info', [
 'columns' => [ 'site.role',"site.name" ,'site.action']
-]);
+])
 
 <tbody>
     @if($roles->count() > 0)
