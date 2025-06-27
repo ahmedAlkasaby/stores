@@ -1,7 +1,7 @@
 <thead>
     <tr>
         @foreach($columns as $column)
-        <th>{{ $column}}</th>
+        <th>{{ __($column)}}</th>
         @endforeach
     </tr>
 </thead>

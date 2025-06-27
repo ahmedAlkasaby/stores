@@ -1,6 +1,8 @@
 @extends('admin.layouts.app')
 @section('title', __('site.store_types'))
 @section('styles')
+@include('admin.layouts.table.datatablesCss')
+
 @endsection
 @section('content')
 @include('admin.layouts.messages.success')
