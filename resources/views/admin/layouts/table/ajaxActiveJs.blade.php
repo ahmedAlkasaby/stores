@@ -1,0 +1,47 @@
+<script>
+    var $jq = jQuery.noConflict();
+
+    $jq(document).ready(function () {
+        var csrfToken = $jq('meta[name="csrf-token"]').attr('content');
+        $jq.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
+        });
+        console.log("jQuery is ready");
+
+
+        // Pass the Blade PHP variable into JS safely
+        var model = "{{ $model }}";
+
+        $jq('.toggle-' + model).on('click', function (e) {
+            e.preventDefault();
+
+            var button = $jq(this);
+            var modelId = button.data(model + '-id');
+
+            var url = button.data('url');
+            console.log("Model ID:", modelId);
+            console.log("URL:", url);
+            
+
+
+            $jq.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    if (response.active) {
+                        button.removeClass('btn-danger').addClass('btn-success');
+                        button.find('i').removeClass('fa-circle-xmark').addClass('fa-check');
+                    } else {
+                        button.removeClass('btn-success').addClass('btn-danger');
+                        button.find('i').removeClass('fa-check').addClass('fa-circle-xmark');
+                    }
+                },
+                error: function (xhr) {
+                    alert('There was an error. Please try again.');
+                }
+            });
+        });
+    });
+</script>

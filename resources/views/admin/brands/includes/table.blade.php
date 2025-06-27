@@ -1,9 +1,9 @@
-@include('admin.layouts.table.header')
+@include('admin.layouts.table.header',['TitleTable' => 'site.brands'])
 @include('admin.layouts.table.thead_info', [
-'columns' => ['ID', 'site.name',"site.order_id" ,"site.image",'site.status', 'site.action']
+'columns' => [ 'site.name',"site.order_id" ,"site.image",'site.status', 'site.action']
 ])
 
-<tbody>
+<tbody class="table-border-bottom-0">
     @if($brands->count() > 0)
     @each("admin.brands.includes.data", $brands, 'brand')
     @else

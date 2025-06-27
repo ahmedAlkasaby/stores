@@ -13,7 +13,8 @@ class StoreType extends MainModel
     protected $fillable = [
         'name',
         'description',
-        'image'
+        'image',
+        'active',
     ];
 
     public function stores()

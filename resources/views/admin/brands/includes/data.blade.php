@@ -1,9 +1,8 @@
 <tr>
-    <td class="text-lg-end">{{ $brand->id }}</td>
-    <td class="text-lg-end">{{ $brand->nameLang() }}</td>
-    <td class="text-lg-end">{{ $brand->order_id?? 0 }}</td>
+    <td>{{ $brand->nameLang() }}</td>
+    <td>{{ $brand->order_id?? 0 }}</td>
     {{-- image --}}
-    <td class="text-end">
+    <td >
         @if ($brand->image)
         <img src="{{ asset( $brand->image) }}" alt="{{ $brand->nameLang() }}" class="rounded-circle" width="50"
             height="50">
@@ -13,71 +12,22 @@
         @endif
     </td>
     {{-- active --}}
-    <td class="text-lg-end">
-        <a href="{{ route('dashboard.brands.toggle', ['brand' => $brand->id]) }}">
-            <button type="button"
-                class="btn {{ $brand->active ? 'btn-success' : 'btn-danger' }} toggle-brand waves-effect waves-light"
-                data-brand-id="{{ $brand->id }}">
-                <i class="fa-solid {{ $brand->active ? 'fa-check' : 'fa-circle-xmark' }}"></i>
-            </button>
-        </a>
-    </td>
+    @include('admin.layouts.tables.active', [
+    "model" => "brands",
+    "item" => $brand,
+    "param" => "brand"
+    ])
+
 
 
     {{-- action --}}
-    <td class="text-lg-end">
-        <div class="dropdown">
-            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                <i class="ti ti-dots-vertical"></i>
-            </button>
-            <div class="dropdown-menu">
-
-                {{-- @endif --}}
-                @if (request()->has('deleted')&& request('deleted') === "1")
-                <li>
-                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $brand->id }}">
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete_forever')
-                    </button>
-                    <a class="dropdown-item" href="{{ route('dashboard.brands.restore', $brand->id) }}">
-                        <i class="ti ti-rotate-clockwise me-1"></i> @lang('site.restore')
-                    </a>
-                </li>
-                @else
-                <li>
-                    @if (auth()->user()->hasPermission('brands.update'))
-                    <a class="dropdown-item" href="{{ route('dashboard.brands.edit', $brand->id) }}">
-                        <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
-                    </a>
-                    @else
-                    <button disabled class="dropdown-item" disabled>
-                        <i class="ti ti-pencil me-1"></i> @lang('site.Edit')
-                    </button>
-                    @endif
-                    @if (auth()->user()->hasPermission('brands.read'))
-                    <a class="dropdown-item" href="{{ route('dashboard.brands.show', $brand->id) }}">
-                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
-                    </a>
-                    @else
-                    <button disabled class="dropdown-item" disabled>
-                        <i class="ti ti-eye me-1"></i> @lang('site.Show')
-                    </button>
-                    @endif
-                    @if (auth()->user()->hasPermission('brands.delete'))
-                    <button class="dropdown-item delete-btn" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $brand->id }}">
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete')
-                    </button>
-                    @else
-                    <button class="dropdown-item" disabled>
-                        <i class="ti ti-trash me-1"></i> @lang('site.delete')
-                    </button>
-                    @endif
-                </li>
-            </div>
-            @endif
-        </div>
-    </td>
+    @include('admin.layouts.tables.actions', [
+    "model" => "brands",
+    "edit" => true,
+    "show" => true,
+    "delete" => true,
+    "item" => $brand,
+    ])
 </tr>
 
 @include('admin.layouts.modals.delete', [

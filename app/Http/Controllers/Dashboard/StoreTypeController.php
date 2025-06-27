@@ -90,8 +90,12 @@ class StoreTypeController extends MainController
     }
     public function active(StoreType $storeType)
     {
-        $storeType->active = !$storeType->active;
-        $storeType->save();
-        return back();
+        $storeType->update([
+            'active' => ! ($storeType->active),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $storeType->active,
+        ]);
     }
 }

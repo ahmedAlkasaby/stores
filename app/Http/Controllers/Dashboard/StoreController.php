@@ -96,8 +96,12 @@ class StoreController extends MainController
 
     public function active(Store $store)
     {
-        $store->active = !$store->active;
-        $store->save();
-        return back();
+        $store->update([
+            'active' => !($store->active),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $store->active,
+        ]);
     }
 }

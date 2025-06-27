@@ -1,16 +1,15 @@
  <td >
         @if (auth()->user()->hasPermission($model.'.active'))
-        <a href="{{ route('dashboard.'.$model.'.active', [$param => $item->id]) }}">
             <button type="button"
                 class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }} toggle-{{ $model }} waves-effect waves-light"
-                data-{{ $model }}-id="{{ $item->id }}">
+                data-{{ $model }}-id="{{ $item->id }}"
+                data-url="{{ route('dashboard.'.$model.'.active', [$param => $item->id]) }}">
+
                 <i class="fa-solid {{ $item->active ? 'fa-check' : 'fa-circle-xmark' }}"></i>
             </button>
-        </a>
         @else
          <button disabled type="button"
-                class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }} toggle-{{ $model }} waves-effect waves-light"
-                data-{{ $model }}-id="{{ $item->id }}">
+                class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }}">
                 <i class="fa-solid {{ $item->active ? 'fa-check' : 'fa-circle-xmark' }}"></i>
             </button>
         @endif

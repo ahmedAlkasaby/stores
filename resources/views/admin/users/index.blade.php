@@ -15,4 +15,5 @@
 
 @section('jsFiles')
 @include('admin.layouts.table.dataTableJs')
+@include('admin.layouts.table.ajaxActiveJs', ['model' => 'users'])
 @endsection

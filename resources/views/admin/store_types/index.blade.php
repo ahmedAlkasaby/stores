@@ -13,5 +13,5 @@
 
 @section('mainFiles')
 @include('admin.layouts.table.dataTableJs')
-
+@include('admin.layouts.table.ajaxActiveJs', ['model' => 'store_types'])
 @endsection
