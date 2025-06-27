@@ -1,3 +1,4 @@
-<div class="d-flex justify-end-center mt-4">
+
+ <div>
     {{ $data->links('pagination::bootstrap-5') }}
 </div>

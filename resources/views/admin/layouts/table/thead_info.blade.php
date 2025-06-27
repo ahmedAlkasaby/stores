@@ -1,7 +1,7 @@
-<thead class="border-top">
+<thead>
     <tr>
         @foreach($columns as $column)
-        <th class="text-lg-end">{{ __($column) }}</th>
+        <th>{{ $column}}</th>
         @endforeach
     </tr>
 </thead>

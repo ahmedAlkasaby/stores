@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\dashboard\StoreTypeController;
 use App\Http\Controllers\Dashboard\UnitController;
+use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,6 +32,8 @@ Route::group(['middleware'=>['auth','admin','check.permission']],function(){
     });
     // Resource routes for roles
         Route::resource('roles', RoleController::class);
+    // Resource routes for users
+        Route::resource('users', UserController::class);
 
     // Resource routes for store types
         Route::resource('store_types', StoreTypeController::class);

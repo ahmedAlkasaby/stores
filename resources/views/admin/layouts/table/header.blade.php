@@ -1,3 +1,11 @@
-<div class="justify-content-between dt-layout-table">
-    <div class="d-md-flex justify-content-between align-items-center dt-layout-full table-responsive">
-        <table class="table table-striped display dataTable" id="myTable">
+@php
+    $classOfHeaderTable= 'card-header';
+    $classDivTable = 'table-responsive text-nowrap';
+    $classTable='table';
+
+@endphp
+
+<h5 class={{ $classOfHeaderTable }}>{{ $TitleTable }}</h5>
+<div class={{ $classDivTable }}>
+    <table class={{ $classTable }}>
+

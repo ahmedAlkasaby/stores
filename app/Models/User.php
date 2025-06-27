@@ -59,6 +59,43 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
       ];
     }
 
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function scopeFilter($query ,$request=null){
+        $request=$request??request();
+
+        if($request->has('type')){
+            $query->where('type',$request->type);
+        }
+        if($request->has('search')){
+            $query->where(function($q) use($request){
+                $q->where('first_name','like','%'.$request->search.'%')
+                  ->orWhere('last_name','like','%'.$request->search.'%')
+                  ->orWhere('email','like','%'.$request->search.'%')
+                  ->orWhere('phone','like','%'.$request->search.'%');
+            });
+        }
+        if($request->has('active')){
+            $query->where('active',$request->active);
+        }
+        if($request->has('vip')){
+            $query->where('vip',$request->vip);
+        }
+        if($request->has('lang')){
+            $query->where('lang',$request->lang);
+        }
+        if($request->has('theme')){
+            $query->where('theme',$request->theme);
+        }
+        if($request->has('notify')){
+            $query->where('notify',$request->notify);
+        }
+        return $query;
+    }
+
     public function wishlists()
     {
         return $this->belongsToMany(Product::class,'wishlists','user_id','product_id')->withTimestamps();

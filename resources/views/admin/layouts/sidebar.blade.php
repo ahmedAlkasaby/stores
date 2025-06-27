@@ -89,6 +89,32 @@
         </li>
         @endif
 
+         @if (auth()->user()->isAbleTo(['users.index']))
+        <li class="menu-item @if (isset($class) && in_array($class,['admin','delivery','client'])) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div >{{ __('site.users') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item  @if (isset($class) && $class == 'admin') active @endif">
+                    <a href="{{ route('dashboard.users.index', ['type' => 'admin']) }}" class="menu-link">
+                        <div >{{ __('site.users') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (isset($class) && $class == 'client') active @endif">
+                    <a href="{{ route('dashboard.users.index', ['type' => 'client']) }}" class="menu-link">
+                        <div>{{ __('site.clients') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (isset($class) && $class == 'delivery') active @endif">
+                    <a href="{{ route('dashboard.users.index', ['type' => 'delivery']) }}" class="menu-link">
+                        <div>{{ __('site.deliveries') }}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endif
+
 
 
 
