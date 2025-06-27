@@ -40,6 +40,7 @@ return new class extends Migration
             // status
             $table->boolean('active')->default(true);
             $table->boolean('feature')->default(true);
+            $table->boolean('offer')->default(true);
             $table->boolean('new')->default(true);
             $table->boolean('special')->default(true);
             $table->boolean('filter')->default(true);
