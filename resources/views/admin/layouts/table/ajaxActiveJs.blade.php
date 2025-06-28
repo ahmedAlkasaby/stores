@@ -13,7 +13,6 @@
                 'X-CSRF-TOKEN': csrfToken
             }
         });
-        console.log("jQuery is ready");
 
 
         // Pass the Blade PHP variable into JS safely
@@ -27,8 +26,7 @@
             var modelId = button.data(model + '-id');
 
             var url = button.data('url');
-            console.log("Model ID:", modelId);
-            console.log("URL:", url);
+
 
 
 

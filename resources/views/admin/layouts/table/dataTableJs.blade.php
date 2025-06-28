@@ -1,5 +1,5 @@
 
-
+@if($table)
 <!-- JS -->
 <script src={{ url("https://code.jquery.com/jquery-3.7.1.min.js")}}></script>
 <script src={{ url("https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js")}}></script>
@@ -40,5 +40,5 @@
         table.buttons().container().appendTo('.custom-export-area');
     });
 </script>
-
+@endif
 

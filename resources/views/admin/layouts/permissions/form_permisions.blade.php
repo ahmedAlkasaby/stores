@@ -50,7 +50,7 @@
                 <tr>
                     <td class="text-nowrap fw-medium">
                         <input type="checkbox" class="form-check-input select-module" data-module="{{ $module }}" />
-                        {{ $module }}
+                        {{ __('site.'.$module) }}
                     </td>
                     @foreach ($modulePermissions as $permission)
                     @php

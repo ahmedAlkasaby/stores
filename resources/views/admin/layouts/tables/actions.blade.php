@@ -1,4 +1,4 @@
-<td>
+<td class="text-lg-center">
     <div class="dropdown">
         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
             <i class="ti ti-dots-vertical"></i>

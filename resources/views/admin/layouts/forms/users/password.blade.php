@@ -1,7 +1,7 @@
 <div class="form-group">
     <label>{{ __('Password') }}</label>
-    @if($new > 0)
-    {!! Form::password('password', array('class' => 'form-control','id'=>'password','required'=>'','data-parsley-minlength'=>'8')) !!}
+    @if($new == 1)
+    {!! Form::password('password' ,array('class' => 'form-control','id'=>'password','required'=>'','data-parsley-minlength'=>'8')) !!}
     @else
     {!! Form::password('password', array('class' => 'form-control','id'=>'password','data-parsley-minlength'=>'8')) !!}
     @endif

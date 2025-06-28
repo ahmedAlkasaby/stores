@@ -30,18 +30,18 @@ class DatabaseSeeder extends Seeder
             StoreSeeder::class,
         ]);
 
-        for ($i = 0; $i < 100; $i++) {
-         User::create([
-           'first_name'=>fake()->firstName(),
-           'last_name'=>fake()->lastName(),
-           'email'=> fake()->unique()->safeEmail(),
-           'phone'=> fake()->phoneNumber(),
-           'password'=> fake()->password(),
-           'lang'=>'en',
-           'theme'=>'light',
-           'type'=>fake()->randomElement(['admin', 'client','delivery']),
-        ]);
-        }
+        // for ($i = 0; $i < 100; $i++) {
+        //  User::create([
+        //    'first_name'=>fake()->firstName(),
+        //    'last_name'=>fake()->lastName(),
+        //    'email'=> fake()->unique()->safeEmail(),
+        //    'phone'=> fake()->phoneNumber(),
+        //    'password'=> fake()->password(),
+        //    'lang'=>'en',
+        //    'theme'=>'light',
+        //    'type'=>fake()->randomElement(['admin', 'client','delivery']),
+        // ]);
+        // }
 
         // \App\Models\User::factory(10)->create();
         // \App\Models\Post::factory(10)->create();

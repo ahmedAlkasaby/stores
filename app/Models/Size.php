@@ -15,6 +15,9 @@ class Size extends MainModel
         'active',
         'order_id'
     ];
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
      public function scopeFilter($query, $request=null,$type_app='app')
     {
 
@@ -24,6 +27,9 @@ class Size extends MainModel
                 $q->where('name','like','%'.$request->search.'%')
                    ->orWhere('description','like','%'.$request->search.'%');
             });
+        }
+        if(request()->has('active') && request()->active != 'all'){
+            $query->where('active',request()->active);
         }
         if($request->has("deleted") ){
             $query->onlyTrashed();

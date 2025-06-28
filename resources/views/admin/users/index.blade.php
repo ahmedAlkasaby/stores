@@ -14,6 +14,6 @@
 @endsection
 
 @section('jsFiles')
-@include('admin.layouts.table.dataTableJs')
+@include('admin.layouts.table.dataTableJs', ['table' => $users->count() > 0])
 @include('admin.layouts.table.ajaxActiveJs', ['model' => 'users'])
 @endsection

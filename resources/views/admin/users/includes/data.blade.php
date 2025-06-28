@@ -1,6 +1,5 @@
 <tr>
-
-    <td>
+    <td class="text-lg-center">
         <div class="d-flex align-items-center">
             <img src="{{ asset($user->image ?? 'admin/assets/img/avatars/1.png') }}" class="rounded-circle me-3"
                 width="32" height="32" alt="Avatar">
@@ -14,8 +13,8 @@
 
     </td>
 
-    <td>{{ $user->phone }}</td>
-    <td>{{ __('site.'.$user->type) }}</td>
+    <td class="text-lg-center">{{ $user->phone }}</td>
+    <td class="text-lg-center">{{ __('site.'.$user->type) }}</td>
     @include('admin.layouts.tables.active', [
     "model" => "users",
     "item" => $user,

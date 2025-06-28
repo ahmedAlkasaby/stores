@@ -1,8 +1,10 @@
 @extends('admin.layouts.app')
 @section('title', __('site.brands'))
 @section('styles')
-<link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
-@endsection
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />@endsection
 @section('content')
 @include('admin.layouts.forms.edit', [
 'table' => 'brands',
@@ -33,9 +35,14 @@
 'number_value' => $brand->order_id ?? null,
 
 ])
-<div class="col-md-6 mt-3">
-    @include('admin.layouts.forms.active',["var"=> $brand])
-</div>
+
+    @include('admin.layouts.forms.fields.select', [
+        'select_name' => 'active',
+        'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
+        'select_value' => $brand->active ?? null,
+        'select_class' => 'select2',
+        'select2' => true,
+    ])
 @include('admin.layouts.forms.fields.file',[
 'image' => $brand->image ?? null
 ])
@@ -48,7 +55,9 @@
 <script src="{{ asset('js/showImage.js') }}"></script>
 @endsection
 @section('mainFiles')
-<script src="{{asset("admin/assets/js/form-wizard-numbered.js")}}"></script>
-<script src="{{asset("admin/assets/js/form-wizard-validation.js")}}"></script>
+    <script src="{{ asset('admin/assets/js/form-wizard-numbered.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
 @endsection
 @endsection

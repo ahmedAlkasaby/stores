@@ -1,4 +1,4 @@
 <div class="form-group">
         <label>{{ __('Phone') }}</label>
-        {!! Form::text('phone', null, array('class' => 'form-control','required'=>'')) !!}
+        {!! Form::text('phone', isset($phone) ? $phone : null, array('class' => 'form-control','required'=>'','data-parsley-type'=>"number"), array('class' => 'form-control','required'=>'')) !!}
 </div>

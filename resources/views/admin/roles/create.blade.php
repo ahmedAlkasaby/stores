@@ -10,8 +10,8 @@
 'table' => 'dashboard.roles',
 'enctype' => false
 ])
-
-<div class="col-sm-12 mt-2">
+@include('admin.layouts.forms.head',["show"=>true])
+<div class="col-sm-12 mt-3">
     @include('admin.layouts.forms.fields.text', [
     'text_name' => 'name',
     'text_value' => null,
