@@ -1,7 +1,12 @@
+@php
+    $function = $function ?? 'active';
+@endphp
+
+
  <td >
         @if (auth()->user()->hasPermission($model.'.active'))
             <button type="button"
-                class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }} toggle-{{ $model }} waves-effect waves-light"
+                class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }} {{ $function }}-{{ $model }} waves-effect waves-light"
                 data-{{ $model }}-id="{{ $item->id }}"
                 data-url="{{ route('dashboard.'.$model.'.active', [$param => $item->id]) }}">
 

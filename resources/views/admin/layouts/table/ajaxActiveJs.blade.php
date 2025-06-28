@@ -1,3 +1,8 @@
+@php
+    $function = $function ?? 'active';
+@endphp
+
+
 <script>
     var $jq = jQuery.noConflict();
 
@@ -13,8 +18,9 @@
 
         // Pass the Blade PHP variable into JS safely
         var model = "{{ $model }}";
+        var funcName ="{{ $function }}";
 
-        $jq('.toggle-' + model).on('click', function (e) {
+        $jq('.' + funcName  + '-' + model).on('click', function (e) {
             e.preventDefault();
 
             var button = $jq(this);
@@ -23,7 +29,7 @@
             var url = button.data('url');
             console.log("Model ID:", modelId);
             console.log("URL:", url);
-            
+
 
 
             $jq.ajax({
