@@ -11,7 +11,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,25 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|min:6',
+            'token' => 'required|string',
+            'device_type' => 'required|string|in:android,huawei,apple',
+            'imei'=>'required|string',
+        ];
+    }
+
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => __('validation.required', ['attribute' => __('auth.email')]),
+            'email.exists' => __('validation.exists', ['attribute' => __('auth.email')]),
+            'password.required' => __('validation.required', ['attribute' => __('auth.password')]),
+            'token.required' => __('validation.required', ['attribute' => __('auth.token')]),
+            'device_type.required' => __('validation.required', ['attribute' => __('auth.device_type')]),
+            'device_type.in' => __('validation.in', ['attribute' => __('auth.device_type')]),
+            'imei.required' => __('validation.required', ['attribute' => __('auth.imei')]),
         ];
     }
 }

@@ -34,6 +34,8 @@ return [
     'device_type' => 'نوع الجهاز',
     'imei' => 'IMEI',
     'phone' => 'الهاتف',
+    'account_not_active' => 'الحساب غير نشط',
+    'token' => 'رمز التحقق',
 
 ];
 

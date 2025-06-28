@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Api\MainController;
+use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Notifications\VerfyEmail;
 use Ichtrojan\Otp\Otp;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -66,16 +68,9 @@ class AuthController extends MainController
 
 
 
-    public function login(Request $request){
+    public function login(LoginRequest $request){
 
-        $validator=Validator::make($request->all(),[
-            'email'=>'required|email|string',
-            'password'=>'required|min:8',
-        ]);
 
-        if($validator->fails()){
-            return $this->sendError('error',$validator->errors(),403);
-        }
 
         $credentials = $request->only('email', 'password');
         $token=Auth::guard('api')->attempt($credentials);
@@ -86,7 +81,9 @@ class AuthController extends MainController
 
         $user=User::find($auth->id);
 
-
+        if(!$user->active){
+            return $this->messageError(__('auth.account_not_active'), 400);
+        }
 
         return $this->sendData([
             'user' => new UserResource($user),

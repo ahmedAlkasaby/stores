@@ -33,4 +33,6 @@ return [
     'device_type' => 'Device Type',
     'imei' => 'IMEI',
     'phone' => 'Phone',
+    'account_not_active' => 'Account Not Active',
+    'token' => 'Token',
 ];
