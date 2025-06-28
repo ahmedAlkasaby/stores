@@ -2,6 +2,7 @@
 <div class="col-12 mb-4">
     <small class="text-light fw-medium"></small>
     <div class="bs-stepper wizard-numbered mt-2">
+        @if(!isset($show))
         <div class="bs-stepper-header">
             <div class="step" data-target="#english-details">
                 <button type="button" class="step-trigger">
@@ -25,6 +26,7 @@
                 </button>
             </div>
         </div>
+        @endif
         <div class="bs-stepper-content">
             <form onSubmit="return false">
                 <!-- english Details -->

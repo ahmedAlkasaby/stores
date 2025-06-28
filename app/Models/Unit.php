@@ -16,6 +16,9 @@ class Unit extends MainModel
         'active',
         'order_id'
     ];
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 

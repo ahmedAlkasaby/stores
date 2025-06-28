@@ -31,7 +31,8 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         'active',
         'phone',
         'vip',
-        'notify'
+        'notify',
+        "image"
     ];
 
 

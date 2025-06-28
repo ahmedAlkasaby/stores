@@ -36,18 +36,8 @@ class UnitController extends MainController
      */
     public function store(UnitRequest $request)
     {
-        Unit::create([
-            "name" => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en
-            ],
-            "description" => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en
-            ],
-            "active" => $request->active,
-            "order_id" => $request->order_id,
-        ]);
+        $data=$request->all();
+        Unit::create($data);
 
         return redirect()->route('dashboard.units.index')->with('success', __('site.unit_created_successfully'));
     }
@@ -76,18 +66,7 @@ class UnitController extends MainController
     public function update(UnitRequest $request, string $id)
     {
         $unit = Unit::findOrFail($id);
-        $unit->update([
-            "name" => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en
-            ],
-            "description" => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en
-            ],
-            "active" => $request->active,
-            "order_id" => $request->order_id,
-        ]);
+        $unit->update($request->all());
 
         return redirect()->route('dashboard.units.index')->with('success', __('site.unit_updated_successfully'));
     }
@@ -95,30 +74,25 @@ class UnitController extends MainController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Unit $unit)
     {
-        $unit = Unit::findOrFail($id);
+        if($unit->products()->count() > 0){
+            return redirect()->route('dashboard.units.index')->with('error', __('site.unit_cant_be_deleted'));
+        }
         $unit->delete();
         return redirect()->route('dashboard.units.index')->with('success', __('site.unit_deleted_successfully'));
     }
 
-    public function restore(string $id)
+    
+    
+    public function active(Unit $Unit)
     {
-        $unit = Unit::withTrashed()->findOrFail($id);
-        $unit->restore();
-        return redirect()->route("dashboard.units.index")->with('success', __('site.unit_restored_successfully'));
-    }
-    public function forceDelete(string $id)
-    {
-        $unit = Unit::withTrashed()->findOrFail($id);
-        $unit->forceDelete();
-        return redirect()->route('dashboard.units.index')->with('success', __('site.unit_force_deleted_successfully'));
-    }
-    public function toggleActive(string $id)
-    {
-        $unit = Unit::withTrashed()->where('id', $id)->first();
-        $unit->active = !$unit->active;
-        $unit->save();
-        return redirect()->route('dashboard.units.index')->with('success', __('site.unit_toggled_successfully'));
+        $Unit->update([
+            'active' => ! ($Unit->active),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $Unit->active,
+        ]);
     }
 }

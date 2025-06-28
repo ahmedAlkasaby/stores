@@ -23,7 +23,7 @@ return [
             "stores" => 'i,sh,s,u,a,d',
             "categories" => 'i,sh,s,u,a,d',
             "products" => 'i,sh,s,u,a,d',
-            'Additions' => 'i,sh,s,u,a,d',
+            'additions' => 'i,sh,s,u,a,d',
             'wishlists'=>'i,sh',
             'home' => 'i',
 
