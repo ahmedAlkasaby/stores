@@ -25,4 +25,12 @@ return [
     'unauthenticated'=>'Unauthenticated',
     'invalid_credentials'=>'Invalid Credentials',
     'logout_successfully'=>'Logout Successfully',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'code' => 'Code',
+    'device_type' => 'Device Type',
+    'imei' => 'IMEI',
+    'phone' => 'Phone',
 ];

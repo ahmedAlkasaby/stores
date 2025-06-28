@@ -26,6 +26,14 @@ return [
     'unauthenticated'=>'غير مسجل دخول ',
     'invalid_credentials'=>'بيانات الاعتماد غير صحيحة',
     'logout_successfully'=>'تم تسجيل الخروج بنجاح',
+    'first_name' => 'الاسم الأول',
+    'last_name' => 'الاسم الأخير',
+    'email' => 'البريد الإلكتروني',
+    'password' => 'كلمة المرور',
+    'code' => 'الكود',
+    'device_type' => 'نوع الجهاز',
+    'imei' => 'IMEI',
+    'phone' => 'الهاتف',
 
 ];
 

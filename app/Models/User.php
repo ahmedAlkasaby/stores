@@ -64,6 +64,11 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function devices()
+    {
+        return $this->hasMany(Device::class, 'user_id', 'id');
+    }
+
     public function scopeFilter($query ,$request=null){
         $request=$request??request();
 

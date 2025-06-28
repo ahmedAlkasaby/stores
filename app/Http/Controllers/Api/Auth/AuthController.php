@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Api\MainController;
+use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Notifications\VerfyEmail;
@@ -40,24 +41,14 @@ class AuthController extends MainController
 
 
 
-    public function register(Request $request){
+    public function register(RegisterRequest $request){
 
-        $validator=Validator::make($request->all(),[
-            'first_name'=>'required|string|max:255',
-            'last_name'=>'required|string|max:255',
-            'email'=>'required|email|unique:users|max:255|string',
-            'password'=>'required|confirmed|min:8|string',
-            'code'=>'required',
-        ]);
 
-        if($validator->fails()){
-            return $this->sendError('error',$validator->errors(),403);
-        }
         $otp=(new Otp)->validate($request->email, $request->code);
-
 
         if($otp->status==true){
             $user = User::create($request->all());
+            $user->devices()->create($request->all());
             $token = Auth::guard('api')->login($user);
         }else{
             return $this->messageError($otp->message,400);
