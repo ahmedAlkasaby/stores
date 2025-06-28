@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   
+
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
@@ -23,7 +23,10 @@ return new class extends Migration
             $table->string('color')->nullable();
 
             // price
-            $table->decimal('price', 10, 2)->default(0);
+            $table->decimal('price', 10, 2);
+            $table->decimal('offer_price', 10, 2)->nullable();
+            $table->decimal('offer_amount', 10, 2)->nullable();
+            $table->decimal('offer_percent', 10, 2)->nullable();
 
 
             //order limit
@@ -32,17 +35,25 @@ return new class extends Migration
             $table->decimal('order_limit', 10, 2)->default(1);
             $table->decimal('max_order', 10, 2)->default(1);
 
-            // stock
-            $table->decimal('stock_amount', 10, 2)->default(0);
-            $table->decimal('max_amount', 10, 2)->default(0);
+
 
             // status
             $table->boolean('active')->default(true);
-            $table->boolean('feature')->default(false);
+            $table->boolean('feature')->default(true);
+            $table->boolean('offer')->default(true);
+            $table->boolean('new')->default(true);
+            $table->boolean('special')->default(true);
+            $table->boolean('filter')->default(true);
+            $table->boolean('sale')->default(true);
+            $table->boolean('late')->default(true);
+            $table->boolean('stock')->default(true);
+            $table->boolean('free_shipping')->default(true);
+            $table->boolean('returned')->default(true);
+
 
             // dates
             $table->dateTime('date_start')->nullable();
-            $table->dateTime('date_expire')->nullable();
+            $table->dateTime('date_end')->nullable();
             $table->time('day_start')->nullable();
             $table->time('day_end')->nullable();
 

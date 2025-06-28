@@ -8,35 +8,57 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-    protected $fillable = [
-        'code',
-        'link',
-        'name',
-        'description',
-        'image',
-        'video',
-        'background',
-        'color',
-        'price',
-        'start',
-        'skip',
-        'order_limit',
-        'max_order',
-        'stock_amount',
-        'max_amount',
-        'active',
-        'feature',
-        'date_start',
-        'date_expire',
-        'day_start',
-        'day_end',
-        'unit_id',
-        'brand_id',
-        'size_id',
-        'parent_id',
-        'order_id',
-        'store_id',
-    ];
+  protected $fillable = [
+    'code',
+    'link',
+    'name',
+    'description',
+    'image',
+    'video',
+    'background',
+    'color',
+
+    // price
+    'price',
+    'offer_price',
+    'offer_amount',
+    'offer_percent',
+
+    // order limits
+    'start',
+    'skip',
+    'order_limit',
+    'max_order',
+
+    // status flags
+    'active',
+    'feature',
+    'new',
+    'special',
+    'filter',
+    'sale',
+    'late',
+    'stock',
+    'free_shipping',
+    'returned',
+
+    // dates
+    'date_start',
+    'date_end',
+    'day_start',
+    'day_end',
+
+    // foreign keys
+    'store_id',
+    'unit_id',
+    'brand_id',
+    'size_id',
+    'parent_id',
+
+    // order
+    'order_id',
+];
+
 
     public function categories()
     {
@@ -53,8 +75,6 @@ class Product extends MainModel
     {
         return $this->hasOneThrough(StoreType::class,Store::class, 'id', 'id', 'store_id', 'store_type_id');
     }
-
-
 
 
     public function unit()
@@ -83,6 +103,9 @@ class Product extends MainModel
     {
         return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
     }
+
+
+
 
     public function scopeApplyBasicFilters($query, $request, $type_app)
     {
@@ -156,6 +179,78 @@ class Product extends MainModel
 
         return $query;
     }
+    public function scopeApplyNewFilter($query, $request)
+    {
+        if ($request->filled('new')) {
+            $query->where('new', $request->new);
+        }
+        return $query;
+    }
+    public function scopeApplySpecialFilter($query, $request)
+    {
+        if ($request->filled('special')) {
+            $query->where('special', $request->special);
+        }
+        return $query;
+    }
+    public function scopeApplyFilterFilter($query, $request)
+    {
+        if ($request->filled('filter')) {
+            $query->where('filter', $request->filter);
+        }
+        return $query;
+    }
+    public function scopeApplySaleFilter($query, $request)
+    {
+        if ($request->filled('sale')) {
+            $query->where('sale', $request->sale);
+        }
+        return $query;
+    }
+    public function scopeApplyStockFilter($query, $request)
+    {
+        if ($request->filled('stock')) {
+            $query->where('stock', $request->stock);
+        }
+        return $query;
+    }
+    public function scopeApplyFreeShippingFilter($query, $request)
+    {
+        if ($request->filled('free_shipping')) {
+            $query->where('free_shipping', $request->free_shipping);
+        }
+        return $query;
+    }
+    public function scopeApplyReturnedFilter($query, $request)
+    {
+        if ($request->filled('returned')) {
+            $query->where('returned', $request->returned);
+        }
+        return $query;
+    }
+
+    public function scopeApplyLateFilter($query, $request)
+    {
+        if ($request->filled('late')) {
+            $query->where('late', $request->late);
+        }
+        return $query;
+    }
+
+    public function scopeApplyDateFilters($query, $request)
+    {
+        if ($request->filled('date_start')) {
+            $query->where('date_start', '>=', $request->date_start);
+        }
+
+        if ($request->filled('date_end')) {
+            $query->where('date_end', '<=', $request->date_end);
+        }
+
+        return $query;
+    }
+
+
 
     public function scopeApplySorting($query, $request)
     {
@@ -175,7 +270,6 @@ class Product extends MainModel
                     break;
             }
         }
-
         return $query;
     }
 
@@ -189,13 +283,22 @@ class Product extends MainModel
         $request = $request ?? request();
 
         return $query
-            // ->applyBasicFilters($request, $type_app)
+            ->applyBasicFilters($request, $type_app)
             ->applySearch($request)
             ->applyStoreFilters($request)
             ->applyCategoryFilter($request)
             ->applyPriceFilters($request)
             ->applyFeatureFilter($request)
-            ->applySorting($request);
+            ->applyNewFilter($request)
+            ->applySpecialFilter($request)
+            ->applyFilterFilter($request)
+            ->applySaleFilter($request)
+            ->applyLateFilter($request)
+            ->applyStockFilter($request)
+            ->applyFreeShippingFilter($request)
+            ->applyReturnedFilter($request)
+            ->applySorting($request)
+            ->applyDateFilters($request);
     }
 
 

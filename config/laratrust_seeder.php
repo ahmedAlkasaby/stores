@@ -13,19 +13,36 @@ return [
 
     'roles_structure' => [
         'super_admin' => [
-            'roles' => 'c,r,u,d',
-            'users' => 'c,r,u,d',
+            'roles' => 'i,sh,s,u,a,d',
+            'users' => 'i,sh,s,u,a,d',
+            "units" => 'i,sh,s,u,a,d',
+            "brands" => 'i,sh,s,u,a,d',
+
+            "store_types" => 'i,sh,s,u,a,d',
+            "sizes" => 'i,sh,s,u,a,d',
+            "stores" => 'i,sh,s,u,a,d',
+            "categories" => 'i,sh,s,u,a,d',
+            "products" => 'i,sh,s,u,a,d',
+            'Additions' => 'i,sh,s,u,a,d',
+            'wishlists'=>'i,sh',
+            'home' => 'i',
+
+
         ],
         'admin' => [
-            'users' => 'c,r,u',
+            'users' => 'i,sh,s,u,d,a',
+            "store_types" => 'i,u,d',
+
         ],
-      
+
     ],
 
     'permissions_map' => [
-        'c' => 'create',
-        'r' => 'read',
+        'i' => 'index',
+        's' => 'store',
         'u' => 'update',
-        'd' => 'delete',
+        'd' => 'destroy',
+        'a'=>'active',
+        'sh' => 'show',
     ],
 ];

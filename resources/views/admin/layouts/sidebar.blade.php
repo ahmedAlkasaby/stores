@@ -16,7 +16,7 @@
                         fill="#7367F0" />
                 </svg>
             </span>
-            <span class="app-brand-text demo menu-text fw-bold">@lang('site.Woudyan') </span>
+            <span class="app-brand-text demo menu-text fw-bold">@lang('site.woudyan') </span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -27,13 +27,100 @@
 
     <div class="menu-inner-shadow"></div>
 
-   <ul class="menu-inner py-1">
-        <li class="menu-item @if (isset($class) && $class == 'home') active @endif">
-            <a href="" class="menu-link">
+    <ul class="menu-inner py-1">
+        @if (auth()->user()->hasPermission('home.index'))
+        <li class="menu-item @if ($class=='home') active @endif">
+            <a href="{{ route('dashboard.home.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div >{{ __('site.home') }}</div>
+                <div>{{ __('site.home') }}</div>
             </a>
         </li>
-   </ul>
+        @endif
+        @if (auth()->user()->hasPermission('roles.index'))
+        <li class="menu-item @if ($class=='roles') active @endif">
+            <a href="{{ route('dashboard.roles.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.role') }}</div>
+            </a>
+        </li>
+        @endif
+        @if (auth()->user()->hasPermission('store_types.index'))
+        <li class="menu-item @if ($class=='store_types') active @endif">
+            <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.store_type') }}</div>
+            </a>
+        </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('stores.index'))
+        <li class="menu-item @if ($class=='stores') active @endif">
+            <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.stores') }}</div>
+            </a>
+        </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('brands.index'))
+        <li class="menu-item @if ($class=='brands') active @endif">
+            <a href="{{ route('dashboard.brands.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.brand') }}</div>
+            </a>
+        </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('units.index'))
+        <li class="menu-item @if (Route::is(" dashboard.units.*") ) active @endif">
+            <a href="{{ route('dashboard.units.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.unit') }}</div>
+            </a>
+        </li>
+        @endif
+
+        @if (auth()->user()->hasPermission('sizes.index'))
+        <li class="menu-item @if ($class=='sizes') active @endif">
+            <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>{{ __('site.size') }}</div>
+            </a>
+        </li>
+        @endif
+
+         @if (auth()->user()->isAbleTo(['users.index']))
+        <li class="menu-item @if (isset($class) && in_array($class,['admin','delivery','client'])) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div >{{ __('site.users') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item  @if (isset($class) && $class == 'admin') active @endif">
+                    <a href="{{ route('dashboard.users.index', ['type' => 'admin']) }}" class="menu-link">
+                        <div >{{ __('site.users') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (isset($class) && $class == 'client') active @endif">
+                    <a href="{{ route('dashboard.users.index', ['type' => 'client']) }}" class="menu-link">
+                        <div>{{ __('site.clients') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (isset($class) && $class == 'delivery') active @endif">
+                    <a href="{{ route('dashboard.users.index', ['type' => 'delivery']) }}" class="menu-link">
+                        <div>{{ __('site.deliveries') }}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endif
+
+
+
+
+
+
+
+    </ul>
 </aside>
 <!-- / Menu -->

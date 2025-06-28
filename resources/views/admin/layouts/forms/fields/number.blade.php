@@ -3,6 +3,7 @@ $add_class = '';
 if (isset($number_class)) {
     $add_class = $number_class;
 }
+
 $field_name = 'price';
 if (isset($number_name)) {
     $field_name = $number_name;
@@ -28,6 +29,6 @@ if (isset($range)) {
 }
 @endphp
 @include('admin.layouts.forms.fields.form-group-head', ['field_name' => $field_name])
-@include('admin.layouts.forms.fields.label',['label_default'=>__("Price")])
+@include('admin.layouts.forms.fields.label',['label_default'=>__("site." . $field_name)])
 {!! Form::text($field_name, $number_value ?? null, $array_control) !!}
 @include('admin.layouts.forms.fields.form-group-foot', ['field_name' => $field_name])

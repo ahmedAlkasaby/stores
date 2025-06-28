@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Store extends MainModel
 {
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'description',
@@ -39,7 +41,9 @@ class Store extends MainModel
 
         $query->orderBy('order_id','asc');
 
-        $query->where('active', $type_app=='app' ? 1 : $request->active);
+        if($request->has('active') && $request->active !=='all'){
+            $query->where('active', $type_app=='app' ? 1 : $request->active);
+        }
 
 
 
@@ -50,7 +54,7 @@ class Store extends MainModel
                    ->orWhere('address','like','%'.$request->search.'%');
             });
         }
-        if ($request->has('store_type_id')) {
+        if ($request->has('store_type_id') && $request->store_type_id !=='all') {
             $query->where('store_type_id', $request->store_type_id);
         }
 
@@ -63,6 +67,18 @@ class Store extends MainModel
                     $query->orderBy('order_id', 'asc');
                     break;
             }
+        }
+
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+        if ($request->filled('address')) {
+            $query->where('address', 'like', '%' . $request->address . '%');
+        }
+
+        if ($request->filled('order_id')) {
+            $query->where('order_id', $request->order_id);
         }
 
 
