@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\MainController;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Device;
 use App\Models\User;
 use App\Notifications\VerfyEmail;
 use Ichtrojan\Otp\Otp;
@@ -80,6 +81,18 @@ class AuthController extends MainController
         $auth = Auth::guard('api')->user();
 
         $user=User::find($auth->id);
+
+        $dataDevice = $request->only('token', 'device_type', 'imei');
+
+        $user->devices()->updateOrCreate(
+            [
+                'user_id' => $user->id,
+                'imei' => $dataDevice['imei'],
+            ],
+            array_merge($dataDevice, ['user_id' => $user->id])
+        );
+
+
 
         if(!$user->active){
             return $this->messageError(__('auth.account_not_active'), 400);
