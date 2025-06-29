@@ -112,7 +112,7 @@ class Product extends MainModel
         return $query
             ->where('active', $type_app == 'app' ? true : $request->active)
             ->where('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
-            ->where('date_expire', '>=', $type_app == 'app' ? now() : $request->date_expire)
+            ->where('date_end', '>=', $type_app == 'app' ? now() : $request->date_expire)
             ->where('day_start', '<=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_start)
             ->where('day_end', '>=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_end)
             ->orderBy('order_id', 'asc');
@@ -298,7 +298,8 @@ class Product extends MainModel
             ->applyFreeShippingFilter($request)
             ->applyReturnedFilter($request)
             ->applySorting($request)
-            ->applyDateFilters($request);
+            ->applyDateFilters($request)
+            ;
     }
 
 
