@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\HourHelper;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\HomeController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\StoreTypeController;
-
 
 
 
@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('units/restore/{unit}', [UnitController::class, 'restore'])->name('units.restore');
     Route::delete('units/force_delete/{unit}', [UnitController::class, 'forceDelete'])->name('units.force_delete');
     Route::get('units/toggle_active/{unit}', [UnitController::class, 'active'])->name('units.active');
-    // Resource routes for additions 
+    // Resource routes for additions
     Route::resource('additions', AdditionController::class);
     Route::get('additions/restore/{addition}', [AdditionController::class, 'restore'])->name('additions.restore');
     Route::delete('additions/force_delete/{addition}', [AdditionController::class, 'forceDelete'])->name('additions.force_delete');
