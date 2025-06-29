@@ -7,12 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends MainModel
 {
-    protected static function booted()
-    {
-        static::deleting(function ($order) {
-            $order->location()->delete();
-        });
-    }
+
 
     protected $fillable = [
         'user_id',
@@ -53,9 +48,6 @@ class Order extends MainModel
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-    public function location()
-    {
-        return $this->morphOne(location::class, 'locationable');
-    }
+
 
 }
