@@ -36,9 +36,8 @@ class ProductResource extends JsonResource
 
 
             'date_start' => $this->date_start,
-            'date_expire' => $this->date_expire,
-            'day_start' => $this->day_start,
-            'day_end' => $this->day_end,
+            'date_end' => $this->date_end,
+           
             'store_id' => $this->store_id,
             'unit_id' => $this->unit_id,
             'brand_id' => $this->brand_id,

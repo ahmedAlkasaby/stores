@@ -45,8 +45,7 @@ class Product extends MainModel
     // dates
     'date_start',
     'date_end',
-    'day_start',
-    'day_end',
+    
 
     // foreign keys
     'store_id',
@@ -111,10 +110,8 @@ class Product extends MainModel
     {
         return $query
             ->where('active', $type_app == 'app' ? true : $request->active)
-            ->where('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
-            ->where('date_end', '>=', $type_app == 'app' ? now() : $request->date_expire)
-            ->where('day_start', '<=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_start)
-            ->where('day_end', '>=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_end)
+            ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
+            ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
             ->orderBy('order_id', 'asc');
     }
 

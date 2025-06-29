@@ -54,8 +54,7 @@ return new class extends Migration
             // dates
             $table->dateTime('date_start')->nullable();
             $table->dateTime('date_end')->nullable();
-            $table->time('day_start')->nullable();
-            $table->time('day_end')->nullable();
+          
 
             // relations
             $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
