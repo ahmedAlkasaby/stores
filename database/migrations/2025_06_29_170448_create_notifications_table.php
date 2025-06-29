@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('active')->default(true);
-            $table->integer('order_id')->nullable();
-            $table->integer('shipping')->default(0);
-            $table->softDeletes();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table ->text('name');
+            $table ->longText('description');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('notifications');
     }
 };

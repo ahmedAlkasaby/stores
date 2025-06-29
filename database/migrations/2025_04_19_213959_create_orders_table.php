@@ -23,10 +23,6 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('notes')->nullable();
 
-            $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
-            $table->foreignId('region_id')->constrained('regions')->onDelete('cascade');
-
-
             $table->timestamps();
         });
     }

@@ -45,7 +45,7 @@ class Product extends MainModel
     // dates
     'date_start',
     'date_end',
-    
+
 
     // foreign keys
     'store_id',
@@ -335,6 +335,16 @@ class Product extends MainModel
                 ->first();
         }
         return 0;
+    }
+
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+    
+    public function averageRating()
+    {
+        return $this->reviews()->where('active', true)->avg('rating') ?? 0;
     }
 
 
