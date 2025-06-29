@@ -56,7 +56,7 @@ return new class extends Migration
             $table->dateTime('date_end')->nullable();
           
 
-            // relations
+            // relationss
             $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();
