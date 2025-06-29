@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\dashboard\DeliveryController;
 use App\Http\Controllers\dashboard\StoreTypeController;
 
 
@@ -99,4 +100,8 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::resource('contacts', ContactController::class);
     Route::get('contacts/active/{contact}', [ContactController::class, 'seen'])->name('contacts.seen');
     Route::post("messages/send/{contact}", [ContactController::class, "sendMessage"])->name("contacts.sendMessage");
+
+    //Resource Route for deliveries
+    Route::resource('deliveries', DeliveryController::class);
+    Route::get('deliveries/active/{delivery}', [DeliveryController::class, 'active'])->name('deliveries.active');
 });

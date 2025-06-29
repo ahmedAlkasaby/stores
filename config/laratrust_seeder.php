@@ -30,6 +30,8 @@ return [
             "regions" => 'i,sh,s,u,a,d',
             "settings" => 'i,sh,s,u,a,d',
             "contacts" => 'i,sh,s,u,a,d',
+            "deliveries"=>"i,sh,s,u,a,d",
+
 
 
         ],

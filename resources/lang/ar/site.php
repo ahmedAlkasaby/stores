@@ -289,4 +289,7 @@ return [
     "message_details" => "تفاصيل الرسالة",
     "send_message_successfully" => "تم ارسال الرسالة بنجاح",
     "send" => "ارسال",
+    "delivery_updated_successfully" => "تم تحديث التوصيل بنجاح",
+    "delivery_created_successfully" => "تم إنشاء التوصيل بنجاح",
+
 ];

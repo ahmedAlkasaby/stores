@@ -291,4 +291,6 @@ return [
     "message_details"=>"Message Details",
     "send"=>"Send",
     "send_message_successfully"=>"Send Message Successfully",
+    "delivery_updated_successfully"=>"Delivery Updated Successfully",
+    "delivery_created_successfully"=>"Delivery Created Successfully"
 ];
