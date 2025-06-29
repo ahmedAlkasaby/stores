@@ -275,4 +275,18 @@ return [
     "email" => "البريد الالكتروني",
     "password_confirmation" => "تاكيد كلمة المرور",
     "remember_me" => "تذكرني",
+
+    "message"=>"الرسالة",
+    "title" => "العنوان",
+    "date" => "التاريخ",
+    "seen" => "مراجعة",
+    "active" => "مفعل",
+    "actions" => "الإجراءات",
+    "no_data" => "لا يوجد بيانات",
+    "contacts" => "المراسلات",
+    "body"=>"النص",
+    "message_response" => "استكمال الرسالة",
+    "message_details" => "تفاصيل الرسالة",
+    "send_message_successfully" => "تم ارسال الرسالة بنجاح",
+    "send" => "ارسال",
 ];

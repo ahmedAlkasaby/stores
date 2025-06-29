@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -30,18 +32,29 @@ class DatabaseSeeder extends Seeder
             StoreSeeder::class,
         ]);
 
-        // for ($i = 0; $i < 100; $i++) {
-        //  User::create([
-        //    'first_name'=>fake()->firstName(),
-        //    'last_name'=>fake()->lastName(),
-        //    'email'=> fake()->unique()->safeEmail(),
-        //    'phone'=> fake()->phoneNumber(),
-        //    'password'=> fake()->password(),
-        //    'lang'=>'en',
-        //    'theme'=>'light',
-        //    'type'=>fake()->randomElement(['admin', 'client','delivery']),
-        // ]);
-        // }
+        for ($i = 0; $i < 10; $i++) {
+         User::create([
+           'first_name'=>fake()->firstName(),
+           'last_name'=>fake()->lastName(),
+           'email'=> fake()->unique()->safeEmail(),
+           'phone'=> fake()->phoneNumber(),
+           'password'=> fake()->password(),
+           'lang'=>'en',
+           'theme'=>'light',
+           'type'=>fake()->randomElement(['admin', 'client','delivery']),
+        ]);
+        }
+        for ($i = 0; $i < 10; $i++) {
+            Contact::create([
+                "name" => fake()->name(),
+                "email" => "osamy8088@gmail.com",
+                "message" => fake()->text(),
+                "read_at" => fake()->dateTime(),
+                "title" => fake()->title(),
+                "read_at" => fake()->dateTime(),
+            ]);
+        }
+
 
         // \App\Models\User::factory(10)->create();
         // \App\Models\Post::factory(10)->create();

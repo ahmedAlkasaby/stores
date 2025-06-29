@@ -66,6 +66,8 @@ class StoreSeeder extends Seeder
             "twitter" => "https://www.twitter.com/",
             "tiktok" => "https://www.tiktok.com/",
         ]);
+
+        
         // }
         // for($i = 1; $i < 6; $i++){
         //      Size::create([

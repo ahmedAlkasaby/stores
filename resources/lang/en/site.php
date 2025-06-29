@@ -276,5 +276,19 @@ return [
 
     "Drag_file_here_to_upload"=>"Drag file here to upload",
 
-    "confirm_password"=>"Confirm Password"
+    "confirm_password"=>"Confirm Password",
+
+    "message"=>"Message",
+    "title"=>"Title",
+    "date"=>"Date",
+    "seen"=>"Seen",
+    "active"=>"Active",
+    "actions"=>"Actions",
+    "no_data"=>"No Data",
+    "contacts"=>"Contacts",
+    "body"=>"Body",
+    "message_response"=>"Message Response",
+    "message_details"=>"Message Details",
+    "send"=>"Send",
+    "send_message_successfully"=>"Send Message Successfully",
 ];

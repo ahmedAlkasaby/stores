@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\AdditionController;
@@ -94,4 +95,8 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     //Resource routes for settings
     Route::resource('settings', SettingController::class);
 
+    //contacts
+    Route::resource('contacts', ContactController::class);
+    Route::get('contacts/active/{contact}', [ContactController::class, 'seen'])->name('contacts.seen');
+    Route::post("messages/send/{contact}", [ContactController::class, "sendMessage"])->name("contacts.sendMessage");
 });

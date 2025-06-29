@@ -52,6 +52,14 @@
                 </a>
             </li>
         @endif
+        @if (auth()->user()->hasPermission('contacts.index'))
+            <li class="menu-item @if ($class == 'contacts') active @endif">
+                <a href="{{ route('dashboard.contacts.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                    <div>{{ __('site.contacts') }}</div>
+                </a>
+            </li>
+        @endif
         @if (auth()->user()->hasPermission('store_types.index'))
             <li class="menu-item @if ($class == 'store_types') active @endif">
                 <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">

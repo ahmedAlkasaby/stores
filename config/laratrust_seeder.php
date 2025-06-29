@@ -29,6 +29,7 @@ return [
             "cities" => 'i,sh,s,u,a,d',
             "regions" => 'i,sh,s,u,a,d',
             "settings" => 'i,sh,s,u,a,d',
+            "contacts" => 'i,sh,s,u,a,d',
 
 
         ],

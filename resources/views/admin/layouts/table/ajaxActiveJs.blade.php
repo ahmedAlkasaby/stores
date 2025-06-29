@@ -6,7 +6,7 @@
 <script>
     var $jq = jQuery.noConflict();
 
-    $jq(document).ready(function () {
+    $jq(document).ready(function() {
         var csrfToken = $jq('meta[name="csrf-token"]').attr('content');
         $jq.ajaxSetup({
             headers: {
@@ -17,9 +17,9 @@
 
         // Pass the Blade PHP variable into JS safely
         var model = "{{ $model }}";
-        var funcName ="{{ $function }}";
+        var funcName = "{{ $function }}";
 
-        $jq('.' + funcName  + '-' + model).on('click', function (e) {
+        $jq('.' + funcName + '-' + model).on('click', function(e) {
             e.preventDefault();
 
             var button = $jq(this);
@@ -27,22 +27,34 @@
 
             var url = button.data('url');
 
-
-
-
             $jq.ajax({
                 url: url,
                 type: 'GET',
-                success: function (response) {
-                    if (response.active) {
-                        button.removeClass('btn-danger').addClass('btn-success');
-                        button.find('i').removeClass('fa-circle-xmark').addClass('fa-check');
-                    } else {
-                        button.removeClass('btn-success').addClass('btn-danger');
-                        button.find('i').removeClass('fa-check').addClass('fa-circle-xmark');
+                success: function(response) {
+                    if (funcName == "active") {
+
+                        if (response.active) {
+                            button.removeClass('btn-danger').addClass('btn-success');
+                            button.find('i').removeClass('fa-circle-xmark').addClass(
+                                'fa-check');
+                        } else {
+                            button.removeClass('btn-success').addClass('btn-danger');
+                            button.find('i').removeClass('fa-check').addClass(
+                                'fa-circle-xmark');
+                        }
+                    } else if (funcName == "seen") {
+                        if (response.seen) {
+                            button.removeClass('btn-danger').addClass('btn-success disabled');
+                            button.find('i').removeClass('fa-circle-xmark').addClass(
+                                'fa-check');
+                        } else {
+                            button.removeClass('btn-success').addClass('btn-danger');
+                            button.find('i').removeClass('fa-check').addClass(
+                                'fa-circle-xmark');
+                        }
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     alert('There was an error. Please try again.');
                 }
             });
