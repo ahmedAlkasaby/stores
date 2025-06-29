@@ -122,7 +122,23 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         return $this->hasMany(Address::class, 'user_id', 'id');
     }
 
-   
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
+    }
+    
+    public function notificationsUnread()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')->whereNull('read_at');
+    }
+    public function notificationsRead()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')->whereNotNull('read_at');
+    }
+    public function markAllNotificationsAsRead()
+    {
+        $this->notificationsUnread()->update(['read_at' => now()]);
+    }
 
 
 
