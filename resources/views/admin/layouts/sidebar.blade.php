@@ -59,12 +59,36 @@
                     <div>{{ __('site.contacts') }}</div>
                 </a>
             </li>
+        @endif
+        @if (auth()->user()->hasPermission('deliveries.index'))
+            <li class="menu-item @if ($class == 'deliveries') active @endif">
+                <a href="{{ route('dashboard.deliveries.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                    <div>{{ __('site.deliveries') }}</div>
+                </a>
+            </li>
             @endif
-            @if (auth()->user()->hasPermission('deliveries.index'))
-                <li class="menu-item @if ($class == 'deliveries') active @endif">
-                    <a href="{{ route('dashboard.deliveries.index') }}" class="menu-link">
+            @if (auth()->user()->hasPermission('pages.index'))
+                <li class="menu-item @if ($class == 'pages') active @endif">
+                    <a href="{{ route('dashboard.pages.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                        <div>{{ __('site.deliveries') }}</div>
+                        <div>{{ __('site.pages') }}</div>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('payments.index'))
+                <li class="menu-item @if ($class == 'payments') active @endif">
+                    <a href="{{ route('dashboard.payments.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.payments') }}</div>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('addresses.index'))
+                <li class="menu-item @if ($class == 'addresses') active @endif">
+                    <a href="{{ route('dashboard.addresses.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.addresses') }}</div>
                     </a>
                 </li>
             @endif

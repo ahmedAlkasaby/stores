@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('title');
+            $table->text("name");
+            $table->text('description');
             $table->string('image')->nullable();
-            $table->boolean('active')->default(true);
-            $table->integer('order_id')->nullable();
-            $table->string("type");
-            $table->softDeletes();
+            $table->string('page');
+            $table->boolean('active');
+            $table->integer('order_id');
+            $table->string("link")->nullable();
+            $table->string("video_link")->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('pages');
     }
 };

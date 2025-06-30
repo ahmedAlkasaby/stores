@@ -1,5 +1,5 @@
 @php
-    $function = $function ?? 'active';
+    $function = $function ?? 'seen';
 @endphp
 
 
@@ -27,22 +27,20 @@
 
             var url = button.data('url');
 
-
-
-
             $jq.ajax({
                 url: url,
                 type: 'GET',
                 success: function(response) {
-                    if (response.active) {
-                        button.removeClass('btn-danger').addClass('btn-success');
+                    if (response.seen) {
+                        button.removeClass('btn-danger').addClass('btn-success disabled');
                         button.find('i').removeClass('fa-circle-xmark').addClass(
-                        'fa-check');
+                            'fa-check');
                     } else {
                         button.removeClass('btn-success').addClass('btn-danger');
                         button.find('i').removeClass('fa-check').addClass(
-                        'fa-circle-xmark');
+                            'fa-circle-xmark');
                     }
+
                 },
                 error: function(xhr) {
                     alert('There was an error. Please try again.');

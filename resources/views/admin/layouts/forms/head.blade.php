@@ -44,7 +44,7 @@
                         @if($show_title ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.text', [
-                            'text_name' => 'title_en',
+                            'text_name' => 'title[en]',
                             'text_value' => $name_en ?? null,
                             'label_name' => __('site.english_title'),
                             'not_req' => true,
@@ -93,7 +93,7 @@
                         @if($show_title ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.text', [
-                            'text_name' => 'title_ar',
+                            'text_name' => 'title[ar]',
                             'text_value' => $name_ar ?? null,
                             'label_name' => __('site.arabic_title'),
                             'not_req' => true,

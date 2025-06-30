@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\dashboard\PageController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\UnitController;
@@ -11,7 +12,9 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\StoreController;
 use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\Dashboard\AddressController;
 use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\AdditionController;
@@ -104,4 +107,16 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     //Resource Route for deliveries
     Route::resource('deliveries', DeliveryController::class);
     Route::get('deliveries/active/{delivery}', [DeliveryController::class, 'active'])->name('deliveries.active');
+
+    //Resourse route for pages
+    Route::resource('pages', PageController::class);
+    Route::get('pages/active/{page}', [PageController::class, 'active'])->name('pages.active');
+
+    //Resourse route for payments
+    Route::resource('payments', PaymentController::class);
+    Route::get('payments/active/{payment}', [PaymentController::class, 'active'])->name('payments.active');
+
+    //Resourse route for addresses
+    Route::resource('addresses', AddressController::class);
+
 });
