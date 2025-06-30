@@ -216,4 +216,15 @@ return [
     "permissions"=> "الصلاحيات",
     "display_name"=> "اسم العرض",
     "admin"=>"المشرف",
+
+    'request' => 'طلب جديد',
+    'pending' => 'قيد الانتظار',
+    'approved' => 'تمت الموافقة',
+    'rejected' => 'مرفوض',
+    'preparing' => 'جاري التحضير',
+    'preparingFinished' => 'تم التحضير',
+    'deliveryGo' => 'خرج للتوصيل',
+    'delivered' => 'تم التوصيل',
+    'canceled' => 'ملغي',
+    'returned' => 'مرتجع',
 ];

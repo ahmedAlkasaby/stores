@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Enums\StatusOrderEnum;
+
+
 
 class Order extends MainModel
 {
 
-
     protected $fillable = [
         'user_id',
-        'status_order_id',
+        'status',
         'store_id',
         'product_id',
         'payment_id',
@@ -20,13 +20,23 @@ class Order extends MainModel
         'notes',
     ];
 
+    protected $casts=[
+        'status'=>StatusOrderEnum::class,
+    ];
+
+     protected static $allowedTransitions = [
+        'request' => ['pending', 'approved', 'preparing','preparingFins', 'rejected', 'canceled'],
+        'pending' => ['approved', 'rejected', 'canceled'],
+        'approved' => ['preparing', 'canceled'],
+        'preparing' => ['preparing finished', 'canceled'],
+        'preparing finished' => ['delivery go'],
+        'delivery go' => ['delivered', 'canceled'],
+        'delivered' => ['returned'],
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-    public function statusOrder()
-    {
-        return $this->belongsTo(StatusOrder::class, 'status_order_id', 'id');
     }
 
     public function store()
@@ -48,7 +58,7 @@ class Order extends MainModel
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-    
+
 
 
 

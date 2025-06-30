@@ -212,5 +212,15 @@ return [
     "permissions"=>"Permissions",
     "display_name"=>"Display Name",
     "admin"=>"Admin",
+    'request' => 'Request',
+    'pending' => 'Pending',
+    'approved' => 'Approved',
+    'rejected' => 'Rejected',
+    'preparing' => 'Preparing',
+    'preparingFinished' => 'Preparing Finished',
+    'deliveryGo' => 'Out for Delivery',
+    'delivered' => 'Delivered',
+    'canceled' => 'Canceled',
+    'returned' => 'Returned',
 
 ];
