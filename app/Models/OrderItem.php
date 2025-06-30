@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+
 
 class OrderItem extends MainModel
 {
     protected $fillable = [
         'order_id',
         'product_id',
-        'qty',
-        'price_at_time'
+        'amount',
+        'price',
+        'discount',
+        'shipping_cost'
     ];
 
     public function order()

@@ -12,11 +12,8 @@ class Order extends MainModel
     protected $fillable = [
         'user_id',
         'status',
-        'store_id',
-        'product_id',
         'payment_id',
-        'price',
-        'shipping_cost',
+        'shipping',
         'notes',
     ];
 
@@ -24,15 +21,7 @@ class Order extends MainModel
         'status'=>StatusOrderEnum::class,
     ];
 
-     protected static $allowedTransitions = [
-        'request' => ['pending', 'approved', 'preparing','preparingFins', 'rejected', 'canceled'],
-        'pending' => ['approved', 'rejected', 'canceled'],
-        'approved' => ['preparing', 'canceled'],
-        'preparing' => ['preparing finished', 'canceled'],
-        'preparing finished' => ['delivery go'],
-        'delivery go' => ['delivered', 'canceled'],
-        'delivered' => ['returned'],
-    ];
+    
 
     public function user()
     {
