@@ -94,7 +94,7 @@ class StoreSeeder extends Seeder
         }
 
         for($i = 1; $i < 6; $i++){
-            Category::create([
+            $category=Category::create([
                 'name' => [
                     'en' => 'Category ' . $i,
                     'ar' => 'الفئة ' . $i,
@@ -107,8 +107,28 @@ class StoreSeeder extends Seeder
                 'active' => true,
                 "order_id" => $i,
                 'parent_id' => null,
-                'store_id' => 1,
+                'store_id' => $i,
             ]);
+
+            for($j = 1; $j < 6; $j++){
+                $category->children()->create([
+                    'name' => [
+                        'en' => 'Category ' . $i,
+                        'ar' => 'الفئة ' . $i,
+                    ],
+                    'description' => [
+                        'en' => 'Description for Category ' . $i,
+                        'ar' => 'وصفmao للفئة ' . $i,
+                    ],
+                    'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
+                    'active' => true,
+                    "order_id" => $i,
+                    'store_id' => $category->store_id,
+                ]);
+            }
+
+
+
         }
         for($i = 1; $i < 6; $i++){
             Addition::create([
@@ -145,188 +165,7 @@ class StoreSeeder extends Seeder
             "tiktok" => "https://www.tiktok.com/",
         ]);
 
-        
-        // }
-        // for($i = 1; $i < 6; $i++){
-        //      Size::create([
-        //         'name' => [
-        //             'en' => 'Store Type ' . $i,
-        //             'ar' => 'نوع المتجر ' . $i,
-        //         ],
-        //         'description' => [
-        //             'en' => 'Description for Store Type ' . $i,
-        //             'ar' => 'وصف لنوع المتجر ' . $i,
-        //         ],
-        //         'active' => true,
-        //         "order_id" => $i,
-        //     ]);
-
-        
-        // for ($i = 1; $i < 6; $i++) {
-        //     $storeType = StoreType::create([
-        //         'name' => [
-        //             'en' => 'Store Type ' . $i,
-        //             'ar' => 'نوع المتجر ' . $i,
-        //         ],
-        //         'description' => [
-        //             'en' => 'Description for Store Type ' . $i,
-        //             'ar' => 'وصف لنوع المتجر ' . $i,
-        //         ],
-        //         'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //     ]);
-
-        //     for ($j = 1; $j <= 11; $j++) {
-        //         $store = $storeType->stores()->create([
-        //             'name' => [
-        //                 'en' => 'Store ' . $j,
-        //                 'ar' => 'متجر ' . $j,
-        //             ],
-        //             'description' => [
-        //                 'en' => 'Description for Store ' . $j,
-        //                 'ar' => 'وصف للمتجر ' . $j,
-        //             ],
-        //             'address' => 'Address for Store ' . $j,
-        //             'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //         ]);
-
-        //         for ($k = 1; $k <= 10; $k++) {
-        //             // parent categories
-        //             $categoryParent = $store->categories()->create([
-        //                 'name' => [
-        //                     'en' => 'Category ' . $k,
-        //                     'ar' => 'فئة ' . $k,
-        //                 ],
-        //                 'description' => [
-        //                     'en' => 'Description for Category ' . $k,
-        //                     'ar' => 'وصف للفئة ' . $k,
-        //                 ],
-        //                 'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //             ]);
-
-        //             // child categories
-        //             for ($l = 1; $l <= 5; $l++) {
-        //                 $categoryChild = $categoryParent->children()->create([
-        //                     'name' => [
-        //                         'en' => 'Sub Category ' . $l,
-        //                         'ar' => 'فئة فرعية ' . $l,
-        //                     ],
-        //                     'description' => [
-        //                         'en' => 'Description for Sub Category ' . $l,
-        //                         'ar' => 'وصف للفئة الفرعية ' . $l,
-        //                     ],
-        //                     'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //                     'store_id' => $store->id,
-        //                 ]);
-
-        //             }
-
-        //             //products parent and children
 
 
-        //             for ($l = 1; $l <= 5; $l++) {
-        //                 $productsParent=Product::create([
-        //                      'code' => fake()->unique()->numberBetween(1000000, 9999999),
-        //                     'link' =>'Product-' . Str::uuid(),
-        //                     'name' => [
-        //                         'en' => 'Product ' . $l,
-        //                         'ar' => 'منتج ' . $l,
-        //                     ],
-        //                     'description' => [
-        //                         'en' => 'Description for Product ' . $l,
-        //                         'ar' => 'وصف للمنتج ' . $l,
-        //                     ],
-        //                     'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //                     'order_limit' => 1,
-        //                     'max_order' => 10,
-
-        //                     'stock_amount' => 100,
-        //                     'max_amount' => fake()->numberBetween(50,100),
-        //                     'feature' => rand(0, 1),
-        //                     'price' => fake()->numberBetween(100, 1000),
-        //                     'date_start'=> now(),
-        //                     'date_end'=> now()->addDays(100),
-
-        //                     'unit_id' => Unit::inRandomOrder()->first()->id,
-        //                     'brand_id' => null,
-        //                     'size_id' => null,
-        //                     'parent_id' => null,
-        //                     'store_id' => $store->id,
-        //                 ]);
-        //                 $productsParent->categories()->attach([$categoryChild->id,$categoryParent->id]);
-
-        //                 for ($m = 1; $m <= 5; $m++) {
-        //                     $productsChild=Product::create([
-        //                          'code' => fake()->unique()->numberBetween(1000000, 9999999),
-        //                         'link' =>'Product-' . Str::uuid(),
-        //                         'name' => [
-        //                             'en' => 'Product ' . $m,
-        //                             'ar' => 'منتج ' . $m,
-        //                         ],
-        //                         'description' => [
-        //                             'en' => 'Description for Product ' . $m,
-        //                             'ar' => 'وصف للمنتج ' . $m,
-        //                         ],
-        //                         'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //                         'order_limit' => 1,
-        //                         'max_order' => 10,
-
-        //                         'stock_amount' => 100,
-        //                         'max_amount' => fake()->numberBetween(50,100),
-        //                         'feature' => rand(0, 1),
-        //                         'price' => fake()->numberBetween(100, 1000),
-        //                         'date_start'=> now(),
-        //                         'date_end'=> now()->addDays(100),
-
-        //                         'unit_id' => Unit::inRandomOrder()->first()->id,
-        //                         'brand_id' => null,
-        //                         'size_id' => Size::inRandomOrder()->first()->id,
-        //                         'parent_id' => $productsParent->id,
-        //                         'store_id' => $store->id,
-        //                     ]);
-
-        //                    $productsChild->categories()->attach([$categoryChild->id,$categoryParent->id]);
-        //                 }
-        //             }
-
-        //             // products without children
-        //             for($f=1;$f<=50;$f++){
-        //                 $productsParent=Product::create([
-        //                     'code' => fake()->unique()->numberBetween(1000000, 9999999),
-        //                     'link' =>'Product-' . Str::uuid(),
-        //                     'name' => [
-        //                         'en' => 'Product ' . $f,
-        //                         'ar' => 'منتج ' . $f,
-        //                     ],
-        //                     'description' => [
-        //                         'en' => 'Description for Product ' . $f,
-        //                         'ar' => 'وصف للمنتج ' . $f,
-        //                     ],
-        //                     'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        //                     'order_limit' => 1,
-        //                     'max_order' => 10,
-
-        //                     'stock_amount' => 100,
-        //                     'max_amount' => fake()->numberBetween(50,100),
-        //                     'feature' => rand(0, 1),
-        //                     'price' => fake()->numberBetween(100, 1000),
-        //                     'date_start'=> now(),
-        //                     'date_end'=> now()->addDays(100),
-
-        //                     'unit_id' => Unit::inRandomOrder()->first()->id,
-        //                     'brand_id' => null,
-        //                     'size_id' => null,
-        //                     'parent_id' => null,
-        //                     'store_id' => $store->id,
-
-        //                 ]);
-        //                 $productsParent->categories()->attach([$categoryChild->id]);
-        //             }
-
-
-
-
-        //         }
-        //     }
-        // }
         }
 }
