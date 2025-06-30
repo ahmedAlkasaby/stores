@@ -24,7 +24,8 @@ class Setting extends MainModel
         'snapchat',
         'instagram',
         'twitter',
-        'tiktok'
+        'tiktok',
+        "telegram"
     ];
 
 }

@@ -2,10 +2,11 @@
 @section('title', __('site.stores'))
 @section('styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
-    <!-- For date picker -->
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/dropzone-style.css') }}" />
+
 @endsection
 @section('content')
     @include('admin.layouts.messages.displayErrors')
@@ -52,8 +53,8 @@
         'select2' => true,
     ])
 
-    @include('admin.layouts.forms.fields.file', [
-        'image' => $image ?? null,
+    @include('admin.layouts.forms.fields.dropzone', [
+        "name" => "image",
     ])
     @include('admin.layouts.forms.footer')
     @include('admin.layouts.forms.close')
@@ -62,7 +63,9 @@
 
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-    <script src="{{ asset('js/showImage.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+    @include('admin.layouts.forms.dropzone')
+    
 @endsection
 
 

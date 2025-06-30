@@ -21,10 +21,10 @@ class CategoryController extends MainController
     }
     public function index()
     {
-    $categories = Category::with('store')->with("parent")->filter(request(), "dashboard")->paginate($this->perPage);
+        $categories = Category::with('store')->with("parent")->filter(request(), "dashboard")->paginate($this->perPage);
         $stores = Store::all();
         $allCategories = Category::all();
-        
+
         return view('admin.categories.index', compact('categories', 'stores', 'allCategories'));
     }
 
@@ -83,7 +83,7 @@ class CategoryController extends MainController
     public function destroy(string $id)
     {
         // if (Category::find($id)->products()->count() > 0) {
-            // return redirect()->route('dashboard.categories.index')->with('error', __('site.category_has_products'));
+        // return redirect()->route('dashboard.categories.index')->with('error', __('site.category_has_products'));
         // }
         $category = Category::findOrFail($id);
         $this->imageService->deleteImage($category->image);
@@ -93,7 +93,7 @@ class CategoryController extends MainController
     }
 
 
-        public function active(Category $Category)
+    public function active(Category $Category)
     {
         $Category->update([
             'active' => ! ($Category->active),

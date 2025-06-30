@@ -377,7 +377,10 @@ return [
     'order_id_max' => 'The order ID must not exceed 9999999999999999.',
     'address_required' => 'The address field is required.',
 
-
+    "order_id_required"=>"Order id is required",
+    "city_id_required"=>"City is required",
+    "shipping_required"=>"Shipping is required",
+    "shipping_numeric"=>"Shipping must be numeric",
 
 
 

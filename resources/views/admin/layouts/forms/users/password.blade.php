@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label>{{ __('Password') }}</label>
+    <label>{{ __('site.password') }}</label>
     @if($new == 1)
     {!! Form::password('password' ,array('class' => 'form-control','id'=>'password','required'=>'','data-parsley-minlength'=>'8')) !!}
     @else

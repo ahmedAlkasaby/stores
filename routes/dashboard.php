@@ -1,19 +1,27 @@
 <?php
 
-use App\Helpers\HourHelper;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\dashboard\PageController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\StoreController;
+use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\Dashboard\AddressController;
+use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\dashboard\DeliveryController;
 use App\Http\Controllers\dashboard\StoreTypeController;
+
 
 
 
@@ -64,7 +72,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('units/restore/{unit}', [UnitController::class, 'restore'])->name('units.restore');
     Route::delete('units/force_delete/{unit}', [UnitController::class, 'forceDelete'])->name('units.force_delete');
     Route::get('units/toggle_active/{unit}', [UnitController::class, 'active'])->name('units.active');
-    // Resource routes for additions
+    // Resource routes for additions 
     Route::resource('additions', AdditionController::class);
     Route::get('additions/restore/{addition}', [AdditionController::class, 'restore'])->name('additions.restore');
     Route::delete('additions/force_delete/{addition}', [AdditionController::class, 'forceDelete'])->name('additions.force_delete');
@@ -75,4 +83,40 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('categories/restore/{category}', [CategoryController::class, 'restore'])->name('categories.restore');
     Route::delete('categories/force_delete/{category}', [CategoryController::class, 'forceDelete'])->name('categories.force_delete');
     Route::get('categories/active/{category}', [CategoryController::class, 'active'])->name('categories.active');
+
+    //Resource routes for cities
+    Route::resource('cities', CityController::class);
+    Route::get('cities/restore/{city}', [CityController::class, 'restore'])->name('cities.restore');
+    Route::delete('cities/force_delete/{city}', [CityController::class, 'forceDelete'])->name('cities.force_delete');
+    Route::get('cities/active/{city}', [CityController::class, 'active'])->name('cities.active');
+
+    //Resource routes for regions
+    Route::resource('regions', RegionController::class);
+    Route::get('regions/restore/{region}', [RegionController::class, 'restore'])->name('regions.restore');
+    Route::delete('regions/force_delete/{region}', [RegionController::class, 'forceDelete'])->name('regions.force_delete');
+    Route::get('regions/active/{region}', [RegionController::class, 'active'])->name('regions.active');
+
+    //Resource routes for settings
+    Route::resource('settings', SettingController::class);
+
+    //contacts
+    Route::resource('contacts', ContactController::class);
+    Route::get('contacts/active/{contact}', [ContactController::class, 'seen'])->name('contacts.seen');
+    Route::post("messages/send/{contact}", [ContactController::class, "sendMessage"])->name("contacts.sendMessage");
+
+    //Resource Route for deliveries
+    Route::resource('deliveries', DeliveryController::class);
+    Route::get('deliveries/active/{delivery}', [DeliveryController::class, 'active'])->name('deliveries.active');
+
+    //Resourse route for pages
+    Route::resource('pages', PageController::class);
+    Route::get('pages/active/{page}', [PageController::class, 'active'])->name('pages.active');
+
+    //Resourse route for payments
+    Route::resource('payments', PaymentController::class);
+    Route::get('payments/active/{payment}', [PaymentController::class, 'active'])->name('payments.active');
+
+    //Resourse route for addresses
+    Route::resource('addresses', AddressController::class);
+
 });

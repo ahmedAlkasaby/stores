@@ -26,6 +26,14 @@ return [
             'additions' => 'i,sh,s,u,a,d',
             'wishlists'=>'i,sh',
             'home' => 'i',
+            "cities" => 'i,sh,s,u,a,d',
+            "regions" => 'i,sh,s,u,a,d',
+            "settings" => 'i,sh,s,u,a,d',
+            "contacts" => 'i,sh,s,u,a,d',
+            "deliveries"=>"i,sh,s,u,a,d",
+            "pages" => 'i,sh,s,u,a,d',
+            "payments" => 'i,sh,s,u,a,d',
+            "addresses" => 'i,sh,s,u,a,d',
 
 
         ],

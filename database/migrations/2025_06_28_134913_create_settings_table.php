@@ -23,14 +23,14 @@ return new class extends Migration
             $table->boolean('site_open');
             $table->boolean('active');
             $table->string('logo');
-            $table->string('facebbook');
-            $table->string('youtube');
-            $table->string('whatsapp');
-            $table->string('snapchat');
-            $table->string('instagram');
-            $table->string('twitter');
-            $table->string('tiktok');
-
+            $table->string('facebook')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('snapchat')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('tiktok')->nullable();
+            $table->string('telegram')->nullable();
             $table->timestamps();
         });
     }

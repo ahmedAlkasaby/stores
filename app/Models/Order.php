@@ -21,7 +21,7 @@ class Order extends MainModel
         'status'=>StatusOrderEnum::class,
     ];
 
-    
+
 
     public function user()
     {
@@ -49,6 +49,9 @@ class Order extends MainModel
 
 
 
-
+    public function region()
+    {
+        return $this->belongsTo(Region::class, 'region_id', 'id');
+    }
 
 }

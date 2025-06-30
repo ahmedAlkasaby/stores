@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label>{{ __('Email') }}</label>
+    <label>{{ __('site.email') }}</label>
     @if(!isset($not_req))
     {!! Form::text('email', isset($email) ? $email : null, array('class' => 'form-control','required'=>'','data-parsley-type'=>"email")) !!}
     @else

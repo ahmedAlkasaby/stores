@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers\dashboard;
+
+use App\Models\Page;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\MainController;
+use App\Http\Requests\dashboard\PageRequest;
+
+class PageController extends MainController
+{
+    /**
+     * Display a listing of the resource.
+     */
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setClass('pages');
+    }
+    public function index()
+    {
+        $pages = Page::paginate($this->perPage);
+        return view('admin.pages.index', compact('pages'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.pages.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(PageRequest $request)
+    {
+        Page::create($request->all());
+        return redirect()->route('dashboard.pages.index')->with('success', __('site.page_created_successfully'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $page = Page::findOrFail($id);
+        return view('admin.pages.edit', compact('page'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(PageRequest $request, string $id)
+    {
+        $page = Page::findOrFail($id);
+        $page->update($request->all());
+        return redirect()->route('dashboard.pages.index')->with('success', __('site.page_updated_successfully'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+
+    public function active(Page $page)
+    {
+        $page->active = !$page->active;
+        $page->save();
+        return response()->json([
+            'success' => true,
+            'active' => $page->active,
+        ]);
+    }
+}
