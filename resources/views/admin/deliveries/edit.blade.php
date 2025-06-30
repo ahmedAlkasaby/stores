@@ -5,9 +5,8 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/dropzone-style.css') }}" />
-@endsection
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/dropzone/dropzone.css') }}" />
+ @endsection
 @section('content')
     @include('admin.layouts.messages.displayErrors')
     @include('admin.layouts.forms.edit', [

@@ -1,6 +1,5 @@
 <tr>
-    <td class="text-lg-center">{{ $contact->name?? __("site.null") }}</td>
-    <td class="text-lg-center">{{ $contact->phone?? __("site.null") }}</td>
+    <td class="text-lg-center">{{ $contact->email?? __("site.null") }}</td>
     <td class="text-lg-center">{{ $contact->title?? __("site.null") }}</td>
     <td class="text-lg-center">{{ $contact->message?? __("site.null") }}</td>
     <td class="text-lg-center">{{ $contact->created_at->diffForHumans() }}</td>

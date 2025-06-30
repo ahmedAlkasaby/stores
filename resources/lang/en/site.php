@@ -319,4 +319,11 @@ return [
     "address_updated_successfully"=>"Address Updated Successfully",
     "address"=>"Address",
     "location"=>"Location",
+
+    "pages" => "Pages",
+    "pages_management" => "Pages Management",
+    "products_management" => "Products Management",
+    "roles_management" => "Roles Management",
+    "clients_management" => "Clients Management",
+    "shortcut" => "Shortcut",
 ];

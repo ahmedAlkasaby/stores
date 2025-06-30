@@ -2,8 +2,7 @@
     <table class="table">
         @include('admin.layouts.table.thead_info', [
             'columns' => [
-                'site.name',
-                'site.phone',
+                'site.email',
                 'site.title',
                 'site.message',
                 'site.date',

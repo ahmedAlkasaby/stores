@@ -46,7 +46,6 @@ class DatabaseSeeder extends Seeder
         }
         for ($i = 0; $i < 10; $i++) {
             Contact::create([
-                "name" => fake()->name(),
                 "email" => "osamy8088@gmail.com",
                 "message" => fake()->text(),
                 "read_at" => fake()->dateTime(),
