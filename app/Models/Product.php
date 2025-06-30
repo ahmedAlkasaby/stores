@@ -23,6 +23,7 @@ class Product extends MainModel
     'offer_price',
     'offer_amount',
     'offer_percent',
+    'shipping_cost',
 
     // order limits
     'start',
@@ -341,7 +342,7 @@ class Product extends MainModel
     {
         return $this->morphMany(Review::class, 'reviewable');
     }
-    
+
     public function averageRating()
     {
         return $this->reviews()->where('active', true)->avg('rating') ?? 0;

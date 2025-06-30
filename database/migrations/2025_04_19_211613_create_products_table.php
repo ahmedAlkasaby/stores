@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('link')->unique();
+            $table->string('code');
+            $table->string('link')->nullable();
 
             $table->text('name');
             $table->longText('description')->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->decimal('offer_price', 10, 2)->nullable();
             $table->decimal('offer_amount', 10, 2)->nullable();
             $table->decimal('offer_percent', 10, 2)->nullable();
+            $table->decimal('shipping_cost', 10, 2)->nullable();
 
 
             //order limit
@@ -54,7 +55,7 @@ return new class extends Migration
             // dates
             $table->dateTime('date_start')->nullable();
             $table->dateTime('date_end')->nullable();
-          
+
 
             // relations
             $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');

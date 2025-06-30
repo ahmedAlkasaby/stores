@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
        $user->addRole('super_admin');
         $this->call([
             StoreSeeder::class,
+            ProductSeeder::class
         ]);
 
         for ($i = 0; $i < 10; $i++) {
@@ -56,6 +57,6 @@ class DatabaseSeeder extends Seeder
         }
 
 
-     
+
     }
 }
