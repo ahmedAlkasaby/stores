@@ -14,23 +14,29 @@
         </div>
         <div class="card-body p-0">
             <div class="card-body">
-            <form method="POST" action="{{ route('dashboard.addresses.update', ['address' => $address->id]) }}') }}"
-                method="POST">
-                @csrf
-                @method('PUT')
-                    @include("admin.addresses.includes.form-fields")
-            </form>
+                @include('admin.layouts.forms.edit', [
+                    'table' => 'addresses',
+                    'route_type' => 'dashboard',
+                    'form_method' => 'PATCH',
+                    'form_class' => 'custom-form-class',
+                    'form_status' => 'update',
+                    'model' => $address,
+                    'model_id' => $address->id,
+                    'enctype' => true,
+                ])
+                @include('admin.addresses.includes.form-fields')
+                @include('admin.layouts.forms.close')
+            </div>
         </div>
-    </div>
 
-@section('jsFiles')
-    <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-    <script src="{{ asset('js/showImage.js') }}"></script>
-@endsection
-@section('mainFiles')
-    <script src="{{ asset('admin/assets/js/form-wizard-numbered.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-@endsection
+    @section('jsFiles')
+        <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
+        <script src="{{ asset('js/showImage.js') }}"></script>
+    @endsection
+    @section('mainFiles')
+        <script src="{{ asset('admin/assets/js/form-wizard-numbered.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
+        <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
+        <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
+    @endsection
 @endsection
