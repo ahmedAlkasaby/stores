@@ -19,7 +19,7 @@ class Setting extends MainModel
         'site_open',
         'active',
         'logo',
-        'facebbook',
+        'facebook',
         'youtube',
         'whatsapp',
         'snapchat',

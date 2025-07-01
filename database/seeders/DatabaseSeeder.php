@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Contact;
-use App\Models\User;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,12 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-
-
+        // this main
         $this->call([
+            SettingSeeder::class,
             LaratrustSeeder::class,
             AdminSeeder::class,
+        ]);
+
+        $this->call([
             StoreSeeder::class,
             ProductSeeder::class,
             SliderSeeder::class,

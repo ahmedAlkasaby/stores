@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('delivery_cost');
             $table->boolean('site_open');
             $table->boolean('active');
-            $table->integer('result');
+            $table->integer('result')->default(100);
             $table->string('logo');
             $table->string('facebook')->nullable();
             $table->string('youtube')->nullable();

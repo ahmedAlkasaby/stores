@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Setting;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SettingSeeder extends Seeder
@@ -10,7 +13,7 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        Setting::create([
+         Setting::create([
             'site_title' => 'Alkasaby',
             'site_phone' => '01016192604',
             'site_email' => 'support@myshop.com',
@@ -23,7 +26,7 @@ class SettingSeeder extends Seeder
             'result' => 100,
             'logo' => 'uploads/settings/logo.png',
 
-            'facebbook' => 'https://www.facebook.com/myshop',
+            'facebook' => 'https://www.facebook.com/myshop',
             'youtube' => 'https://www.youtube.com/@myshop',
             'whatsapp' => 'https://wa.me/966500000000',
             'snapchat' => 'https://www.snapchat.com/add/myshop',
