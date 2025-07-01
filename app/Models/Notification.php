@@ -23,4 +23,6 @@ class Notification extends MainModel
         $this->read_at = now();
         $this->save();
     }
+
+    
 }
