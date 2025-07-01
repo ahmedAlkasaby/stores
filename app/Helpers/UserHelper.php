@@ -9,7 +9,7 @@ class UserHelper
         return [
             'admin' => __('site.Admin'),
             'client' => __('site.Client'),
-            'delivery' => __('site.Delivery'),
+            'delivery' => __('site.delivery'),
         ];
     }
 }

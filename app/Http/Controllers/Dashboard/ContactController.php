@@ -86,7 +86,7 @@ class ContactController extends MainController
         ]);
         $message = Contact::findOrFail($id);
         Notification::route('mail', $message->email)
-            ->notify(new NotifyUser($request->body, $message->name, $request->title));
+            ->notify(new NotifyUser($request->body,  $request->title));
         
         return redirect()->back()->with('success', __('site.send_message_successfully'));
     }

@@ -18,15 +18,14 @@ class NotifyUser extends Notification
     private string $name;
     private string $title;
 
-    public function __construct( string $message,string $name,string $title)
+    public function __construct( string $message,string $title)
     {
         $this->message=$message;
-        $this->name=$name;
         $this->title=$title;
     }
 
     /**
-     * Get the notification's delivery channels.
+     * Get the notification's delivery_time channels.
      *
      * @return array<int, string>
      */
@@ -41,7 +40,7 @@ class NotifyUser extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->greeting('hello '.$this->name)
+                    ->greeting('hello')
                     ->subject($this->title)
                     ->line($this->message)
                     ->line('Thank you for using our application!');

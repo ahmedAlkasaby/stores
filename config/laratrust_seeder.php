@@ -30,7 +30,7 @@ return [
             "regions" => 'i,sh,s,u,a,d',
             "settings" => 'i,sh,s,u,a,d',
             "contacts" => 'i,sh,s,u,a,d',
-            "deliveries"=>"i,sh,s,u,a,d",
+            "delivery_times"=>"i,sh,s,u,a,d",
             "pages" => 'i,sh,s,u,a,d',
             "payments" => 'i,sh,s,u,a,d',
             "addresses" => 'i,sh,s,u,a,d',

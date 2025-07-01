@@ -12,8 +12,8 @@
         'form_method' => 'POST',
         'form_class' => 'needs-validation',
         'form_status' => 'store',
-        'table' => 'dashboard.deliveries',
-        'model_id' => $delivery->id ?? null,
+        'table' => 'dashboard.delivery_times',
+        'model_id' => $delivery_time->id ?? null,
         'enctype' => true,
     ])
 
@@ -32,11 +32,11 @@
         'select_class' => 'select2',
         'select2' => true,
     ])
-    @include('admin.layouts.forms.selects.delivery', [
+    @include('admin.layouts.forms.selects.delivery_time', [
         'name' => 'start_hour',
         "label" => __('site.start_hour'),
     ])
-    @include('admin.layouts.forms.selects.delivery', [
+    @include('admin.layouts.forms.selects.delivery_time', [
         'name' => 'end_hour',
         "label" => __('site.end_hour'),
     ])

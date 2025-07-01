@@ -10,46 +10,46 @@
 @section('content')
     @include('admin.layouts.messages.displayErrors')
     @include('admin.layouts.forms.edit', [
-        'table' => 'deliveries',
+        'table' => 'delivery_times',
         'route_type' => 'dashboard',
         'form_method' => 'PATCH',
         'form_class' => 'custom-form-class',
         'form_status' => 'update',
-        'model' => $delivery,
-        'model_id' => $delivery->id,
+        'model' => $delivery_time,
+        'model_id' => $delivery_time->id,
         'enctype' => true,
     ])
     @include('admin.layouts.forms.head', [
         'show_name' => true,
-        'name_ar' => $delivery->nameLang('ar'),
-        'name_en' => $delivery->nameLang('en'),
+        'name_ar' => $delivery_time->nameLang('ar'),
+        'name_en' => $delivery_time->nameLang('en'),
     ])
     @include('admin.layouts.forms.fields.number', [
         'number_name' => 'order_id',
         'min' => 0,
         'placeholder' => __('site.order_id'),
-        'number_value' => $delivery->order_id ?? null,
+        'number_value' => $delivery_time->order_id ?? null,
     ])
     @include('admin.layouts.forms.fields.select', [
         'select_name' => 'active',
         'select_function' => [false => __('site.not_active'), true => __('site.active')],
-        'select_value' => $delivery->active ?? null,
+        'select_value' => $delivery_time->active ?? null,
         'select_class' => 'select2',
         'select2' => true,
     ])
-    @include('admin.layouts.forms.selects.delivery', [
+    @include('admin.layouts.forms.selects.delivery_time', [
         'name' => 'start_hour',
         'label' => __('site.start_hour'),
-        'type' => isset($delivery->start_hour)
-            ? \Carbon\Carbon::parse($delivery->start_hour)->format('H:i')
+        'type' => isset($delivery_time->start_hour)
+            ? \Carbon\Carbon::parse($delivery_time->start_hour)->format('H:i')
             : null,
     ])
 
-    @include('admin.layouts.forms.selects.delivery', [
+    @include('admin.layouts.forms.selects.delivery_time', [
         'name' => 'end_hour',
         'label' => __('site.end_hour'),
-        'type' => isset($delivery->end_hour)
-            ? \Carbon\Carbon::parse($delivery->end_hour)->format('H:i')
+        'type' => isset($delivery_time->end_hour)
+            ? \Carbon\Carbon::parse($delivery_time->end_hour)->format('H:i')
             : null,
     ])
     @include('admin.layouts.forms.footer')

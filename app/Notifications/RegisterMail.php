@@ -18,7 +18,7 @@ class RegisterMail extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
+     * Get the notification's delivery_time channels.
      *
      * @return array<int, string>
      */

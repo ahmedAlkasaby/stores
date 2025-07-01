@@ -14,7 +14,7 @@ class Setting extends MainModel
         'min_order',
         'max_order',
         'min_order_for_shipping_free',
-        'delivery_cost',
+        'delivery_time_cost',
         'site_open',
         'active',
         'logo',

@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('site.cities'))
+@section('title', __('site.contacts'))
 @section('styles')
 
 @section('content')
