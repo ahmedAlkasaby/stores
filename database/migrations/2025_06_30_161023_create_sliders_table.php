@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->boolean('feature')->default(false);
             $table->integer('order_id')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ class Slider extends MainModel
         'active',
         'feature',
         'order_id',
+        'product_id',
         'image',
     ];
 
