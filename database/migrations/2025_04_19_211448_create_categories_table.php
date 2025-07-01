@@ -21,6 +21,13 @@ return new class extends Migration
             $table->integer('order_id')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
+
+            $table->index('store_id');
+            $table->index('parent_id');
+            $table->index('active');
+            $table->index('order_id');
+            $table->index(['active', 'store_id']); 
+
         });
     }
 

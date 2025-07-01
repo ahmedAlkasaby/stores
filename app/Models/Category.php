@@ -34,31 +34,35 @@ class Category extends MainModel
         return $this->belongsToMany(Product::class);
     }
 
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1)
+                     ->whereDoesntHave('children')
+                     ->orderBy('order_id', 'asc');
+    }
+
+
+
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 
         $request = $request ?? request();
 
-        $query->orderBy('order_id', 'asc');
+       $query->orderBy('order_id','asc');
 
-        if ($type_app == 'app') {
-            $query->where('active', 1);
-            $query->whereNull('parent_id');
-        } else {
-            if ($request->filled('active') && $request->active != 'all') {
-                $query->where('active', $request->active);
-            }
-            if ($request->filled('parent_id')&& $request->parent_id != "all") {
-                if($request->parent_id == "null"){
-                    $query->whereNull('parent_id');
-                }else
-                $query->where('parent_id', $request->parent_id);
-            }
+        if($request->has('active') && $request->active !=='all'){
+            $query->where('active', $type_app=='app' ? 1 : $request->active);
         }
+
+        if ($request->has('parent_id') && $request->parent_id != 'all'){
+            $query->where('parent_id', $request->parent_id);
+        }
+
         if ($request->has('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%');
+                   ->orWhere('description', 'like', '%' . $request->search . '%');
             });
         }
 
@@ -71,13 +75,17 @@ class Category extends MainModel
             });
         }
 
+        if ($request->has('is_parents')==1) {
+            $query->whereNull('parent_id');
+        }
+
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
                 case 'latest':
-                    $query->orderByDesc('order_id');
+                    $query->orderByDesc('id');
                     break;
                 case 'oldest':
-                    $query->orderBy('order_id', 'asc');
+                    $query->orderBy('id', 'asc');
                     break;
             }
         }

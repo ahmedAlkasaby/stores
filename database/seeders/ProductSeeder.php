@@ -132,11 +132,11 @@ class ProductSeeder extends Seeder
 
     public function getCategoryData($count): array
     {
-        $data=[];
-        for ($i=0; $i < $count; $i++) {
-            $data[]=Category::inRandomOrder()->first()->id;
-        }
-        return $data;
+        return Category::active()
+                       ->inRandomOrder()
+                       ->limit($count)
+                       ->pluck('id')
+                       ->toArray();
     }
 
 
