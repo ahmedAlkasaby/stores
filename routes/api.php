@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware'=>'userLangApi'],function(){
+Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
     Route::apiResource('store_types',StoreTypeController::class)->only(['index','show']);
     Route::apiResource('stores',StoreController::class)->only(['index','show']);
     Route::apiResource('categories',CategoryController::class)->only(['index','show']);

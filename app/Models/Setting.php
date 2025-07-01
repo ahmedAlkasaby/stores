@@ -13,6 +13,7 @@ class Setting extends MainModel
         'site_email',
         'min_order',
         'max_order',
+        'result',
         'min_order_for_shipping_free',
         'delivery_cost',
         'site_open',
