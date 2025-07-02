@@ -41,14 +41,24 @@
             @endif
 
             this.on("addedfile", function(file) {
+                if (this.files.length > 1) {
+                    this.removeFile(this.files[0]);
+                }
+
                 let fileInput = document.getElementById('hiddenImageInput');
                 let dataTransfer = new DataTransfer();
                 dataTransfer.items.add(file);
                 fileInput.files = dataTransfer.files;
             });
 
+
             this.on("removedfile", function() {
                 document.getElementById('hiddenImageInput').value = "";
+            });
+            this.on("maxfilesexceeded", function(file) {
+                this.removeAllFiles();
+                this.addFile(file);
+
             });
         }
     });

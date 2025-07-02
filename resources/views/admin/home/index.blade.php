@@ -414,7 +414,7 @@
                 <div class="card-header d-flex justify-content-between pb-2 mb-1">
                     <div class="card-title mb-1">
                         <h5 class="m-0 me-2">Sales by Countries</h5>
-                        <small class="text-muted">62 Deliveries in Progress</small>
+                        <small class="text-muted">62delivery_times in Progress</small>
                     </div>
                     <div class="dropdown">
                         <button class="btn p-0" type="button" id="salesByCountryTabs" data-bs-toggle="dropdown"

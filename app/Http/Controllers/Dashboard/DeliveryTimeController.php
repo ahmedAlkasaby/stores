@@ -8,7 +8,7 @@ use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Requests\dashboard\DeliveryTimeRequest;
 use App\Models\DeliveryTime;
 
-class DeliveryController extends MainController
+class DeliveryTimeController extends MainController
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,12 @@ class DeliveryController extends MainController
     public function __construct()
     {
         parent::__construct();
-        $this->setClass('deliveries');
+        $this->setClass('delivery_times');
     }
     public function index()
     {
-        $deliveries = DeliveryTime::paginate($this->perPage);
-        return view('admin.deliveries.index', compact('deliveries'));
+        $delivery_times = DeliveryTime::paginate($this->perPage);
+        return view('admin.delivery_times.index', compact('delivery_times'));
     }
 
     /**
@@ -29,7 +29,7 @@ class DeliveryController extends MainController
      */
     public function create()
     {
-        return view('admin.deliveries.create');
+        return view('admin.delivery_times.create');
     }
 
     /**
@@ -38,24 +38,21 @@ class DeliveryController extends MainController
     public function store(DeliveryTimeRequest $request)
     {
         DeliveryTime::create($request->all());
-        return redirect()->route('dashboard.deliveries.index')->with('success', __('site.delivery_created_successfully'));
+        return redirect()->route('dashboard.delivery_times.index')->with('success', __('site.delivery_time_created_successfully'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $delivery = DeliveryTime::findOrFail($id);
-        return view('admin.deliveries.edit', compact('delivery'));
+        $delivery_time = DeliveryTime::findOrFail($id);
+        return view('admin.delivery_times.edit', compact('delivery_time'));
     }
 
     /**
@@ -63,9 +60,9 @@ class DeliveryController extends MainController
      */
     public function update(Request $request, string $id)
     {
-        $delivery = DeliveryTime::findOrFail($id);
-        $delivery->update($request->all());
-        return redirect()->route('dashboard.deliveries.index')->with('success', __('site.delivery_updated_successfully'));
+        $delivery_time = DeliveryTime::findOrFail($id);
+        $delivery_time->update($request->all());
+        return redirect()->route('dashboard.delivery_times.index')->with('success', __('site.delivery_time_updated_successfully'));
     }
 
     /**
@@ -73,18 +70,18 @@ class DeliveryController extends MainController
      */
     public function destroy(string $id)
     {
-        $delivery = DeliveryTime::findOrFail($id);
-        $delivery->delete();
-        return redirect()->route('dashboard.deliveries.index');
+        $delivery_time = DeliveryTime::findOrFail($id);
+        $delivery_time->delete();
+        return redirect()->route('dashboard.delivery_times.index');
     }
     public function active(string $id)
     {
-        $delivery = DeliveryTime::findOrFail($id);
-        $delivery->active = !$delivery->active;
-        $delivery->save();
+        $delivery_time = DeliveryTime::findOrFail($id);
+        $delivery_time->active = !$delivery_time->active;
+        $delivery_time->save();
         return response()->json([
             'success' => true,
-            'active' => $delivery->active,
+            'active' => $delivery_time->active,
         ]);
     }
 }

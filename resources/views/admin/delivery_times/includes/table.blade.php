@@ -1,6 +1,6 @@
 @include('admin.layouts.table.header', [
-    'TitleTable' => __('site.deliveries'),
-    'routeToCreate' => route('dashboard.deliveries.create'),
+    'TitleTable' => __('site.delivery_times'),
+    'routeToCreate' => route('dashboard.delivery_times.create'),
 ])
 
 @include('admin.layouts.table.thead_info', [
@@ -8,12 +8,12 @@
 ])
 
 <tbody>
-    @if ($deliveries->count() > 0)
-        @each('admin.deliveries.includes.data', $deliveries, 'delivery')
+    @if ($delivery_times->count() > 0)
+        @each('admin.delivery_times.includes.data', $delivery_times, 'delivery_time')
     @else
         @include('admin.layouts.table.empty', [($number = 5)])
     @endif
 </tbody>
 </table>
 @include('admin.layouts.table.footer')
-@include('admin.layouts.table.paginate', ['data' => $deliveries])
+@include('admin.layouts.table.paginate', ['data' => $delivery_times])
