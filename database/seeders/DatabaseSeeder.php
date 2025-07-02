@@ -33,45 +33,45 @@ class DatabaseSeeder extends Seeder
         //     StoreSeeder::class,
         // ]);
 
-        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                'first_name' => fake()->firstName(),
-                'last_name' => fake()->lastName(),
-                'email' => fake()->unique()->safeEmail(),
-                'phone' => fake()->phoneNumber(),
-                'password' => fake()->password(),
-                'lang' => 'en',
-                'theme' => 'light',
-                'type' => fake()->randomElement(['admin', 'client', 'delivery']),
-            ]);
-        }
-        for ($i = 0; $i < 10; $i++) {
-            Contact::create([
-                "email" => "osamy8088@gmail.com",
-                "message" => fake()->text(),
-                "read_at" => fake()->dateTime(),
-                "title" => fake()->title(),
-                "read_at" => fake()->dateTime(),
-            ]);
-        }
-        Setting::create([
-            "site_title" => "Store_title",
-            "site_phone" => "01019631989",
-            "site_email" => "KX3eC@example.com",
-            "min_order" => 1,
-            "max_order" => 10,
-            "min_order_for_shipping_free" => 5,
-            "delivery_cost" => 5,
-            "site_open" => true,
-            "active" => true,
-            "logo" => "uploads/settings/logo.jpg",
-            "facebook" => "https://www.facebook.com/",
-            "youtube" => "https://www.youtube.com/",
-            "whatsapp" => "https://www.whatsapp.com/",
-            "snapchat" => "https://www.snapchat.com/",
-            "instagram" => "https://www.instagram.com/",
-            "twitter" => "https://www.twitter.com/",
-            "tiktok" => "https://www.tiktok.com/",
-        ]);
+        // for ($i = 0; $i < 10; $i++) {
+        //     User::create([
+        //         'first_name' => fake()->firstName(),
+        //         'last_name' => fake()->lastName(),
+        //         'email' => fake()->unique()->safeEmail(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'password' => fake()->password(),
+        //         'lang' => 'en',
+        //         'theme' => 'light',
+        //         'type' => fake()->randomElement(['admin', 'client', 'delivery']),
+        //     ]);
+        // }
+        // for ($i = 0; $i < 10; $i++) {
+        //     Contact::create([
+        //         "email" => "osamy8088@gmail.com",
+        //         "message" => fake()->text(),
+        //         "read_at" => fake()->dateTime(),
+        //         "title" => fake()->title(),
+        //         "read_at" => fake()->dateTime(),
+        //     ]);
+        // }
+        // Setting::create([
+        //     "site_title" => "Store_title",
+        //     "site_phone" => "01019631989",
+        //     "site_email" => "KX3eC@example.com",
+        //     "min_order" => 1,
+        //     "max_order" => 10,
+        //     "min_order_for_shipping_free" => 5,
+        //     "delivery_cost" => 5,
+        //     "site_open" => true,
+        //     "active" => true,
+        //     "logo" => "uploads/settings/logo.jpg",
+        //     "facebook" => "https://www.facebook.com/",
+        //     "youtube" => "https://www.youtube.com/",
+        //     "whatsapp" => "https://www.whatsapp.com/",
+        //     "snapchat" => "https://www.snapchat.com/",
+        //     "instagram" => "https://www.instagram.com/",
+        //     "twitter" => "https://www.twitter.com/",
+        //     "tiktok" => "https://www.tiktok.com/",
+        // ]);
     }
 }
