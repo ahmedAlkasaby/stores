@@ -104,7 +104,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('contacts/active/{contact}', [ContactController::class, 'seen'])->name('contacts.seen');
     Route::post("messages/send/{contact}", [ContactController::class, "sendMessage"])->name("contacts.sendMessage");
 
-    //Resource Route fordelivery_times
+    //Resource Route for delivery_times
     Route::resource('delivery_times', DeliveryTimeController::class);
     Route::get('delivery_times/active/{delivery_time}', [DeliveryTimeController::class, 'active'])->name('delivery_times.active');
 
