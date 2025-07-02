@@ -16,4 +16,16 @@ class Slider extends MainModel
         'image',
     ];
 
+
+    public function scopeFilter($query, $request=null, $type_app='app')
+    {
+        $request = $request ?? request();
+
+        $query->orderBy('order_id','asc');
+
+        $query->where('active', $type_app=='app' ? 1 : $request->active);
+
+
+    }
+
 }

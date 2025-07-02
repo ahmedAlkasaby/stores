@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Auth\RestPasswordController;
 use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StoreController;
@@ -31,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
+    Route::get('home',[HomeController::class,'index']);
     Route::apiResource('store_types',StoreTypeController::class)->only(['index','show']);
     Route::apiResource('stores',StoreController::class)->only(['index','show']);
     Route::apiResource('categories',CategoryController::class)->only(['index','show']);

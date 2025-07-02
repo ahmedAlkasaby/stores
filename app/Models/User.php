@@ -126,7 +126,7 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     {
         return $this->hasMany(Notification::class, 'user_id', 'id');
     }
-    
+
     public function notificationsUnread()
     {
         return $this->hasMany(Notification::class, 'user_id', 'id')->whereNull('read_at');
@@ -138,6 +138,20 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     public function markAllNotificationsAsRead()
     {
         $this->notificationsUnread()->update(['read_at' => now()]);
+    }
+
+    public function totalPriceInCart(){
+        if($this->cartItems()->isEmpty()){
+            return 0;
+        }
+        $price=0;
+        $cartItems=$this->cartItems();
+        foreach ($cartItems as $item) {
+            $product=Product::find($item->product_id);
+            $price += $product->price * $item->amount;
+        }
+        return $price;
+
     }
 
 
