@@ -11,7 +11,8 @@ class MainModel extends Model
     use HasFactory ;
 
     protected $casts = [
-        
+        'name' => \App\Casts\UnescapedJson::class,
+        'description' => \App\Casts\UnescapedJson::class,
     ];
 
 

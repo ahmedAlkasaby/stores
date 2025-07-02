@@ -25,7 +25,7 @@ class NotifyUser extends Notification
     }
 
     /**
-     * Get the notification's delivery_time channels.
+     * Get the notification's delivery channels.
      *
      * @return array<int, string>
      */

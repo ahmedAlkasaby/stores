@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin'
         ]);
         $user->addRole('super_admin');
-        // $this->call([
-        //     StoreSeeder::class,
-        // ]);
+        $this->call([
+            StoreSeeder::class,
+        ]);
 
         // for ($i = 0; $i < 10; $i++) {
         //     User::create([
