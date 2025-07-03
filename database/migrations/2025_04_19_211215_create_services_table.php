@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->longText('description')->nullable();
-            $table->string('address');
             $table->string('image')->nullable();
             $table->boolean('active')->default(true);
-            $table->foreignId('store_type_id')->constrained('store_types')->onDelete('cascade');
             $table->integer('order_id')->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -4,33 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Store extends MainModel
+class Service  extends MainModel
 {
-    use SoftDeletes;
     protected $fillable = [
         'name',
         'description',
-        'address',
         'image',
-        'store_type_id',
         'active',
         'order_id',
     ];
 
-    public function storeType()
-    {
-        return $this->belongsTo(StoreType::class, 'store_type_id', 'id');
-    }
+
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'store_id', 'id');
+        return $this->hasMany(Category::class, 'service_id', 'id');
     }
     public function products()
     {
-        return $this->hasMany(Product::class, 'store_id', 'id');
+        return $this->hasMany(Product::class, 'service_id', 'id');
     }
 
 
@@ -50,21 +43,18 @@ class Store extends MainModel
         if ($request->has('search')) {
             $query->where(function($q) use($request){
                 $q->where('name','like','%'.$request->search.'%')
-                   ->orWhere('description','like','%'.$request->search.'%')
-                   ->orWhere('address','like','%'.$request->search.'%');
+                   ->orWhere('description','like','%'.$request->search.'%');
             });
         }
-        if ($request->has('store_type_id') && $request->store_type_id !=='all') {
-            $query->where('store_type_id', $request->store_type_id);
-        }
+
 
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
                 case 'latest':
-                    $query->orderByDesc('order_id');
+                    $query->orderByDesc('id');
                     break;
                 case 'oldest':
-                    $query->orderBy('order_id', 'asc');
+                    $query->orderBy('id', 'asc');
                     break;
             }
         }

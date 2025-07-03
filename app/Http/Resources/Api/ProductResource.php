@@ -25,7 +25,7 @@ class ProductResource extends JsonResource
             'background' => $this->background,
             'color' => $this->color,
             'image' => url($this->image),
-            
+
 
             'price_start'=>$this->children->min('price'),
             'price_end'=>$this->children->max('price'),
@@ -63,7 +63,7 @@ class ProductResource extends JsonResource
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
 
-            'store_id' => $this->store_id,
+            'service_id' => $this->service_id,
             'unit_id' => $this->unit_id,
             'brand_id' => $this->brand_id,
             'size_id' => $this->size_id,
@@ -77,9 +77,8 @@ class ProductResource extends JsonResource
             'unit' => new UnitResource($this->whenLoaded('unit')),
             'brand' => $this->whenLoaded('brand'),
             'size' => new SizeResource($this->whenLoaded('size')),
-            'store' => new StoreResource($this->whenLoaded('store')),
+            'service' => new ServiceResource($this->whenLoaded('service')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'store_type' => new StoreTypeResource($this->whenLoaded('storeType')),
             'children' => ProductResource::collection($this->whenLoaded('children')),
             'parent' => new ProductResource($this->whenLoaded('parent')),
 

@@ -23,8 +23,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'search' => 'nullable|string|max:255',
-            'store_id' => 'nullable|exists:stores,id',
-            'store_type_id' => 'nullable|exists:store_types,id',
+            'service_id' => 'nullable|exists:services,id',
             'sort_by' => 'nullable|in:latest,oldest',
         ];
     }
@@ -32,7 +31,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'search.string' => __('validation.search_string'),
-            'store_id.exists' => __('validation.store_exists'),
+            'service_id.exists' => __('validation.service_exists'),
             'store_type_id.exists' => __('validation.store_type_exists'),
             'sort_by.in' => __('validation.sort_by_in'),
         ];

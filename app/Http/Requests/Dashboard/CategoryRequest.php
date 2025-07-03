@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
             "description.en" => "nullable|string|max:1000",
             "image" => "nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048",
             "parent_id" => "nullable|exists:categories,id",
-            "store_id" => "nullable|exists:stores,id",
+            "service_id" => "nullable|exists:services,id",
             "active" => "nullable|boolean",
             "order_id" => "nullable|integer|min:0",
         ];
@@ -50,7 +50,6 @@ class CategoryRequest extends FormRequest
             'image.mimes' => __('site.image_mimes'),
             'image.max' => __('site.image_max'),
             'parent_id.exists' => __('site.parent_id_exists'),
-            'store_id.exists' => __('site.store_id_exists'),
             'active.boolean' => __('site.active_boolean'),
             'order_id.integer' => __('site.order_id_integer'),
             'order_id.min' => __('site.order_id_min'),

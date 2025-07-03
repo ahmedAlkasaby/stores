@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Brand extends MainModel
 {
@@ -15,14 +14,14 @@ class Brand extends MainModel
         'order_id',
         'image'
     ];
-    use SoftDeletes;
-    // public function getImageAttribute($value)
-    // {
-    //     return $value ? asset('storage/' . $value) : null;
-    // }
-    public function products(){
+
+
+    public  function products(){
         return $this->hasMany(Product::class);
     }
+
+
+
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 

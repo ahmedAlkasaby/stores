@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Service;
 use App\Models\Size;
 use App\Models\Store;
 use App\Models\Unit;
@@ -78,7 +79,7 @@ class ProductSeeder extends Seeder
             'returned'=>rand(0,1),
             'date_start' => now(),
             'date_end' => now()->addMonth(),
-            'store_id' => Store::inRandomOrder()->first()->id,
+            'service_id' => Service::inRandomOrder()->first()->id,
             'unit_id'=> Unit::inRandomOrder()->first()->id,
         ];
     }
