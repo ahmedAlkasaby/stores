@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MainModel extends Model
 {
-    use HasFactory , SoftDeletes ;
+    use HasFactory , SoftDeletes;
 
     protected $casts = [
         'name' => \App\Casts\UnescapedJson::class,

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('order_id')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('service_id');
             $table->index('parent_id');

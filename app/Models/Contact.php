@@ -13,8 +13,6 @@ class Contact extends MainModel
         'email',
         'read_at',
         'seen',
-        'name',
-        'phone',
     ];
 
 }
