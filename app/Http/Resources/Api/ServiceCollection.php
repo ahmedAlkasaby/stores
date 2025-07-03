@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class StoreCollection extends ResourceCollection
+class ServiceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,7 @@ class StoreCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'stores' => $this->collection,
+            'services' => $this->collection,
             'meta' => [
                 'current_page' => $this->currentPage(),
                 'last_page' => $this->lastPage(),

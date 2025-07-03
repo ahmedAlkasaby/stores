@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('feature')->default(false);
             $table->integer('order_id')->nullable();
             $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

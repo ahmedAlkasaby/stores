@@ -33,7 +33,7 @@ return new class extends Migration
             //order limit
             $table->decimal('start', 10, 2)->default(1);
             $table->decimal('skip', 10, 2)->default(1);
-            $table->decimal('order_limit', 10, 2)->default(1);
+            $table->decimal('amount', 10, 2)->default(1);
             $table->decimal('max_order', 10, 2)->default(1);
 
 
@@ -58,7 +58,7 @@ return new class extends Migration
 
 
             // relations
-            $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
+            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();
             $table->foreignId('size_id')->nullable()->constrained('sizes')->nullOnDelete();
@@ -69,6 +69,7 @@ return new class extends Migration
 
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

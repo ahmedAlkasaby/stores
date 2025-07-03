@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Store;
-use App\Models\StoreType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\ImageHandlerService;
 use App\Http\Requests\dashboard\StoreRequest;
 
-class StoreController extends MainController
+class ServiceController extends MainController
 {
 
     protected $imageService;

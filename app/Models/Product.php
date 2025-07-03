@@ -28,7 +28,7 @@ class Product extends MainModel
     // order limits
     'start',
     'skip',
-    'order_limit',
+    'amount',
     'max_order',
 
     // status flags
@@ -49,7 +49,7 @@ class Product extends MainModel
 
 
     // foreign keys
-    'store_id',
+    'service_id',
     'unit_id',
     'brand_id',
     'size_id',
@@ -66,15 +66,12 @@ class Product extends MainModel
     }
 
 
-    public function store()
+    public function service()
     {
-        return $this->belongsTo(Store::class, 'store_id', 'id');
+        return $this->belongsTo(Service::class, 'service_id', 'id');
     }
 
-    public function storeType()
-    {
-        return $this->hasOneThrough(StoreType::class,Store::class, 'id', 'id', 'store_id', 'store_type_id');
-    }
+
 
 
     public function unit()
@@ -130,16 +127,10 @@ class Product extends MainModel
         return $query;
     }
 
-    public function scopeApplyStoreFilters($query, $request)
+    public function scopeApplyServiceFilters($query, $request)
     {
-        if ($request->filled('store_type_id')) {
-            $query->whereHas('store.storeType', function ($q) use ($request) {
-                $q->where('id', $request->store_type_id);
-            });
-        }
-
-        if ($request->filled('store_id')) {
-            $query->where('store_id', $request->store_id);
+        if ($request->filled('service_id')) {
+            $query->where('service_id', $request->service_id);
         }
 
         return $query;
@@ -255,10 +246,10 @@ class Product extends MainModel
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
                 case 'latest':
-                    $query->orderByDesc('order_id');
+                    $query->orderByDesc('id');
                     break;
                 case 'oldest':
-                    $query->orderBy('order_id', 'asc');
+                    $query->orderBy('id', 'asc');
                     break;
                 case 'highest_price':
                     $query->orderBy('price', 'desc');
@@ -283,7 +274,7 @@ class Product extends MainModel
         return $query
             ->applyBasicFilters($request, $type_app)
             ->applySearch($request)
-            ->applyStoreFilters($request)
+            ->applyServiceFilters($request)
             ->applyCategoryFilter($request)
             ->applyPriceFilters($request)
             ->applyFeatureFilter($request)

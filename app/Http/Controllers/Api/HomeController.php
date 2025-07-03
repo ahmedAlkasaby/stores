@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class HomeController extends MainController
 {
     public function index(){
-        $products=Product::with(['categories','store','unit','size','brand','storeType','children'])->filter()->paginate($this->perPage);
+        $data=['categories','service','unit','size','brand','children'];
+        $products=Product::with($data)->filter()->paginate($this->perPage);
 
         $data=new HomeCollection($products);
 

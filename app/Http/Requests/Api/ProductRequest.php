@@ -24,23 +24,37 @@ class ProductRequest extends FormRequest
         return [
             'search' => 'nullable|string|max:255',
             'category_id' => 'nullable|exists:categories,id',
-            'store_id' => 'nullable|exists:stores,id',
-            'store_type_id' => 'nullable|exists:store_types,id',
+            'service_id' => 'nullable|exists:services,id',
             'sort_by' => 'nullable|in:latest,oldest,highest_price,lowest_price',
             'min_price' => 'nullable|numeric|min:0',
             'max_price' => 'nullable|numeric|min:0',
+            'feature'=>'nullable|in:0,1',
+            'new'=>'nullable|in:0,1',
+            'special'=>'nullable|in:0,1',
+            'filter'=>'nullable|in:0,1',
+            'sale'=>'nullable|in:0,1',
+            'late'=>'nullable|in:0,1',
+            'free_shipping'=>'nullable|in:0,1',
+            'returned'=>'nullable|in:0,1',
         ];
     }
     public function messages(): array
     {
         return [
-            'search.string' => __('validation.search_string'),
-            'category_id.exists' => __('validation.category_exists'),
-            'store_id.exists' => __('validation.store_exists'),
-            'store_type_id.exists' => __('validation.store_type_exists'),
-            'sort_by.in' => __('validation.sort_by_in'),
-            'min_price.numeric' => __('validation.min_price_numeric'),
-            'max_price.numeric' => __('validation.max_price_numeric'),
+            'search.string' => __('validation.string',['attribute'=> 'search']),
+            'category_id.exists' => __('validation.exists',['attribute'=>'category_id']),
+            'service_id.exists' => __('validation.exists',['attribute'=>'service_id']),
+            'sort_by.in' => __('validation.in',['attribute'=>'sort_by']),
+            'min_price.numeric' => __('validation.numeric',['attribute'=>'min_price']),
+            'max_price.numeric' => __('validation.numeric',['attribute'=>'max_price']),
+            'feature.in' => __('validation.in',['attribute'=>'feature']),
+            'new.in' => __('validation.in',['attribute'=>'new']),
+            'special.in' => __('validation.in',['attribute'=>'special']),
+            'filter.in' => __('validation.in',['attribute'=>'filter']),
+            'sale.in' => __('validation.in',['attribute'=>'sale']),
+            'late.in' => __('validation.in',['attribute'=>'late']),
+            'free_shipping.in' => __('validation.in',['attribute'=>'free_shipping']),
+            'returned.in' => __('validation.in',['attribute'=>'returned']),
         ];
     }
 }

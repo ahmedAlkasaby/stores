@@ -6,6 +6,7 @@ use App\Models\Addition;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Size;
 use App\Models\Store;
@@ -20,22 +21,11 @@ class StoreSeeder extends Seeder
 
     public function run(): void
     {
-        // Create default store type
-        StoreType::create([
-            'name' => [
-                'en' => 'Default Store Type',
-                'ar' => 'نوع المتجر الافتراضي',
-            ],
-            'description' => [
-                'en' => 'This is the default store type.',
-                'ar' => 'هذا هو نوع المتجر الافتراضي.',
-            ],
-            'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
-        ]);
 
-        // Create stores
+
+        // Create services
         for ($i = 1; $i < 6; $i++) {
-            Store::create([
+            Service::create([
                 'name' => [
                     'en' => 'unit Type ' . $i,
                     'ar' => 'نوع المتجر ' . $i,
@@ -47,8 +37,6 @@ class StoreSeeder extends Seeder
                 'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                 'active' => true,
                 'order_id' => $i,
-                'store_type_id' => 1,
-                'address' => 'Address for Store ' . $i,
             ]);
         }
 
@@ -116,7 +104,7 @@ class StoreSeeder extends Seeder
                 'active' => true,
                 'order_id' => $i,
                 'parent_id' => null,
-                'store_id' => $i,
+                'service_id' => $i,
             ]);
 
             for ($j = 1; $j < 6; $j++) {
@@ -132,7 +120,7 @@ class StoreSeeder extends Seeder
                     'image' => 'uploads/storeTypes/storeTypeDefoult.jpg',
                     'active' => true,
                     'order_id' => $j,
-                    'store_id' => $category->store_id,
+                    'service_id' => $category->service_id,
                 ]);
             }
         }

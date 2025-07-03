@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('telegram')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

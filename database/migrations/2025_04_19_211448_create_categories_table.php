@@ -16,17 +16,18 @@ return new class extends Migration
             $table->text('name');
             $table->longText('description')->nullable();
             $table->string('image');
-            $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
+            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->integer('order_id')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->index('store_id');
+            $table->index('service_id');
             $table->index('parent_id');
             $table->index('active');
             $table->index('order_id');
-            $table->index(['active', 'store_id']); 
+            $table->index(['active', 'service_id']);
 
         });
     }

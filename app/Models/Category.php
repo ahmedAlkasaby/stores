@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends MainModel
 {
@@ -11,7 +10,7 @@ class Category extends MainModel
         'description',
         'image',
         'parent_id',
-        'store_id',
+        'service_id',
         'active',
         'order_id'
     ];
@@ -25,9 +24,9 @@ class Category extends MainModel
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
-    public function store()
+    public function service()
     {
-        return $this->belongsTo(Store::class, 'store_id', 'id');
+        return $this->belongsTo(Service::class, 'service_id', 'id');
     }
     public function products()
     {
@@ -66,13 +65,8 @@ class Category extends MainModel
             });
         }
 
-        if ($request->has('store_id')&& $request->store_id != "all") {
-            $query->where('store_id', $request->store_id);
-        }
-        if ($request->has('store_type_id')) {
-            $query->whereHas('store', function ($q) use ($request) {
-                $q->where('store_type_id', $request->store_type_id);
-            });
+        if ($request->has('service_id')&& $request->service_id != "all") {
+            $query->where('service_id', $request->service_id);
         }
 
         if ($request->has('is_parents')==1) {

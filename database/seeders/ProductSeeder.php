@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Service;
 use App\Models\Size;
 use App\Models\Store;
 use App\Models\Unit;
@@ -23,12 +24,14 @@ class ProductSeeder extends Seeder
             $dataOffer=$this->getOfferData($dataProduct['offer'],$dataProduct['price']);
             $dataShipping=$this->getShippingData($dataProduct['free_shipping']);
             $data = array_merge($dataProduct, $dataOffer, $dataShipping);
-            $categoryIds = $this->getCategoryData(3);
+            $categoryIds = $this->getCategoryData(3,$dataProduct['service_id']);
 
             $product=Product::create($data);
             $product->categories()->sync($categoryIds);
 
             $dataProductParent=Arr::except($data,[
+                'amount',
+                'max_order',
                 'price',
                 'offer_price',
                 'offer',
@@ -63,7 +66,7 @@ class ProductSeeder extends Seeder
             'code' => fake()->unique()->bothify('PROD-####'),
             'image'=>'uploads\categories\685ee90b4219a.png',
             'price'=>rand(100,1000),
-            'order_limit'=>rand(50,100),
+            'amount'=>rand(50,100),
             'max_order'=>rand(1,10),
             'active'=>rand(0,1),
             'offer'=>rand(0,1),
@@ -78,7 +81,7 @@ class ProductSeeder extends Seeder
             'returned'=>rand(0,1),
             'date_start' => now(),
             'date_end' => now()->addMonth(),
-            'store_id' => Store::inRandomOrder()->first()->id,
+            'service_id' => Service::inRandomOrder()->first()->id,
             'unit_id'=> Unit::inRandomOrder()->first()->id,
         ];
     }
@@ -120,6 +123,8 @@ class ProductSeeder extends Seeder
             $data[]=array_merge($this->getOfferData($offer,$price),[
             'price'=>rand(100,1000),
             'active'=>rand(0,1),
+            'amount'=>rand(50,100),
+            'max_order'=>rand(1,10),
             'offer'=>$offer,
             'parent_id'=>$parentId,
             'size_id'=>$sizeId
@@ -130,9 +135,9 @@ class ProductSeeder extends Seeder
         return $data;
     }
 
-    public function getCategoryData($count): array
+    public function getCategoryData($count,$service_id): array
     {
-        return Category::active()
+        return Category::where('service_id',$service_id)->active()
                        ->inRandomOrder()
                        ->limit($count)
                        ->pluck('id')

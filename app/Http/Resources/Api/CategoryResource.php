@@ -23,8 +23,8 @@ class CategoryResource extends JsonResource
             'active' => $this->active,
             'order_id' => $this->order_id,
             'parent_id'=>$this->parent_id,
-            'store_id' => $this->store_id,
-            'store' => new StoreResource($this->whenLoaded('store')),
+            'service_id' => $this->service_id,
+            'service' => new ServiceResource($this->whenLoaded('service')),
             'children' => CategoryResource::collection($this->whenLoaded('children')),
         ];
     }

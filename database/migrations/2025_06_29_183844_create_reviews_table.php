@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('rating')->default(1);
             $table->text('comment')->nullable();
             $table->boolean('active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
