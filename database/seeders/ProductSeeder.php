@@ -30,6 +30,8 @@ class ProductSeeder extends Seeder
             $product->categories()->sync($categoryIds);
 
             $dataProductParent=Arr::except($data,[
+                'amount',
+                'max_order',
                 'price',
                 'offer_price',
                 'offer',
@@ -64,7 +66,7 @@ class ProductSeeder extends Seeder
             'code' => fake()->unique()->bothify('PROD-####'),
             'image'=>'uploads\categories\685ee90b4219a.png',
             'price'=>rand(100,1000),
-            'order_limit'=>rand(50,100),
+            'amount'=>rand(50,100),
             'max_order'=>rand(1,10),
             'active'=>rand(0,1),
             'offer'=>rand(0,1),
@@ -121,6 +123,8 @@ class ProductSeeder extends Seeder
             $data[]=array_merge($this->getOfferData($offer,$price),[
             'price'=>rand(100,1000),
             'active'=>rand(0,1),
+            'amount'=>rand(50,100),
+            'max_order'=>rand(1,10),
             'offer'=>$offer,
             'parent_id'=>$parentId,
             'size_id'=>$sizeId
