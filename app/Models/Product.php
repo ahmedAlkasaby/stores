@@ -74,6 +74,8 @@ class Product extends MainModel
 
 
 
+
+
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id', 'id');
@@ -101,6 +103,10 @@ class Product extends MainModel
         return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
     }
 
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class,'product_id','id');
+    }
 
 
 
@@ -110,7 +116,8 @@ class Product extends MainModel
             ->where('active', $type_app == 'app' ? true : $request->active)
             ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
             ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
-            ->orderBy('order_id', 'asc');
+            ->orderBy('order_id', 'asc')
+            ;
     }
 
     public function scopeApplySearch($query, $request)
@@ -300,7 +307,7 @@ class Product extends MainModel
         if ($userId) {
             return CartItem::where('product_id', $this->id)
                 ->where('user_id', $userId)
-                ->sum('qty');
+                ->sum('amount');
         }
         return 0;
     }
@@ -327,6 +334,14 @@ class Product extends MainModel
                 ->first();
         }
         return 0;
+    }
+
+    public function amountInAllCarts(){
+        return $this->cartItems()->sum('amount');
+    }
+
+    public function availableAmount(){
+        return $this->amount - $this->amountInAllCarts();
     }
 
     public function reviews()

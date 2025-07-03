@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-
-class CartItem extends MainModel
+class CartItem extends Model
 {
     protected $fillable = [
         'product_id',
@@ -21,4 +21,6 @@ class CartItem extends MainModel
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+   
 }

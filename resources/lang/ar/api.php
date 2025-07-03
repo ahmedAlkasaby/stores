@@ -1,5 +1,11 @@
 <?php
 
 return [
-    'setting_close'=>'التطبيق مغلق حاليا'
+    'setting_close'=>'التطبيق مغلق حاليا',
+    'you_must_choose_from_children' => 'يجب اختيار نوع محدد من هذا المنتج.',
+    'product_not_active' => 'هذا المنتج غير متاح حاليًا.',
+    'max_order' => 'الحد الأقصى المسموح للطلب من هذا المنتج هو :max_order وحدة.',
+    'product_not_available_amount' => 'الكمية المطلوبة غير متوفرة في المخزون حاليًا.',
+    'max_order_in_setting' => 'لا يمكنك تجاوز الحد الأقصى لقيمة الطلب المسموح بها وهو :max_order جنيه.',
+
 ];

@@ -39,8 +39,12 @@ class ProductResource extends JsonResource
 
             'start' => $this->start,
             'skip' => $this->skip,
-            'amount' => $this->amount,
             'max_order'=> $this->max_order,
+            'amount' => $this->amount,
+            'amount_in_all_carts'=> $this->amountInAllCarts(),
+            'available_amount'=>$this->availableAmount(),
+
+
 
 
 
@@ -79,7 +83,7 @@ class ProductResource extends JsonResource
             'size' => new SizeResource($this->whenLoaded('size')),
             'service' => new ServiceResource($this->whenLoaded('service')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'children' => ProductResource::collection($this->whenLoaded('children')),
+            'children' => ProductResource::collection($this->whenLoaded('children')->filter()),
             'parent' => new ProductResource($this->whenLoaded('parent')),
 
         ];

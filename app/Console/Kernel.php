@@ -11,11 +11,16 @@ class Kernel extends ConsoleKernel
      * Define the application's command schedule.
      */
     protected $commands = [
-        \App\Console\Commands\MakeServiceCommand::class,
+        // \App\Console\Commands\MakeServiceCommand::class,
+        \App\Console\Commands\DeleteExpiredCartItems::class,
+
     ];
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('otp:clean')->daily();
+
+        $schedule->command('cart:clear-expired')->everyFiveMinutes();
+
     }
 
     /**

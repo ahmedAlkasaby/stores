@@ -21,11 +21,11 @@ class StoreCartItemsRequest extends FormRequest
 
         return [
             'product_id' => ['required', 'exists:products,id'],
-            'qty' => [
+            'amount' => [
                 'required',
                 'integer',
                 'min:1',
-               
+
             ],
         ];
     }
@@ -33,11 +33,11 @@ class StoreCartItemsRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'product_id.required' => __('validation.product_required'),
-            'product_id.exists'   => __('validation.product_exists'),
-            'qty.required' => __('validation.qty_required'),
-            'qty.integer' => __('validation.qty_integer'),
-            'qty.min' => __('validation.qty_min'),
+            'product_id.required' => __('validation.required',['attribute'=>'product_id']),
+            'product_id.exists'   => __('validation.exists',['attribute'=>'product_id']),
+            'amount.required' => __('validation.required',['attribute'=>'amount']),
+            'amount.integer' => __('validation.integer',['attribute'=>'amount']),
+            'amount.min' => __('validation.min.numeric',['attribute'=>'amount','min:1']),
 
         ];
     }
