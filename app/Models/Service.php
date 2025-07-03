@@ -59,17 +59,7 @@ class Service  extends MainModel
             }
         }
 
-
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
-        }
-       
-
-        if ($request->filled('order_id')) {
-            $query->where('order_id', $request->order_id);
-        }
-
-
+      
        return $query;
     }
 

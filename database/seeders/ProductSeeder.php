@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
             $dataOffer=$this->getOfferData($dataProduct['offer'],$dataProduct['price']);
             $dataShipping=$this->getShippingData($dataProduct['free_shipping']);
             $data = array_merge($dataProduct, $dataOffer, $dataShipping);
-            $categoryIds = $this->getCategoryData(3);
+            $categoryIds = $this->getCategoryData(3,$dataProduct['service_id']);
 
             $product=Product::create($data);
             $product->categories()->sync($categoryIds);
@@ -135,9 +135,9 @@ class ProductSeeder extends Seeder
         return $data;
     }
 
-    public function getCategoryData($count): array
+    public function getCategoryData($count,$service_id): array
     {
-        return Category::active()
+        return Category::where('service_id',$service_id)->active()
                        ->inRandomOrder()
                        ->limit($count)
                        ->pluck('id')

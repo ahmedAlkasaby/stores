@@ -25,15 +25,18 @@ class CategoryRequest extends FormRequest
             'search' => 'nullable|string|max:255',
             'service_id' => 'nullable|exists:services,id',
             'sort_by' => 'nullable|in:latest,oldest',
+            'is_parents'=>'nullable|in:0,1',
+            'parent_id'=>'nullable|exists:categories,id',
         ];
     }
     public function messages(): array
     {
         return [
-            'search.string' => __('validation.search_string'),
-            'service_id.exists' => __('validation.service_exists'),
-            'store_type_id.exists' => __('validation.store_type_exists'),
-            'sort_by.in' => __('validation.sort_by_in'),
+            'search.string' => __('validation.string',['attribute'=> 'search']),
+            'service_id.exists' => __('validation.exists',['attribute'=>'service_id']),
+            'sort_by.in' => __('validation.in',['attribute'=>'sort_by']),
+            'is_parents.in' => __('validation.in',['attribute'=>'is_parents']),
+            'parent_id.in' => __('validation.in',['attribute'=>'parent_id']),
         ];
     }
 }

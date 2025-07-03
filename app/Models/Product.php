@@ -129,8 +129,6 @@ class Product extends MainModel
 
     public function scopeApplyServiceFilters($query, $request)
     {
-
-
         if ($request->filled('service_id')) {
             $query->where('service_id', $request->service_id);
         }
@@ -248,10 +246,10 @@ class Product extends MainModel
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
                 case 'latest':
-                    $query->orderByDesc('order_id');
+                    $query->orderByDesc('id');
                     break;
                 case 'oldest':
-                    $query->orderBy('order_id', 'asc');
+                    $query->orderBy('id', 'asc');
                     break;
                 case 'highest_price':
                     $query->orderBy('price', 'desc');
@@ -276,7 +274,7 @@ class Product extends MainModel
         return $query
             ->applyBasicFilters($request, $type_app)
             ->applySearch($request)
-            ->scopeApplyServiceFilters($request)
+            ->applyServiceFilters($request)
             ->applyCategoryFilter($request)
             ->applyPriceFilters($request)
             ->applyFeatureFilter($request)

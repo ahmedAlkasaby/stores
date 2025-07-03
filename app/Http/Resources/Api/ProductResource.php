@@ -39,7 +39,7 @@ class ProductResource extends JsonResource
 
             'start' => $this->start,
             'skip' => $this->skip,
-            'order_limit' => $this->order_limit,
+            'amount' => $this->amount,
             'max_order'=> $this->max_order,
 
 

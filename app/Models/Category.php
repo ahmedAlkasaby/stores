@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends MainModel
 {
@@ -69,7 +68,7 @@ class Category extends MainModel
         if ($request->has('service_id')&& $request->service_id != "all") {
             $query->where('service_id', $request->service_id);
         }
-      
+
         if ($request->has('is_parents')==1) {
             $query->whereNull('parent_id');
         }

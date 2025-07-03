@@ -5,6 +5,7 @@ namespace App\Http\Resources\Api;
 use App\Http\Resources\UserResource;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\User;
@@ -25,13 +26,15 @@ class HomeCollection extends ResourceCollection
         $sliders=Slider::filter()->paginate(10);
         $sliderFeature=Slider::where('feature',1)->filter()->paginate(10);
         $categories=Category::with('children')->filter()->paginate(10);
+        $services=Service::filter()->paginate(10);
+        $data=['categories','service','unit','size','brand','children'];
 
-        $featureProducts=Product::with(['categories','store','unit','size','brand','storeType','children'])->where('feature',1)->filter()->paginate(10);
-        $newProducts=Product::with(['categories','store','unit','size','brand','storeType','children'])->where('new',1)->filter()->paginate(10);
-        $specialProducts=Product::with(['categories','store','unit','size','brand','storeType','children'])->where('special',1)->filter()->paginate(10);
-        $saleProducts=Product::with(['categories','store','unit','size','brand','storeType','children'])->where('sale',1)->filter()->paginate(10);
-        $filterProducts=Product::with(['categories','store','unit','size','brand','storeType','children'])->where('filter',1)->filter()->paginate(10);
-        $offerProducts=Product::with(['categories','store','unit','size','brand','storeType','children'])->where('offer',1)->filter()->paginate(10);
+        $featureProducts=Product::with($data)->where('feature',1)->filter()->paginate(10);
+        $newProducts=Product::with($data)->where('new',1)->filter()->paginate(10);
+        $specialProducts=Product::with($data)->where('special',1)->filter()->paginate(10);
+        $saleProducts=Product::with($data)->where('sale',1)->filter()->paginate(10);
+        $filterProducts=Product::with($data)->where('filter',1)->filter()->paginate(10);
+        $offerProducts=Product::with($data)->where('offer',1)->filter()->paginate(10);
 
 
 
@@ -39,7 +42,7 @@ class HomeCollection extends ResourceCollection
 
 
         return [
-            'products'=>$this->collection,
+            'products'=>ProductResource::collection($this->collection),
              'meta' => [
                 'current_page' => $this->currentPage(),
                 'last_page' => $this->lastPage(),
@@ -73,6 +76,7 @@ class HomeCollection extends ResourceCollection
             'twitter'=> $setting->twitter,
             'tiktok'=> $setting->tiktok,
             'telegram'=> $setting->telegram,
+            'services'=>ServiceResource::collection($services),
             'sliders'=>SliderResource::collection($sliders),
             'sliderFeature'=>SliderResource::collection($sliderFeature),
             'categories'=>CategoryResource::collection($categories),
