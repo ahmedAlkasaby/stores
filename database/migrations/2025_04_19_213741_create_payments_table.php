@@ -18,6 +18,8 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->string('image')->nullable();
             $table->integer('order_id')->nullable();
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

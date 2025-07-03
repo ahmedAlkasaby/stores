@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Store;
+use App\Models\Service;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,19 +21,19 @@ class CategoryController extends MainController
     }
     public function index()
     {
-        $categories = Category::with('store')->with("parent")->filter(request(), "dashboard")->paginate($this->perPage);
-        $stores = Store::all();
+        $categories = Category::with('service')->with("parent")->filter(request(), "dashboard")->paginate($this->perPage);
+        $services = Service::all();
         $allCategories = Category::all();
 
-        return view('admin.categories.index', compact('categories', 'stores', 'allCategories'));
+        return view('admin.categories.index', compact('categories', 'services', 'allCategories'));
     }
 
 
     public function create()
     {
-        $stores = Store::all();
+        $services = Service::all();
         $categories = Category::all();
-        return view('admin.categories.create', compact('stores', 'categories'));
+        return view('admin.categories.create', compact('services', 'categories'));
     }
 
 
@@ -42,7 +42,7 @@ class CategoryController extends MainController
         $imageUrl = $this->imageService->uploadImage('categories', $request);
 
         $data = $request->except('image');
-        $data['image'] = $imageUrl;
+        $data['image'] = $imageUrl ?? null;
         Category::create($data);
         return redirect()->route('dashboard.categories.index')->with('success', __('site.category_created_successfully'));
     }
@@ -51,20 +51,20 @@ class CategoryController extends MainController
     public function show(string $id)
     {
         $category = Category::findOrFail($id);
-        $stores = Store::all();
+        $services = Service::all();
         $categories = Category::all();
 
-        return view('admin.categories.show', compact('category', "stores", "categories"));
+        return view('admin.categories.show', compact('category', "services", "categories"));
     }
 
 
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
-        $stores = Store::all();
+        $services = Service::all();
         $categories = Category::all();
 
-        return view('admin.categories.edit', compact('category', "stores", "categories"));
+        return view('admin.categories.edit', compact('category', "services", "categories"));
     }
 
     public function update(CategoryRequest $request, string $id)

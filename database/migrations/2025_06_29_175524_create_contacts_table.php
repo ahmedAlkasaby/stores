@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email');
             $table->boolean('seen')->default(false);
             $table->timestamp('read_at')->nullable();
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

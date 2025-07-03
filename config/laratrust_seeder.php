@@ -18,9 +18,8 @@ return [
             "units" => 'i,sh,s,u,a,d',
             "brands" => 'i,sh,s,u,a,d',
 
-            "store_types" => 'i,sh,s,u,a,d',
             "sizes" => 'i,sh,s,u,a,d',
-            "stores" => 'i,sh,s,u,a,d',
+            "services" => 'i,sh,s,u,a,d',
             "categories" => 'i,sh,s,u,a,d',
             "products" => 'i,sh,s,u,a,d',
             'additions' => 'i,sh,s,u,a,d',
@@ -39,7 +38,6 @@ return [
         ],
         'admin' => [
             'users' => 'i,sh,s,u,d,a',
-            "store_types" => 'i,u,d',
 
         ],
 

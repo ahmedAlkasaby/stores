@@ -4,7 +4,7 @@ namespace App\Http\Requests\dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class ServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class StoreRequest extends FormRequest
         return [
             'name.ar' => 'required|string|max:255',
             'name.en' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
             'description.en' => 'nullable|string|max:500',
             'description.ar' => 'nullable|string|max:500',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            'store_type_id' => 'nullable|exists:store_types,id',
             'order_id' => 'nullable|integer|min:0',
         ];
     }
@@ -52,17 +50,13 @@ class StoreRequest extends FormRequest
             'description.ar.required' => __("validation.description_ar_required"),
             'description.ar.string' => __("validation.description_ar_string"),
 
-            'address.required' => __("validation.address_required"),
-            'address.string' => __("validation.address_string"),
-            'address.max' => __("validation.address_max"),
+
 
             'image.image' => __("validation.image_image"),
             'image.mimes' => __("validation.image_mimes"),
             'image.max' => __("validation.image_max"),
             'image.required' => __("validation.image_required"),
 
-            'store_type_id.exists' => __("validation.store_type_id_exists"),
-            'store_type_id.required' => __("validation.store_type_id_required"),
 
 
             'order_id.integer' => __("validation.order_id_integer"),

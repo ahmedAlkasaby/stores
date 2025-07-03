@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->unique(['product_id', 'user_id'], 'product_user_unique');
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

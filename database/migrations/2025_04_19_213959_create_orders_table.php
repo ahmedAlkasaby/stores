@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->decimal('shipping')->default(25);
             $table->text('notes')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

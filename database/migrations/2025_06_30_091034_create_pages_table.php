@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('order_id');
             $table->string("link")->nullable();
             $table->string("video_link")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

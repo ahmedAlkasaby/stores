@@ -1,4 +1,4 @@
-@include('admin.layouts.modals.filter.header', ['model' => 'stores'])
+@include('admin.layouts.modals.filter.header', ['model' => 'services'])
 
 
 {{-- Search by Name --}}
@@ -42,22 +42,11 @@
 
 <div class="col-md-6">
 
-@include('admin.layouts.forms.fields.select', [
-    'select_name' => 'store_type_id',
-    'select_function' =>
-        ['all' => __('site.all')] +
-            $storeTypes->mapWithKeys(fn($storeType) => [$storeType->id => $storeType->nameLang()])->toArray() ??
-        null,
-    'select_value' => old('store_type_id') ?? request('store_type_id'),
-    'select_class' => 'select2',
-    'select2' => true,
-    'not_req' => true,
-])
-</div>
+
 
 
 {{-- buttons --}}
-@include('admin.layouts.modals.filter.buttons', ['model' => 'stores'])
+@include('admin.layouts.modals.filter.buttons', ['model' => 'services'])
 
 {{-- Footer --}}
 @include('admin.layouts.modals.filter.footer')

@@ -5,12 +5,7 @@
     <div class="card-body">
         <table class="table table-md">
             <tbody>
-                <tr>
-                    <th>@lang('site.name')</th>
-                    <td>
-                        {{ $contact->name }}
-                    </td>
-                </tr>
+
                 <tr>
                     <th>@lang('site.email')</th>
                     <td>

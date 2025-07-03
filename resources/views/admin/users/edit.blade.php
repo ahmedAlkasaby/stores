@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('site.stores'))
+@section('title', __('site.users'))
 @section('styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->enum('type',['home', 'work', 'other'])->default('home');
+            $table->enum('type', ['home', 'work', 'other'])->default('home');
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
             $table->foreignId('region_id')->constrained('regions')->onDelete('cascade');
             $table->boolean('active')->default(true);
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('floor')->nullable();
             $table->string('apartment')->nullable();
             $table->string('additional_info')->nullable();
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

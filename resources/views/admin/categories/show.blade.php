@@ -4,7 +4,9 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
-<link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />@endsection
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/dropzone/dropzone.css') }}" />
+ @endsection
 @section('content')
     @include('admin.layouts.messages.success')
     @include('admin.layouts.messages.displayErrors')
@@ -37,10 +39,10 @@
     ])
 
     @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'store_id',
+        'select_name' => 'service_id',
         'select_function' =>
-            $stores->mapWithKeys(fn($store) => [$store->id => $store->nameLang()])->toArray() ?? null,
-        'select_value' => $category->store_id ?? null,
+            $services->mapWithKeys(fn($service) => [$service->id => $service->nameLang()])->toArray() ?? null,
+        'select_value' => $category->service_id ?? null,
         'select_class' => 'select2',
         'select2' => true,
     ])
@@ -62,14 +64,22 @@
         'select2' => true,
     ])
 
-    @include('admin.layouts.forms.fields.file', [
-        'image' => $category->image ?? null,
+    @include('admin.layouts.forms.fields.dropzone', [
+        "name" => "image",
     ])
     @include('admin.layouts.forms.footer')
     @include('admin.layouts.forms.close')
     </div>
+        @endsection
+
+@section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-    <script src="{{ asset('js/showImage.js') }}"></script>
+    <script src="{{ asset("admin/assets/vendor/libs/dropzone/dropzone.js") }}"></script>
+
+    @include('admin.layouts.forms.dropzone', [
+        'inputName' => 'image',
+        'existingImageUrl' => isset($category) && $category->image ? asset($category->image) : null,
+    ])
 @endsection
 @section('mainFiles')
     <script src="{{ asset('admin/assets/js/form-wizard-numbered.js') }}"></script>

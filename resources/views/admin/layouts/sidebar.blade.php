@@ -92,20 +92,13 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->hasPermission('store_types.index'))
-                <li class="menu-item @if ($class == 'store_types') active @endif">
-                    <a href="{{ route('dashboard.store_types.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                        <div>{{ __('site.store_type') }}</div>
-                    </a>
-                </li>
-            @endif
 
-            @if (auth()->user()->hasPermission('stores.index'))
-                <li class="menu-item @if ($class == 'stores') active @endif">
-                    <a href="{{ route('dashboard.stores.index') }}" class="menu-link">
+
+            @if (auth()->user()->hasPermission('services.index'))
+                <li class="menu-item @if ($class == 'services') active @endif">
+                    <a href="{{ route('dashboard.services.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                        <div>{{ __('site.stores') }}</div>
+                        <div>{{ __('site.services') }}</div>
                     </a>
                 </li>
             @endif
@@ -171,7 +164,7 @@
                         </li>
                         <li class="menu-item @if (isset($class) && $class == 'delivery') active @endif">
                             <a href="{{ route('dashboard.users.index', ['type' => 'delivery']) }}" class="menu-link">
-                                <div>{{ __('site. delivery_time_times') }}</div>
+                                <div>{{ __('site.deliveries') }}</div>
                             </a>
                         </li>
 

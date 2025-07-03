@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('token');
             $table->string('device_type');
             $table->string('imei');
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

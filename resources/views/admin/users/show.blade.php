@@ -1,74 +1,115 @@
 @extends('admin.layouts.app')
-@section('title', __('site.stores'))
+@section('title', __('site.users'))
 @section('styles')
-<link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
-<link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bs-stepper/bs-stepper.css")}}" />
-<link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css")}}" />
-<link rel="stylesheet" href="{{asset("admin/assets/vendor/libs/select2/select2.css")}}" />@endsection
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/dropzone/dropzone.css') }}" />
+ @endsection
 @section('content')
-@include('admin.layouts.messages.success')
-@include('admin.layouts.messages.displayErrors')
-@include('admin.layouts.forms.edit', [
-'table' => 'stores',
-'route_type' => 'dashboard',
-'form_method' => 'PATCH',
-'form_class' => 'custom-form-class',
-'form_status' => 'update',
-'model' => $store,
-'model_id' => $store->id,
-'enctype' => true,
-])
-
-
-@include('admin.layouts.forms.head',[
-"show_name"=> true,
-"show_content"=> true,
-"show_image"=> true,
-"name_ar"=> $store->nameLang('ar') ,
-"name_en"=> $store->nameLang('en') ,
-"content_ar"=> $store->descriptionLang('ar') ?? null,
-"content_en"=> $store->descriptionLang('en') ?? null,
-])
-@include('admin.layouts.forms.fields.number',
-[
-'number_name' => 'order_id',
-"min" => 0,
-"placeholder" => __('site.order_id'),
-'number_value' => $store->order_id ?? null,
-
-])
-<div class="col-sm-12 mt-2">
-    @include('admin.layouts.forms.fields.text', [
-    'text_name' => 'address',
-    'text_value' => $store->address ?? null,
-    'label_name' => __("site.address"),
-    'label_req' => true
+    @include('admin.layouts.messages.displayErrors')
+    @include('admin.layouts.forms.edit', [
+        'table' => 'users',
+        'route_type' => 'dashboard',
+        'form_method' => 'PATCH',
+        'form_class' => 'custom-form-class',
+        'form_status' => 'update',
+        'model' => $user,
+        'model_id' => $user->id,
+        'enctype' => true,
     ])
-</div>
-@include("admin.layouts.forms.fields.select",[
-'select_name' => 'store_type_id',
-'select_function' => $storeTypes->mapWithKeys(fn($storeType) => [$storeType->id => $storeType->nameLang()])->toArray()
-?? null,
-'select_value' => $store->store_type_id ?? null,
-'select_class' => 'select2',
-'select2' => true,
-])
-<div class="col-md-6 mt-3">
-    @include('admin.layouts.forms.active',["var"=> $store])
-</div>
+    @include('admin.layouts.forms.head', ['show' => true])
+    <input type="hidden" name="id" value="{{ $user->id ?? null }}">
+    <div class="row">
+        <div class="col-md-6">
+            @include('admin.layouts.forms.fields.text', [
+                'text_name' => 'first_name',
+                'text_value' => $user->first_name ?? null,
+                'label_name' => __('site.first_name'),
+                'label_req' => true,
+            ])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.fields.text', [
+                'text_name' => 'last_name',
+                'text_value' => $user->last_name ?? null,
+                'label_name' => __('site.last_name'),
+                'label_req' => true,
+            ])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.users.email', ['email' => $user->email ?? null])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.users.phone', ['phone' => $user->phone ?? null])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.users.password', ['new' => 0])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.users.password-confirm', ['new' => 0])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.fields.select', [
+                'select_name' => 'active',
+                'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
+                'select_value' => $user->active ?? null,
+                'select_class' => 'select2',
+                'select2' => true,
+            ])
+        </div>
+        <div class="col-md-6">
+            @include('admin.layouts.forms.fields.select', [
+                'select_name' => 'lang',
+                'select_function' => ['en' => __('site.english'), 'ar' => __('site.arabic')],
+                'select_value' => $user->lang ?? null,
+                'select_class' => 'select2',
+                'select2' => true,
+            ])
+        </div>
+    </div>
+    <div class="mt-1">
+        @include('admin.layouts.forms.users.user-type-admin', ['type' => $user->type ?? null])
+    </div>
+    <div class="mt-1">
+        @include('admin.layouts.forms.users.role', ['roles' => $roles, 'userRoles' => $userRoles ?? null])
+    </div>
+    @include('admin.layouts.forms.fields.select', [
+        'select_name' => 'vip',
+        'select_function' => [0 => __('site.no'), 1 => __('site.yes')],
+        'select_value' => $user->vip ?? null,
+        'select_class' => 'select2',
+        'select2' => true,
+    ])
+    @include('admin.layouts.forms.fields.select', [
+        'select_name' => 'notify',
+        'select_function' => [0 => __('site.no'), 1 => __('site.yes')],
+        'select_value' => $user->notify ?? null,
+        'select_class' => 'select2',
+        'select2' => true,
+    ])
+    @include('admin.layouts.forms.fields.dropzone', [
+        "name" => "image",
+    ])
 
-@include('admin.layouts.forms.fields.file',[
-'image' => $store->image ?? null
-])
-@include("admin.layouts.forms.footer")
-@include('admin.layouts.forms.close')
-</div>
-<script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-<script src="{{ asset('js/showImage.js') }}"></script>
+    @include('admin.layouts.forms.footer')
+    @include('admin.layouts.forms.close')
+    </div>
+@endsection
+@section('jsFiles')
+    @include('admin.layouts.permissions.script_permission')
+    <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
+    <script src="{{ asset("admin/assets/vendor/libs/dropzone/dropzone.js") }}"></script>
+
+    @include('admin.layouts.forms.dropzone', [
+        'inputName' => 'image',
+        'existingImageUrl' => isset($user) && $user->image ? asset($user->image) : null,
+    ])
 @endsection
 @section('mainFiles')
-<script src="{{asset("admin/assets/js/form-wizard-numbered.js")}}"></script>
-<script src="{{asset("admin/assets/js/form-wizard-validation.js")}}"></script>
-<script src="{{asset("admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js")}}"></script>
-<script src="{{asset("admin/assets/vendor/libs/select2/select2.js")}}"></script>
+    <script src="{{ asset('admin/assets/js/form-wizard-numbered.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
 @endsection

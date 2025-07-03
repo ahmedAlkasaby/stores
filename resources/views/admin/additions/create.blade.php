@@ -53,6 +53,8 @@
     @include('admin.layouts.forms.footer')
     @include('admin.layouts.forms.close')
     </div>
+@endsection
+
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset("admin/assets/vendor/libs/dropzone/dropzone.js") }}"></script>
@@ -64,5 +66,4 @@
     <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-@endsection
 @endsection

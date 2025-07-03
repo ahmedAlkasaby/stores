@@ -43,7 +43,7 @@
         </div>
         <div class="col-sm-6">
             @include('admin.layouts.forms.fields.select', [
-                'select_name' => 'type',
+                'select_name' => 'page',
                 'select_function' => \App\Helpers\PageHelper::getPagesTypes(),
                 'select_value' => $page->type ?? null,
                 'select_class' => 'select2',

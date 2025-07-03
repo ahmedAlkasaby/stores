@@ -36,16 +36,16 @@
         'not_req' => true,
     ])
 </div>
-{{-- Store --}}
+{{-- service --}}
 <div class="col-md-6">
 
 @include('admin.layouts.forms.fields.select', [
-    'select_name' => 'store_id',
+    'select_name' => 'service_id',
     'select_function' =>
         ['all' => __('site.all')] +
-            $stores->mapWithKeys(fn($store) => [$store->id => $store->nameLang()])->toArray() ??
+            $services->mapWithKeys(fn($service) => [$service->id => $service->nameLang()])->toArray() ??
         null,
-    'select_value' => old('store') ?? request('store'),
+    'select_value' => old('service') ?? request('service'),
     'select_class' => 'select2',
     'select2' => true,
     'not_req' => true,

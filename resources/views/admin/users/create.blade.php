@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('site.stores'))
+@section('title', __('site.users'))
 @section('styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
@@ -20,35 +20,35 @@
     <div class="row">
         <div class="col-md-6">
             @include('admin.layouts.forms.fields.text', [
-                'text_name' => __('site.first_name'),
-                'text_value' => old('first_name') ?? null,
+                'text_name' => 'first_name',
+                'text_value' => $user->first_name ?? null,
                 'label_name' => __('site.first_name'),
                 'label_req' => true,
             ])
         </div>
         <div class="col-md-6">
             @include('admin.layouts.forms.fields.text', [
-                'text_name' => __('site.last_name'),
-                'text_value' => old('last_name') ?? null,
+                'text_name' => 'last_name',
+                'text_value' => $user->last_name ?? null,
                 'label_name' => __('site.last_name'),
                 'label_req' => true,
             ])
         </div>
         <div class="col-md-6">
-            @include('admin.layouts.forms.users.email')
+            @include('admin.layouts.forms.users.email', ['email' => $user->email ?? null])
         </div>
         <div class="col-md-6">
-            @include('admin.layouts.forms.users.phone')
+            @include('admin.layouts.forms.users.phone', ['phone' => $user->phone ?? null])
         </div>
         <div class="col-md-6">
-            @include('admin.layouts.forms.users.password', ['new' => 1])
+            @include('admin.layouts.forms.users.password', ['new' => 0])
         </div>
         <div class="col-md-6">
-            @include('admin.layouts.forms.users.password-confirm', ['new' => 1])
+            @include('admin.layouts.forms.users.password-confirm', ['new' => 0])
         </div>
         <div class="col-md-6">
             @include('admin.layouts.forms.fields.select', [
-                'select_name' => __('active'),
+                'select_name' => 'active',
                 'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
                 'select_value' => $user->active ?? null,
                 'select_class' => 'select2',
@@ -57,7 +57,7 @@
         </div>
         <div class="col-md-6">
             @include('admin.layouts.forms.fields.select', [
-                'select_name' => __('lang'),
+                'select_name' => 'lang',
                 'select_function' => ['en' => __('site.english'), 'ar' => __('site.arabic')],
                 'select_value' => $user->lang ?? null,
                 'select_class' => 'select2',
@@ -66,30 +66,28 @@
         </div>
     </div>
     <div class="mt-1">
-        @include('admin.layouts.forms.users.user-type-admin')
+        @include('admin.layouts.forms.users.user-type-admin', ['type' => $user->type ?? null])
     </div>
     <div class="mt-1">
         @include('admin.layouts.forms.users.role', ['roles' => $roles, 'userRoles' => $userRoles ?? null])
-
     </div>
     @include('admin.layouts.forms.fields.select', [
-        'select_name' => __('vip'),
+        'select_name' => 'vip',
         'select_function' => [0 => __('site.no'), 1 => __('site.yes')],
         'select_value' => $user->vip ?? null,
         'select_class' => 'select2',
         'select2' => true,
     ])
     @include('admin.layouts.forms.fields.select', [
-        'select_name' => __('notify'),
+        'select_name' => 'notify',
         'select_function' => [0 => __('site.no'), 1 => __('site.yes')],
         'select_value' => $user->notify ?? null,
         'select_class' => 'select2',
         'select2' => true,
     ])
     @include('admin.layouts.forms.fields.dropzone', [
-        'name' => 'image',
+        "name" => "image",
     ])
-
     @include('admin.layouts.forms.footer')
     @include('admin.layouts.forms.close')
     </div>

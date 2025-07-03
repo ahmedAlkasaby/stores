@@ -23,6 +23,8 @@ class Page extends MainModel
     ];
     protected $casts = [
         'title' => \App\Casts\UnescapedJson::class,
+        'name' => \App\Casts\UnescapedJson::class,
+        'description' => \App\Casts\UnescapedJson::class,
     ];
 
     public function titleLang($lang = null)
