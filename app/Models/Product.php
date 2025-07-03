@@ -28,7 +28,7 @@ class Product extends MainModel
     // order limits
     'start',
     'skip',
-    'order_limit',
+    'amount',
     'max_order',
 
     // status flags

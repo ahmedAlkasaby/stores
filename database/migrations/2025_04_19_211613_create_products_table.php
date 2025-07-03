@@ -33,7 +33,7 @@ return new class extends Migration
             //order limit
             $table->decimal('start', 10, 2)->default(1);
             $table->decimal('skip', 10, 2)->default(1);
-            $table->decimal('order_limit', 10, 2)->default(1);
+            $table->decimal('amount', 10, 2)->default(1);
             $table->decimal('max_order', 10, 2)->default(1);
 
 
