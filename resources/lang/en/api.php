@@ -23,5 +23,12 @@ return [
     'floor'=>'Floor',
     'apartment'=>'Apartment',
     'phone'=>'Phone',
-    'additional_info'=>'Additional Info'
+    'additional_info'=>'Additional Info',
+    'address_updated'=>'Address Updated Successfully',
+    'home'=>'Home',
+    'work'=>'Work',
+    'other'=>'Other',
+    'address_not_found'=>'Address not found',
+    'not_delete_active_address'=>'not delete the active address',
+    'address_deleted'=>'Deleted Address success'
 ];

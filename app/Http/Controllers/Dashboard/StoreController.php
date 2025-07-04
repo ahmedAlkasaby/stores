@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ImageHandlerService;
 use App\Http\Requests\dashboard\StoreRequest;
 
-class ServiceController extends MainController
+class StoreController extends MainController
 {
 
     protected $imageService;

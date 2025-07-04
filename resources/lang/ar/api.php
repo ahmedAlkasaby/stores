@@ -23,6 +23,13 @@ return [
     'floor'=>'الدور',
     'apartment'=>'الشقه',
     'phone'=>'رقم الهاتف',
-    'additional_info'=>'معلومات اضافيه'
+    'additional_info'=>'معلومات اضافيه',
+    'address_updated'=>'تم تحديث العنوان بنجاح',
+    'home'=>'البيت',
+    'work'=>'العمل',
+    'other'=>'آخر',
+    'address_not_found'=>'العنوان غير موجود',
+    'not_delete_active_address'=>'ممنوع حدف العنوان المفعل',
+    'address_deleted'=>'تم حدف العنوان بنجاح'
 
 ];

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('floor')->nullable();
             $table->string('apartment')->nullable();
             $table->string('additional_info')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
