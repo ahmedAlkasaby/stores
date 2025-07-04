@@ -38,5 +38,27 @@ class AddressRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'type.required' => __('validation.required',['attribute'=>__('api.type')]),
+            'type.enum' => __('validation.enum',['attribute'=>__('api.type')]),
+            'city_id.required' => __('validation.required',['attribute'=>__('api.city_id')]),
+            'city_id.exists' => __('validation.exists',['attribute'=>__('api.city_id')]),
+            'region_id.exists' => __('validation.exists',['attribute'=>__('api.region_id')]),
+            'address.required' => __('validation.required',['attribute'=>__('api.address')]),
+            'address.string' => __('validation.string',['attribute'=>__('api.address')]),
+            'latitude.required' => __('validation.required',['attribute'=>__('api.latitude')]),
+            'latitude.string' => __('validation.string',['attribute'=>__('api.latitude')]),
+            'longitude.required' => __('validation.required',['attribute'=>__('api.longitude')]),
+            'longitude.string' => __('validation.string',['attribute'=>__('api.longitude')]),
+            'building.string' => __('validation.string',['attribute'=>__('api.building')]),
+            'floor.string' => __('validation.string',['attribute'=>__('api.floor')]),
+            'apartment.string' => __('validation.string',['attribute'=>__('api.apartment')]),
+            'phone.string' => __('validation.string',['attribute'=>__('api.phone')]),
+            'additional_info.string' => __('validation.string',['attribute'=>__('api.additional_info')]),
+        ];
+    }
+
 
 }

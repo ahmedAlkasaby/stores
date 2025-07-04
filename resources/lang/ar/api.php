@@ -10,5 +10,19 @@ return [
     'address_added'=>'تمت اضافه العنوان بنجاح',
     'city_not_found'=>'المدينه غير موجوده',
     'region_not_found'=>'المنطقه غير موجوده',
+    'region_not_found_in_city'=>'المنطقه غير موجوده في هذه المدينة',
+    'region_not_active'=>'المنطقه غير متاح حاليا',
+    'city_not_active'=>'المدينه غير متاح حاليا',
+     'type'=>'النوع',
+    'city_id'=>'المدينه',
+    'region_id'=>'المنطقه',
+    'address'=>'العنوان',
+    'latitude'=>'خطوط الطول',
+    'longitude'=>'خطوط العرض',
+    'building'=>'العماره',
+    'floor'=>'الدور',
+    'apartment'=>'الشقه',
+    'phone'=>'رقم الهاتف',
+    'additional_info'=>'معلومات اضافيه'
 
 ];

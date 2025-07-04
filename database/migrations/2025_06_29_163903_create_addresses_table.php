@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('type')->default('home');
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
-            $table->foreignId('region_id')->constrained('regions')->onDelete('cascade');
+            $table->foreignId('region_id')->nullable()->constrained('regions')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->string('phone')->nullable();
             $table->string('latitude')->nullable();
