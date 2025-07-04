@@ -17,13 +17,14 @@ class DatabaseSeeder extends Seeder
         // this main
         $this->call([
             SettingSeeder::class,
-            CitySeeder::class,
-            RegionSeeder::class,
             LaratrustSeeder::class,
             AdminSeeder::class,
         ]);
 
         $this->call([
+            DeliveryTimeSeeder::class,
+            CitySeeder::class,
+            RegionSeeder::class,
             StoreSeeder::class,
             ProductSeeder::class,
             SliderSeeder::class,

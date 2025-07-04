@@ -21,12 +21,18 @@ class CategoryController extends MainController
 
     public function show(string $id)
     {
-        $category = Category::with(['service', 'children'])->find($id);
+        $category = Category::with(['service', 'children'])
+                            ->filter()
+                            ->where('id', $id)
+                            ->first();
+
         if (!$category) {
             return $this->sendError(__('api.category_not_found'), 404);
         }
+
         return $this->sendData(new CategoryResource($category));
     }
+
 
 
 }

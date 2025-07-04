@@ -18,7 +18,7 @@ class CityController extends MainController
 
     public function show(string $id)
     {
-        $city=City::withCount('regions')->find($id);
+        $city=City::withCount('regions')->filter()->find($id);
         if (!$city) {
             return $this->messageError(__('api.city_not_found'));
         }

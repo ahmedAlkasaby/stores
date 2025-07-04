@@ -30,6 +30,9 @@ return [
     'other'=>'آخر',
     'address_not_found'=>'العنوان غير موجود',
     'not_delete_active_address'=>'ممنوع حدف العنوان المفعل',
-    'address_deleted'=>'تم حدف العنوان بنجاح'
+    'address_deleted'=>'تم حدف العنوان بنجاح',
+    'category_not_found'=>'الفئة غير موجودة',
+    'delivery_time_not_found'=>'وقت التوصيل غير موجود',
+    
 
 ];

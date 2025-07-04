@@ -34,7 +34,10 @@ class AddressController extends MainController
 
     public function show(string $id)
     {
-        $address=Address::with('city','region')->find($id);
+        $userId=Auth::guard('api')->user();
+        $address = Address::where('user_id', $userId)->where('id', $id)
+                    ->with('city', 'region')
+                    ->first();
         if(!$address){
             return $this->messageError(__('api.address_not_found'));
         }
@@ -86,7 +89,7 @@ class AddressController extends MainController
         ->where('id', '!=', $address->id)
         ->where('active', 1)
         ->update(['active' => 0]);
-        
+
 
         $address->update($data);
         return $this->messageSuccess(__('api.address_updated'));
@@ -102,7 +105,7 @@ class AddressController extends MainController
     {
         $auth=Auth::guard('api')->user();
         $user=User::find($auth->id);
-        $address=$user->addresses()->find($id);
+        $address = $user->addresses()->where('id', $id)->first();
         if(!$address){
             return $this->messageError(__('api.address_not_found'));
         }

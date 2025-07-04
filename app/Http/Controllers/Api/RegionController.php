@@ -19,7 +19,7 @@ class RegionController extends MainController
 
     public function show(string $id)
     {
-        $region=Region::with('city')->find($id);
+        $region=Region::with('city')->filter()->where('id',$id)->first();
         if (!$region) {
             return $this->messageError(__('api.region_not_found'));
         }
