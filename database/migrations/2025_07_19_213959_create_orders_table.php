@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('delivery_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('status')->default('request');
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
-            $table->foreignId('delivery_time_id')->constrained('delivery_times')->onDelete('cascade');
-            $table->decimal('shipping')->default(25);
+            $table->foreignId('delivery_time_id')->nullable()->constrained('delivery_times')->onDelete('cascade');
+            $table->decimal('shipping_address')->default(25);
             $table->text('notes')->nullable();
             $table->timestamps();
         });
