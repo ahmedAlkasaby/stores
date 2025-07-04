@@ -2,9 +2,14 @@
 
 namespace App\Models;
 
+use App\Enums\TypeAddressEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Address extends MainModel
+class Address extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'type',
@@ -18,6 +23,10 @@ class Address extends MainModel
         'floor',
         'apartment',
         'additional_info'
+    ];
+
+    protected $casts=[
+        'type'=>TypeAddressEnum::class,
     ];
 
     public function user()

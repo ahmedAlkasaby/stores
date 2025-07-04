@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Auth\RestPasswordController;
@@ -50,6 +51,7 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::get('wishlists',[WishListController::class,'index']);
         Route::post('wishlists',[WishListController::class,'toggle']);
         Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
+        Route::apiResource('addresses',AddressController::class)->only(['index','show','store','destroy']);
         Route::apiResource('orders',OrderController::class)->only(['index','show','store']);
     });
 
