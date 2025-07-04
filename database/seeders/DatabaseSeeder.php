@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         // this main
         $this->call([
             SettingSeeder::class,
+            CitySeeder::class,
+            RegionSeeder::class,
             LaratrustSeeder::class,
             AdminSeeder::class,
         ]);

@@ -22,6 +22,7 @@ class Address extends Model
         'building',
         'floor',
         'apartment',
+        'phone',
         'additional_info'
     ];
 

@@ -81,8 +81,8 @@ class ProductSeeder extends Seeder
             'returned'=>rand(0,1),
             'date_start' => now(),
             'date_end' => now()->addMonth(),
-            'service_id' => Service::inRandomOrder()->first()->id,
-            'unit_id'=> Unit::inRandomOrder()->first()->id,
+            'service_id' => Service::where('active',1)->inRandomOrder()->first()->id,
+            'unit_id'=> Unit::where('active',1)->inRandomOrder()->first()->id,
         ];
     }
 

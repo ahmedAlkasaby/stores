@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class City extends MainModel
 {
-    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -16,12 +13,35 @@ class City extends MainModel
         "active",
     ];
 
+     public function scopeFilter($query, $request=null,$type_app='app')
+    {
+
+        $request=$request??request();
+
+        $query->orderBy('order_id','asc');
+
+        if($request->has('active') && $request->active !=='all'){
+            $query->where('active', $type_app=='app' ? 1 : $request->active);
+        }
+
+        if ($request->has('search')) {
+            $query->where(function($q) use($request){
+                $q->where('name','like','%'.$request->search.'%');
+            });
+        }
+
+
+
+
+
+       return $query;
+    }
+
     public function regions()
     {
         return $this->hasMany(Region::class);
     }
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
+
+
+
 }
