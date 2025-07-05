@@ -34,8 +34,8 @@
                     </th>
 
                     <th>
-                        <input type="checkbox" class="form-check-input select-type select-delete" data-type="delete" />
-                        <label class="fw-bold">@lang('site.delete')</label>
+                        <input type="checkbox" class="form-check-input select-type select-delete" data-type="destroy" />
+                        <label class="fw-bold">@lang('site.destroy')</label>
                     </th>
 
 
