@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            PaymentSeeder::class,
             DeliveryTimeSeeder::class,
             CitySeeder::class,
             RegionSeeder::class,
