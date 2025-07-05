@@ -33,6 +33,7 @@ return [
     'address_deleted'=>'تم حدف العنوان بنجاح',
     'category_not_found'=>'الفئة غير موجودة',
     'delivery_time_not_found'=>'وقت التوصيل غير موجود',
-    
+    'payment_not_found'=>'طريقة الدفع غير موجودة',
+
 
 ];

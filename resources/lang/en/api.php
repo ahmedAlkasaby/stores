@@ -32,5 +32,7 @@ return [
     'not_delete_active_address'=>'not delete the active address',
     'address_deleted'=>'Deleted Address success',
     'category_not_found'=>'Category not found',
-    'delivery_time_not_found'=>'Delivery time not found'
+    'delivery_time_not_found'=>'Delivery time not found',
+    'payment_not_found'=>'Payment not found',
+
 ];
