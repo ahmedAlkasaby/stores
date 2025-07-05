@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use App\Http\Resources\UserResource;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,6 +16,7 @@ class OrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $setting=Setting::where('active',1)->first();
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -29,6 +31,7 @@ class OrderResource extends JsonResource
             'shipping_address'=>$this->getShippingAddress(),
             'order_shipping_products'=>$this->orderShippingProducts(),
             'shipping'=>$this->orderShippingProducts()+$this->getShippingAddress(),
+            'delivery_cost'=>$setting->delivery_cost,
 
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
