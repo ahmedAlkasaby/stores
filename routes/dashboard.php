@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\AddressController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\PaymentController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\WishlistController;
 use App\Http\Controllers\dashboard\DeliveryTimeController;
 
 
@@ -113,4 +115,10 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     //Resourse route for addresses
     Route::resource('addresses', AddressController::class);
 
+    //Resource route for Slider
+    Route::resource('sliders', SliderController::class);
+    Route::get('sliders/active/{slider}', [SliderController::class, 'active'])->name('sliders.active');
+
+    //Resourse route for Favourites
+    Route::resource('wishlists', WishlistController::class);
 });

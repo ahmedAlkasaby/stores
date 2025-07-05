@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 
+use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,7 +30,10 @@ class DatabaseSeeder extends Seeder
             NotificationSeeder::class,
             ContactSeeder::class,
         ]);
-
+            Wishlist::create([
+                'user_id' => 1,
+                "product_id"=>1
+            ]);
 
 
 

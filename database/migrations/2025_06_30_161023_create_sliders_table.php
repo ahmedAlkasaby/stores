@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('image');
             $table->boolean('active')->default(true);
             $table->boolean('feature')->default(false);
+            $table->string('type');
+            $table->string('link')->nullable();
             $table->integer('order_id')->nullable();
             $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('cascade');
             $table->softDeletes();

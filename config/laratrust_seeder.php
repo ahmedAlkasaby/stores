@@ -33,6 +33,8 @@ return [
             "pages" => 'i,sh,s,u,a,d',
             "payments" => 'i,sh,s,u,a,d',
             "addresses" => 'i,sh,s,u,a,d',
+            "sliders" => 'i,sh,s,u,a,d',
+            "wishlists" => 'i',
 
 
         ],

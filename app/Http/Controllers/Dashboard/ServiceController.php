@@ -17,7 +17,7 @@ class ServiceController extends MainController
     public function __construct(ImageHandlerService $imageService)
     {
         parent::__construct();
-        $this->setClass('Services');
+        $this->setClass('services');
         $this->imageService = $imageService;
     }
     public function index()

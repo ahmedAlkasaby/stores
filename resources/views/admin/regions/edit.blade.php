@@ -17,33 +17,9 @@
         'enctype' => true,
     ])
 
+@include("admin.regions.includes.form-fields")
+@endsection
 
-    @include('admin.layouts.forms.head', [
-        'show_name' => true,
-        'show_content' => true,
-        'show_image' => true,
-        'name_ar' => $region->nameLang('ar'),
-        'name_en' => $region->nameLang('en'),
-        'content_ar' => $region->descriptionLang('ar') ?? null,
-        'content_en' => $region->descriptionLang('en') ?? null,
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'order_id',
-        'min' => 0,
-        'placeholder' => __('site.order_id'),
-        'number_value' => $region->order_id ?? null,
-    ])
-    @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'active',
-        'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
-        'select_value' => $region->active ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-    ])
-
-    @include('admin.layouts.forms.footer')
-    @include('admin.layouts.forms.close')
-    </div>
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset('js/showImage.js') }}"></script>
@@ -53,5 +29,4 @@
     <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-@endsection
 @endsection

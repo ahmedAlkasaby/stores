@@ -380,6 +380,17 @@ return [
     "start_hour" => "وقت البدء",
     "end_hour" => "وقت الانتهاء",
     "deliveries"=>"التوصيلات",
-    "delivery"=>"موصل"
+    "delivery"=>"موصل",
+    "product_id" => "منتج",
+    "sliders" => "السلايدر",
+    "slider" => "سلايدر",
+    "slider_updated_successfully" => "تم تحديث السلايدر بنجاح",
+    "slider_created_successfully" => "تم إنشاء السلايدر بنجاح",
+    "slider_deleted_successfully" => "تم حذف السلايدر بنجاح",
+    "slider_restored_successfully" => "تم استعادة السلايدر بنجاح",
+    "slider_force_deleted_successfully" => "تم حذف السلايدر بنجاح",
+    "slider_toggled_successfully" => "تم تغيير حالة السلايدر بنجاح",
+    "slider_has_orders" => "السلايدر لديها طلبات",
+    "slider_cant_be_deleted" => "لا يمكن حذف السلايدر لانه لديها منتجات",
 ];
 
