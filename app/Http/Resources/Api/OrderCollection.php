@@ -2,20 +2,20 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\CartItem;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CartItemCollection extends ResourceCollection
+class OrderCollection extends ResourceCollection
 {
-
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @return array<int|string, mixed>
+     */
     public function toArray(Request $request): array
     {
-        $auth=Auth()->guard('api')->user();
-        $user=User::find($auth->id);
         return [
-            'cart_items' => $this->collection,
+            'orders' =>$this->collection,
             'meta' => [
                 'current_page' => $this->currentPage(),
                 'last_page' => $this->lastPage(),
@@ -28,8 +28,6 @@ class CartItemCollection extends ResourceCollection
                 'prev' => $this->previousPageUrl(),
                 'next' => $this->nextPageUrl(),
             ],
-
-            'total_price'=>$user->totalPriceInCart(),
         ];
     }
 }

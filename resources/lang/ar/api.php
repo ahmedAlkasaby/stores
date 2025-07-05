@@ -34,6 +34,13 @@ return [
     'category_not_found'=>'الفئة غير موجودة',
     'delivery_time_not_found'=>'وقت التوصيل غير موجود',
     'payment_not_found'=>'طريقة الدفع غير موجودة',
+    'payment'=>'طريقة الدفع',
+    'delivery_time'=>'وقت التوصيل',
+    'notes'=>'ملاحظات',
+    'cart_is_empty'=>'عربة التسوق فارغة',
+    'min_order'=>'قيمة الطلب الادنى هي :min_order جنيه',
+    'order_added'=>'تم اضافه الطلب بنجاح',
+    'order_not_found'=>'الطلب غير موجود'
 
 
 ];

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('delivery_time_id')->nullable()->constrained('delivery_times')->onDelete('cascade');
             $table->decimal('shipping_address')->default(25);
             $table->text('notes')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

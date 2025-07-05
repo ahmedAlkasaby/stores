@@ -34,5 +34,12 @@ return [
     'category_not_found'=>'Category not found',
     'delivery_time_not_found'=>'Delivery time not found',
     'payment_not_found'=>'Payment not found',
+     'payment'=>'Payment',
+    'delivery_time'=>'Delivery time',
+    'notes'=>'Notes',
+    'cart_is_empty'=>'Cart is empty',
+    'min_order'=>'The minimum order value is :min_order EGP',
+    'order_added'=>'Order Added Successfully',
+    'order_not_found'=>'Order not found'
 
 ];

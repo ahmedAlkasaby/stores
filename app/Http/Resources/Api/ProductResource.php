@@ -83,7 +83,7 @@ class ProductResource extends JsonResource
             'size' => new SizeResource($this->whenLoaded('size')),
             'service' => new ServiceResource($this->whenLoaded('service')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'children' => ProductResource::collection($this->whenLoaded('children')->filter()),
+            'children' => ProductResource::collection($this->whenLoaded('children')),
             'parent' => new ProductResource($this->whenLoaded('parent')),
 
         ];
