@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\DeliveryTimeController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Api\StoreTypeController;
 use App\Http\Controllers\Api\WishListController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -53,6 +55,7 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
     Route::apiResource('regions',RegionController::class)->only(['index','show']);
     Route::apiResource('payments',PaymentController::class)->only(['index','show']);
     Route::apiResource('delivery_times',DeliveryTimeController::class)->only(['index','show']);
+    Route::apiResource('pages',PageController::class)->only(['index','show']);
     Route::group(['prefix'=>'auth'],function(){
         Route::post('register/check',[AuthController::class, 'check_register']);
         Route::post('register',[AuthController::class,'register']);
