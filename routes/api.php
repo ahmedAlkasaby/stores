@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\DeliveryTimeController;
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
@@ -59,11 +60,13 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::post('rest/password',[RestPasswordController::class,'RestPassword']);
     });
     Route::group(['middleware'=>['auth-api']],function(){
+        Route::get('notifications',[NotificationController::class,'index']);
         Route::get('wishlists',[WishListController::class,'index']);
         Route::post('wishlists',[WishListController::class,'toggle']);
         Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
         Route::apiResource('addresses',AddressController::class);
         Route::apiResource('orders',OrderController::class)->only(['index','show','store','update']);
+
     });
 
 });
