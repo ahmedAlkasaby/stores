@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\StoreController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Api\StoreTypeController;
 use App\Http\Controllers\Api\WishListController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -66,6 +68,11 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
         Route::apiResource('addresses',AddressController::class);
         Route::apiResource('orders',OrderController::class)->only(['index','show','store','update']);
+        Route::group(['prefix'=>'profile'],function(){
+            Route::get('/',[ProfileController::class, 'index']);
+            Route::post('change/address',[ProfileController::class, 'changeAddress']);
+            Route::post('change/password',[ProfileController::class, 'changePassword']);
+        });
 
     });
 

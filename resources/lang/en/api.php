@@ -41,6 +41,10 @@ return [
     'min_order'=>'The minimum order value is :min_order EGP',
     'order_added'=>'Order Added Successfully',
     'order_not_found'=>'Order not found',
-    'order_updated'=>'Order Updated Successfully'
+    'order_updated'=>'Order Updated Successfully',
+    'address_changed'=>'Address Changed Successfully',
+    'The old password must not match the new password'=>'The old password must not match the new password',
+    'current_password_not_correct'=>'The current password is incorrect',
+    'change_password_successfully'=>'Change Password Successfully',
 
 ];

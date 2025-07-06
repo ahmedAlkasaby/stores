@@ -42,6 +42,10 @@ return [
     'order_added'=>'تم اضافه الطلب بنجاح',
     'order_not_found'=>'الطلب غير موجود',
     'order_updated'=>'تم تحديث الطلب بنجاح',
+    'address_changed'=>'تم تغيير العنوان بنجاح',
+    'The old password must not match the new password'=>'كلمة المرور القديمة يجب ان تكون مختلفة عن كلمة المرور الجديدة',
+    'current_password_not_correct'=>'كلمة المرور الحالية غير صحيحة',
+    'change_password_successfully'=>'تم تغيير كلمة المرور بنجاح',
 
 
 ];
