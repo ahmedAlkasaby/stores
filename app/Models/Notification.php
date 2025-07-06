@@ -24,5 +24,22 @@ class Notification extends MainModel
         $this->save();
     }
 
-    
+    public static function send($users,$nameAr,$nameEn,$descriptionAr,$descriptionEn)
+    {
+        foreach ($users as $user) {
+            Notification::create([
+                'user_id' => $user->id,
+                'name' =>[
+                    'en' => $nameEn,
+                    'ar' => $nameAr,
+                ] ,
+                'description' => [
+                    'en' => $descriptionEn,
+                    'ar' => $descriptionAr,
+                ],
+            ]);
+        }
+    }
+
+
 }

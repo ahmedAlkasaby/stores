@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\OrderNotificationData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\Api\OrderCollection;
 use App\Http\Resources\Api\OrderResource;
+use App\Models\Notification;
 use App\Models\User;
+use App\Services\FirebaseNotificationService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends MainController
 {
@@ -45,6 +49,7 @@ class OrderController extends MainController
             $items = $user->cartItems()->with('product')->get();
             $this->orderService->createOrderItems($items, $order);
             $user->cartItems()->delete();
+            $this->orderService->notificationAfterOrder();
         });
 
        return $this->messageSuccess(__('api.order_added'));

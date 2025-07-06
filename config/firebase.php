@@ -11,6 +11,8 @@ return [
 
     'default' => env('FIREBASE_PROJECT', 'app'),
 
+    'project_id' => env('FIREBASE_PROJECT_ID'), // تأكد من إضافة هذا في ملف .env أيضًا
+
     /*
      * ------------------------------------------------------------------------
      * Firebase project configurations

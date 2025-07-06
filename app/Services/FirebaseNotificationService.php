@@ -1,9 +1,10 @@
 <?php
 namespace App\Services;
 
-use Kreait\Firebase\Messaging\CloudMessage;
-use Kreait\Firebase\Messaging;
+use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Factory;
+use Kreait\Firebase\Messaging;
+use Kreait\Firebase\Messaging\CloudMessage;
 
 class FirebaseNotificationService
 {
@@ -28,4 +29,23 @@ class FirebaseNotificationService
 
         return $this->messaging->send($message);
     }
+
+    public function sendNotificationWithDevice($device, $title, $body, $data = [])
+    {
+        try {
+            $this->sendNotification(
+                    $device->token,
+                    $title,
+                    $body,
+                    $data
+            );
+        } catch (\Kreait\Firebase\Exception\Messaging\InvalidMessage $e) {
+            Log::info('Invalid FCM token: ' . $device->token);
+            $device->delete();
+        } catch (\Throwable $e) {
+            Log::info('Unexpected FCM error: ' . $e->getMessage());
+
+        }
+    }
+
 }

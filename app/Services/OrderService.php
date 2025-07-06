@@ -2,12 +2,22 @@
 
 namespace App\Services;
 
+use App\Helpers\OrderNotificationData;
+use App\Models\Notification;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrderService{
+
+    protected $firebaseNotification;
+
+    public function __construct(FirebaseNotificationService $firebaseNotification){
+        $this->firebaseNotification=$firebaseNotification;
+
+    }
 
     public function getShippingAddress()
     {
@@ -72,6 +82,34 @@ class OrderService{
         }
 
         return true;
+    }
+
+    public function notificationAfterOrder()
+    {
+        $admins=User::where('type','admin')->where('notify',1)->where('active',1)->get();
+        $notificationData=OrderNotificationData::getData('new_order');
+        Notification::send($admins,$notificationData['title_ar'],$notificationData['title_en'],$notificationData['body_ar'],$notificationData['body_en']);
+        $dataFirebase = [
+            'title' => json_encode([
+                'ar' => $notificationData['title_ar'],
+                'en' => $notificationData['title_en'],
+            ]),
+            'body' => json_encode([
+                'ar' => $notificationData['body_ar'],
+                'en' => $notificationData['body_en'],
+            ]),
+        ];
+        $user=Auth::guard('api')->user();
+
+        foreach ($user->devices as $device) {
+            $this->firebaseNotification->sendNotificationWithDevice(
+                $device,
+                $notificationData['title_ar'],
+                $notificationData['body_ar'],
+                $dataFirebase,
+            );
+        }
+
     }
 
 }
