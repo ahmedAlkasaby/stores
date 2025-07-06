@@ -40,6 +40,7 @@ return [
     'cart_is_empty'=>'Cart is empty',
     'min_order'=>'The minimum order value is :min_order EGP',
     'order_added'=>'Order Added Successfully',
-    'order_not_found'=>'Order not found'
+    'order_not_found'=>'Order not found',
+    'order_updated'=>'Order Updated Successfully'
 
 ];

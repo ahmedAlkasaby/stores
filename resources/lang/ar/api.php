@@ -40,7 +40,8 @@ return [
     'cart_is_empty'=>'عربة التسوق فارغة',
     'min_order'=>'قيمة الطلب الادنى هي :min_order جنيه',
     'order_added'=>'تم اضافه الطلب بنجاح',
-    'order_not_found'=>'الطلب غير موجود'
+    'order_not_found'=>'الطلب غير موجود',
+    'order_updated'=>'تم تحديث الطلب بنجاح',
 
 
 ];

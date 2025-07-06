@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\OrderNotificationData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\OrderRequest;
+use App\Http\Requests\Api\UpdateOrderRequest;
 use App\Http\Resources\Api\OrderCollection;
 use App\Http\Resources\Api\OrderResource;
 use App\Models\Notification;
@@ -69,6 +70,19 @@ class OrderController extends MainController
             return $this->messageError(__('api.order_not_found'));
         }
         return $this->sendData(new OrderResource($order));
+    }
+
+    public function update(UpdateOrderRequest $request,string $id)
+    {
+        $data = $request->validated();
+        $auth=Auth()->guard('api')->user();
+        $user=User::find($auth->id);
+        $order=$user->orders()->where('id',$id)->first();
+        if (!$order) {
+            return $this->messageError(__('api.order_not_found'));
+        }
+        $order->update($data);
+        return $this->messageSuccess(__('api.order_updated'));
     }
 
 

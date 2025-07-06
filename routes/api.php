@@ -63,7 +63,7 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::post('wishlists',[WishListController::class,'toggle']);
         Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
         Route::apiResource('addresses',AddressController::class);
-        Route::apiResource('orders',OrderController::class)->only(['index','show','store']);
+        Route::apiResource('orders',OrderController::class)->only(['index','show','store','update']);
     });
 
 });
