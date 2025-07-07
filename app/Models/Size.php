@@ -4,18 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Size extends MainModel
-{   
-    use SoftDeletes;
+{
     protected $fillable = [
         'name',
         'description',
         'active',
         'order_id'
     ];
-     public function scopeFilter($query, $request=null,$type_app='app')
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
+
+    public function scopeFilter($query, $request=null,$type_app='app')
     {
 
         $request=$request??request();
@@ -24,6 +28,9 @@ class Size extends MainModel
                 $q->where('name','like','%'.$request->search.'%')
                    ->orWhere('description','like','%'.$request->search.'%');
             });
+        }
+        if(request()->has('active') && request()->active != 'all'){
+            $query->where('active',request()->active);
         }
         if($request->has("deleted") ){
             $query->onlyTrashed();

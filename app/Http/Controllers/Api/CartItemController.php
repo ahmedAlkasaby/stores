@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreCartItemsRequest;
 use App\Http\Resources\Api\CartItemCollection;
 use App\Http\Resources\Api\CartItemResource;
 use App\Models\CartItem;
-use App\Models\Product;
 use App\Models\User;
+use App\Services\CartItemsService;
 
 class CartItemController extends MainController
 {
+    protected $cartItemsService ;
+
+    public function __construct(CartItemsService $cartItemsService)
+    {
+        $this->cartItemsService = $cartItemsService;
+    }
+
 
     public function index()
     {
@@ -23,23 +29,17 @@ class CartItemController extends MainController
 
     public function store(StoreCartItemsRequest $request)
     {
-        // check qty is smaller than product stock
-        $product = Product::find($request->product_id);
-        if ($product->qty < $request->qty) {
-            return $this->messageError(__('validation.qty_greater_than_stock'));
-        }
-
-        // check if product is already in cart
         $auth=Auth()->guard('api')->user();
         $user=User::find($auth->id);
-        $cartItem=CartItem::where('product_id', $request->product_id)
-        ->where('user_id', $user->id)
-        ->first();
-        if($cartItem){
-           $cartItem->update([
-                'qty' => $request->qty,
-            ]);
-            return $this->messageSuccess(__('site.cart_item_updated'));
+
+        if($this->cartItemsService->checkProductInCart($request->product_id,$auth->id)){
+            CartItem::where('product_id', $request->product_id)->where('user_id', $auth->id)->delete();
+        }
+
+        $result=$this->cartItemsService->canPlaceProductInCart($request->product_id,$request->amount,$auth->id);
+
+        if($result !== true){
+            return $this->messageError($result);
         }
 
         $user->cartItems()->create($request->validated());
@@ -51,7 +51,9 @@ class CartItemController extends MainController
 
     public function show(string $id)
     {
-        $cartItem = CartItem::with('product')->find($id);
+        $auth=Auth()->guard('api')->user();
+        $user=User::find($auth->id);
+        $cartItem=$user->cartItems()->with('product')->where('id',$id)->first();
         if (!$cartItem) {
             return $this->messageError(__('site.cart_item_not_found'));
         }
@@ -62,7 +64,10 @@ class CartItemController extends MainController
 
     public function destroy(string $id)
     {
-        $cartItem = CartItem::find($id);
+        $auth=Auth()->guard('api')->user();
+        $user=User::find($auth->id);
+        $cartItem=$user->cartItems()->where('id',$id)->first();
+
         if (!$cartItem) {
             return $this->messageError(__('site.cart_item_not_found'));
         }

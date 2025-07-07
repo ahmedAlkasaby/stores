@@ -17,7 +17,8 @@ class ApiAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::guard('api')->user();
+        $user = auth()->guard('api')->user();
+
         if($user){
             return $next($request);
 

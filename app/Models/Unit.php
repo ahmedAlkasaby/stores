@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends MainModel
 {
-    use SoftDeletes;
-    
+
     protected $fillable = [
         'name',
         'description',
         'active',
         'order_id'
     ];
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
 

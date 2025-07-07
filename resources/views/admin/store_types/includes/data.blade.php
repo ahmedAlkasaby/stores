@@ -1,8 +1,8 @@
 <tr>
-    <td >{{ $storeType->nameLang() }}</td>
+    <td class="text-lg-center">{{ $storeType->nameLang() }}</td>
 
     {{-- image --}}
-    <td >
+    <td class="text-lg-center">
         @if ($storeType->image)
         <img src="{{ asset( $storeType->image) }}" alt="{{ $storeType->nameLang() }}" class="rounded-circle" width="50"
             height="50">

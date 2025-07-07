@@ -2,6 +2,7 @@
 <div class="col-12 mb-4">
     <small class="text-light fw-medium"></small>
     <div class="bs-stepper wizard-numbered mt-2">
+        @if(!isset($show))
         <div class="bs-stepper-header">
             <div class="step" data-target="#english-details">
                 <button type="button" class="step-trigger">
@@ -25,6 +26,7 @@
                 </button>
             </div>
         </div>
+        @endif
         <div class="bs-stepper-content">
             <form onSubmit="return false">
                 <!-- english Details -->
@@ -42,7 +44,7 @@
                         @if($show_title ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.text', [
-                            'text_name' => 'title_en',
+                            'text_name' => 'title[en]',
                             'text_value' => $name_en ?? null,
                             'label_name' => __('site.english_title'),
                             'not_req' => true,
@@ -91,7 +93,7 @@
                         @if($show_title ?? false)
                         <div class="col-sm-12">
                             @include('admin.layouts.forms.fields.text', [
-                            'text_name' => 'title_ar',
+                            'text_name' => 'title[ar]',
                             'text_value' => $name_ar ?? null,
                             'label_name' => __('site.arabic_title'),
                             'not_req' => true,

@@ -24,6 +24,7 @@ $field_name = $field_name.'[]';
 if (isset($select_id)) {
 $array_control['id'] = $select_id;
 }
+
 @endphp
 @include('admin.layouts.forms.fields.form-group-head', ['field_name' => $field_name])
 @include('admin.layouts.forms.fields.label',['label_default'=>__("site.".$field_name)])

@@ -1,8 +1,9 @@
 <tr>
-    <td>{{ $brand->nameLang() }}</td>
-    <td>{{ $brand->order_id?? 0 }}</td>
+    <td class="text-lg-center">{{ $brand->id }}</td>
+    <td class="text-lg-center">{{ $brand->nameLang() }}</td>
+    <td class="text-lg-center">{{ $brand->order_id?? 0 }}</td>
     {{-- image --}}
-    <td >
+    <td class="text-lg-center">
         @if ($brand->image)
         <img src="{{ asset( $brand->image) }}" alt="{{ $brand->nameLang() }}" class="rounded-circle" width="50"
             height="50">

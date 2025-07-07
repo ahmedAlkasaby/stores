@@ -28,8 +28,8 @@ class ToggleWishlistRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'product_id.required' => __('validation.product_required'),
-            'product_id.exists' => __('validation.product_exists'),
+            'product_id.required' => __('validation.required',['attribute'=>'product_id']),
+            'product_id.exists' => __("validation.exists",['attribute'=>'product_id']),
         ];
     }
 }

@@ -40,24 +40,11 @@ class BrandController extends MainController
      */
     public function store(BrandRequest $request)
     {
-        $imageUrl = "";
+        $imageUrl = $this->imageService->uploadImage('brands', $request);
+        $data = $request->except('image');
 
-        if ($request->hasFile('image')) {
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'brands');
-        }
-        Brand::create([
-            "name" => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en
-            ],
-            "description" => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en
-            ],
-            "active" => $request->active,
-            "order_id" => $request->order_id,
-            "image" => $imageUrl,
-        ]);
+        $data['image'] = $imageUrl;
+        Brand::create($data);
         return redirect()->route('dashboard.brands.index')->with('success', __('site.brand_created_successfully'));
     }
 
@@ -85,62 +72,31 @@ class BrandController extends MainController
     public function update(Request $request, string $id)
     {
         $brand = Brand::findOrFail($id);
-        $imageUrl = $brand->image ?? "";
+        $imgUrl = $this->imageService->editImage($request, $brand, 'brands');
+        $data = $request->except('image');
 
-        if ($request->hasFile('image')) {
-            // Delete the old image if it exists
-            if ($imageUrl) {
-                $this->imageService->deleteImage($imageUrl);
-            }
-            $imageUrl = $this->imageService->uploadImage($request->file('image'), 'brands');
-        }
-
-        $brand->update([
-            "name" => [
-                "ar" => $request->name_ar,
-                "en" => $request->name_en
-            ],
-            "description" => [
-                "ar" => $request->description_ar,
-                "en" => $request->description_en
-            ],
-            "active" => $request->active,
-            "order_id" => $request->order_id,
-            "image" => $imageUrl,
-        ]);
-
+        $data['image'] = $imgUrl ?? $brand->image;
+        $brand->update($data);
         return redirect()->route('dashboard.brands.index')->with('success', __('site.brand_updated_successfully'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Brand $brand)
     {
-        $brand = Brand::findOrFail($id);
+        if ($brand->products()->count() > 0) {
+            return redirect()->route('dashboard.brands.index')->with('error', __('site.brand_has_products'));
+        }
+        $this->imageService->deleteImage($brand->image);
         $brand->delete();
         return redirect()->route('dashboard.brands.index')->with('success', __('site.brand_deleted_successfully'));
     }
-    public function toggleActive(string $id)
+    public function active(Brand $brand)
     {
-        $brand = Brand::withTrashed()->where('id', $id)->first();
-        $brand->active = !$brand->active;
-        $brand->save();
-        return redirect()->back()->with('success', __('site.brand_status_updated_successfully'));
-    }
-    public function restore($brandId)
-    {
-        $brand = Brand::withTrashed()->findOrFail($brandId);
-        $brand->restore();
-        return back()->with('success', __('site.brand_restored_successfully'));
-    }
-    public function forceDelete($brandId)
-    {
-        $brand = Brand::withTrashed()->findOrFail($brandId);
-        if ($brand->image) {
-            $this->imageService->deleteImage($brand->image);
-        }
-        $brand->forceDelete();
-        return back()->with('success', __('site.brand_deleted_successfully'));
+        $brand->update([
+            'active' => !($brand->active),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $brand->active,
+        ]);
     }
 }

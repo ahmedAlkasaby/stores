@@ -1,5 +1,5 @@
 @php
-    $route_name = /*getRouteName($route_type ?? null)*/null;
+    $route_name = /*getRouteName($route_type ?? null)*/ null;
     $add_class = '';
     $route_method = 'POST';
     $is_validate = 'yes';
@@ -22,20 +22,30 @@
     if (isset($form_status)) {
         $route_status = $form_status;
     }
-    $form_control = ['method' => $route_method,'class' => 'systemira-form ' . $add_class,'autocomplete' => $autocomplete,];
-    if ($is_validate == "yes"){
+    $form_control = [
+        'method' => $route_method,
+        'class' => 'systemira-form ' . $add_class,
+        'autocomplete' => $autocomplete,
+    ];
+    if ($is_validate == 'yes') {
         $form_control[$route_validate] = $route_validate_type;
     }
-    if (isset($enctype)){
-        $form_control['enctype'] = "multipart/form-data";
+    if (isset($enctype)) {
+        $form_control['enctype'] = 'multipart/form-data';
     }
-    if (isset($model_id) && isset($table_parent)){
+
+    if (isset($model_id) && isset($table_parent)) {
         $form_control['route'] = ["$route_name.$table_parent.$table.$route_status", $model_id];
-    }elseif (isset($model_id) && !isset($table_parent)){
+    } elseif (isset($model_id) && !isset($table_parent)) {
         $form_control['route'] = ["$route_name.$table.$route_status", $model_id];
-    }else{
+    } else {
         $form_control['route'] = "$table.$route_status";
     }
+    $form_control['id'] = 'formDropzone';
 @endphp
-    {!! Form::open($form_control) !!}
-
+<div class="col-lg-12 margin-tb mb-1 mb-2">
+    <div class="pull-left">
+        <a class="btn btn-primary ti ti-arrow-left waves-effect waves-light" href="{{ route("$table.index") }}"></a>
+    </div>
+</div>
+{!! Form::open($form_control) !!}

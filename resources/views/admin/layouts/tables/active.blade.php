@@ -3,7 +3,7 @@
 @endphp
 
 
- <td >
+ <td class="text-lg-center">
         @if (auth()->user()->hasPermission($model.'.active'))
             <button type="button"
                 class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }} {{ $function }}-{{ $model }} waves-effect waves-light"

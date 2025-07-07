@@ -401,6 +401,11 @@ return [
     'order_id_min' => 'معرف الطلب يجب أن يكون على الأقل 0.',
     'order_id_max' => 'معرف الطلب يجب أن لا يتجاوز 9999999999999999',
     'address_required' => 'العنوان مطلوب.',
+    "order_id_required" => "رقم العرض مطلوب",
 
+    "city_id_required" => "المدينة مطلوبة",
+    "shipping_required" => "الشحن مطلوب",
+    "shipping_numeric" => "الشحن يجب ان يكون رقم",
 
+   
 ];

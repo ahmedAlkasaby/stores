@@ -16,5 +16,5 @@
 
 @section('jsFiles')
 <script src="{{asset("admin/assets/vendor/libs/select2/select2.js")}}"></script>
-@include('admin.layouts.table.dataTableJs')
+@include('admin.layouts.table.dataTableJs',["table"=>$roles->count() > 0])
 @endsection

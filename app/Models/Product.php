@@ -23,11 +23,12 @@ class Product extends MainModel
     'offer_price',
     'offer_amount',
     'offer_percent',
+    'shipping_cost',
 
     // order limits
     'start',
     'skip',
-    'order_limit',
+    'amount',
     'max_order',
 
     // status flags
@@ -45,11 +46,10 @@ class Product extends MainModel
     // dates
     'date_start',
     'date_end',
-    'day_start',
-    'day_end',
+
 
     // foreign keys
-    'store_id',
+    'service_id',
     'unit_id',
     'brand_id',
     'size_id',
@@ -66,15 +66,14 @@ class Product extends MainModel
     }
 
 
-    public function store()
+    public function service()
     {
-        return $this->belongsTo(Store::class, 'store_id', 'id');
+        return $this->belongsTo(Service::class, 'service_id', 'id');
     }
 
-    public function storeType()
-    {
-        return $this->hasOneThrough(StoreType::class,Store::class, 'id', 'id', 'store_id', 'store_type_id');
-    }
+
+
+
 
 
     public function unit()
@@ -104,6 +103,10 @@ class Product extends MainModel
         return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
     }
 
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class,'product_id','id');
+    }
 
 
 
@@ -111,11 +114,10 @@ class Product extends MainModel
     {
         return $query
             ->where('active', $type_app == 'app' ? true : $request->active)
-            ->where('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
-            ->where('date_expire', '>=', $type_app == 'app' ? now() : $request->date_expire)
-            ->where('day_start', '<=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_start)
-            ->where('day_end', '>=', $type_app == 'app' ? now()->format('H:i:s') : $request->day_end)
-            ->orderBy('order_id', 'asc');
+            ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
+            ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
+            ->orderBy('order_id', 'asc')
+            ;
     }
 
     public function scopeApplySearch($query, $request)
@@ -132,16 +134,10 @@ class Product extends MainModel
         return $query;
     }
 
-    public function scopeApplyStoreFilters($query, $request)
+    public function scopeApplyServiceFilters($query, $request)
     {
-        if ($request->filled('store_type_id')) {
-            $query->whereHas('store.storeType', function ($q) use ($request) {
-                $q->where('id', $request->store_type_id);
-            });
-        }
-
-        if ($request->filled('store_id')) {
-            $query->where('store_id', $request->store_id);
+        if ($request->filled('service_id')) {
+            $query->where('service_id', $request->service_id);
         }
 
         return $query;
@@ -257,10 +253,10 @@ class Product extends MainModel
         if ($request->filled('sort_by')) {
             switch ($request->sort_by) {
                 case 'latest':
-                    $query->orderByDesc('order_id');
+                    $query->orderByDesc('id');
                     break;
                 case 'oldest':
-                    $query->orderBy('order_id', 'asc');
+                    $query->orderBy('id', 'asc');
                     break;
                 case 'highest_price':
                     $query->orderBy('price', 'desc');
@@ -285,7 +281,7 @@ class Product extends MainModel
         return $query
             ->applyBasicFilters($request, $type_app)
             ->applySearch($request)
-            ->applyStoreFilters($request)
+            ->applyServiceFilters($request)
             ->applyCategoryFilter($request)
             ->applyPriceFilters($request)
             ->applyFeatureFilter($request)
@@ -298,7 +294,8 @@ class Product extends MainModel
             ->applyFreeShippingFilter($request)
             ->applyReturnedFilter($request)
             ->applySorting($request)
-            ->applyDateFilters($request);
+            ->applyDateFilters($request)
+            ;
     }
 
 
@@ -310,7 +307,7 @@ class Product extends MainModel
         if ($userId) {
             return CartItem::where('product_id', $this->id)
                 ->where('user_id', $userId)
-                ->sum('qty');
+                ->sum('amount');
         }
         return 0;
     }
@@ -327,7 +324,7 @@ class Product extends MainModel
         return $userId && $this->wishlists()->where('user_id', $userId)->exists();
     }
 
-    public function productIdInCart(): int
+    public function productIdInCart()
     {
         $userId = Auth::guard('api')->id();
         if ($userId) {
@@ -337,6 +334,24 @@ class Product extends MainModel
                 ->first();
         }
         return 0;
+    }
+
+    public function amountInAllCarts(){
+        return $this->cartItems()->sum('amount');
+    }
+
+    public function availableAmount(){
+        return $this->amount - $this->amountInAllCarts();
+    }
+
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->where('active', true)->avg('rating') ?? 0;
     }
 
 

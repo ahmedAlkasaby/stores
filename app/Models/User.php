@@ -31,7 +31,8 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         'active',
         'phone',
         'vip',
-        'notify'
+        'notify',
+        "image"
     ];
 
 
@@ -62,6 +63,11 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class, 'user_id', 'id');
     }
 
     public function scopeFilter($query ,$request=null){
@@ -96,6 +102,8 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         return $query;
     }
 
+
+
     public function wishlists()
     {
         return $this->belongsToMany(Product::class,'wishlists','user_id','product_id')->withTimestamps();
@@ -110,4 +118,49 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     {
         return $this->hasMany(Order::class, 'user_id','id');
     }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id', 'id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
+    }
+
+    public function notificationsUnread()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')->whereNull('read_at');
+    }
+    public function notificationsRead()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')->whereNotNull('read_at');
+    }
+
+
+    public function markNotificationAsRead($notifications)
+    {
+        foreach ($notifications as $notification){
+            $notification->update(['read_at' => now()]);
+        }
+    }
+
+    public function totalPriceInCart(){
+        if($this->cartItems->count()==0){
+            return 0;
+        }
+        $price=0;
+        $cartItems=$this->cartItems;
+        foreach ($cartItems as $item) {
+            $product=Product::find($item->product_id);
+            $price += $product->price * $item->amount;
+        }
+        return $price;
+
+    }
+
+
+
+
 }
