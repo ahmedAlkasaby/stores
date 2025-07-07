@@ -20,6 +20,7 @@ class OrderResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'address_id' => $this->address_id,
             'payment_id' => $this->payment_id,
             'delivery_time_id' => $this->delivery_time_id,
             'delivery_id' => $this->delivery_id,
@@ -37,6 +38,7 @@ class OrderResource extends JsonResource
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
             'order_items' => OrderItemResource::collection($this->whenLoaded('orderItems')),
             'user' => new UserResource($this->whenLoaded('user')),
+            'address' => new AddressResource($this->whenLoaded('address')),
             'payment' => new PaymentResource($this->whenLoaded('payment')),
             'delivery_time' => new DeliveryTimeResource($this->whenLoaded('deliveryTime')),
             'delivery' => new UserResource($this->whenLoaded('delivery')),

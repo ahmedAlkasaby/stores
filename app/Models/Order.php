@@ -12,6 +12,7 @@ class Order extends MainModel
 
     protected $fillable = [
         'user_id',
+        'address_id',
         'status',
         'payment_id',
         'delivery_time_id',
@@ -29,6 +30,11 @@ class Order extends MainModel
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id', 'id');
     }
 
     public function delivery()

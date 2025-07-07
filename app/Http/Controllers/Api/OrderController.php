@@ -28,7 +28,7 @@ class OrderController extends MainController
     {
         $auth=Auth()->guard('api')->user();
         $user=User::find($auth->id);
-        $data=['user','delivery','payment','deliveryTime','orderItems.product'];
+        $data=['user','address','delivery','payment','deliveryTime','orderItems.product'];
         $orders=$user->orders()->with($data)->paginate($this->perPage);
         return $this->sendData(new OrderCollection($orders));
     }
@@ -46,6 +46,7 @@ class OrderController extends MainController
 
         DB::transaction(function () use ($user, $data) {
             $data['shipping_address'] = $this->orderService->getShippingAddress();
+            $data['address_id'] = $this->orderService->getAddressId();
             $order = $user->orders()->create($data);
             $items = $user->cartItems()->with('product')->get();
             $this->orderService->createOrderItems($items, $order);
@@ -63,7 +64,7 @@ class OrderController extends MainController
     {
         $auth=Auth()->guard('api')->user();
         $user=User::find($auth->id);
-        $data=['user','delivery','payment','deliveryTime','orderItems.product'];
+        $data=['user','address','delivery','payment','deliveryTime','orderItems.product'];
 
         $order=$user->orders()->with($data)->where('id',$id)->first();
         if (!$order) {
