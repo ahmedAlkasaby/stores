@@ -28,6 +28,7 @@ class AddressRequest extends FormRequest
             "region_id" => "required|exists:regions,id",
             "city_id" => "required|exists:cities,id",
             "type" => "required",
+            "phone" => "nullable|numeric|digits:11",
             "address" => "required|string",
             "building" => "nullable|string",
             "floor" => "nullable|string",
@@ -35,6 +36,21 @@ class AddressRequest extends FormRequest
             "additional_info" => "nullable|string",
             "latitude" => "required|string",
             "longitude" => "required|string",
+
+        ];
+    }
+
+    public function messsage():array{
+        return [
+            "user_id.required" => __("validation.required", ["attribute" => "User ID"]),
+            "region_id.required" => __("validation.required", ["attribute" => "Region ID"]),
+            "city_id.required" => __("validation.required", ["attribute" => "City ID"]),
+            "type.required" => __("validation.required", ["attribute" => "Type"]),
+            "phone.numeric" => __("validation.numeric", ["attribute" => "Phone"]),
+            "phone.digits" => __("validation.digits", ["attribute" => "Phone"]),
+            "address.required" => __("validation.required", ["attribute" => "Address"]),
+            "latitude.required" => __("validation.required", ["attribute" => "Latitude"]),
+            "longitude.required" => __("validation.required", ["attribute" => "Longitude"]),
 
         ];
     }

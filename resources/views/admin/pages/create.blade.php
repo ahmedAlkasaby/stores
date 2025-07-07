@@ -19,60 +19,7 @@
         'enctype' => true,
     ])
 
-    @include('admin.layouts.forms.head', [
-        'show_name' => true,
-        'show_title' => true,
-        'show_content' => true,
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'order_id',
-        'min' => 0,
-        'placeholder' => __('site.order_id'),
-    ])
-
-    <div class ="row">
-        <div class="col-sm-6">
-            @include('admin.layouts.forms.fields.select', [
-                'select_name' => 'active',
-                'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
-                'select_value' => $page->active ?? null,
-                'select_class' => 'select2',
-                'select2' => true,
-            ])
-        </div>
-        <div class="col-sm-6">
-            @include('admin.layouts.forms.fields.select', [
-                'select_name' => 'type',
-                'select_function' => \App\Helpers\PageHelper::getPagesTypes(),
-                'select_value' => $page->type ?? null,
-                'select_class' => 'select2',
-                'select2' => true,
-            ])
-        </div>
-        <div class="col-sm-6">
-            @include('admin.layouts.forms.fields.text', [
-                'text_name' => 'linl',
-                'text_value' => $page->linl ?? null,
-                'label_name' => __('site.link'),
-                'not_req' => true,
-            ])
-        </div>
-        <div class="col-sm-6">
-            @include('admin.layouts.forms.fields.text', [
-                'text_name' => 'video_link',
-                'text_value' => $page->video_link ?? null,
-                'label_name' => __('site.video_link'),
-                'not_req' => true,
-            ])
-        </div>
-    </div>
-    @include('admin.layouts.forms.fields.dropzone', [
-        'name' => 'image',
-    ])
-
-    @include('admin.layouts.forms.footer')
-    @include('admin.layouts.forms.close')
-    </div>
+ @include('admin.pages.includes.form-fields')
 @endsection
 
 @section('jsFiles')

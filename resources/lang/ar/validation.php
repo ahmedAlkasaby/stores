@@ -406,6 +406,7 @@ return [
     "city_id_required" => "المدينة مطلوبة",
     "shipping_required" => "الشحن مطلوب",
     "shipping_numeric" => "الشحن يجب ان يكون رقم",
+    "one_of_this_fields_required" => "احد الحقول مطلوبة (اللينك , المنتج)",
 
-   
+
 ];

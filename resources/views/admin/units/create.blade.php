@@ -17,26 +17,9 @@
         'enctype' => true,
     ])
 
-    @include('admin.layouts.forms.head', [
-        'show_name' => true,
-        'show_content' => true,
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'order_id',
-        'min' => 0,
-        'placeholder' => __('site.order_id'),
-        'label_req' => true,
-    ])
-    @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'active',
-        'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
-        'select_value' => $unit->active ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-    ])
-    @include('admin.layouts.forms.footer')
-    @include('admin.layouts.forms.close')
-    </div>
+@include("admin.units.includes.form-fields")
+@endsection
+
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
 @endsection
@@ -45,5 +28,4 @@
     <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-@endsection
 @endsection

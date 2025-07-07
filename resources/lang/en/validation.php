@@ -381,7 +381,7 @@ return [
     "city_id_required"=>"City is required",
     "shipping_required"=>"Shipping is required",
     "shipping_numeric"=>"Shipping must be numeric",
-
+    "one_of_this_fields_required"=>"One of this fields requred (link , product)"
    
 
 

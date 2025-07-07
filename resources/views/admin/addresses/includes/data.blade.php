@@ -4,6 +4,7 @@
     <td class="text-lg-center">{{ $address->city->nameLang() ?? __('site.null')  }}</td>
     <td class="text-lg-center">{{ $address->region->nameLang() ?? __('site.null') }}</td>
     <td class="text-lg-center">{{ $address->address }}</td>
+    <td class="text-lg-center">{{ $address->phone }}</td>
     {{-- location --}}
     <td class="text-lg-center">
         <a href="https://www.google.com/maps?q={{ $address->latitude }},{{ $address->longitude }}" target="_blank">

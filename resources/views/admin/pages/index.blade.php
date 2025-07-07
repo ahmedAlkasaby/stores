@@ -20,5 +20,5 @@
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
     @include('admin.layouts.table.dataTableJs', ['table' => $pages->count() > 0])
-    @include('admin.layouts.table.ajaxSeenjs', ['model' => 'pages'])
+    @include('admin.layouts.table.ajaxActivejs', ['model' => 'pages'])
 @endsection

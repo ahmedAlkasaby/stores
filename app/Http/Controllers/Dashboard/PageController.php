@@ -5,19 +5,21 @@ namespace App\Http\Controllers\dashboard;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Dashboard\MainController;
+use App\Services\ImageHandlerService;
 use App\Http\Requests\dashboard\PageRequest;
+use App\Http\Controllers\Dashboard\MainController;
 
 class PageController extends MainController
 {
     /**
      * Display a listing of the resource.
      */
-
-    public function __construct()
+    protected $imageService;
+    public function __construct(ImageHandlerService $ImageService)
     {
         parent::__construct();
         $this->setClass('pages');
+        $this->imageService = $ImageService;
     }
     public function index()
     {
@@ -38,7 +40,10 @@ class PageController extends MainController
      */
     public function store(PageRequest $request)
     {
-        Page::create($request->all());
+        $imageUrl = $this->imageService->uploadImage('pages', $request);
+        $data=$request->except('image');
+        $data['image'] = $imageUrl;
+        Page::create($data);
         return redirect()->route('dashboard.pages.index')->with('success', __('site.page_created_successfully'));
     }
 
@@ -47,7 +52,8 @@ class PageController extends MainController
      */
     public function show(string $id)
     {
-        //
+        $page = Page::findOrFail($id);
+        return view('admin.pages.edit',compact('page'));
     }
 
     /**
@@ -65,7 +71,10 @@ class PageController extends MainController
     public function update(PageRequest $request, string $id)
     {
         $page = Page::findOrFail($id);
-        $page->update($request->all());
+        $imageUrl=$this->imageService->editImage($request,$page,'pages');
+        $data=$request->except('image');
+        $data["image"]=$imageUrl;
+        $page->update($data);
         return redirect()->route('dashboard.pages.index')->with('success', __('site.page_updated_successfully'));
     }
 
@@ -74,7 +83,10 @@ class PageController extends MainController
      */
     public function destroy(string $id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $this->imageService->deleteImage($page,'pages');
+        $page->delete();
+        return redirect()->route('dashboard.pages.index')->with('success', __('site.page_deleted_successfully'));
     }
 
     public function active(Page $page)

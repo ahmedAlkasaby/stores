@@ -30,6 +30,7 @@ class SliderSeeder extends Seeder
                 'feature'=>rand(0,1),
                 'product_id'=>rand(0,1) == 1 ? null : Product::where('active',1)->inRandomOrder()->first()->id,
                 'order_id'=>rand(1,10),
+                "type"=>rand(0,1) == 1 ? 'product' : 'link',
             ]);
         }
     }
