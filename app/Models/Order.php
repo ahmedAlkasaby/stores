@@ -64,10 +64,7 @@ class Order extends MainModel
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-    public function region()
-    {
-        return $this->belongsTo(Region::class, 'region_id', 'id');
-    }
+
 
     public function orderPrice(){
         $price=0;
@@ -95,17 +92,7 @@ class Order extends MainModel
         return $shipping;
     }
 
-    public function getShippingAddress()
-    {
-        $auth=Auth::guard('api')->user();
-        $user=User::find($auth->id);
-        $address=$user->addresses()->where('active',1)->first();
-        $shipping=$address->city->shipping;
-        if ($address->region_id){
-            $shipping += $address->region->shipping;
-        }
-        return $shipping;
-    }
+   
 
 
 
