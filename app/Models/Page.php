@@ -8,32 +8,33 @@ use Illuminate\Support\Facades\Auth;
 
 class Page extends MainModel
 {
-    use HasFactory;
 
     protected $fillable = [
-        'title',
         'name',
         'description',
         'image',
-        'page',
+        'type',
         'active',
         'order_id',
-        'link',
-        'video_link',
-    ];
-    protected $casts = [
-        'title' => \App\Casts\UnescapedJson::class,
     ];
 
-    public function titleLang($lang = null)
+
+    public function scopeFilter($query, $request = null, $type_app = 'app')
     {
-        $data = $this->title;
-        if ($lang === null) {
-            $user = Auth::guard('api')->user();
-            $langUser = $user ? $user->lang : app()->getLocale();
-            $defaultLang = app()->getLocale();
-            return $data[$langUser] ?? $data[$defaultLang] ?? null;
+       $request=$request??request();
+
+        $query->orderBy('order_id','asc');
+
+        if($request->has('active') && $request->active !=='all'){
+            $query->where('active', $type_app=='app' ? 1 : $request->active);
         }
-        return $data[$lang] ?? null;
+
+        if($request->has('type')){
+            $query->where('type', $request->type);
+        }
+
     }
+
+
+
 }

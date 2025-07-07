@@ -22,7 +22,10 @@ class ProductController extends MainController
 
     public function show(string $id)
     {
-        $product = Product::with(['categories','service','unit','size','brand','children'])->find($id);
+        $product = Product::with(['categories','service','unit','size','brand','children'])
+                    ->filter()
+                    ->where('id', $id)
+                    ->first();
         if (!$product) {
             return $this->sendError(__('site.not_found_product'), 404);
         }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->time('start_hour');
             $table->time('end_hour');
             $table->boolean('active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

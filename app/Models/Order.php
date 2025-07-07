@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\StatusOrderEnum;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -13,7 +14,9 @@ class Order extends MainModel
         'user_id',
         'status',
         'payment_id',
-        'shipping',
+        'delivery_time_id',
+        'delivery_id',
+        'shipping_address',
         'notes',
     ];
 
@@ -28,7 +31,18 @@ class Order extends MainModel
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-   
+    public function delivery()
+    {
+        return $this->belongsTo(User::class,'delivery_id','id');
+    }
+
+    public function deliveryTime()
+    {
+        return $this->belongsTo(DeliveryTime::class, 'delivery_time_id', 'id');
+    }
+
+
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
@@ -44,11 +58,49 @@ class Order extends MainModel
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-
-
     public function region()
     {
         return $this->belongsTo(Region::class, 'region_id', 'id');
     }
+
+    public function orderPrice(){
+        $price=0;
+        $orderItems=$this->orderItems;
+        foreach ($orderItems as $item) {
+            $price += $item->price * $item->amount;
+        }
+        return $price;
+    }
+
+    public function orderDiscount(){
+        $discount=0;
+        $orderItems=$this->orderItems;
+        foreach ($orderItems as $item) {
+            $discount += $item->discount * $item->amount;
+        }
+        return $discount;
+    }
+    public function orderShippingProducts(){
+        $shipping=0;
+        $orderItems=$this->orderItems;
+        foreach ($orderItems as $item) {
+            $shipping += $item->shipping_cost * $item->amount;
+        }
+        return $shipping;
+    }
+
+    public function getShippingAddress()
+    {
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $address=$user->addresses()->where('active',1)->first();
+        $shipping=$address->city->shipping;
+        if ($address->region_id){
+            $shipping += $address->region->shipping;
+        }
+        return $shipping;
+    }
+
+
 
 }

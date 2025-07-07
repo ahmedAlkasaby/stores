@@ -22,8 +22,31 @@ class Region extends MainModel
         return $this->belongsTo(City::class);
     }
 
-        public function orders()
+    public function scopeFilter($query, $request=null,$type_app='app')
     {
-        return $this->hasMany(Order::class);
+
+        $request=$request??request();
+
+        $query->orderBy('order_id','asc');
+
+        if($request->has('active') && $request->active !=='all'){
+            $query->where('active', $type_app=='app' ? 1 : $request->active);
+        }
+
+        if ($request->has('search')) {
+            $query->where(function($q) use($request){
+                $q->where('name','like','%'.$request->search.'%');
+            });
+        }
+
+        if($request->has('city_id')){
+            $query->where('city_id',$request->city_id);
+        }
+
+       return $query;
     }
+
+
+
+
 }

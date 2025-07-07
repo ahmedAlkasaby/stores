@@ -19,7 +19,7 @@ class ServiceController extends MainController
 
     public function show(string $id)
     {
-        $service=Service::withCount(['categories','products'])->find($id);
+        $service=Service::filter()->withCount(['categories','products'])->where('id',$id)->first();
         if (!$service) {
             return $this->messageError(__('site.not_found_store'), 404);
         }

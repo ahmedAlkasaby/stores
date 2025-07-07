@@ -51,7 +51,9 @@ class CartItemController extends MainController
 
     public function show(string $id)
     {
-        $cartItem = CartItem::with('product')->find($id);
+        $auth=Auth()->guard('api')->user();
+        $user=User::find($auth->id);
+        $cartItem=$user->cartItems()->with('product')->where('id',$id)->first();
         if (!$cartItem) {
             return $this->messageError(__('site.cart_item_not_found'));
         }
@@ -62,7 +64,10 @@ class CartItemController extends MainController
 
     public function destroy(string $id)
     {
-        $cartItem = CartItem::find($id);
+        $auth=Auth()->guard('api')->user();
+        $user=User::find($auth->id);
+        $cartItem=$user->cartItems()->where('id',$id)->first();
+
         if (!$cartItem) {
             return $this->messageError(__('site.cart_item_not_found'));
         }

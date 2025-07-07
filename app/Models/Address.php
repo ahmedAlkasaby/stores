@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\TypeAddressEnum;
+
 
 class Address extends MainModel
 {
+
     protected $fillable = [
         'user_id',
         'type',
@@ -17,7 +20,12 @@ class Address extends MainModel
         'building',
         'floor',
         'apartment',
+        'phone',
         'additional_info'
+    ];
+
+    protected $casts=[
+        'type'=>TypeAddressEnum::class,
     ];
 
     public function user()

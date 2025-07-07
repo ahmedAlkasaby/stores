@@ -59,7 +59,7 @@ class Service  extends MainModel
             }
         }
 
-      
+
        return $query;
     }
 

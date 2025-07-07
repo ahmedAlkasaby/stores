@@ -324,7 +324,7 @@ class Product extends MainModel
         return $userId && $this->wishlists()->where('user_id', $userId)->exists();
     }
 
-    public function productIdInCart(): int
+    public function productIdInCart()
     {
         $userId = Auth::guard('api')->id();
         if ($userId) {

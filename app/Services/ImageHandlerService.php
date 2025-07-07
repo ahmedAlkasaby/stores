@@ -2,22 +2,37 @@
 
 namespace App\Services;
 
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ImageHandlerService
 {
-    public function uploadImage($folder, $request): ?string
+   
+    public function uploadImage( $folder = 'images', $request,$width = 800, $height = 600)
     {
-        $imgUrl = null;
+        $manager = new ImageManager(new Driver());
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/' . $folder), $fileName);
-            $imgUrl = 'uploads/' . $folder . '/' . $fileName;
-        }
+        $imageFile = $request->file('image');
 
-        return $imgUrl;
+        $realPath = $imageFile->getRealPath();
+        $image = $manager->read($realPath);
+
+        $image->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        $imageName = time() . '.webp';
+        $imagePath = 'uploads/' . $folder . '/' . $imageName;
+
+        $image->toWebp(quality: 60)
+              ->save(public_path($imagePath));
+
+        return $imagePath;
     }
+
+
+
 
 
     public function deleteImage($path): void

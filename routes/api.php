@@ -1,18 +1,31 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Auth\RestPasswordController;
 use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\DeliveryTimeController;
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\StoreTypeController;
 use App\Http\Controllers\Api\WishListController;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
+
+
+
+
 
 
 
@@ -38,6 +51,11 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
     Route::apiResource('services',ServiceController::class)->only(['index','show']);
     Route::apiResource('categories',CategoryController::class)->only(['index','show']);
     Route::apiResource('products',ProductController::class)->only(['index','show']);
+    Route::apiResource('cities',CityController::class)->only(['index','show']);
+    Route::apiResource('regions',RegionController::class)->only(['index','show']);
+    Route::apiResource('payments',PaymentController::class)->only(['index','show']);
+    Route::apiResource('delivery_times',DeliveryTimeController::class)->only(['index','show']);
+    Route::apiResource('pages',PageController::class)->only(['index','show']);
     Route::group(['prefix'=>'auth'],function(){
         Route::post('register/check',[AuthController::class, 'check_register']);
         Route::post('register',[AuthController::class,'register']);
@@ -47,10 +65,18 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::post('rest/password',[RestPasswordController::class,'RestPassword']);
     });
     Route::group(['middleware'=>['auth-api']],function(){
+        Route::get('notifications',[NotificationController::class,'index']);
         Route::get('wishlists',[WishListController::class,'index']);
         Route::post('wishlists',[WishListController::class,'toggle']);
         Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
-        Route::apiResource('orders',OrderController::class)->only(['index','show','store']);
+        Route::apiResource('addresses',AddressController::class);
+        Route::apiResource('orders',OrderController::class)->only(['index','show','store','update']);
+        Route::group(['prefix'=>'profile'],function(){
+            Route::get('/',[ProfileController::class, 'index']);
+            Route::post('change/address',[ProfileController::class, 'changeAddress']);
+            Route::post('change/password',[ProfileController::class, 'changePassword']);
+        });
+
     });
 
 });

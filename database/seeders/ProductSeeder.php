@@ -81,8 +81,8 @@ class ProductSeeder extends Seeder
             'returned'=>rand(0,1),
             'date_start' => now(),
             'date_end' => now()->addMonth(),
-            'service_id' => Service::inRandomOrder()->first()->id,
-            'unit_id'=> Unit::inRandomOrder()->first()->id,
+            'service_id' => Service::where('active',1)->inRandomOrder()->first()->id,
+            'unit_id'=> Unit::where('active',1)->inRandomOrder()->first()->id,
         ];
     }
 
@@ -112,7 +112,7 @@ class ProductSeeder extends Seeder
             ];
         }else{
             return [
-                'shipping_cost'=>null,
+                'shipping_cost'=>0,
             ];
         }
     }
@@ -122,7 +122,6 @@ class ProductSeeder extends Seeder
         for ($i=0; $i < $count; $i++) {
             $data[]=array_merge($this->getOfferData($offer,$price),[
             'price'=>rand(100,1000),
-            'active'=>rand(0,1),
             'amount'=>rand(50,100),
             'max_order'=>rand(1,10),
             'offer'=>$offer,

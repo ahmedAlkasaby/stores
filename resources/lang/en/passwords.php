@@ -20,5 +20,6 @@ return [
     'user' => "We can't find a user with that email address.",
     'must_new_password_not_equal_old_password' => 'The new password must not be the same as the old password.',
     'reset_password_successfully' => 'Password reset successfully.',
+    
 
 ];

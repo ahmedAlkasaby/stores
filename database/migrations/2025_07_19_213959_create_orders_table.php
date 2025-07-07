@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('delivery_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('status')->default('request');
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
-            $table->decimal('shipping')->default(25);
+            $table->foreignId('delivery_time_id')->nullable()->constrained('delivery_times')->onDelete('cascade');
+            $table->decimal('shipping_address')->default(25);
             $table->text('notes')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

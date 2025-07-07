@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('name');
+            $table->longText('description')->nullable();
             $table->boolean('active')->default(true);
             $table->string('image')->nullable();
             $table->integer('order_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

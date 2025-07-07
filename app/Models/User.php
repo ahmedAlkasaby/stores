@@ -102,6 +102,8 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         return $query;
     }
 
+
+
     public function wishlists()
     {
         return $this->belongsToMany(Product::class,'wishlists','user_id','product_id')->withTimestamps();
@@ -135,17 +137,21 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     {
         return $this->hasMany(Notification::class, 'user_id', 'id')->whereNotNull('read_at');
     }
-    public function markAllNotificationsAsRead()
+
+
+    public function markNotificationAsRead($notifications)
     {
-        $this->notificationsUnread()->update(['read_at' => now()]);
+        foreach ($notifications as $notification){
+            $notification->update(['read_at' => now()]);
+        }
     }
 
     public function totalPriceInCart(){
-        if($this->cartItems()->isEmpty()){
+        if($this->cartItems->count()==0){
             return 0;
         }
         $price=0;
-        $cartItems=$this->cartItems();
+        $cartItems=$this->cartItems;
         foreach ($cartItems as $item) {
             $product=Product::find($item->product_id);
             $price += $product->price * $item->amount;
