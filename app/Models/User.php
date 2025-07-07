@@ -102,6 +102,8 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         return $query;
     }
 
+
+
     public function wishlists()
     {
         return $this->belongsToMany(Product::class,'wishlists','user_id','product_id')->withTimestamps();
@@ -135,7 +137,7 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     {
         return $this->hasMany(Notification::class, 'user_id', 'id')->whereNotNull('read_at');
     }
-   
+
 
     public function markNotificationAsRead($notifications)
     {
