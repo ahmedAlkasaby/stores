@@ -16,7 +16,7 @@ if (isset($date_name)) {
 }
 @endphp
 @include('admin.layouts.forms.fields.form-group-head', ['field_name' => $field_name])
-@include('admin.layouts.forms.fields.label',['label_default'=>__("Date")])
+@include('admin.layouts.forms.fields.label',['label_default'=>$label_name ?? __("Date")])
 <i class="ti ti-calendar calendar-icon" aria-hidden="true"></i>
 {!! Form::text($field_name, $date_value ?? null, $array_control) !!}
 @include('admin.layouts.forms.fields.form-group-foot', ['field_name' => $field_name])

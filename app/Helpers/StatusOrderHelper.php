@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Helpers;
+
 use App\Enums\StatusOrderEnum;
 
 class StatusOrderHelper

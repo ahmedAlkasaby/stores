@@ -1,4 +1,4 @@
-@include('admin.layouts.forms.head', [
+    @include('admin.layouts.forms.head', [
         'show_name' => true,
         'show_content' => true,
         'show_image' => true,
