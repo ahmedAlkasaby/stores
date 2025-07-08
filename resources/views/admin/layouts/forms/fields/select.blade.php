@@ -17,7 +17,6 @@ $array_control = ['class' =>'form-control '.$select2_class .' ' . $add_class, 'd
 if (!isset($not_req)) {
 $array_control['required'] = '';
 }
-$array_control['placeholder'] = __('site.select_option');
 
 if (isset($is_multiple)) {
 $array_control['multiple'] = '';
