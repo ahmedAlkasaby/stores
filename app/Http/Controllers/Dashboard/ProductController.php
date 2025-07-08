@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Service;
 use App\Models\Size;
 use App\Models\Unit;
@@ -44,7 +45,7 @@ class ProductController extends MainController
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
 
