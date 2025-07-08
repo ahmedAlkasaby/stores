@@ -23,7 +23,7 @@ class ProductController extends MainController
     public function show(string $id)
     {
         $product = Product::with(['categories','service','unit','size','brand','children'])
-                    ->filter()
+                    ->active()
                     ->where('id', $id)
                     ->first();
         if (!$product) {

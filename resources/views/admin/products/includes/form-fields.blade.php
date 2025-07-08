@@ -11,7 +11,7 @@
     <div class="col-md-6">
         @include('admin.layouts.forms.fields.select', [
         'select_name' => 'unit_id',
-        'select_function' => $services->mapWithKeys(fn($unit) => [$unit->id => $unit->nameLang()])->toArray() ?? null,
+        'select_function' => ['' => __('site.select_option')] + $units->mapWithKeys(fn($unit) => [$unit->id => $unit->nameLang()])->toArray() ?? null,
         'select_value' => $product->unit_id ?? null,
         'select_class' => 'select2',
         'select2' => true,
@@ -21,10 +21,12 @@
     <div class="col-md-6">
         @include('admin.layouts.forms.fields.select', [
         'select_name' => 'brand_id',
-        'select_function' => $brands->mapWithKeys(fn($brand) => [$brand->id => $brand->nameLang()])->toArray() ?? null,
+        'select_function' => ['' => __('site.select_option')] + $brands->mapWithKeys(fn($brand) => [$brand->id => $brand->nameLang()])->toArray() ?? null,
         'select_value' => $product->brand_id ?? null,
         'select_class' => 'select2',
         'select2' => true,
+        'not_req' => true,
+
         ])
     </div>
 
@@ -36,7 +38,7 @@
     <div class="col-md-6">
         @include('admin.layouts.forms.fields.select', [
         'select_name' => 'service_id',
-        'select_function' => $services->mapWithKeys(fn($service) => [$service->id => $service->nameLang()])->toArray() ?? null,
+        'select_function' => ['' => __('site.select_option')] + $services->mapWithKeys(fn($service) => [$service->id => $service->nameLang()])->toArray(),
         'select_value' => $product->service_id ?? null,
         'select_class' => 'select2',
         'select2' => true,
@@ -45,7 +47,7 @@
     </div>
     <div class="col-md-6">
         @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'category_id',
+        'select_name' => 'categories',
         'select_function' => $categories,
         'select_value' => $product->category_id ?? null,
         'select_class' => 'select2',
@@ -79,6 +81,17 @@
         ])
     </div>
 
+</div>
+<div class="row">
+     @include('admin.layouts.forms.fields.select', [
+        'select_name' => 'size_id',
+        'select_function' => ['' => __('site.select_option')] + $sizes->mapWithKeys(fn($size) => [$size->id => $size->nameLang()])->toArray() ?? null,
+        'select_value' => $product->size_id ?? null,
+        'select_class' => 'select2',
+        'select2' => true,
+        'not_req' => true,
+
+        ])
 </div>
 
 @include('admin.products.includes.booliens_fields')
