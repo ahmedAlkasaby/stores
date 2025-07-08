@@ -92,58 +92,74 @@
                 </a>
             </li>
         @endif
+        @if (auth()->user()->hasPermission('orders.index'))
+            <li class="menu-item @if ($class == 'orders') active @endif">
+                <a href="{{ route('dashboard.orders.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                    <div>{{ __('site.orders') }}</div>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->hasPermission('coupons.index'))
+                <li class="menu-item @if ($class == 'coupons') active @endif">
+                    <a href="{{ route('dashboard.coupons.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.coupons') }}</div>
+                    </a>
+                </li>
+            @endif
 
 
-        @if (auth()->user()->hasPermission('services.index'))
-            <li class="menu-item @if ($class == 'services') active @endif">
-                <a href="{{ route('dashboard.services.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>{{ __('site.services') }}</div>
-                </a>
-            </li>
-        @endif
+            @if (auth()->user()->hasPermission('services.index'))
+                <li class="menu-item @if ($class == 'services') active @endif">
+                    <a href="{{ route('dashboard.services.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.services') }}</div>
+                    </a>
+                </li>
+            @endif
 
-        @if (auth()->user()->hasPermission('brands.index'))
-            <li class="menu-item @if ($class == 'brands') active @endif">
-                <a href="{{ route('dashboard.brands.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>{{ __('site.brand') }}</div>
-                </a>
-            </li>
-        @endif
+            @if (auth()->user()->hasPermission('brands.index'))
+                <li class="menu-item @if ($class == 'brands') active @endif">
+                    <a href="{{ route('dashboard.brands.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.brand') }}</div>
+                    </a>
+                </li>
+            @endif
 
-        @if (auth()->user()->hasPermission('units.index'))
-            <li class="menu-item @if ($class == 'units') active @endif">
-                <a href="{{ route('dashboard.units.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>{{ __('site.unit') }}</div>
-                </a>
-            </li>
-        @endif
+            @if (auth()->user()->hasPermission('units.index'))
+                <li class="menu-item @if ($class == 'units') active @endif">
+                    <a href="{{ route('dashboard.units.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.unit') }}</div>
+                    </a>
+                </li>
+            @endif
 
-        @if (auth()->user()->hasPermission('sizes.index'))
-            <li class="menu-item @if ($class == 'sizes') active @endif">
-                <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>{{ __('site.size') }}</div>
-                </a>
-            </li>
-        @endif
-        @if (auth()->user()->hasPermission('categories.index'))
-            <li class="menu-item @if ($class == 'categories') active @endif">
-                <a href="{{ route('dashboard.categories.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>{{ __('site.category') }}</div>
-                </a>
-            </li>
-        @endif
-        @if (auth()->user()->hasPermission('additions.index'))
-            <li class="menu-item @if ($class == 'additions') active @endif">
-                <a href="{{ route('dashboard.additions.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>{{ __('site.additions') }}</div>
-                </a>
-            </li>
+            @if (auth()->user()->hasPermission('sizes.index'))
+                <li class="menu-item @if ($class == 'sizes') active @endif">
+                    <a href="{{ route('dashboard.sizes.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.size') }}</div>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('categories.index'))
+                <li class="menu-item @if ($class == 'categories') active @endif">
+                    <a href="{{ route('dashboard.categories.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.category') }}</div>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->hasPermission('additions.index'))
+                <li class="menu-item @if ($class == 'additions') active @endif">
+                    <a href="{{ route('dashboard.additions.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                        <div>{{ __('site.additions') }}</div>
+                    </a>
+                </li>
             @endif
             @if (auth()->user()->hasPermission('sliders.index'))
                 <li class="menu-item @if ($class == 'sliders') active @endif">

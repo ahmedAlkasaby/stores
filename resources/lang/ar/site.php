@@ -392,5 +392,42 @@ return [
     "slider_toggled_successfully" => "تم تغيير حالة السلايدر بنجاح",
     "slider_has_orders" => "السلايدر لديها طلبات",
     "slider_cant_be_deleted" => "لا يمكن حذف السلايدر لانه لديها منتجات",
+
+
+    "order_details" => "تفاصيل الطلب",
+    "quantity"=>"الكمية",
+    "total" => "المجموع",
+    "subtotal" => "المجموع الفرعي",
+    "discount" => "الخصم",
+    "tax" => "الضرائب",
+    "shipping_activity" => "نشاط التوصيل",
+    "customer_details" => "تفاصيل الزبون",
+    "orders" => "الطلبات",
+    "shipping_details" => "تفاصيل التوصيل",
+    "payment_details" => "تفاصيل الدفع",
+    "payment_method" => "وسيلة الدفع",
+    
+    //order enum
+    "Request" => "طلب",
+    "pending" => "قيد الانتظار",
+    "approved" => "تم الموافقة",
+    "rejected" => "تم الرفض",
+    "preparing" => "قيد التحضير",
+    "preparing_finished" => "انتهى التحضير",
+    "delivery_go" => "اتجه التوصيل",
+    "delivered" => "تم التوصيل",
+    "canceled" => "تم الالغاء",
+    "returned" => "تم الارجاع",
+
+    "coupon"=>"كوبون",
+    "coupons" => "كوبونات",
+    "coupon_created_successfully" => "تم إنشاء الكوبون بنجاح",
+    "coupon_updated_successfully" => "تم تحديث الكوبون بنجاح",
+    "coupon_deleted_successfully" => "تم حذف الكوبون بنجاح",
+    "coupon_restored_successfully" => "تم استعادة الكوبون بنجاح",
+    "coupon_force_deleted_successfully" => "تم حذف الكوبون بنجاح",
+    "coupon_toggled_successfully" => "تم تغيير حالة الكوبون بنجاح",
+    "coupon_has_orders" => "الكوبون لديها طلبات",
+    "coupon_cant_be_deleted" => "لا يمكن حذف الكوبون لانه لديها منتجات",
 ];
 

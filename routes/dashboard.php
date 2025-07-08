@@ -10,6 +10,8 @@ use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\dashboard\OrderController;
+use App\Http\Controllers\dashboard\CouponController;
 use App\Http\Controllers\dashboard\RegionController;
 use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\AddressController;
@@ -121,4 +123,14 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     //Resourse route for Favourites
     Route::resource('wishlists', WishlistController::class);
+
+    //Resource route for Orders
+    Route::resource('orders', OrderController::class);
+    Route::get('orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::post('orders/change_status/{order}', [OrderController::class, 'changeStatus'])->name('orders.change_status');
+
+    //Resource route for Coupons
+    Route::resource('coupons', CouponController::class);
+    Route::get('coupons/active/{coupon}', [CouponController::class, 'active'])->name('coupons.active');
+    Route::get('coupons/finish/{coupon}', [CouponController::class, 'finish'])->name('coupons.finish');
 });
