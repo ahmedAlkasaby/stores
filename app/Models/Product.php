@@ -108,6 +108,16 @@ class Product extends MainModel
         return $this->hasMany(CartItem::class,'product_id','id');
     }
 
+    public function scopeActive($query)
+    {
+         return $query
+            ->where('active', true )
+            ->whereDate('date_start', '<=', now() )
+            ->whereDate('date_end', '>=', now() )
+            ->orderBy('order_id', 'asc')
+            ;
+    }
+
 
 
     public function scopeApplyBasicFilters($query, $request, $type_app)
@@ -117,6 +127,7 @@ class Product extends MainModel
             ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
             ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
             ->orderBy('order_id', 'asc')
+            ->where('parent_id', null)
             ;
     }
 

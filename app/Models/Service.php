@@ -27,6 +27,17 @@ class Service  extends MainModel
     }
 
 
+    public function scopeActive($query)
+    {
+        $query->orderBy('order_id','asc');
+
+        $query->where('active', 1);
+
+        return $query;
+
+    }
+
+
     public function scopeFilter($query, $request=null,$type_app='app')
     {
 

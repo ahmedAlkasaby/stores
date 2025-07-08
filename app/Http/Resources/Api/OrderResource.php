@@ -29,9 +29,9 @@ class OrderResource extends JsonResource
             'status' => $this->status,
             'price'=>$this->orderPrice(),
             'discount'=>$this->orderDiscount(),
-            'shipping_address'=>$this->getShippingAddress(),
+            'shipping_address'=>$this->shipping_address,
             'order_shipping_products'=>$this->orderShippingProducts(),
-            'shipping'=>$this->orderShippingProducts()+$this->getShippingAddress(),
+            'shipping'=>$this->orderShippingProducts()+$this->shipping_address,
             'delivery_cost'=>$setting->delivery_cost,
 
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),

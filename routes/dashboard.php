@@ -6,17 +6,27 @@ use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\dashboard\PageController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\UnitController;
+use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\dashboard\OrderController;
 use App\Http\Controllers\dashboard\CouponController;
 use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\AddressController;
+use App\Http\Controllers\Dashboard\AddressController;
+use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\PaymentController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\dashboard\SettingController;
@@ -24,6 +34,7 @@ use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\WishlistController;
 use App\Http\Controllers\dashboard\DeliveryTimeController;
+
 
 
 
@@ -70,7 +81,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('units/restore/{unit}', [UnitController::class, 'restore'])->name('units.restore');
     Route::delete('units/force_delete/{unit}', [UnitController::class, 'forceDelete'])->name('units.force_delete');
     Route::get('units/toggle_active/{unit}', [UnitController::class, 'active'])->name('units.active');
-    // Resource routes for additions 
+    // Resource routes for additions
     Route::resource('additions', AdditionController::class);
     Route::get('additions/restore/{addition}', [AdditionController::class, 'restore'])->name('additions.restore');
     Route::delete('additions/force_delete/{addition}', [AdditionController::class, 'forceDelete'])->name('additions.force_delete');
@@ -124,7 +135,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     //Resourse route for Favourites
     Route::resource('wishlists', WishlistController::class);
 
-    //Resource route for Orders
+     //Resource route for Orders
     Route::resource('orders', OrderController::class);
     Route::get('orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
     Route::post('orders/change_status/{order}', [OrderController::class, 'changeStatus'])->name('orders.change_status');
@@ -133,4 +144,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::resource('coupons', CouponController::class);
     Route::get('coupons/active/{coupon}', [CouponController::class, 'active'])->name('coupons.active');
     Route::get('coupons/finish/{coupon}', [CouponController::class, 'finish'])->name('coupons.finish');
+
+    // Pesdource Route for Products
+    Route::resource('products', ProductController::class);
 });
