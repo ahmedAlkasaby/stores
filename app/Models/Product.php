@@ -8,61 +8,61 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-  protected $fillable = [
-    'code',
-    'link',
-    'name',
-    'description',
-    'image',
-    'video',
-    'background',
-    'color',
+    protected $fillable = [
+        'code',
+        'link',
+        'name',
+        'description',
+        'image',
+        'video',
+        'background',
+        'color',
 
-    // price
-    'price',
-    'offer_price',
-    'offer_amount',
-    'offer_percent',
-    'shipping_cost',
+        // price
+        'price',
+        'offer_price',
+        'offer_amount',
+        'offer_percent',
+        'shipping_cost',
 
-    // order limits
-    'start',
-    'skip',
-    'amount',
-    'max_order',
+        // order limits
+        'start',
+        'skip',
+        'amount',
+        'max_order',
 
-    // status flags
-    'active',
-    'feature',
-    'new',
-    'special',
-    'filter',
-    'sale',
-    'late',
-    'stock',
-    'free_shipping',
-    'returned',
+        // status flags
+        'active',
+        'feature',
+        'new',
+        'special',
+        'filter',
+        'sale',
+        'late',
+        'stock',
+        'free_shipping',
+        'returned',
 
-    // dates
-    'date_start',
-    'date_end',
+        // dates
+        'date_start',
+        'date_end',
 
 
-    // foreign keys
-    'service_id',
-    'unit_id',
-    'brand_id',
-    'size_id',
-    'parent_id',
+        // foreign keys
+        'service_id',
+        'unit_id',
+        'brand_id',
+        'size_id',
+        'parent_id',
 
-    // order
-    'order_id',
-];
+        // order
+        'order_id',
+    ];
 
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'category_product','product_id','category_id')->withTimestamps();
+        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id')->withTimestamps();
     }
 
 
@@ -100,35 +100,37 @@ class Product extends MainModel
 
     public function wishlists()
     {
-        return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withTimestamps();
     }
 
     public function cartItems()
     {
-        return $this->hasMany(CartItem::class,'product_id','id');
+        return $this->hasMany(CartItem::class, 'product_id', 'id');
     }
 
     public function scopeActive($query)
     {
-         return $query
-            ->where('active', true )
-            ->whereDate('date_start', '<=', now() )
-            ->whereDate('date_end', '>=', now() )
+        return $query
+            ->where('active', true)
+            ->whereDate('date_start', '<=', now())
+            ->whereDate('date_end', '>=', now())
             ->orderBy('order_id', 'asc')
-            ;
+        ;
     }
 
 
 
     public function scopeApplyBasicFilters($query, $request, $type_app)
     {
-        return $query
-            ->where('active', $type_app == 'app' ? true : $request->active)
-            ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
-            ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
-            ->orderBy('order_id', 'asc')
-            ->where('parent_id', null)
-            ;
+        if ($type_app == 'app') {
+            return $query
+                ->where('active', true)
+                ->whereDate('date_start', '<=', now())
+                ->whereDate('date_end', '>=', now())
+                ->whereNull('parent_id')
+                ->orderBy('order_id', 'asc');
+        }
+         $query;
     }
 
     public function scopeApplySearch($query, $request)
@@ -137,8 +139,8 @@ class Product extends MainModel
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('description', 'like', '%' . $search . '%')
-                  ->orWhere('price', 'like', '%' . $search . '%');
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('price', 'like', '%' . $search . '%');
             });
         }
 
@@ -156,7 +158,7 @@ class Product extends MainModel
 
     public function scopeApplyCategoryFilter($query, $request)
     {
-        if ($request->filled('category_id')) {
+        if ($request->filled('category_id') && $request->category_id != 'all') {
             $query->whereHas('categories', function ($q) use ($request) {
                 $q->where('category_id', $request->category_id);
             });
@@ -180,7 +182,7 @@ class Product extends MainModel
 
     public function scopeApplyFeatureFilter($query, $request)
     {
-        if ($request->filled('feature')) {
+        if ($request->filled('feature') && $request->feature != 'all') {
             $query->where('feature', $request->feature);
         }
 
@@ -188,49 +190,49 @@ class Product extends MainModel
     }
     public function scopeApplyNewFilter($query, $request)
     {
-        if ($request->filled('new')) {
+        if ($request->filled('new') && $request->new != 'all') {
             $query->where('new', $request->new);
         }
         return $query;
     }
     public function scopeApplySpecialFilter($query, $request)
     {
-        if ($request->filled('special')) {
+        if ($request->filled('special') && $request->special != 'all') {
             $query->where('special', $request->special);
         }
         return $query;
     }
     public function scopeApplyFilterFilter($query, $request)
     {
-        if ($request->filled('filter')) {
+        if ($request->filled('filter') && $request->filter != 'all') {
             $query->where('filter', $request->filter);
         }
         return $query;
     }
     public function scopeApplySaleFilter($query, $request)
     {
-        if ($request->filled('sale')) {
+        if ($request->filled('sale') && $request->sale != 'all') {
             $query->where('sale', $request->sale);
         }
         return $query;
     }
     public function scopeApplyStockFilter($query, $request)
     {
-        if ($request->filled('stock')) {
+        if ($request->filled('stock') && $request->stock != 'all') {
             $query->where('stock', $request->stock);
         }
         return $query;
     }
     public function scopeApplyFreeShippingFilter($query, $request)
     {
-        if ($request->filled('free_shipping')) {
+        if ($request->filled('free_shipping') && $request->free_shipping != 'all') {
             $query->where('free_shipping', $request->free_shipping);
         }
         return $query;
     }
     public function scopeApplyReturnedFilter($query, $request)
     {
-        if ($request->filled('returned')) {
+        if ($request->filled('returned') && $request->returned != 'all') {
             $query->where('returned', $request->returned);
         }
         return $query;
@@ -257,7 +259,19 @@ class Product extends MainModel
         return $query;
     }
 
+    public function scopeApplyUnitFilter($query, $request){
+        if ($request->filled('unit') && $request->unit != 'all') {
+            $query->where('unit_id', $request->unit);
+        }
+        return $query;
+    }
 
+    public function scopeApplyBrandFilter($query, $request){
+        if ($request->filled('brand') && $request->brand != 'all') {
+            $query->where('brand_id', $request->brand);
+        }
+        return $query;
+    }
 
     public function scopeApplySorting($query, $request)
     {
@@ -306,7 +320,8 @@ class Product extends MainModel
             ->applyReturnedFilter($request)
             ->applySorting($request)
             ->applyDateFilters($request)
-            ;
+            ->applyUnitFilter($request)
+        ;
     }
 
 
@@ -347,11 +362,13 @@ class Product extends MainModel
         return 0;
     }
 
-    public function amountInAllCarts(){
+    public function amountInAllCarts()
+    {
         return $this->cartItems()->sum('amount');
     }
 
-    public function availableAmount(){
+    public function availableAmount()
+    {
         return $this->amount - $this->amountInAllCarts();
     }
 
@@ -364,6 +381,4 @@ class Product extends MainModel
     {
         return $this->reviews()->where('active', true)->avg('rating') ?? 0;
     }
-
-
 }

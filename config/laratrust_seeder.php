@@ -37,6 +37,7 @@ return [
             "wishlists" => 'i',
             "orders" => 'i,sh,s,u,a,d',
             "coupons" => 'i,sh,s,u,a,d',
+            "reviews" => 'i,sh,s,u,a,d',
 
 
         ],

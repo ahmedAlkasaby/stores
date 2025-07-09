@@ -427,4 +427,16 @@ return [
     "coupon_toggled_successfully" => "Coupon Toggled Successfully",
     "coupon_has_orders" => "Coupon Has Orders",
     "coupon_cant_be_deleted" => "Coupon Can Not Be Deleted",
+
+    "feature" => "Features",
+    "offer" => "Offers",
+    "shipping_free" => "Free Shipping",
+    "free_shipping" => "Free Shipping",
+    "code" => "Code",
+    "max_price" => "Maximum",
+    "min_price" => "Minimum",
+    "sale" => "Discount",
+    "special" => "Special",
+    "reviews" => "Reviews",
+    "review" => "Review",
 ];

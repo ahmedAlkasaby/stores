@@ -6,24 +6,15 @@ use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\dashboard\PageController;
 use App\Http\Controllers\Dashboard\RoleController;
-use App\Http\Controllers\Dashboard\RoleController;
-use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\UnitController;
-use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\dashboard\OrderController;
 use App\Http\Controllers\dashboard\CouponController;
 use App\Http\Controllers\dashboard\RegionController;
-use App\Http\Controllers\dashboard\RegionController;
-use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\AddressController;
-use App\Http\Controllers\Dashboard\AddressController;
-use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -34,13 +25,7 @@ use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\WishlistController;
 use App\Http\Controllers\dashboard\DeliveryTimeController;
-
-
-
-
-
-
-
+use App\Http\Controllers\dashboard\ReviewController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [AuthController::class, 'viewLogin'])->name('login.view');
@@ -147,4 +132,14 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     // Pesdource Route for Products
     Route::resource('products', ProductController::class);
+    Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
+    Route::get('products/offer/{product}', [ProductController::class, 'offer'])->name('products.offer');
+    Route::get('products/shipping_free/{product}', [ProductController::class, 'shipping_free'])->name('products.shipping_free');
+    Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
+    Route::get('products/active/{product}', [ProductController::class, 'active'])->name('products.active');
+
+    //Resource route for reviews
+    Route::resource('reviews', ReviewController::class);
+    Route::get('reviews/active/{comment}', [ReviewController::class, 'active'])->name('reviews.active');
+
 });

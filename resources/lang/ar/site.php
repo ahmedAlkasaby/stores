@@ -429,5 +429,18 @@ return [
     "coupon_toggled_successfully" => "تم تغيير حالة الكوبون بنجاح",
     "coupon_has_orders" => "الكوبون لديها طلبات",
     "coupon_cant_be_deleted" => "لا يمكن حذف الكوبون لانه لديها منتجات",
+
+    "feature" => "ميزات",
+    "offer" => "عروض",
+    "shipping_free" => "توصيل مجاني",
+    "free_shipping" => "توصيل مجاني",
+    "code" => "كود",
+    "max_price"=>"السعر الاقصى",
+    "min_price"=>"السعر الادنى",
+    "sale"=>"خصم",
+    "special"=>"خاص",
+    "reviews" => "المراجعات",
+    "review" => "مراجعة",
+
 ];
 
