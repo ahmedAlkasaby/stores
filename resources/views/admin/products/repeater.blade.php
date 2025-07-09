@@ -2,64 +2,7 @@
 @section('title', __('site.products'))
 
 @section('styles')
-{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<style>
-    /* تنسيق select2 كأنه form-control (Bootstrap 5) */
-    .select2-container .select2-selection--single {
-        height: calc(1.5em + 0.75rem + 2px);
-        padding: 0.375rem 0.75rem;
-        border: 1px solid #ced4da;
-        border-radius: 0.375rem;
-        background-color: #fff;
-        font-size: 1rem;
-        line-height: 1.5;
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
 
-    /* تنسيق النص داخل السلكت */
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: #212529;
-        padding: 0;
-        line-height: 1.5;
-        flex: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    /* إخفاء السهم الأصلي */
-    .select2-container--default .select2-selection__arrow {
-        display: none;
-    }
-
-    /* إضافة سهم يدوي */
-    .select2-container--default .select2-selection--single::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        width: 0;
-        height: 0;
-        pointer-events: none;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #6c757d;
-        transform: translateY(-50%);
-    }
-
-    /* دعم RTL */
-    [dir="rtl"] .select2-container--default .select2-selection--single {
-        padding-left: 0.75rem;
-        padding-right: 2rem;
-    }
-
-    [dir="rtl"] .select2-container--default .select2-selection--single::after {
-        left: 1rem;
-        right: auto;
-    }
-</style> --}}
 <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
 
 

@@ -17,7 +17,7 @@ class OfferRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if($this->request->boolien('offer')){
+        if($this->request->boolean('offer')){
             $offerFields=array_filter([
                 'offer_price'=>$this->request->offer_price,
                 'offer_amount'=>$this->request->offer_amount,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -13,6 +14,7 @@ use App\Services\ImageHandlerService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 
 class ProductController extends MainController
@@ -52,20 +54,36 @@ class ProductController extends MainController
     }
 
 
-    public function store(Request $request)
+
+    public function store(ProductRequest $request)
     {
-        dd($request->all());
-        $data = $request->except('image');
+        $image=$this->imageService->uploadImage('products', $request);
+        // try {
+            // DB::transaction(function () use ($request, $image) {
+                $data = $request->except('image');
+                $data['image'] = $image;
 
-        $data['image'] = $this->imageService->uploadImage('products', $request);
+                $product = Product::create($data);
+                $product->categories()->sync($request->categories);
 
-        $product = Product::create($data);
-        $product->categories()->sync($request->categories);
+                $this->productService->handleProductChildren($request, $product);
+            // });
 
-        $this->productService->handleProductChildren($request, $product);
+
+
+        // } catch (\Throwable $e) {
+        //     if (isset($data['image'])) {
+        //         $this->imageService->deleteImage('products', $data['image']);
+        //     }
+
+        //     return redirect()->back()
+        //         ->with('error', __('site.something_went_wrong'))
+        //         ->withInput();
+        // }
 
         return redirect()->route('dashboard.products.index')->with('success', __('site.product_created_successfully'));
     }
+
 
 
     public function show(string $id)
@@ -83,14 +101,28 @@ class ProductController extends MainController
     {
         $data = $request->except('image');
 
+
         if ($request->hasFile('image')) {
             $data['image'] = $this->imageService->uploadImage('products', $request);
         }
 
-        $product->update($data);
-        $product->categories()->sync($request->categories);
+        try {
+            DB::transaction(function() use ($product, $data, $request) {
 
-        $this->productService->handleProductChildren($request, $product);
+                $product->update($data);
+                $product->categories()->sync($request->categories);
+
+                $this->productService->handleProductChildren($request, $product);
+            });
+        } catch (\Throwable $th) {
+             if (isset($data['image'])) {
+                $this->imageService->deleteImage('products', $data['image']);
+            }
+
+            return redirect()->back()
+                ->with('error', __('site.something_went_wrong'))
+                ->withInput();
+        }
 
         return redirect()->route('dashboard.products.index')->with('success', __('site.product_updated_successfully'));
     }

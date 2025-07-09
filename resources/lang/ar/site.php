@@ -392,5 +392,18 @@ return [
     "slider_toggled_successfully" => "تم تغيير حالة السلايدر بنجاح",
     "slider_has_orders" => "السلايدر لديها طلبات",
     "slider_cant_be_deleted" => "لا يمكن حذف السلايدر لانه لديها منتجات",
+    'code' => 'كود',
+    'offer' => 'عرض',
+    'offer_percent' => 'الخصم الثابت (بالجنيه)',
+
+    'offer_amount' => 'نسبة خصم',
+    'offer_price' => 'سعر قبل خصم',
+    'free_shipping' => 'توصيل مجاني',
+    'shipping_cost' => 'تكلفة التوصيل',
+    'amount' => 'الكمية',
+    'order_max' => 'الحد الاقصي للطلب ',
+    'date_start' => 'تاريخ البدء',
+    'date_end' => 'تاريخ الانتهاء',
+
 ];
 

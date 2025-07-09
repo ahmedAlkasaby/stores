@@ -413,6 +413,10 @@ return [
     'shipping_cost_required' => 'سعر الشحن مطلوب',
     'order_max_smaller_than_amount' => 'الحد الاقصى للطلب يجب ان يكون اقل من الكمية',
     'invalid_category_for_service' => 'القسم غير صحيح لهذا الخدمة',
+    'offer_price_bigger_than_price' => 'سعر العرض يجب ان يكون اكبر من سعر المنتج',
+    'offer_percent_smaller_than_price' => 'قيمة الخصم الثابت  يجب أن تكون أقل من سعر المنتج',
+
+    'duplicate_child_size' => 'لا يمكن تكرار نفس المقاس في المتغيرات.',
 
 
 ];

@@ -388,6 +388,10 @@ return [
     'shipping_cost_required' => 'The shipping cost is required.',
     'order_max_smaller_than_amount' => 'The order max must be smaller than the amount.',
     'invalid_category_for_service' => 'The category is invalid for this service.',
+    'offer_price_bigger_than_price' => 'The price befor offer must be bigger than the price.',
+    'offer_percent_smaller_than_price' => 'The discount value must be less than the original price.',
+
+    'duplicate_child_size' => 'Duplicate child size.',
 
 
 

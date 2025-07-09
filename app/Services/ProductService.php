@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 
@@ -20,7 +21,7 @@ class ProductService{
             ]);
         }
 
-        Event::withoutEvents(function () use ($request, $product, $parentAttributes) {
+        Model::withoutEvents(function () use ($request, $product, $parentAttributes) {
             foreach ($request->children as $childData) {
                 $data = array_merge($parentAttributes, Arr::except($childData, ['id']));
 
