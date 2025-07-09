@@ -381,8 +381,14 @@ return [
     "city_id_required"=>"City is required",
     "shipping_required"=>"Shipping is required",
     "shipping_numeric"=>"Shipping must be numeric",
-    "one_of_this_fields_required"=>"One of this fields requred (link , product)"
-   
+    "one_of_this_fields_required"=>"One of this fields requred (link , product)",
+    'you_must_select_an_offer' => 'You must select an offer: percentage, amount, or price.',
+    'you_must_select_one_offer' => 'You must select one offer: percentage, amount, or price.',
+    'shipping_cost_must_be_zero' => 'The shipping cost must be zero when the free shipping option is selected.',
+    'shipping_cost_required' => 'The shipping cost is required.',
+    'order_max_smaller_than_amount' => 'The order max must be smaller than the amount.',
+    'invalid_category_for_service' => 'The category is invalid for this service.',
+
 
 
 

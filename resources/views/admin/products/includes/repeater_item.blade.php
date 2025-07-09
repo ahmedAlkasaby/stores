@@ -1,4 +1,10 @@
 <div data-repeater-item class="row mb-3">
+
+    @include('admin.layouts.forms.hiddens.id', [
+    'id' => $product->id ?? null,
+    ])
+
+
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
         @include('admin.layouts.forms.fields.select', [
         'select_name' => 'size_id',
@@ -20,7 +26,16 @@
         'label_req' => true,
         ])
     </div>
+    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
 
+        @include('admin.layouts.forms.fields.number', [
+        'number_name' => 'price',
+        'min' => 0,
+        'placeholder' => __('site.pice'),
+        'number_value' => $product->price ?? null,
+        'label_req' => true,
+        ])
+    </div>
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
         @include('admin.layouts.forms.fields.select', [
         'select_name' => 'offer',

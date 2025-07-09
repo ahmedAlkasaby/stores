@@ -407,6 +407,12 @@ return [
     "shipping_required" => "الشحن مطلوب",
     "shipping_numeric" => "الشحن يجب ان يكون رقم",
     "one_of_this_fields_required" => "احد الحقول مطلوبة (اللينك , المنتج)",
+    'you_must_select_an_offer' => 'يجب تحديد نوع واحد من العرض: نسبة أو مبلغ أو سعر نهائي.',
+    'you_must_select_one_offer' => 'يجب تحديد نوع واحد من العرض: نسبة او مبلغ او سعر نهائي.',
+    'shipping_cost_must_be_zero' => 'يجب ان يكون سعر الشحن صفر عند اختيار خدمة الشحن المجانية.',
+    'shipping_cost_required' => 'سعر الشحن مطلوب',
+    'order_max_smaller_than_amount' => 'الحد الاقصى للطلب يجب ان يكون اقل من الكمية',
+    'invalid_category_for_service' => 'القسم غير صحيح لهذا الخدمة',
 
 
 ];

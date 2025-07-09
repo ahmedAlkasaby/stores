@@ -9,6 +9,7 @@
  @endsection
 @section('content')
     @include('admin.layouts.messages.displayErrors')
+    @include('admin.layouts.messages.success')
     @include('admin.layouts.forms.create', [
         'form_method' => 'POST',
         'form_class' => 'needs-validation',
@@ -18,7 +19,7 @@
         'enctype' => true,
     ])
 
-        @include("admin.categories.includes.form-fields")
+    @include("admin.categories.includes.form-fields")
 
 @endsection
 

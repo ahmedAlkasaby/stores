@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-  protected $fillable = [
+  protected $fillable =
+  [
     'code',
     'link',
     'name',
@@ -33,6 +34,7 @@ class Product extends MainModel
 
     // status flags
     'active',
+    'offer',
     'feature',
     'new',
     'special',
@@ -57,7 +59,7 @@ class Product extends MainModel
 
     // order
     'order_id',
-];
+  ] ;
 
 
     public function categories()
@@ -70,10 +72,6 @@ class Product extends MainModel
     {
         return $this->belongsTo(Service::class, 'service_id', 'id');
     }
-
-
-
-
 
 
     public function unit()

@@ -9,14 +9,23 @@ use App\Models\Product;
 use App\Models\Service;
 use App\Models\Size;
 use App\Models\Unit;
+use App\Services\ImageHandlerService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Event;
 
 class ProductController extends MainController
 {
-    public function __construct()
+    protected $imageService;
+    protected $productService;
+
+    public function __construct(ImageHandlerService $imageService, ProductService $productService)
     {
         parent::__construct();
         $this->setClass('ptoducts');
+        $this->imageService = $imageService;
+        $this->productService = $productService;
     }
 
     public function index()
@@ -46,6 +55,16 @@ class ProductController extends MainController
     public function store(Request $request)
     {
         dd($request->all());
+        $data = $request->except('image');
+
+        $data['image'] = $this->imageService->uploadImage('products', $request);
+
+        $product = Product::create($data);
+        $product->categories()->sync($request->categories);
+
+        $this->productService->handleProductChildren($request, $product);
+
+        return redirect()->route('dashboard.products.index')->with('success', __('site.product_created_successfully'));
     }
 
 
@@ -60,10 +79,23 @@ class ProductController extends MainController
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->except('image');
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->imageService->uploadImage('products', $request);
+        }
+
+        $product->update($data);
+        $product->categories()->sync($request->categories);
+
+        $this->productService->handleProductChildren($request, $product);
+
+        return redirect()->route('dashboard.products.index')->with('success', __('site.product_updated_successfully'));
     }
+
+
 
 
     public function destroy(string $id)

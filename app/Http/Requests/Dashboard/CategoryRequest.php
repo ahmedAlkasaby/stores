@@ -42,12 +42,12 @@ class CategoryRequest extends FormRequest
             "order_id.integer" => __("validation.integer", ["attribute" => "order_id"]),
             "order_id.min" => __("validation.min.numeric", ["attribute" => "order_id", "min" => 0]),
             "image.image" => __("validation.image", ["attribute" => "image"]),
-            "name.ar.required" => __("validation.required", ["attribute" => "name"]),
-            "name.en.required" => __("validation.required", ["attribute" => "name"]),
-            "name.ar.string" => __("validation.string", ["attribute" => "name"]),
-            "name.en.string" => __("validation.string", ["attribute" => "name"]),
-            "name.ar.max" => __("validation.max.string", ["attribute" => "name", "max" => 255]),
-            "name.en.max" => __("validation.max.string", ["attribute" => "name", "max" => 255]),
+            "name.ar.required" => __("validation.required", ["attribute" => __("site.name")]),
+            "name.en.required" => __("validation.required", ["attribute" => __("site.name")]),
+            "name.ar.string" => __("validation.string", ["attribute" =>  __("site.name")]),
+            "name.en.string" => __("validation.string", ["attribute" =>  __("site.name")]),
+            "name.ar.max" => __("validation.max.string", ["attribute" =>  __("site.name"), "max" => 255]),
+            "name.en.max" => __("validation.max.string", ["attribute" =>  __("site.name"), "max" => 255]),
 
 
         ];
