@@ -35,7 +35,6 @@ class ProductRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:products,code' . ($productId ? ',' . $productId : ''),
             ],
 
             'image' => [
@@ -54,7 +53,7 @@ class ProductRequest extends FormRequest
             'price' => ['required', 'numeric', 'gt:1'],
 
             'offer' => ['required', 'boolean',new OfferRule($this)],
-            'offer_percent' => ['nullable', 'numeric', 'min:1',new OfferPercentRule($this)],
+            'offer_percent' => ['nullable', 'numeric', 'min:1'],
             'offer_amount' => ['nullable', 'numeric', 'min:1','max:99'],
             'offer_price' => ['nullable', 'numeric', 'min:1',new PriceOfferRule($this)],
 
@@ -109,7 +108,21 @@ class ProductRequest extends FormRequest
                         }
                     }
                 }
+
+                $maxOrder = $this->input('max_order');
+
+                foreach ($this->children as $index => $child) {
+                    if (isset($child['amount']) && isset($maxOrder) && $child['amount'] <= $maxOrder) {
+                        $validator->errors()->add("children.$index.amount", __("validation.child_amount_gt_max_order", [
+                            'child' => $index + 1,
+                            'max_order' => $maxOrder,
+                        ]));
+                    }
+                }
             }
+
+
+
         });
     }
 

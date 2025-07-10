@@ -58,8 +58,8 @@ class ProductController extends MainController
     public function store(ProductRequest $request)
     {
         $image=$this->imageService->uploadImage('products', $request);
-        // try {
-            // DB::transaction(function () use ($request, $image) {
+        try {
+            DB::transaction(function () use ($request, $image) {
                 $data = $request->except('image');
                 $data['image'] = $image;
 
@@ -67,19 +67,19 @@ class ProductController extends MainController
                 $product->categories()->sync($request->categories);
 
                 $this->productService->handleProductChildren($request, $product);
-            // });
+            });
 
 
 
-        // } catch (\Throwable $e) {
-        //     if (isset($data['image'])) {
-        //         $this->imageService->deleteImage('products', $data['image']);
-        //     }
+        } catch (\Throwable $e) {
+            if (isset($data['image'])) {
+                $this->imageService->deleteImage('products', $data['image']);
+            }
 
-        //     return redirect()->back()
-        //         ->with('error', __('site.something_went_wrong'))
-        //         ->withInput();
-        // }
+            return redirect()->back()
+                ->with('error', __('site.something_went_wrong'))
+                ->withInput();
+        }
 
         return redirect()->route('dashboard.products.index')->with('success', __('site.product_created_successfully'));
     }
@@ -91,13 +91,27 @@ class ProductController extends MainController
         //
     }
 
-      public function edit(string $id)
+    public function edit(string $id)
     {
-        //
+        $product = Product::with('children')->findOrFail($id);
+        $services=Service::active()->get();
+        $brands=Brand::active()->get();
+        $units=Unit::active()->get();
+        $sizes=Size::active()->get();
+
+        $categories = Category::active()
+        ->with('parent')
+        ->get()
+        ->mapWithKeys(function ($category) {
+            $label = $category->parent ? $category->parent->nameLang() . ' > ' . $category->nameLang() : $category->nameLang();
+            return [$category->id => $label];
+        });
+
+        return view('admin.products.edit',get_defined_vars());
     }
 
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
         $data = $request->except('image');
 
@@ -111,7 +125,7 @@ class ProductController extends MainController
 
                 $product->update($data);
                 $product->categories()->sync($request->categories);
-
+                $product->deleteChildrenOldWhenNotSendInUpdate();
                 $this->productService->handleProductChildren($request, $product);
             });
         } catch (\Throwable $th) {

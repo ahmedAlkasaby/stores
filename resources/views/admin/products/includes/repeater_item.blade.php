@@ -1,78 +1,85 @@
+@php
+    if (!isset($child) || !is_object($child)) {
+        $child = null;
+    }
+@endphp
+
 <div data-repeater-item class="row mb-3">
 
     @include('admin.layouts.forms.hiddens.id', [
-    'id' => $product->id ?? null,
+        'id' => $child?->id,
+        'name' => 'children[][id]' // تأكد من اسم الـ id كمان
     ])
 
+    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+        @include('admin.layouts.forms.fields.select', [
+            'select_name' => 'children[][size_id]',
+            'select_function' => ['' => __('site.select_option')] + $sizes->mapWithKeys(fn($size) =>
+                [$size->id => $size->nameLang()])->toArray(),
+            'select_value' => $child?->size_id,
+            'select_class' => 'select2',
+            'select2' => true,
+            'label_req' => true,
+        ])
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+        @include('admin.layouts.forms.fields.number', [
+            'number_name' => 'children[][amount]',
+            'min' => 0,
+            'placeholder' => __('site.amount'),
+            'number_value' => $child?->amount,
+            'label_req' => true,
+        ])
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+        @include('admin.layouts.forms.fields.number', [
+            'number_name' => 'children[][price]',
+            'min' => 0,
+            'placeholder' => __('site.price'),
+            'number_value' => $child?->price,
+            'label_req' => true,
+        ])
+    </div>
 
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
         @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'size_id',
-        'select_function' => ['' => __('site.select_option')] + $sizes->mapWithKeys(fn($size) =>
-        [$size->id => $size->nameLang()])->toArray() ?? null,
-        'select_value' => $product->size_id ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-        'label_req' => true,
+            'select_name' => 'children[][offer]',
+            'select_function' => ['' => __('site.select_option')] + booleantype(),
+            'select_value' => $child?->offer,
+            'select_class' => 'select2',
+            'select2' => true,
         ])
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
         @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'amount',
-        'min' => 0,
-        'placeholder' => __('site.amount'),
-        'number_value' => $product->amount ?? null,
-        'label_req' => true,
-        ])
-    </div>
-    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-
-        @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'price',
-        'min' => 0,
-        'placeholder' => __('site.pice'),
-        'number_value' => $product->price ?? null,
-        'label_req' => true,
-        ])
-    </div>
-    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-        @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'offer',
-        'select_function' =>['' => __('site.select_option')] + booleantype(),
-        'select_value' => $product->offer ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
+            'number_name' => 'children[][offer_price]',
+            'min' => 0,
+            'placeholder' => __('site.offer_price'),
+            'number_value' => $child?->offer_price,
+            'not_req' => true,
         ])
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
         @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'offer_price',
-        'min' => 0,
-        'placeholder' => __('site.offer_price'),
-        'number_value' => $product->offer_price ?? null,
-        'not_req' => true,
+            'number_name' => 'children[][offer_amount]',
+            'min' => 0,
+            'placeholder' => __('site.offer_amount'),
+            'number_value' => $child?->offer_amount,
+            'not_req' => true,
         ])
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
         @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'offer_amount',
-        'min' => 0,
-        'placeholder' => __('site.offer_amount'),
-        'number_value' => $product->offer_amount ?? null,
-        'not_req' => true,
-        ])
-    </div>
-
-    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-        @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'offer_percent',
-        'min' => 0,
-        'placeholder' => __('site.offer_percent'),
-        'number_value' => $product->offer_percent ?? null,
-        'not_req' => true,
+            'number_name' => 'children[][offer_percent]',
+            'min' => 0,
+            'placeholder' => __('site.offer_percent'),
+            'number_value' => $child?->offer_percent,
+            'not_req' => true,
         ])
     </div>
 

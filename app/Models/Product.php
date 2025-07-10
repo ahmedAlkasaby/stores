@@ -364,4 +364,13 @@ class Product extends MainModel
     }
 
 
+    
+    public function deleteChildrenOldWhenNotSendInUpdate(){
+        if ($this->children()->count() > 0 && !request()->has('children')){
+
+            $this->children()->delete();
+        }
+    }
+
+
 }

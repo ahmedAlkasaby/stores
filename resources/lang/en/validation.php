@@ -392,6 +392,7 @@ return [
     'offer_percent_smaller_than_price' => 'The discount value must be less than the original price.',
 
     'duplicate_child_size' => 'Duplicate child size.',
+    'child_amount_gt_max_order' => 'The amount for child product number :child must be greater than the maximum order limit (:max_order).',
 
 
 

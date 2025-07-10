@@ -24,18 +24,25 @@ class ProductService{
         Model::withoutEvents(function () use ($request, $product, $parentAttributes) {
             foreach ($request->children as $childData) {
                 $data = array_merge($parentAttributes, Arr::except($childData, ['id']));
+                $data['parent_id'] = $product->id;
 
                 if (isset($childData['id'])) {
                     $child = $product->children()->find($childData['id']);
                     if ($child) {
                         $child->update($data);
+                         $receivedIds[] = $child->id;
+
                     }
                 } else {
                     if (isset($childData['size_id']) && isset($childData['amount'])) {
-                        $product->children()->create($data);
+                        $newChild = $product->children()->create($data);
+                        $receivedIds[] = $newChild->id;
                     }
                 }
             }
+
+            $product->children()->whereNotIn('id', $receivedIds)->delete();
+
         });
     }
 }

@@ -418,5 +418,8 @@ return [
 
     'duplicate_child_size' => 'لا يمكن تكرار نفس المقاس في المتغيرات.',
 
+    'child_amount_gt_max_order' => 'الكمية في المنتج الفرعي رقم :child يجب أن تكون أكبر من الحد الأقصى للطلب وهو :max_order.',
+
+
 
 ];

@@ -20,13 +20,15 @@ class CartItemsService{
             return __('api.product_not_active');
         }
 
+        if ($amount > $product->availableAmount()){
+            return __('api.product_not_available_amount');
+        }
+
         if($amount > $product->max_order){
             return __('api.max_order',['max_order' => $product->max_order]);
         }
 
-        if ($amount > $product->availableAmount()){
-            return __('api.product_not_available_amount');
-        }
+
         if(! $this->checkMaxOrderInSetting($userId,$amount,$productId)){
             return __('api.max_order_in_setting',['max_order' => $setting->max_order]);
         }

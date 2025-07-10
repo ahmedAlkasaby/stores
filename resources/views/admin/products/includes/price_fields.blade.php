@@ -3,7 +3,7 @@
         @include('admin.layouts.forms.fields.number', [
         'number_name' => 'price',
         'min' => 0,
-        'placeholder' => __('site.pice'),
+        'placeholder' => __('site.price'),
         'number_value' => $product->price ?? null,
         'label_req' => true,
         ])
@@ -63,4 +63,3 @@
         ])
     </div>
 </div>
-
