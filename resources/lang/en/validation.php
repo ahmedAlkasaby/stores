@@ -381,8 +381,26 @@ return [
     "city_id_required"=>"City is required",
     "shipping_required"=>"Shipping is required",
     "shipping_numeric"=>"Shipping must be numeric",
-    "one_of_this_fields_required"=>"One of this fields requred (link , product)"
-   
+    "one_of_this_fields_required"=>"One of this fields requred (link , product)",
+    'you_must_select_an_offer' => 'You must select an offer: percentage, amount, or price.',
+    'you_must_select_one_offer' => 'You must select one offer: percentage, amount, or price.',
+    'shipping_cost_must_be_zero' => 'The shipping cost must be zero when the free shipping option is selected.',
+    'shipping_cost_required' => 'The shipping cost is required.',
+    'order_max_smaller_than_amount' => 'The order max must be smaller than the amount.',
+    'invalid_category_for_service' => 'The category is invalid for this service.',
+    'offer_price_bigger_than_price' => 'The price befor offer must be bigger than the price.',
+    'offer_percent_smaller_than_price' => 'The discount value must be less than the original price.',
+
+    'duplicate_child_size' => 'Duplicate child size.',
+    'child_amount_gt_max_order' => 'The amount for child product number :child must be greater than the maximum order limit (:max_order).',
+
+    'offer_required_one' => 'You must select at least one offer type.',
+    'offer_required_only_one' => 'You must select only one offer type.',
+    'amount_less_than_max' => 'The sub-product quantity must be greater than the maximum order limit.',
+    'offer_price_must_be_greater_than' => 'The offer price must be greater than the regular price.',
+    'duplicate_size' => 'This size is already used. Please select a different size.',
+    'check_form_before_submit' => '⚠️ Please make sure all fields are filled correctly before saving.',
+
 
 
 

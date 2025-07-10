@@ -407,6 +407,25 @@ return [
     "shipping_required" => "الشحن مطلوب",
     "shipping_numeric" => "الشحن يجب ان يكون رقم",
     "one_of_this_fields_required" => "احد الحقول مطلوبة (اللينك , المنتج)",
+    'you_must_select_an_offer' => 'يجب تحديد نوع واحد من العرض: نسبة أو مبلغ أو سعر نهائي.',
+    'you_must_select_one_offer' => 'يجب تحديد نوع واحد من العرض: نسبة او مبلغ او سعر نهائي.',
+    'shipping_cost_must_be_zero' => 'يجب ان يكون سعر الشحن صفر عند اختيار خدمة الشحن المجانية.',
+    'shipping_cost_required' => 'سعر الشحن مطلوب',
+    'order_max_smaller_than_amount' => 'الحد الاقصى للطلب يجب ان يكون اقل من الكمية',
+    'invalid_category_for_service' => 'القسم غير صحيح لهذا الخدمة',
+    'offer_price_bigger_than_price' => 'سعر العرض يجب ان يكون اكبر من سعر المنتج',
+    'offer_percent_smaller_than_price' => 'قيمة الخصم الثابت  يجب أن تكون أقل من سعر المنتج',
+
+    'duplicate_child_size' => 'لا يمكن تكرار نفس المقاس في المتغيرات.',
+
+    'child_amount_gt_max_order' => 'الكمية في المنتج الفرعي رقم :child يجب أن تكون أكبر من الحد الأقصى للطلب وهو :max_order.',
+
+    'offer_required_one' => 'يجب اختيار نوع عرض واحد على الأقل',
+    'offer_required_only_one' => 'يجب اختيار نوع عرض واحد فقط',
+    'amount_less_than_max' => 'يجب أن تكون كمية المنتج الفرعي أكبر من الحد الأعلى للطلب',
+    'offer_price_must_be_greater_than' => 'سعر العرض يجب أن يكون أكبر من السعر العادي',
+    'duplicate_size' => 'الحجم مستخدم من قبل، اختر حجم مختلف',
+    'check_form_before_submit' => '⚠️ تأكد من إدخال البيانات بشكل صحيح قبل الحفظ',
 
 
 ];

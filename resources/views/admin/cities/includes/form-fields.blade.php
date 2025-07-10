@@ -1,4 +1,4 @@
-@include('admin.layouts.forms.head', [
+    @include('admin.layouts.forms.head', [
         'show_name' => true,
         'name_ar' => $city?->nameLang('ar') ?? null,
         'name_en' => $city?->nameLang('en') ?? null,
@@ -8,7 +8,7 @@
         'min' => 0,
         'placeholder' => __('site.order_id'),
         'number_value' => $city->order_id ?? null,
-    ]) 
+    ])
     @include('admin.layouts.forms.fields.number', [
         'number_name' => 'shipping',
         'min' => 0,

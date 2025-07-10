@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-  protected $fillable = [
+  protected $fillable =
+  [
     'code',
     'link',
     'name',
@@ -33,6 +34,7 @@ class Product extends MainModel
 
     // status flags
     'active',
+    'offer',
     'feature',
     'new',
     'special',
@@ -57,7 +59,7 @@ class Product extends MainModel
 
     // order
     'order_id',
-];
+  ] ;
 
 
     public function categories()
@@ -70,10 +72,6 @@ class Product extends MainModel
     {
         return $this->belongsTo(Service::class, 'service_id', 'id');
     }
-
-
-
-
 
 
     public function unit()
@@ -108,6 +106,16 @@ class Product extends MainModel
         return $this->hasMany(CartItem::class,'product_id','id');
     }
 
+    public function scopeActive($query)
+    {
+         return $query
+            ->where('active', true )
+            ->whereDate('date_start', '<=', now() )
+            ->whereDate('date_end', '>=', now() )
+            ->orderBy('order_id', 'asc')
+            ;
+    }
+
 
 
     public function scopeApplyBasicFilters($query, $request, $type_app)
@@ -117,6 +125,7 @@ class Product extends MainModel
             ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
             ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
             ->orderBy('order_id', 'asc')
+            ->where('parent_id', null)
             ;
     }
 
@@ -352,6 +361,15 @@ class Product extends MainModel
     public function averageRating()
     {
         return $this->reviews()->where('active', true)->avg('rating') ?? 0;
+    }
+
+
+    
+    public function deleteChildrenOldWhenNotSendInUpdate(){
+        if ($this->children()->count() > 0 && !request()->has('children')){
+
+            $this->children()->delete();
+        }
     }
 
 

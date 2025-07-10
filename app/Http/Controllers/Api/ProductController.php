@@ -14,7 +14,7 @@ class ProductController extends MainController
 
     public function index(ProductRequest $request)
     {
-        $products =Product::with(['categories','service','unit','size','brand','children'])->filter($request)->paginate($this->perPage);
+        $products =Product::with(['categories','service','unit','size','brand','children.size'])->filter($request)->paginate($this->perPage);
         return $this->sendData(new ProductCollection($products));
     }
 
@@ -22,8 +22,8 @@ class ProductController extends MainController
 
     public function show(string $id)
     {
-        $product = Product::with(['categories','service','unit','size','brand','children'])
-                    ->filter()
+        $product = Product::with(['categories','service','unit','size','brand','children.size'])
+                    ->active()
                     ->where('id', $id)
                     ->first();
         if (!$product) {
