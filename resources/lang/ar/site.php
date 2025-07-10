@@ -422,6 +422,7 @@ return [
     'children[][offer_price]'=>'السعر قبل الخصم',
     'children[][offer_amount]'=>'نسبة الخصم',
     'children[][offer_percent]'=> 'الخصم الثابت',
+    'children[][price]'=>'السعر',
 
 ];
 

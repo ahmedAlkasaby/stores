@@ -417,4 +417,5 @@ return [
     'children[][offer_price]'=>'Price Before Offer',
     'children[][offer_amount]'=>'Discount Rate',
     'children[][offer_percent]'=>'Discount Value',
+    'children[][price]'=>'Price',
 ];

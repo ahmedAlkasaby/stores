@@ -1,30 +1,35 @@
 <script>
     $(document).ready(function () {
         function updateOfferFields($row) {
-            const offerVal = $row.find('[name*="[offer]"]').val();
-            const offerEnabled = offerVal === '1' || offerVal === 'true';
+           const offerVal = $row.find('[name*="[offer]"]').val();
+           const offerEnabled = offerVal === '1' || offerVal === 'true';
 
-            const fields = [
-                $row.find('[name*="[offer_percent]"]'),
-                $row.find('[name*="[offer_amount]"]'),
-                $row.find('[name*="[offer_price]"]'),
-            ];
+           const fields = [
+               $row.find('[name*="[offer_percent]"]'),
+               $row.find('[name*="[offer_amount]"]'),
+               $row.find('[name*="[offer_price]"]'),
+           ];
 
-            fields.forEach($el => {
-                $el.prop('disabled', !offerEnabled);
-                if (!offerEnabled) {
-                    $el.val('');
-                    $el.removeClass('is-invalid');
-                    $row.find('.offer-error').remove();
-                }
-            });
+           fields.forEach($el => {
+               $el.prop('disabled', !offerEnabled);
+               if (!offerEnabled) {
+                   $el.val('');
+                   $el.removeClass('is-invalid');
+                   $row.find('.offer-error').remove();
+               }
+           });
 
-            if (offerEnabled) {
-                clampOfferAmount($row);
-                validateOfferSelection($row);
-                validateOfferPrice($row);
-            }
-        }
+           if (!offerEnabled) {
+               $row.find('[name*="[offer]"]').removeClass('is-invalid');
+               $row.find('.offer-error').remove();
+               return;
+           }
+
+           clampOfferAmount($row);
+           validateOfferSelection($row);
+           validateOfferPrice($row);
+       }
+
 
         function handleSingleOfferInput($row, changedField) {
             const fields = [
