@@ -394,6 +394,13 @@ return [
     'duplicate_child_size' => 'Duplicate child size.',
     'child_amount_gt_max_order' => 'The amount for child product number :child must be greater than the maximum order limit (:max_order).',
 
+    'offer_required_one' => 'You must select at least one offer type.',
+    'offer_required_only_one' => 'You must select only one offer type.',
+    'amount_less_than_max' => 'The sub-product quantity must be greater than the maximum order limit.',
+    'offer_price_must_be_greater_than' => 'The offer price must be greater than the regular price.',
+    'duplicate_size' => 'This size is already used. Please select a different size.',
+    'check_form_before_submit' => '⚠️ Please make sure all fields are filled correctly before saving.',
+
 
 
 

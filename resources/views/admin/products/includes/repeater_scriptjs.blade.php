@@ -1,35 +1,34 @@
 <script>
     $(document).ready(function () {
         function updateOfferFields($row) {
-           const offerVal = $row.find('[name*="[offer]"]').val();
-           const offerEnabled = offerVal === '1' || offerVal === 'true';
+            const offerVal = $row.find('[name*="[offer]"]').val();
+            const offerEnabled = offerVal === '1' || offerVal === 'true';
 
-           const fields = [
-               $row.find('[name*="[offer_percent]"]'),
-               $row.find('[name*="[offer_amount]"]'),
-               $row.find('[name*="[offer_price]"]'),
-           ];
+            const fields = [
+                $row.find('[name*="[offer_percent]"]'),
+                $row.find('[name*="[offer_amount]"]'),
+                $row.find('[name*="[offer_price]"]'),
+            ];
 
-           fields.forEach($el => {
-               $el.prop('disabled', !offerEnabled);
-               if (!offerEnabled) {
-                   $el.val('');
-                   $el.removeClass('is-invalid');
-                   $row.find('.offer-error').remove();
-               }
-           });
+            fields.forEach($el => {
+                $el.prop('disabled', !offerEnabled);
+                if (!offerEnabled) {
+                    $el.val('');
+                    $el.removeClass('is-invalid');
+                    $row.find('.offer-error').remove();
+                }
+            });
 
-           if (!offerEnabled) {
-               $row.find('[name*="[offer]"]').removeClass('is-invalid');
-               $row.find('.offer-error').remove();
-               return;
-           }
+            if (!offerEnabled) {
+                $row.find('[name*="[offer]"]').removeClass('is-invalid');
+                $row.find('.offer-error').remove();
+                return;
+            }
 
-           clampOfferAmount($row);
-           validateOfferSelection($row);
-           validateOfferPrice($row);
-       }
-
+            clampOfferAmount($row);
+            validateOfferSelection($row);
+            validateOfferPrice($row);
+        }
 
         function handleSingleOfferInput($row, changedField) {
             const fields = [
@@ -61,11 +60,11 @@
             if (offer) {
                 if (filled.length === 0) {
                     $row.find('[name*="[offer]"]').addClass('is-invalid')
-                        .after(`<div class="invalid-feedback offer-error">يجب اختيار نوع عرض واحد على الأقل</div>`);
+                        .after(`<div class="invalid-feedback offer-error">{{ __('validation.offer_required_one') }}</div>`);
                     return false;
                 } else if (filled.length > 1) {
                     $row.find('[name*="[offer]"]').addClass('is-invalid')
-                        .after(`<div class="invalid-feedback offer-error">يجب اختيار نوع عرض واحد فقط</div>`);
+                        .after(`<div class="invalid-feedback offer-error">{{ __('validation.offer_required_only_one') }}</div>`);
                     return false;
                 }
             }
@@ -84,7 +83,7 @@
             if (maxOrder > 0 && amount <= maxOrder) {
                 $input.addClass('is-invalid');
                 $input.after(`<div class="invalid-feedback amount-error">
-                    يجب أن تكون كمية المنتج الفرعي أكبر من الحد الأعلى للطلب (${maxOrder})
+                    {{ __('validation.amount_less_than_max') }} (${maxOrder})
                 </div>`);
                 return false;
             } else {
@@ -115,7 +114,7 @@
             if (!isNaN(offerPrice) && !isNaN(price) && offerPrice <= price) {
                 $offerPriceInput.addClass('is-invalid');
                 $offerPriceInput.after(`<div class="invalid-feedback offer-price-error">
-                    سعر العرض يجب أن يكون أكبر من السعر العادي (${price})
+                    {{ __('validation.offer_price_must_be_greater_than') }} (${price})
                 </div>`);
                 return false;
             } else {
@@ -123,7 +122,6 @@
                 return true;
             }
         }
-
 
         function validateUniqueSizes() {
             let isValid = true;
@@ -137,7 +135,7 @@
 
                 if (val && sizes.includes(val)) {
                     $input.addClass('is-invalid');
-                    $input.after(`<div class="invalid-feedback size-error">الحجم مستخدم من قبل، اختر حجم مختلف</div>`);
+                    $input.after(`<div class="invalid-feedback size-error">{{ __('validation.duplicate_size') }}</div>`);
                     isValid = false;
                 } else {
                     sizes.push(val);
@@ -166,7 +164,7 @@
         $('form').on('submit', function (e) {
             if (!validateAll()) {
                 e.preventDefault();
-                alert('⚠️ تأكد من إدخال البيانات بشكل صحيح قبل الحفظ');
+                alert('{{ __("validation.check_form_before_submit") }}');
             }
         });
 

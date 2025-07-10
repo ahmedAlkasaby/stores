@@ -420,6 +420,12 @@ return [
 
     'child_amount_gt_max_order' => 'الكمية في المنتج الفرعي رقم :child يجب أن تكون أكبر من الحد الأقصى للطلب وهو :max_order.',
 
+    'offer_required_one' => 'يجب اختيار نوع عرض واحد على الأقل',
+    'offer_required_only_one' => 'يجب اختيار نوع عرض واحد فقط',
+    'amount_less_than_max' => 'يجب أن تكون كمية المنتج الفرعي أكبر من الحد الأعلى للطلب',
+    'offer_price_must_be_greater_than' => 'سعر العرض يجب أن يكون أكبر من السعر العادي',
+    'duplicate_size' => 'الحجم مستخدم من قبل، اختر حجم مختلف',
+    'check_form_before_submit' => '⚠️ تأكد من إدخال البيانات بشكل صحيح قبل الحفظ',
 
 
 ];
