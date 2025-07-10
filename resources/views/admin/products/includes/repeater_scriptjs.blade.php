@@ -1,6 +1,5 @@
 <script>
     $(document).ready(function () {
-
         function updateOfferFields($row) {
             const offerVal = $row.find('[name*="[offer]"]').val();
             const offerEnabled = offerVal === '1' || offerVal === 'true';
@@ -16,12 +15,13 @@
                 if (!offerEnabled) {
                     $el.val('');
                     $el.removeClass('is-invalid');
+                    $row.find('.offer-error').remove();
                 }
             });
 
-            // إعادة التحقق بعد التفعيل
             if (offerEnabled) {
                 clampOfferAmount($row);
+                validateOfferSelection($row);
                 validateOfferPrice($row);
             }
         }
@@ -39,6 +39,34 @@
                     $input.removeClass('is-invalid');
                 }
             });
+
+            validateOfferSelection($row);
+        }
+
+        function validateOfferSelection($row) {
+            const offer = $row.find('[name*="[offer]"]').val() === '1';
+            const percent = $row.find('[name*="[offer_percent]"]').val();
+            const amount = $row.find('[name*="[offer_amount]"]').val();
+            const price = $row.find('[name*="[offer_price]"]').val();
+
+            const filled = [percent, amount, price].filter(val => val !== '' && val !== null);
+
+            $row.find('.offer-error').remove();
+
+            if (offer) {
+                if (filled.length === 0) {
+                    $row.find('[name*="[offer]"]').addClass('is-invalid')
+                        .after(`<div class="invalid-feedback offer-error">يجب اختيار نوع عرض واحد على الأقل</div>`);
+                    return false;
+                } else if (filled.length > 1) {
+                    $row.find('[name*="[offer]"]').addClass('is-invalid')
+                        .after(`<div class="invalid-feedback offer-error">يجب اختيار نوع عرض واحد فقط</div>`);
+                    return false;
+                }
+            }
+
+            $row.find('[name*="[offer]"]').removeClass('is-invalid');
+            return true;
         }
 
         function validateAmountVsMax($row) {
@@ -46,16 +74,17 @@
             const maxOrder = parseFloat($('#max_order').val()) || 0;
             const $input = $row.find('[name*="[amount]"]');
 
+            $row.find('.amount-error').remove();
+
             if (maxOrder > 0 && amount <= maxOrder) {
                 $input.addClass('is-invalid');
-                if (!$row.find('.amount-error').length) {
-                    $input.after(`<div class="invalid-feedback amount-error">
-                        ${`{{ __("validation.child_amount_gt_max_order", ["child" => "", "max_order" => ":max_order"]) }}`.replace(':max_order', maxOrder)}
-                    </div>`);
-                }
+                $input.after(`<div class="invalid-feedback amount-error">
+                    يجب أن تكون كمية المنتج الفرعي أكبر من الحد الأعلى للطلب (${maxOrder})
+                </div>`);
+                return false;
             } else {
                 $input.removeClass('is-invalid');
-                $row.find('.amount-error').remove();
+                return true;
             }
         }
 
@@ -76,47 +105,65 @@
             const offerPrice = parseFloat($offerPriceInput.val());
             const price = parseFloat($priceInput.val());
 
-            if (!isNaN(offerPrice) && !isNaN(price)) {
-                if (offerPrice <= price) {
-                    $offerPriceInput.val('');
-                    $offerPriceInput.addClass('is-invalid');
-                    if (!$offerPriceInput.next('.invalid-feedback').length) {
-                        $offerPriceInput.after(
-                            `<div class="invalid-feedback">
-                                سعر العرض يجب أن يكون أكبر من السعر (${price})
-                            </div>`
-                        );
-                    }
-                } else {
-                    $offerPriceInput.removeClass('is-invalid');
-                    $offerPriceInput.next('.invalid-feedback').remove();
-                }
+            $row.find('.offer-price-error').remove();
+
+            if (!isNaN(offerPrice) && !isNaN(price) && offerPrice <= price) {
+                $offerPriceInput.addClass('is-invalid');
+                $offerPriceInput.after(`<div class="invalid-feedback offer-price-error">
+                    سعر العرض يجب أن يكون أكبر من السعر العادي (${price})
+                </div>`);
+                return false;
+            } else {
+                $offerPriceInput.removeClass('is-invalid');
+                return true;
             }
         }
 
-        function refreshSizeOptions() {
-            const selectedSizes = $('[name*="[size_id]"]').map(function () {
-                return $(this).val();
-            }).get();
+
+        function validateUniqueSizes() {
+            let isValid = true;
+            const sizes = [];
 
             $('[name*="[size_id]"]').each(function () {
-                const $select = $(this);
-                const currentVal = $select.val();
+                const $input = $(this);
+                const val = $input.val();
+                $input.removeClass('is-invalid');
+                $input.next('.invalid-feedback.size-error').remove();
 
-                $select.find('option').each(function () {
-                    const optionVal = $(this).val();
-                    if (
-                        optionVal &&
-                        optionVal !== currentVal &&
-                        selectedSizes.includes(optionVal)
-                    ) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
-                    }
-                });
+                if (val && sizes.includes(val)) {
+                    $input.addClass('is-invalid');
+                    $input.after(`<div class="invalid-feedback size-error">الحجم مستخدم من قبل، اختر حجم مختلف</div>`);
+                    isValid = false;
+                } else {
+                    sizes.push(val);
+                }
             });
+
+            return isValid;
         }
+
+        function validateAll() {
+            let allValid = true;
+
+            $('[data-repeater-item]').each(function () {
+                const $row = $(this);
+
+                if (!validateAmountVsMax($row)) allValid = false;
+                if (!validateOfferPrice($row)) allValid = false;
+                if (!validateOfferSelection($row)) allValid = false;
+            });
+
+            if (!validateUniqueSizes()) allValid = false;
+
+            return allValid;
+        }
+
+        $('form').on('submit', function (e) {
+            if (!validateAll()) {
+                e.preventDefault();
+                alert('⚠️ تأكد من إدخال البيانات بشكل صحيح قبل الحفظ');
+            }
+        });
 
         $('.form-repeater').repeater({
             initEmpty: false,
@@ -124,13 +171,11 @@
                 $(this).slideDown();
                 $(this).find('.select2').select2({ dropdownParent: $('body') });
                 updateOfferFields($(this));
-                refreshSizeOptions();
             },
             hide: function (deleteElement) {
                 if (confirm('{{ __("site.confirm_delete") }}')) {
                     $(this).slideUp(deleteElement, function () {
                         $(this).remove();
-                        refreshSizeOptions();
                     });
                 }
             }
@@ -138,7 +183,6 @@
 
         $('.select2').select2({ dropdownParent: $('body') });
 
-        // Bindings
         $(document).on('change', '[name*="[offer]"]', function () {
             updateOfferFields($(this).closest('[data-repeater-item]'));
         });
@@ -160,16 +204,15 @@
         });
 
         $(document).on('change', '[name*="[size_id]"]', function () {
-            refreshSizeOptions();
+            validateUniqueSizes();
         });
 
-        // Initial checks
         $('[data-repeater-item]').each(function () {
             updateOfferFields($(this));
             validateAmountVsMax($(this));
             validateOfferPrice($(this));
         });
 
-        refreshSizeOptions();
+        validateUniqueSizes();
     });
 </script>
