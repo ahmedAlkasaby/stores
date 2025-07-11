@@ -418,4 +418,11 @@ return [
     'children[][offer_amount]'=>'Discount Rate',
     'children[][offer_percent]'=>'Discount Value',
     'children[][price]'=>'Price',
+    'created'=>'Created',
+    'activated'=>'Activated',
+    'updated'=>'Updated',
+    'deleted'=>'Deleted',
+    'restored'=>'Restored',
+    'force_deleted'=>'Force Deleted',
+
 ];

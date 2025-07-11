@@ -35,6 +35,7 @@ return [
             "addresses" => 'i,sh,s,u,a,d',
             "sliders" => 'i,sh,s,u,a,d',
             "wishlists" => 'i',
+            'activity_logs' => 'i',
 
 
         ],
