@@ -2,14 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\User;
-use App\Models\Product;
 use App\Models\Payment;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Models\User;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderSeeder extends Seeder
 {
@@ -22,15 +23,14 @@ class OrderSeeder extends Seeder
         $productIds = Product::pluck('id')->toArray();
 
         for ($i = 0; $i < 20; $i++) {
-            $order = Order::create([
-
-                'user_id'    => $faker->randomElement($userIds),
+            $user =User::where('type','client')->inRandomOrder()->first();
+            $order=$user->orders()->create([
                 'status'     => $faker->randomElement(['request', 'pending', 'approved', 'rejected','preparing','preparingFinished','deliveryGo','delivered','canceled','returned']),
                 'payment_id' => $faker->randomElement($paymentIds),
                 'shipping_address'   => $faker->randomFloat(2, 10, 50),
                 'notes'      => $faker->optional()->sentence(),
                 'created_at' => $faker->dateTimeBetween('-2 months', 'now'),
-                'updated_at' => now(),
+                'address_id'=>$user->addresses()->first()->id,
             ]);
 
             $itemsCount = rand(1, 5);

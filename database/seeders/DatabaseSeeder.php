@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
             NotificationSeeder::class,
             ContactSeeder::class,
             PaymentSeeder::class,
-            // OrderSeeder::class
+            AddressSeeder::class,
+            OrderSeeder::class
         ]);
         Wishlist::create([
             'user_id' => 1,
