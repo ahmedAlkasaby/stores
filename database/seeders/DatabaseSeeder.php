@@ -7,6 +7,9 @@ namespace Database\Seeders;
 
 use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $dispatcher = Model::getEventDispatcher();
+
+        Model::unsetEventDispatcher();
+
+
+
         // this main
         $this->call([
             SettingSeeder::class,
@@ -35,12 +44,15 @@ class DatabaseSeeder extends Seeder
             NotificationSeeder::class,
             ContactSeeder::class,
             PaymentSeeder::class,
-            OrderSeeder::class
+            // OrderSeeder::class
         ]);
-            Wishlist::create([
-                'user_id' => 1,
-                "product_id"=>1
-            ]);
+        Wishlist::create([
+            'user_id' => 1,
+            "product_id"=>1
+        ]);
+
+        Model::setEventDispatcher($dispatcher);
+
 
 
 

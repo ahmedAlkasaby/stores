@@ -8,63 +8,74 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-  protected $fillable =
-  [
-    'code',
-    'link',
-    'name',
-    'description',
-    'image',
-    'video',
-    'background',
-    'color',
+    protected $fillable =
+    [
+        'code',
+        'link',
+        'name',
+        'description',
+        'image',
+        'video',
+        'background',
+        'color',
 
-    // price
-    'price',
-    'offer_price',
-    'offer_amount',
-    'offer_percent',
-    'shipping_cost',
+        // price
+        'price',
+        'offer_price',
+        'offer_amount',
+        'offer_percent',
+        'shipping_cost',
 
-    // order limits
-    'start',
-    'skip',
-    'amount',
-    'max_order',
+        // order limits
+        'start',
+        'skip',
+        'amount',
+        'max_order',
 
-    // status flags
-    'active',
-    'offer',
-    'feature',
-    'new',
-    'special',
-    'filter',
-    'sale',
-    'late',
-    'stock',
-    'free_shipping',
-    'returned',
+        // status flags
+        'active',
+        'offer',
+        'feature',
+        'new',
+        'special',
+        'filter',
+        'sale',
+        'late',
+        'stock',
+        'free_shipping',
+        'returned',
 
-    // dates
-    'date_start',
-    'date_end',
+        // dates
+        'date_start',
+        'date_end',
 
 
-    // foreign keys
-    'service_id',
-    'unit_id',
-    'brand_id',
-    'size_id',
-    'parent_id',
+        // foreign keys
+        'service_id',
+        'unit_id',
+        'brand_id',
+        'size_id',
+        'parent_id',
 
-    // order
-    'order_id',
-  ] ;
+        // order
+        'order_id',
+    ];
+
+
+    public function setDateStartAttribute($value)
+    {
+        $this->attributes['date_start'] = date('Y-m-d H:i:00', strtotime($value));
+    }
+
+    public function setDateEndAttribute($value)
+    {
+        $this->attributes['date_end'] = date('Y-m-d H:i:00', strtotime($value));
+    }
 
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'category_product','product_id','category_id')->withTimestamps();
+        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id')->withTimestamps();
     }
 
 
@@ -98,22 +109,22 @@ class Product extends MainModel
 
     public function wishlists()
     {
-        return $this->belongsToMany(User::class,'wishlists','product_id','user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withTimestamps();
     }
 
     public function cartItems()
     {
-        return $this->hasMany(CartItem::class,'product_id','id');
+        return $this->hasMany(CartItem::class, 'product_id', 'id');
     }
 
     public function scopeActive($query)
     {
-         return $query
-            ->where('active', true )
-            ->whereDate('date_start', '<=', now() )
-            ->whereDate('date_end', '>=', now() )
+        return $query
+            ->where('active', true)
+            ->whereDate('date_start', '<=', now())
+            ->whereDate('date_end', '>=', now())
             ->orderBy('order_id', 'asc')
-            ;
+        ;
     }
 
 
@@ -126,7 +137,7 @@ class Product extends MainModel
             ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
             ->orderBy('order_id', 'asc')
             ->where('parent_id', null)
-            ;
+        ;
     }
 
     public function scopeApplySearch($query, $request)
@@ -135,8 +146,8 @@ class Product extends MainModel
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('description', 'like', '%' . $search . '%')
-                  ->orWhere('price', 'like', '%' . $search . '%');
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('price', 'like', '%' . $search . '%');
             });
         }
 
@@ -304,7 +315,7 @@ class Product extends MainModel
             ->applyReturnedFilter($request)
             ->applySorting($request)
             ->applyDateFilters($request)
-            ;
+        ;
     }
 
 
@@ -345,11 +356,13 @@ class Product extends MainModel
         return 0;
     }
 
-    public function amountInAllCarts(){
+    public function amountInAllCarts()
+    {
         return $this->cartItems()->sum('amount');
     }
 
-    public function availableAmount(){
+    public function availableAmount()
+    {
         return $this->amount - $this->amountInAllCarts();
     }
 
@@ -364,13 +377,12 @@ class Product extends MainModel
     }
 
 
-    
-    public function deleteChildrenOldWhenNotSendInUpdate(){
-        if ($this->children()->count() > 0 && !request()->has('children')){
+
+    public function deleteChildrenOldWhenNotSendInUpdate()
+    {
+        if ($this->children()->count() > 0 && !request()->has('children')) {
 
             $this->children()->delete();
         }
     }
-
-
 }

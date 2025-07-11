@@ -17,7 +17,7 @@ class OrderSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $userIds = User::pluck('id')->toArray();
+        $userIds = User::where('type', 'client')->pluck('id')->toArray();
         $paymentIds = Payment::pluck('id')->toArray();
         $productIds = Product::pluck('id')->toArray();
 
@@ -27,7 +27,7 @@ class OrderSeeder extends Seeder
                 'user_id'    => $faker->randomElement($userIds),
                 'status'     => $faker->randomElement(['request', 'pending', 'approved', 'rejected','preparing','preparingFinished','deliveryGo','delivered','canceled','returned']),
                 'payment_id' => $faker->randomElement($paymentIds),
-                'shipping'   => $faker->randomFloat(2, 10, 50),
+                'shipping_address'   => $faker->randomFloat(2, 10, 50),
                 'notes'      => $faker->optional()->sentence(),
                 'created_at' => $faker->dateTimeBetween('-2 months', 'now'),
                 'updated_at' => now(),
