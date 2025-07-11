@@ -1,4 +1,5 @@
-@include('admin.layouts.table.header',['TitleTable'=>__('site.'.$class),'routeToCreate' => route('dashboard.users.create')])
+@include('admin.layouts.table.header',['TitleTable'=>__('site.'.$class),'routeToCreate' =>
+route('dashboard.users.create'),'model'=>'users'])
 @include('admin.layouts.table.thead_info', [
 'columns' => [ 'site.user' ,"site.phone",'site.type','site.status','site.action']
 ])

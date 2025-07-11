@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ActivityLogController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\AddressController;
 use App\Http\Controllers\Dashboard\AuthController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -126,4 +128,9 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     // Pesdource Route for Products
     Route::resource('products', ProductController::class);
+
+    // route activity_logs
+    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
+
+
 });

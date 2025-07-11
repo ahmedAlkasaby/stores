@@ -423,6 +423,21 @@ return [
     'children[][offer_amount]'=>'نسبة الخصم',
     'children[][offer_percent]'=> 'الخصم الثابت',
     'children[][price]'=>'السعر',
+    'created'=>'انشاء',
+    'activated'=>'تفعيل',
+    'updated'=>'تحديث',
+    'deleted'=>'حذف',
+    'restored'=>'استعادة',
+    'force_deleted'=>'حذف نهائي',
+    'changes' => 'التغييرات',
+    'attribute' => 'الخاصية',
+    'before' => 'قبل',
+    'after' => 'بعد',
+    'no_changes_found' => 'لا توجد تغييرات',
+    'close' => 'إغلاق',
+    'activity_logs' => 'سجلات النشاط',
+    'model'=>'النموذج',
+
 
 ];
 

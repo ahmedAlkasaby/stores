@@ -187,26 +187,41 @@
                     </ul>
                 </li>
             @endif
-            @if (auth()->user()->hasPermission('cities.index'))
+            @if (auth()->user()->hasPermission(['cities.index', 'regions.index']))
                 <li class="menu-item @if (isset($class) && in_array($class, ['cities', 'regions'])) active @endif">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons ti ti-building"></i>
                         <div>{{ __('site.cities') }}</div>
                     </a>
                     <ul class="menu-sub">
+                        @if (auth()->user()->hasPermission('cities.index'))
                         <li class="menu-item  @if (isset($class) && $class == 'cities') active @endif">
                             <a href="{{ route('dashboard.cities.index') }}" class="menu-link">
                                 <div>{{ __('site.cities') }}</div>
                             </a>
                         </li>
+
+                        @endif
+                        @if (auth()->user()->hasPermission('regions.index'))
+
                         <li class="menu-item  @if (isset($class) && $class == 'regions') active @endif">
                             <a href="{{ route('dashboard.regions.index') }}" class="menu-link">
                                 <div>{{ __('site.regions') }}</div>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
             @endif
+
+            @if (auth()->user()->hasPermission('activity_logs.index'))
+            <li class="menu-item @if ($class == 'activity_logs') active @endif">
+                <a href="{{ route('dashboard.activity_logs.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                    <div>{{ __('site.activity_logs') }}</div>
+                </a>
+            </li>
+        @endif
 
 
 
