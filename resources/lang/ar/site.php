@@ -429,6 +429,14 @@ return [
     'deleted'=>'حذف',
     'restored'=>'استعادة',
     'force_deleted'=>'حذف نهائي',
+    'changes' => 'التغييرات',
+    'attribute' => 'الخاصية',
+    'before' => 'قبل',
+    'after' => 'بعد',
+    'no_changes_found' => 'لا توجد تغييرات',
+    'close' => 'إغلاق',
+    'activity_logs' => 'سجلات النشاط',
+    'model'=>'النموذج',
 
 
 ];

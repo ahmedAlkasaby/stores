@@ -20,15 +20,15 @@ class AdminMiddleware
     {
         $auth = auth()->user();
 
-        if($auth && $auth->type =='admin'){
+        if ($auth && $auth->type == 'admin'  && $auth->active) {
             app()->setLocale($auth->lang);
-             View::share([
-            'admin_language' => $auth->lang,
-            'admin_dir' => $auth->lang == 'ar' ? 'rtl' : 'ltr',
-            'admin_theme_style' =>$auth->theme,
-        ]);
+            View::share([
+                'admin_language' => $auth->lang,
+                'admin_dir' => $auth->lang == 'ar' ? 'rtl' : 'ltr',
+                'admin_theme_style' => $auth->theme,
+            ]);
             return $next($request);
-        }else{
+        } else {
             auth()->logout();
             return redirect()->route('dashboard.login.view')->withErrors(['email' => __('auth.not_permission_for_this_action')]);
         }

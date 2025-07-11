@@ -12,12 +12,12 @@ class ActivityLogController extends MainController
      public function __construct()
     {
         parent::__construct();
-        $this->setClass('additions');
+        $this->setClass('activity_logs');
     }
     public function index()
     {
-        $activityLogs=ActivityLog::filter()->paginate($this->perPage);
-
+        // dd(1);
+        $activityLogs=ActivityLog::with('user')->filter()->paginate($this->perPage);
         return view('admin.activity_logs.index',compact('activityLogs'));
     }
 }

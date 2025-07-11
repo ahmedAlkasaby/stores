@@ -8,10 +8,10 @@
 @section('content')
 
     <div class="card">
-        @include('admin.brands.includes.table')
+        @include('admin.activity_logs.includes.table')
     </div>
 </div>
-@include('admin.brands.includes.filter')
+{{-- @include('admin.brands.includes.filter') --}}
 
 @endsection
 
@@ -20,5 +20,5 @@
 @endsection
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-    @include('admin.layouts.table.dataTableJs', ['table' => $brands->count() > 0])
+    @include('admin.layouts.table.dataTableJs', ['table' => $activityLogs->count() > 0])
 @endsection

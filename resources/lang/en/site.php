@@ -424,5 +424,13 @@ return [
     'deleted'=>'Deleted',
     'restored'=>'Restored',
     'force_deleted'=>'Force Deleted',
+    'changes' => 'Changes',
+    'attribute' => 'Attribute',
+    'before' => 'Before',
+    'after' => 'After',
+    'no_changes_found' => 'No changes found',
+    'close' => 'Close',
+    'activity_logs' => 'Activity Logs',
+    'model' => 'Model',
 
 ];
