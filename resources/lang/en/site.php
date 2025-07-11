@@ -439,4 +439,23 @@ return [
     "special" => "Special",
     "reviews" => "Reviews",
     "review" => "Review",
+    "login_page" => "Login Page",
+    "welcome" => "Welcome",
+    "since_last_week" => "Since Last Week",
+    "revenue" => "Revenue",
+    
+    "orders_per_month" => "Orders Per Month",
+    "january" => "January",
+    "february" => "February",
+    "march" => "March",
+    "april" => "April",
+    "may" => "May",
+    "june" => "June",
+    "july" => "July",
+    "august" => "August",
+    "september" => "September",
+    "october" => "October",
+    "november" => "November",
+    "december" => "December",
+
 ];

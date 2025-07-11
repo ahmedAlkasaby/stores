@@ -26,12 +26,12 @@ class OrderSeeder extends Seeder
             $order = Order::create([
 
                 'user_id'    => $faker->randomElement($userIds),
-                'status'     => $faker->randomElement(['request', 'pending', 'approved', 'rejected','preparing','preparingFinished','deliveryGo','delivered','canceled','returned']),
+                'status'     => $faker->randomElement(['request', 'pending', 'approved', 'rejected', 'preparing', 'preparingFinished', 'deliveryGo', 'delivered', 'canceled', 'returned']),
                 'payment_id' => $faker->randomElement($paymentIds),
                 'shipping_address'   => $faker->randomFloat(2, 10, 50),
                 'notes'      => $faker->optional()->sentence(),
                 "address_id" => $faker->randomElement(Address::pluck('id')->toArray()),
-                'created_at' => $faker->dateTimeBetween('-2 months', 'now'),
+                'created_at' => now()->subDays(rand(1, 365)),
                 'updated_at' => now(),
             ]);
 

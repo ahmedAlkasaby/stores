@@ -441,6 +441,23 @@ return [
     "special"=>"خاص",
     "reviews" => "المراجعات",
     "review" => "مراجعة",
+    "login_page" => "صفحة تسجيل الدخول",
+    "welcome" => "مرحبا",
+    "since_last_week" => "منذ اسبوع",
+    "revenue" => "الايرادات",
+    "orders_per_month" => "طلبات الشهر",
+    "january" => "يناير",
+    "february" => "فبراير",
+    "march" => "مارس",
+    "april" => "ابريل",
+    "may" => "ماي",
+    "june" => "يونيو",
+    "july" => "يوليو",
+    "august" => "اغسطس",
+    "september" => "سبتمبر",
+    "october" => "اكتوبر",
+    "november" => "نوفمبر",
+    "december" => "ديسمبر",
 
 ];
 
