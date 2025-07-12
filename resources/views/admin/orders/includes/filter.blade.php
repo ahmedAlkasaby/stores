@@ -4,16 +4,7 @@
 
 
 
-{{-- Search by Name --}}
-<div class="col-md-12">
-    @include('admin.layouts.forms.fields.text', [
-        'text_name' => 'name',
-        'text_value' => request('name') ?? null,
-        'label_name' => __('site.name'),
-        'label_req' => true,
-        'not_req' => true,
-    ])
-</div>
+
 
 
 {{-- delivery --}}

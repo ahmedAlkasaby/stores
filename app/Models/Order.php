@@ -174,7 +174,7 @@ class Order extends MainModel
 
         $request = $request ?? request();
         return $query
-            ->applySearch($request)
+            // ->applySearch($request)
             ->applyDeliveryTime($request)
             ->applyPayment($request)
             ->applyDelivery($request)
