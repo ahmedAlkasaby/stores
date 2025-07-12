@@ -1,6 +1,7 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.sliders'),
     'routeToCreate' => route('dashboard.sliders.create'),
+    "model" => "sliders",
 ])
 
 @include('admin.layouts.table.thead_info', [

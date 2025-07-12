@@ -1,5 +1,24 @@
-<a id="cancel" data-id="{{ $id }}" class="btn-width btn btn-{{ $btn_class ?? 'danger' }} fa fa-{{ $fa_class ?? 'window-close' }}"><span>{{ $cancel ?? '' }}</span></a>
-{!! Form::open(['method' => 'POST','route' => ["admin.$table.cancel", $id],'style'=>'display:inline']) !!}
-{!! Form::submit('Cancel', ['class' => 'hide btn btn-danger delete-btn-submit','data-cancel-id' => $id]) !!}
-@include('admin.layouts.forms.close')
+<?php
+use App\Enums\StatusOrderEnum;
 
+?>
+<td class="text-lg-center">
+    @if (auth()->user()->hasPermission($model . '.active') &&
+            in_array($item->status, [
+                StatusOrderEnum::Request,
+                StatusOrderEnum::Pending,
+                StatusOrderEnum::Approved,
+                StatusOrderEnum::Preparing,
+                StatusOrderEnum::PreparingFinished,
+                StatusOrderEnum::DeliveryGo,
+                StatusOrderEnum::Delivered,
+            ]))
+        <button type="button"
+            class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }}  cancel-orders waves-effect waves-light"
+            data-{{ $model }}-id="{{ $item->id }}"
+            data-url="{{ route('dashboard.' . $model . '.cancel', [$param => $item->id]) }}"
+            id="cancel-{{ $item->id }}">
+            <i class="fa-solid {{ $item->active ? 'fa-check' : 'fa-circle-xmark' }}"></i>
+        </button>
+    @endif
+</td>

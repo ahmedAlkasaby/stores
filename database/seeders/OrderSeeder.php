@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\Address;
+use App\Models\Payment;
+use App\Models\Product;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use App\Models\Product;
@@ -27,6 +30,7 @@ class OrderSeeder extends Seeder
             $order=$user->orders()->create([
                 'status'     => $faker->randomElement(['request', 'pending', 'approved', 'rejected','preparing','preparingFinished','deliveryGo','delivered','canceled','returned']),
                 'payment_id' => $faker->randomElement($paymentIds),
+                'shipping_address'   => $faker->randomFloat(2, 10, 50),
                 'shipping_address'   => $faker->randomFloat(2, 10, 50),
                 'notes'      => $faker->optional()->sentence(),
                 'created_at' => $faker->dateTimeBetween('-2 months', 'now'),

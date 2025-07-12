@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             SliderSeeder::class,
             UserSeeder::class,
+            AddressSeeder::class,
             NotificationSeeder::class,
             ContactSeeder::class,
             PaymentSeeder::class,

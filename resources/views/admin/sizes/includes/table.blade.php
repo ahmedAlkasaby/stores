@@ -2,6 +2,7 @@
     'TitleTable' => __('site.sizes'),
     'routeToCreate' => route('dashboard.sizes.create'),
     'filter' => true,
+    "model" => "sizes",
 ])
 
 @include('admin.layouts.table.thead_info', [

@@ -8,17 +8,22 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-    protected $fillable =
-    [
-        'code',
-        'link',
-        'name',
-        'description',
-        'image',
-        'video',
-        'background',
-        'color',
+  protected $fillable = [
+    'code',
+    'link',
+    'name',
+    'description',
+    'image',
+    'video',
+    'background',
+    'color',
 
+        // price
+        'price',
+        'offer_price',
+        'offer_amount',
+        'offer_percent',
+        'shipping_cost',
         // price
         'price',
         'offer_price',
@@ -32,18 +37,17 @@ class Product extends MainModel
         'amount',
         'max_order',
 
-        // status flags
-        'active',
-        'offer',
-        'feature',
-        'new',
-        'special',
-        'filter',
-        'sale',
-        'late',
-        'stock',
-        'free_shipping',
-        'returned',
+    // status flags
+    'active',
+    'feature',
+    'new',
+    'special',
+    'filter',
+    'sale',
+    'late',
+    'stock',
+    'free_shipping',
+    'returned',
 
         // dates
         'date_start',
@@ -110,10 +114,12 @@ class Product extends MainModel
     public function wishlists()
     {
         return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withTimestamps();
     }
 
     public function cartItems()
     {
+        return $this->hasMany(CartItem::class, 'product_id', 'id');
         return $this->hasMany(CartItem::class, 'product_id', 'id');
     }
 
@@ -123,7 +129,11 @@ class Product extends MainModel
             ->where('active', true)
             ->whereDate('date_start', '<=', now())
             ->whereDate('date_end', '>=', now())
+            ->where('active', true)
+            ->whereDate('date_start', '<=', now())
+            ->whereDate('date_end', '>=', now())
             ->orderBy('order_id', 'asc')
+        ;
         ;
     }
 
@@ -137,7 +147,7 @@ class Product extends MainModel
             ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
             ->orderBy('order_id', 'asc')
             ->where('parent_id', null)
-        ;
+            ;
     }
 
     public function scopeApplySearch($query, $request)
@@ -165,7 +175,7 @@ class Product extends MainModel
 
     public function scopeApplyCategoryFilter($query, $request)
     {
-        if ($request->filled('category_id')) {
+        if ($request->filled('category_id') && $request->category_id != 'all') {
             $query->whereHas('categories', function ($q) use ($request) {
                 $q->where('category_id', $request->category_id);
             });
@@ -189,7 +199,7 @@ class Product extends MainModel
 
     public function scopeApplyFeatureFilter($query, $request)
     {
-        if ($request->filled('feature')) {
+        if ($request->filled('feature') && $request->feature != 'all') {
             $query->where('feature', $request->feature);
         }
 
@@ -197,49 +207,49 @@ class Product extends MainModel
     }
     public function scopeApplyNewFilter($query, $request)
     {
-        if ($request->filled('new')) {
+        if ($request->filled('new') && $request->new != 'all') {
             $query->where('new', $request->new);
         }
         return $query;
     }
     public function scopeApplySpecialFilter($query, $request)
     {
-        if ($request->filled('special')) {
+        if ($request->filled('special') && $request->special != 'all') {
             $query->where('special', $request->special);
         }
         return $query;
     }
     public function scopeApplyFilterFilter($query, $request)
     {
-        if ($request->filled('filter')) {
+        if ($request->filled('filter') && $request->filter != 'all') {
             $query->where('filter', $request->filter);
         }
         return $query;
     }
     public function scopeApplySaleFilter($query, $request)
     {
-        if ($request->filled('sale')) {
+        if ($request->filled('sale') && $request->sale != 'all') {
             $query->where('sale', $request->sale);
         }
         return $query;
     }
     public function scopeApplyStockFilter($query, $request)
     {
-        if ($request->filled('stock')) {
+        if ($request->filled('stock') && $request->stock != 'all') {
             $query->where('stock', $request->stock);
         }
         return $query;
     }
     public function scopeApplyFreeShippingFilter($query, $request)
     {
-        if ($request->filled('free_shipping')) {
+        if ($request->filled('free_shipping') && $request->free_shipping != 'all') {
             $query->where('free_shipping', $request->free_shipping);
         }
         return $query;
     }
     public function scopeApplyReturnedFilter($query, $request)
     {
-        if ($request->filled('returned')) {
+        if ($request->filled('returned') && $request->returned != 'all') {
             $query->where('returned', $request->returned);
         }
         return $query;
@@ -266,7 +276,19 @@ class Product extends MainModel
         return $query;
     }
 
+    public function scopeApplyUnitFilter($query, $request){
+        if ($request->filled('unit') && $request->unit != 'all') {
+            $query->where('unit_id', $request->unit);
+        }
+        return $query;
+    }
 
+    public function scopeApplyBrandFilter($query, $request){
+        if ($request->filled('brand') && $request->brand != 'all') {
+            $query->where('brand_id', $request->brand);
+        }
+        return $query;
+    }
 
     public function scopeApplySorting($query, $request)
     {
@@ -358,9 +380,13 @@ class Product extends MainModel
 
     public function amountInAllCarts()
     {
+    public function amountInAllCarts()
+    {
         return $this->cartItems()->sum('amount');
     }
 
+    public function availableAmount()
+    {
     public function availableAmount()
     {
         return $this->amount - $this->amountInAllCarts();

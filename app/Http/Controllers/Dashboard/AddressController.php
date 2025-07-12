@@ -22,7 +22,7 @@ class AddressController extends MainController
     }
     public function index()
     {
-        $addresses = Address::paginate($this->perPage);
+        $addresses = Address::with("city", "region", "user")->paginate($this->perPage);
         return view('admin.addresses.index', compact('addresses'));
     }
 

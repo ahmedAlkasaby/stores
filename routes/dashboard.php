@@ -3,35 +3,30 @@
 use App\Http\Controllers\Dashboard\ActivityLogController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\AddressController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
-use App\Http\Controllers\Dashboard\BrandController;
-use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\CityController;
-use App\Http\Controllers\Dashboard\ContactController;
-use App\Http\Controllers\dashboard\DeliveryTimeController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\dashboard\PageController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SizeController;
+use App\Http\Controllers\Dashboard\UnitController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\dashboard\OrderController;
+use App\Http\Controllers\dashboard\CouponController;
+use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
-use App\Http\Controllers\dashboard\RegionController;
-use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\dashboard\SettingController;
-use App\Http\Controllers\Dashboard\SizeController;
-use App\Http\Controllers\Dashboard\SliderController;
-use App\Http\Controllers\Dashboard\UnitController;
-use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\WishlistController;
-use Illuminate\Support\Facades\Route;
-
-
-
-
-
-
-
-
+use App\Http\Controllers\dashboard\DeliveryTimeController;
+use App\Http\Controllers\dashboard\ReviewController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [AuthController::class, 'viewLogin'])->name('login.view');
@@ -126,11 +121,16 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     //Resourse route for Favourites
     Route::resource('wishlists', WishlistController::class);
 
+     //Resource route for Orders
+    Route::resource('orders', OrderController::class);
+    Route::get('orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::post('orders/change_status/{order}', [OrderController::class, 'changeStatus'])->name('orders.change_status');
+
+    //Resource route for Coupons
+    Route::resource('coupons', CouponController::class);
+    Route::get('coupons/active/{coupon}', [CouponController::class, 'active'])->name('coupons.active');
+    Route::get('coupons/finish/{coupon}', [CouponController::class, 'finish'])->name('coupons.finish');
+
     // Pesdource Route for Products
     Route::resource('products', ProductController::class);
-
-    // route activity_logs
-    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
-
-
 });

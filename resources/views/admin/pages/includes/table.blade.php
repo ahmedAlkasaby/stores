@@ -1,6 +1,7 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.pages'),
     'routeToCreate' => route('dashboard.pages.create'),
+    "model" => "pages",
 ])
 
 @include('admin.layouts.table.thead_info', [

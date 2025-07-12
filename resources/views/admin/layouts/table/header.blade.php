@@ -5,9 +5,9 @@ $classTable='table';
 
 
 @endphp
-@if(!isset($create))
-<h5 class="{{ $classOfHeaderTable }} d-flex justify-content-between align-items-center px-3 py-2">
-    <span>{{ $TitleTable }}</span>
+@if (!isset($create))
+    <h5 class="{{ $classOfHeaderTable }} d-flex justify-content-between align-items-center px-3 py-2">
+        <span>{{ $TitleTable }}</span>
 
     <div class="d-flex align-items-center gap-2">
         @if(!empty($filter))
@@ -32,7 +32,7 @@ $classTable='table';
         @endif
 
     </div>
-</h5>
+    </h5>
 @endif
 
 
