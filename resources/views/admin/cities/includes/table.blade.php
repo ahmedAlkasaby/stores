@@ -2,6 +2,7 @@
     'TitleTable' => __('site.cities'),
     'routeToCreate' => route('dashboard.cities.create'),
     'filter' => false,
+    "model" => "cities",
 ])
 
 @include('admin.layouts.table.thead_info', [

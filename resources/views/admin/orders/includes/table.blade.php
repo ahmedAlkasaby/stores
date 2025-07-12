@@ -2,6 +2,7 @@
     'TitleTable' => __('site.orders'),
     "create"=>true,
     'filter' => true,
+    "model" => "orders",
 ])
 
 @include('admin.layouts.table.thead_info', [

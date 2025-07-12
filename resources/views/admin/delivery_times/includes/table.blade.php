@@ -1,6 +1,7 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.delivery_times'),
     'routeToCreate' => route('dashboard.delivery_times.create'),
+    "model" => "delivery_times",
 ])
 
 @include('admin.layouts.table.thead_info', [

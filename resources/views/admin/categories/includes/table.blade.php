@@ -2,6 +2,7 @@
     'TitleTable' => __('site.categories'),
     'routeToCreate' => route('dashboard.categories.create'),
     'filter' => true,
+    "model" => "categories",
 ])
 
 @include('admin.layouts.table.thead_info', [
