@@ -1,6 +1,7 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.coupons'),
     'routeToCreate' => route('dashboard.coupons.create'),
+    "model" => "coupons",
 ])
 
 @include('admin.layouts.table.thead_info', [

@@ -2,6 +2,7 @@
 'TitleTable' => __('site.additions'),
 'routeToCreate' => route('dashboard.additions.create'),
 'filter' => true,
+"model" => "additions",
 ])
 @include('admin.layouts.table.thead_info', [
 'columns' => [ 'site.name',"site.order_id","site.type" ,"site.price","site.image",'site.status', 'site.action']

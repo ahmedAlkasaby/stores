@@ -1,6 +1,7 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.payments'),
     'routeToCreate' => route('dashboard.payments.create'),
+    "model" => "payments",
 ])
 
 @include('admin.layouts.table.thead_info', [

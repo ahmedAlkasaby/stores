@@ -1,6 +1,7 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.regions'),
     'routeToCreate' => route('dashboard.regions.create'),
+    "model" => "regions",
 ])
 
 @include('admin.layouts.table.thead_info', [
