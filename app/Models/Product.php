@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends MainModel
 {
-  protected $fillable = [
-    'code',
-    'link',
-    'name',
-    'description',
-    'image',
-    'video',
-    'background',
-    'color',
+    protected $fillable = [
+        'code',
+        'link',
+        'name',
+        'description',
+        'image',
+        'video',
+        'background',
+        'color',
 
         // price
         'price',
@@ -37,17 +37,17 @@ class Product extends MainModel
         'amount',
         'max_order',
 
-    // status flags
-    'active',
-    'feature',
-    'new',
-    'special',
-    'filter',
-    'sale',
-    'late',
-    'stock',
-    'free_shipping',
-    'returned',
+        // status flags
+        'active',
+        'feature',
+        'new',
+        'special',
+        'filter',
+        'sale',
+        'late',
+        'stock',
+        'free_shipping',
+        'returned',
 
         // dates
         'date_start',
@@ -133,8 +133,7 @@ class Product extends MainModel
             ->whereDate('date_start', '<=', now())
             ->whereDate('date_end', '>=', now())
             ->orderBy('order_id', 'asc')
-        ;
-        ;
+        ;;
     }
 
 
@@ -147,7 +146,7 @@ class Product extends MainModel
             ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
             ->orderBy('order_id', 'asc')
             ->where('parent_id', null)
-            ;
+        ;
     }
 
     public function scopeApplySearch($query, $request)
@@ -276,14 +275,16 @@ class Product extends MainModel
         return $query;
     }
 
-    public function scopeApplyUnitFilter($query, $request){
+    public function scopeApplyUnitFilter($query, $request)
+    {
         if ($request->filled('unit') && $request->unit != 'all') {
             $query->where('unit_id', $request->unit);
         }
         return $query;
     }
 
-    public function scopeApplyBrandFilter($query, $request){
+    public function scopeApplyBrandFilter($query, $request)
+    {
         if ($request->filled('brand') && $request->brand != 'all') {
             $query->where('brand_id', $request->brand);
         }
@@ -378,15 +379,13 @@ class Product extends MainModel
         return 0;
     }
 
-    public function amountInAllCarts()
-    {
+
     public function amountInAllCarts()
     {
         return $this->cartItems()->sum('amount');
     }
 
-    public function availableAmount()
-    {
+
     public function availableAmount()
     {
         return $this->amount - $this->amountInAllCarts();

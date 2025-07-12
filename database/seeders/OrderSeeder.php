@@ -4,12 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\Order;
-use App\Models\Address;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\OrderItem;
-use App\Models\Payment;
-use App\Models\Product;
 use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
