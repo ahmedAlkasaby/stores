@@ -20,20 +20,14 @@
         'select_class' => 'select2',
         'select2' => true,
     ])
-    @include('admin.layouts.forms.fields.date', [
-        'date_name' => 'date_start',
-        'date_value' => $coupon->start_date ?? null,
-    ])
+
     @include('admin.layouts.forms.fields.number', [
         'number_name' => 'max_discount',
         'min' => 0,
         'placeholder' => __('site.max_discount'),
         'number_value' => $coupon->max_discount ?? null,
     ])
-    <div class="form-group">
-        <input class="form-control flatpickr-input flatpickr-datetime active" id="date_start" data-parsley-trigger="input"
-            required="" name="date_start" type="text" readonly="readonly">
-    </div>
+
     @include('admin.layouts.forms.fields.select', [
         'select_name' => 'active',
         'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],

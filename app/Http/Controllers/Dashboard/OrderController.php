@@ -46,7 +46,7 @@ class OrderController extends MainController
         $regions = Region::get()->mapWithKeys(function ($region) {
             return [$region->id => $region->nameLang()];
         })->toArray();
-        $orders = Order::with("user", "orderItems")->filter($request)->paginate($this->perPage);
+        $orders = Order::with("user", "orderItems","address")->filter($request)->paginate($this->perPage);
         $transactionsStatuses = collect(StatusOrderEnum::cases())
             ->mapWithKeys(fn($status) => [$status->value => $status->label()])
             ->toArray();

@@ -19,10 +19,10 @@ class HomeController extends MainController
     }
     public function index()
     {
-        $orders = Order::get();
+        $orders = Order::with('orderItems')->get();
         $users = User::get();
         $products = Product::all();
-        $doneOrders = Order::where('status', 'delivered')->get();
+        $doneOrders = Order::where('status', 'delivered')->with('orderItems')->get();
         $newProducts = Product::where('new', 1)->take(10)->get();
         $totalProfit = 0;
         foreach ($doneOrders as $order) {

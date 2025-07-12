@@ -108,14 +108,14 @@
                 </a>
             </li>
         @endif
-        @if (auth()->user()->hasPermission('coupons.index'))
+        {{-- @if (auth()->user()->hasPermission('coupons.index'))
             <li class="menu-item @if ($class == 'coupons') active @endif">
                 <a href="{{ route('dashboard.coupons.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-id"></i>
                     <div>{{ __('site.coupons') }}</div>
                 </a>
             </li>
-        @endif
+        @endif --}}
         @if (auth()->user()->hasPermission('reviews.index'))
             <li class="menu-item @if ($class == 'reviews') active @endif">
                 <a href="{{ route('dashboard.reviews.index') }}" class="menu-link">
