@@ -8,27 +8,14 @@
             <div class="badge bg-label-success me-1 mb-3">{{ $category->nameLang() }}</div>
         @endforeach
     </td>
-    {{-- features --}}
+
     @include('admin.layouts.tables.active', [
         'model' => 'products',
         'item' => $product,
         'param' => 'product',
         'function' => 'feature',
     ])
-    {{-- offer --}}
-    @include('admin.layouts.tables.active', [
-        'model' => 'products',
-        'item' => $product,
-        'param' => 'product',
-        'function' => 'offer',
-    ])
-    {{-- shipping free --}}
-    @include('admin.layouts.tables.active', [
-        'model' => 'products',
-        'item' => $product,
-        'param' => 'product',
-        'function' => 'shipping_free',
-    ])
+   
     {{-- returned --}}
     @include('admin.layouts.tables.active', [
         'model' => 'products',

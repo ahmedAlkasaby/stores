@@ -595,6 +595,7 @@ return [
     "october" => "October",
     "november" => "November",
     "december" => "December",
+    'something_went_wrong'=>'Something went wrong',
 
 
 

@@ -38,6 +38,7 @@ class Product extends MainModel
         'max_order',
 
         // status flags
+        'offer',
         'active',
         'feature',
         'new',
@@ -127,27 +128,42 @@ class Product extends MainModel
     {
         return $query
             ->where('active', true)
-            ->whereDate('date_start', '<=', now())
-            ->whereDate('date_end', '>=', now())
-            ->where('active', true)
-            ->whereDate('date_start', '<=', now())
-            ->whereDate('date_end', '>=', now())
-            ->orderBy('order_id', 'asc')
-        ;;
+            ->where(function ($q) {
+                $q->whereNull('date_start')
+                  ->orWhereDate('date_start', '<=', now());
+            })
+            ->where(function ($q) {
+                $q->whereNull('date_end')
+                  ->orWhereDate('date_end', '>=', now());
+            })
+            ->orderBy('order_id', 'asc');
     }
+
 
 
 
     public function scopeApplyBasicFilters($query, $request, $type_app)
     {
-        return $query
-            ->where('active', $type_app == 'app' ? true : $request->active)
-            ->whereDate('date_start', '<=', $type_app == 'app' ? now() : $request->date_start)
-            ->whereDate('date_end', '>=', $type_app == 'app' ? now() : $request->date_end)
-            ->orderBy('order_id', 'asc')
-            ->where('parent_id', null)
-        ;
+        if($type_app=='app'){
+          $query->active();
+        }
+
+        $query->orderBy('order_id', 'asc');
+        $query->whereNull('parent_id');
+        if ($request->filled('active') && $request->active != 'all') {
+            $query->where('active', $request->active);
+        }
+        if ($request->filled('date_start')) {
+            $query->whereDate('date_start', '<=', $request->date_start);
+        }
+        if ($request->filled('date_end')) {
+            $query->whereDate('date_end', '>=', $request->date_end);
+        }
+
+
+        return $query;
     }
+
 
     public function scopeApplySearch($query, $request)
     {

@@ -13,8 +13,6 @@
         'site.unit',
         'site.categories',
         'site.feature',
-        'site.offer',
-        'site.shipping_free',
         'site.returned',
         'site.status',
         'site.action',

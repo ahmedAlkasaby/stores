@@ -133,4 +133,9 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     // Pesdource Route for Products
     Route::resource('products', ProductController::class);
+    Route::get('products/active/{product}', [ProductController::class, 'active'])->name('products.active');
+    Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
+    Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
+
+    Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
 });

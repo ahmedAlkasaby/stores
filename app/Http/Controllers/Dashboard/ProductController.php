@@ -162,32 +162,37 @@ class ProductController extends MainController
     }
     public function active(Product $product)
     {
-        $product->active = !$product->active;
-        $product->save();
-        return response()->json(['success' => true]);
+        $product->update([
+            'active' => ! ($product->active),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $product->active,
+        ]);
     }
     public function feature(Product $product)
     {
-        $product->feature = !$product->feature;
-        $product->save();
-        return response()->json(['success' => true]);
+        $product->update([
+            'feature' => ! ($product->feature),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $product->feature,
+        ]);
     }
-    public function offer(Product $product)
-    {
-        $product->offer = !$product->offer;
-        $product->save();
-        return response()->json(['success' => true]);
-    }
-    public function shipping_free(Product $product)
-    {
-        $product->shipping_free = !$product->shipping_free;
-        $product->save();
-        return response()->json(['success' => true]);
-    }
+
     public function returned(Product $product)
     {
-        $product->returned = !$product->returned;
-        $product->save();
-        return response()->json(['success' => true]);
+        $product->update([
+            'returned' => ! ($product->returned),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $product->returned,
+        ]);
     }
+
+
+
+
 }
