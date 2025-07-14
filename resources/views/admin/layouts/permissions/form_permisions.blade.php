@@ -13,34 +13,13 @@ $types = ['index', 'show', 'store', 'update', 'active', 'destroy'];
                         <input type="checkbox" class="selectAll form-check-input" />
                         <label class="fw-bold">@lang('site.select_all')</label>
                     </th>
-                    {{-- @foreach ($types as $type) --}}
+                    @foreach ($types as $type)
                     <th>
-                        <input type="checkbox" class="form-check-input select-type select-read" data-type="index" />
-                        <label class="fw-bold">@lang('site.index')</label>
+                        <input type="checkbox" class="form-check-input select-type " data-type="{{ $type }}" />
+                        <label class="fw-bold">@lang('site.'.$type)</label>
                     </th>
 
-                    {{-- @endforeach --}}
-
-                    <th>
-                        <input type="checkbox" class="form-check-input select-type select-show" data-type="show" />
-                        <label class="fw-bold">@lang('site.show')</label>
-                    </th>
-                    <th>
-                        <input type="checkbox" class="form-check-input select-type select-create" data-type="store" />
-                        <label class="fw-bold">@lang('site.store')</label>
-                    </th>
-                    <th>
-                        <input type="checkbox" class="form-check-input select-type select-edit" data-type="update" />
-                        <label class="fw-bold">@lang('site.update')</label>
-                    </th>
-                    <th>
-                        <input type="checkbox" class="form-check-input select-type select-toggle" data-type="active" />
-                        <label class="fw-bold">@lang('site.active')</label>
-                    </th>
-                    <th>
-                        <input type="checkbox" class="form-check-input select-type select-delete" data-type="destroy" />
-                        <label class="fw-bold">@lang('site.destroy')</label>
-                    </th>
+                    @endforeach
                 </tr>
             </thead>
 
