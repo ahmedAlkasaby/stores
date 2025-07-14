@@ -39,6 +39,7 @@ return [
             "coupons" => 'i,sh,s,u,a,d',
             "reviews" => 'i,sh,s,u,a,d',
             'activity_logs' => 'i',
+            'notifications' => 'i,s',
 
 
         ],

@@ -3,30 +3,32 @@
 use App\Http\Controllers\Dashboard\ActivityLogController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\AddressController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
-use App\Http\Controllers\dashboard\CityController;
-use App\Http\Controllers\Dashboard\HomeController;
-use App\Http\Controllers\dashboard\PageController;
-use App\Http\Controllers\Dashboard\RoleController;
-use App\Http\Controllers\Dashboard\SizeController;
-use App\Http\Controllers\Dashboard\UnitController;
-use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\BrandController;
-use App\Http\Controllers\dashboard\OrderController;
-use App\Http\Controllers\dashboard\CouponController;
-use App\Http\Controllers\dashboard\RegionController;
-use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\dashboard\CouponController;
+use App\Http\Controllers\dashboard\DeliveryTimeController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\dashboard\OrderController;
+use App\Http\Controllers\dashboard\PageController;
 use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\dashboard\ReviewController;
+use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\dashboard\SettingController;
-use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\SizeController;
+use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\UnitController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\WishlistController;
-use App\Http\Controllers\dashboard\DeliveryTimeController;
-use App\Http\Controllers\dashboard\ReviewController;
+use Illuminate\Support\Facades\Route;
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [AuthController::class, 'viewLogin'])->name('login.view');
@@ -137,5 +139,14 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
     Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
 
+    //Resource route for reviews
     Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+
+    //Resource route for activity_logs
+   Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
+
+   Route::resource('notifications', NotificationController::class)->only(['index','create','store']);
+
+
+
 });

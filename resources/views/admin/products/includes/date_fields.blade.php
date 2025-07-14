@@ -6,7 +6,8 @@
         'placeholder' => 'YYYY-MM-DD HH:MM',
         'date_id' => 'flatpickr-datetime-start',
         'date_class' => ' flatpickr-datetime',
-        'label_name' => __('site.date_start')
+        'label_name' => __('site.date_start'),
+        'not_req' => true
         ])
     </div>
     <div class="col-md-6">
@@ -16,7 +17,8 @@
         'placeholder' => 'YYYY-MM-DD HH:MM',
         'date_id' => 'flatpickr-datetime-end',
         'date_class' => ' flatpickr-datetime',
-        'label_name' => __('site.date_end')
+        'label_name' => __('site.date_end'),
+        'not_req' => true
         ])
     </div>
 </div>

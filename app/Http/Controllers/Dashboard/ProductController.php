@@ -39,10 +39,12 @@ class ProductController extends MainController
         $brands=Brand::active()->get()->mapWithKeys(function ($brand) {
             return [$brand->id => $brand->nameLang()];
         })->toArray();
-        $categories = Category::active()
+          $categories = Category::active()
+        ->with('parent')
         ->get()
         ->mapWithKeys(function ($category) {
-            return [$category->id => $category->nameLang()];
+            $label = $category->parent ? $category->parent->nameLang() . ' > ' . $category->nameLang() : $category->nameLang();
+            return [$category->id => $label];
         })->toArray();
         return view('admin.products.index',get_defined_vars());
     }

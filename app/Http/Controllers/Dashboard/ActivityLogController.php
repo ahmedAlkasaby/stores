@@ -16,7 +16,6 @@ class ActivityLogController extends MainController
     }
     public function index()
     {
-        // dd(1);
         $activityLogs=ActivityLog::with('user')->filter()->paginate($this->perPage);
         return view('admin.activity_logs.index',compact('activityLogs'));
     }

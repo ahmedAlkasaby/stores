@@ -108,14 +108,14 @@
                 </a>
             </li>
         @endif
-        {{-- @if (auth()->user()->hasPermission('coupons.index'))
-            <li class="menu-item @if ($class == 'coupons') active @endif">
-                <a href="{{ route('dashboard.coupons.index') }}" class="menu-link">
+        @if (auth()->user()->hasPermission('activity_logs.index'))
+            <li class="menu-item @if ($class == 'activity_logs') active @endif">
+                <a href="{{ route('dashboard.activity_logs.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-id"></i>
-                    <div>{{ __('site.coupons') }}</div>
+                    <div>{{ __('site.activity_logs') }}</div>
                 </a>
             </li>
-        @endif --}}
+        @endif
         @if (auth()->user()->hasPermission('reviews.index'))
             <li class="menu-item @if ($class == 'reviews') active @endif">
                 <a href="{{ route('dashboard.reviews.index') }}" class="menu-link">
@@ -192,6 +192,14 @@
                 </a>
             </li>
         @endif
+        @if (auth()->user()->hasPermission('notifications.index'))
+            <li class="menu-item @if ($class == 'notifications') active @endif">
+                <a href="{{ route('dashboard.notifications.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-bookmark"></i>
+                    <div>{{ __('site.notifications') }}</div>
+                </a>
+            </li>
+        @endif
         @if (auth()->user()->isAbleTo(['users.index']))
             <li class="menu-item @if (isset($class) && in_array($class, ['admin', 'delivery', 'client'])) active @endif">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -238,6 +246,8 @@
                 </ul>
             </li>
         @endif
+
+
 
 
 

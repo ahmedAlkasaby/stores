@@ -596,6 +596,7 @@ return [
     "november" => "November",
     "december" => "December",
     'something_went_wrong'=>'Something went wrong',
+    'notifications'=>'Notifications',
 
 
 

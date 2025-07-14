@@ -616,6 +616,7 @@ return [
     "november" => "نوفمبر",
     "december" => "ديسمبر",
     'something_went_wrong'=>'حدث خطأ ما',
+    'notifications'=>'الاشعارات',
 
 ];
 
