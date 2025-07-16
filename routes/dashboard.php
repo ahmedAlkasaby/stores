@@ -146,6 +146,10 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
 
    Route::resource('notifications', NotificationController::class)->only(['index','create','store']);
+   Route::get('/test-firebase-path', function () {
+    return base_path(env('FIREBASE_CREDENTIALS'));
+});
+
 
 
 

@@ -617,6 +617,12 @@ return [
     "december" => "ديسمبر",
     'something_went_wrong'=>'حدث خطأ ما',
     'notifications'=>'الاشعارات',
+    'database'=>'قاعدة البيانات',
+    'firebase'=>'فيربيس',
+    'android'=>'اندرويد',
+    'apple'=>'ايبل',
+
+    'device'=>'جهاز',
 
 ];
 

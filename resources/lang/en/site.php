@@ -597,6 +597,12 @@ return [
     "december" => "December",
     'something_went_wrong'=>'Something went wrong',
     'notifications'=>'Notifications',
+    'database'=>'Database',
+    'firebase'=>'Firebase',
+    'android'=>'Android',
+    'apple'=>'Apple',
+    'device'=>'Device',
+
 
 
 
