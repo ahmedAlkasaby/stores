@@ -95,7 +95,7 @@ class ProductController extends MainController
                 ->withInput();
         }
 
-        return redirect()->route('dashboard.products.index')->with('success', __('site.product_created_successfully'));
+        return redirect()->route('dashboard.products.index')->with('success', __('site.added_successfully'));
     }
 
 
@@ -152,7 +152,7 @@ class ProductController extends MainController
                 ->withInput();
         }
 
-        return redirect()->route('dashboard.products.index')->with('success', __('site.product_updated_successfully'));
+        return redirect()->route('dashboard.products.index')->with('success', __('site.updated_successfully'));
     }
 
 
@@ -191,6 +191,22 @@ class ProductController extends MainController
         return response()->json([
             'success' => true,
             'active' => $product->returned,
+        ]);
+    }
+
+
+    public function getCategoryByService($id)
+    {
+        $categories = Category::where('service_id', $id)->active()
+        ->with('parent')
+        ->get()
+        ->mapWithKeys(function ($category) {
+            $label = $category->parent ? $category->parent->nameLang() . ' > ' . $category->nameLang() : $category->nameLang();
+            return [$category->id => $label];
+        })->toArray();
+        return response()->json([
+            'success' => true,
+            'categories' => $categories,
         ]);
     }
 

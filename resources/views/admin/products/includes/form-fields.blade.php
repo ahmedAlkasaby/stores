@@ -46,6 +46,7 @@
         'select_class' => 'select2',
         'select2' => true,
         'label_req' => true,
+        'select_id' => 'service_id'
         ])
     </div>
     <div class="col-md-6">
@@ -56,6 +57,7 @@
         'select_class' => 'select2',
         'select2' => true,
         'label_req' => true,
+        'select_id' => 'categories',
         'is_multiple' => true
         ])
     </div>

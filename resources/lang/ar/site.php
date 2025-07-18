@@ -484,7 +484,6 @@ return [
     "code" => "كود",
     "max_price"=>"السعر الاقصى",
     "min_price"=>"السعر الادنى",
-    "sale"=>"خصم",
     "special"=>"خاص",
     "reviews" => "المراجعات",
     "review" => "مراجعة",
@@ -594,7 +593,6 @@ return [
     "code" => "كود",
     "max_price"=>"السعر الاقصى",
     "min_price"=>"السعر الادنى",
-    "sale"=>"خصم",
     "special"=>"خاص",
     "reviews" => "المراجعات",
     "review" => "مراجعة",
@@ -623,6 +621,7 @@ return [
     'apple'=>'ايبل',
 
     'device'=>'جهاز',
+    'not_found_category_in_this_service'=>'لا يوجد اقسام داخل هده الخدمه'
 
 ];
 

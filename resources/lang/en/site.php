@@ -478,7 +478,7 @@ return [
     "code" => "Code",
     "max_price" => "Maximum",
     "min_price" => "Minimum",
-    "sale" => "Discount",
+   
     "special" => "Special",
     "reviews" => "Reviews",
     "review" => "Review",
@@ -573,7 +573,6 @@ return [
     "code" => "Code",
     "max_price" => "Maximum",
     "min_price" => "Minimum",
-    "sale" => "Discount",
     "special" => "Special",
     "reviews" => "Reviews",
     "review" => "Review",
@@ -602,6 +601,7 @@ return [
     'android'=>'Android',
     'apple'=>'Apple',
     'device'=>'Device',
+    'not_found_category_in_this_service'=>'Not found Category In This Service'
 
 
 

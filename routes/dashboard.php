@@ -138,6 +138,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('products/active/{product}', [ProductController::class, 'active'])->name('products.active');
     Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
     Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
+    Route::get('getCategoryByService/{id}', [ProductController::class, 'getCategoryByService']);
 
     //Resource route for reviews
     Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
@@ -146,9 +147,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
 
    Route::resource('notifications', NotificationController::class)->only(['index','create','store']);
-   Route::get('/test-firebase-path', function () {
-    return base_path(env('FIREBASE_CREDENTIALS'));
-});
+
 
 
 
