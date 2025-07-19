@@ -621,7 +621,8 @@ return [
     'apple'=>'ايبل',
 
     'device'=>'جهاز',
-    'not_found_category_in_this_service'=>'لا يوجد اقسام داخل هده الخدمه'
+    'not_found_category_in_this_service'=>'لا يوجد اقسام داخل هده الخدمه',
+    'read_at'=>'تم القراءة',
 
 ];
 

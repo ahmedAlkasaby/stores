@@ -601,7 +601,8 @@ return [
     'android'=>'Android',
     'apple'=>'Apple',
     'device'=>'Device',
-    'not_found_category_in_this_service'=>'Not found Category In This Service'
+    'not_found_category_in_this_service'=>'Not found Category In This Service',
+    'read_at'=>'Read At',
 
 
 
