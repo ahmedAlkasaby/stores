@@ -86,8 +86,6 @@ class HomeCollection extends ResourceCollection
             'saleProducts'=>ProductResource::collection($saleProducts),
             'filterProducts'=>ProductResource::collection($filterProducts),
             'offerProducts'=>ProductResource::collection($offerProducts),
-
-
         ];
     }
 }
