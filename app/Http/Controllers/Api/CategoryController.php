@@ -14,14 +14,14 @@ class CategoryController extends MainController
 
     public function index(CategoryRequest $request)
     {
-        $categories = Category::withCount('products')->filter($request)->with('service')->paginate($this->perPage);
+        $categories = Category::filter($request)->with(['parent', 'service'])->paginate($this->perPage);
         return $this->sendData(new CategoryCollection($categories));
     }
 
 
     public function show(string $id)
     {
-        $category = Category::with(['service', 'children'])
+        $category = Category::with(['service', 'parent'])
                             ->filter()
                             ->where('id', $id)
                             ->first();

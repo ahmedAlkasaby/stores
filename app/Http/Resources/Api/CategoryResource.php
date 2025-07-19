@@ -25,7 +25,7 @@ class CategoryResource extends JsonResource
             'parent_id'=>$this->parent_id,
             'service_id' => $this->service_id,
             'service' => new ServiceResource($this->whenLoaded('service')),
-            'children' => CategoryResource::collection($this->whenLoaded('children')),
+            'parent' => new CategoryResource($this->whenLoaded('parent')),
         ];
     }
 }
