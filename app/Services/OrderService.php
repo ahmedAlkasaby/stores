@@ -92,10 +92,10 @@ class OrderService{
         return $address->id;
     }
 
-    public function notificationAfterOrder()
+    public function notificationAfterOrder($statusOrder='request')
     {
         $admins=User::where('type','admin')->where('notify',1)->where('active',1)->get();
-        $notificationData=OrderNotificationData::getData('new_order');
+        $notificationData=OrderNotificationData::getData($statusOrder);
         Notification::send($admins,$notificationData['title_ar'],$notificationData['title_en'],$notificationData['body_ar'],$notificationData['body_en']);
         $dataFirebase = [
             'title' => json_encode([

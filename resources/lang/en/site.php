@@ -603,6 +603,8 @@ return [
     'device'=>'Device',
     'not_found_category_in_this_service'=>'Not found Category In This Service',
     'read_at'=>'Read At',
+    'max_hour_product_in_carts' => 'Maximum Hour Product In Carts',
+    'min_amount_product_notify' => 'Minimum Amount Product Notify',
 
 
 
