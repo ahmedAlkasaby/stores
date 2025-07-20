@@ -44,7 +44,6 @@ class ProductSeeder extends Seeder
 
                 foreach ($this->getChlidrenData($dataProduct['price'],$dataProduct['offer'],$product->id,Size::inRandomOrder()->first()->id,rand(3,5)) as $childData) {
                     $clidermProduct=Product::create(array_merge($dataProductParent,$childData));
-                    $clidermProduct->categories()->sync($categoryIds);
                 }
             }
         }
@@ -123,7 +122,7 @@ class ProductSeeder extends Seeder
         $data=[];
         for ($i=0; $i < $count; $i++) {
             $data[]=array_merge($this->getOfferData($offer,$price),[
-            'price'=>rand(100,1000),
+            'price'=>$price,
             'amount'=>rand(50,100),
             'offer'=>$offer,
             'parent_id'=>$parentId,

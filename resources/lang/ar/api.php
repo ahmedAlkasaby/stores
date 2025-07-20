@@ -46,6 +46,14 @@ return [
     'The old password must not match the new password'=>'كلمة المرور القديمة يجب ان تكون مختلفة عن كلمة المرور الجديدة',
     'current_password_not_correct'=>'كلمة المرور الحالية غير صحيحة',
     'change_password_successfully'=>'تم تغيير كلمة المرور بنجاح',
+    'product_not_found'=>'المنتج غير موجود',
+    'image_updated'=>'تم تحديث الصورة بنجاح',
+    'notify_updated'=>'تم تحديث الاشعارات بنجاح',
+    'profile_updated'=>'تم تحديث الملف الشخصي بنجاح',
+    'lang_updated'=>'تم تحديث اللغة بنجاح',
+    
+
+
 
 
 ];

@@ -34,8 +34,8 @@ class OrderResource extends JsonResource
             'shipping'=>$this->orderShippingProducts()+$this->shipping_address,
             'delivery_cost'=>$setting->delivery_cost,
 
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
             'order_items' => OrderItemResource::collection($this->whenLoaded('orderItems')),
             'user' => new UserResource($this->whenLoaded('user')),
             'address' => new AddressResource($this->whenLoaded('address')),

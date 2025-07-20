@@ -46,5 +46,13 @@ return [
     'The old password must not match the new password'=>'The old password must not match the new password',
     'current_password_not_correct'=>'The current password is incorrect',
     'change_password_successfully'=>'Change Password Successfully',
+    'product_not_found'=>'Product not found',
+    'image_updated'=>'Image Updated Successfully',
+    'notify_updated'=>'Notify Updated Successfully',
+    'profile_updated'=>'Profile Updated Successfully',
+    'lang_updated'=>'Language Updated Successfully',
+    'theme_updated'=>'Theme Updated Successfully',
+    
+
 
 ];
