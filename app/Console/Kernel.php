@@ -18,8 +18,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('otp:clean')->daily();
-
         $schedule->command('cart:clear-expired')->everyFiveMinutes();
+        $schedule->command('app:notify-amount-product')->daily();
+
 
     }
 

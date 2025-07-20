@@ -48,14 +48,33 @@
                 'number_value' => $min_order_for_shipping_free ?? null,
             ])
         </div>
+
         <div class="col-sm-6">
-            @include('admin.layouts.forms.fields.text', [
-                'text_name' => 'delivery_cost',
-                'text_value' => $delivery_cost ?? null,
-                'label_name' => __('site.delivery_cost'),
-                'label_req' => true,
+            @include('admin.layouts.forms.fields.number', [
+                'number_name' => 'max_hour_product_in_carts',
+                'min' => 1,
+                'placeholder' => __('site.max_hour_product_in_carts'),
+                'number_value' => $max_hour_product_in_carts ?? null,
             ])
         </div>
+        <div class="col-sm-6">
+            @include('admin.layouts.forms.fields.number', [
+                'number_name' => 'min_amount_product_notify',
+                'min' => 1,
+                'placeholder' => __('site.min_amount_product_notify'),
+                'number_value' => $min_amount_product_notify ?? null,
+            ])
+        </div>
+        <div class="col-sm-6">
+            @include('admin.layouts.forms.fields.number', [
+                'number_name' => 'delivery_cost',
+                'min' => 1,
+                'placeholder' => __('site.delivery_cost'),
+                'number_value' => $delivery_cost ?? null,
+            ])
+        </div>
+    
+        
         <div class="col-sm-6">
             @include('admin.layouts.forms.fields.select', [
                 'select_name' => 'site_open',

@@ -83,6 +83,8 @@ class OrderController extends MainController
             return $this->messageError(__('api.order_not_found'));
         }
         $order->update($data);
+        $this->orderService->notificationAfterOrder($order->status);
+
         return $this->messageSuccess(__('api.order_updated'));
     }
 

@@ -32,7 +32,8 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('telegram')->nullable();
-            $table->integer('max_hour_product_in_carts')->default(1); 
+            $table->integer('max_hour_product_in_carts')->default(1);
+            $table->integer('min_amount_product_notify')->default(1);
 
             $table->softDeletes();
             $table->timestamps();
