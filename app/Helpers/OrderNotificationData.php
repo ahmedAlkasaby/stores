@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Helpers;
 
-class OrderNotificationData{
+class OrderNotificationData
+{
     public static function getData($type)
     {
         switch ($type) {
@@ -23,10 +25,10 @@ class OrderNotificationData{
                 break;
 
             default:
-                return [];
+                return [
+                    
+                ];
                 break;
         }
-
     }
-
 }

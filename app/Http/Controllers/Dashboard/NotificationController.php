@@ -23,7 +23,7 @@ class NotificationController extends MainController
 
     public function index()
     {
-        $notifications = Notification::with('user')->paginate($this->perPage);
+        $notifications = Notification::filter()->with('user')->paginate($this->perPage);
         $users = User::get()->mapWithKeys(function ($user) {
             return [$user->id => $user->name];
         })->toArray();

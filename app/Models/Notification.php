@@ -46,7 +46,7 @@ class Notification extends MainModel
     {
         $request = $request ?? request();
 
-        $query->orderBy('created_at', 'desc');
+        $query->orderBy('id', 'desc');
 
         if ($request->filled('user_id') && $request->user_id != 'all') {
             $query->where('user_id', $request->user_id);
