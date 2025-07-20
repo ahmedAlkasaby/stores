@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('lang', ['ar', 'en'])->default('en');
             $table->enum('theme', ['light', 'dark'])->default('light');
             $table->enum('type', ['admin', 'client', 'delivery'])->default('client');
+            
             $table->boolean('active')->default(true);
             $table->boolean('vip')->default(false);
             $table->boolean('notify')->default(true);

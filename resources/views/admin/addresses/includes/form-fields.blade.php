@@ -9,6 +9,13 @@
         ])
     </div>
     <div class="col-md-6">
+        @include('admin.layouts.forms.fields.number', [
+            'text_name' => 'phone',
+            'text_value' => $address->phone ?? null,
+            'label_name' => __('site.phone'),
+        ])
+    </div>
+    <div class="col-md-6">
         @include('admin.layouts.forms.fields.text', [
             'text_name' => 'address',
             'text_value' => $address->address ?? null,

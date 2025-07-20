@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Helpers;
+
 use App\Enums\StatusOrderEnum;
 
 class StatusOrderHelper
@@ -6,30 +9,30 @@ class StatusOrderHelper
     public static function transitions(): array
     {
         return [
-            StatusOrderEnum::Request => StatusOrderEnum::cases(),
+            StatusOrderEnum::Request->value => StatusOrderEnum::cases(),
 
-            StatusOrderEnum::Pending => StatusOrderEnum::except([
+            StatusOrderEnum::Pending->value => StatusOrderEnum::except([
                 StatusOrderEnum::Request
             ]),
 
-            StatusOrderEnum::Approved => StatusOrderEnum::except([
+            StatusOrderEnum::Approved->value => StatusOrderEnum::except([
                 StatusOrderEnum::Request
             ]),
 
-            StatusOrderEnum::Preparing => StatusOrderEnum::except([
+            StatusOrderEnum::Preparing->value => StatusOrderEnum::except([
                 StatusOrderEnum::Request,
                 StatusOrderEnum::Pending,
                 StatusOrderEnum::Approved
             ]),
 
-            StatusOrderEnum::PreparingFinished => StatusOrderEnum::except([
+            StatusOrderEnum::PreparingFinished->value => StatusOrderEnum::except([
                 StatusOrderEnum::Request,
                 StatusOrderEnum::Pending,
                 StatusOrderEnum::Approved,
                 StatusOrderEnum::Preparing
             ]),
 
-            StatusOrderEnum::DeliveryGo => StatusOrderEnum::except([
+            StatusOrderEnum::DeliveryGo->value => StatusOrderEnum::except([
                 StatusOrderEnum::Request,
                 StatusOrderEnum::Pending,
                 StatusOrderEnum::Approved,
@@ -37,21 +40,21 @@ class StatusOrderHelper
                 StatusOrderEnum::PreparingFinished
             ]),
 
-            StatusOrderEnum::Delivered => [],
+            StatusOrderEnum::Delivered->value => [],
 
-            StatusOrderEnum::Canceled => StatusOrderEnum::only([
+            StatusOrderEnum::Canceled->value => StatusOrderEnum::only([
                 StatusOrderEnum::Canceled,
                 StatusOrderEnum::Returned,
                 StatusOrderEnum::Rejected
             ]),
 
-            StatusOrderEnum::Returned => StatusOrderEnum::only([
+            StatusOrderEnum::Returned->value => StatusOrderEnum::only([
                 StatusOrderEnum::Canceled,
                 StatusOrderEnum::Returned,
                 StatusOrderEnum::Rejected
             ]),
 
-            StatusOrderEnum::Rejected => StatusOrderEnum::only([
+            StatusOrderEnum::Rejected->value => StatusOrderEnum::only([
                 StatusOrderEnum::Canceled,
                 StatusOrderEnum::Returned,
                 StatusOrderEnum::Rejected
@@ -59,9 +62,10 @@ class StatusOrderHelper
         ];
     }
 
+
     public static function getAvailableTransitions(StatusOrderEnum $status): array
     {
-        return self::transitions()[$status] ?? [];
+        return self::transitions()[$status->value] ?? [];
     }
 
     public static function canTransition(StatusOrderEnum $from, StatusOrderEnum $to): bool
@@ -79,4 +83,3 @@ class StatusOrderHelper
         return empty(self::getAvailableTransitions($status));
     }
 }
-

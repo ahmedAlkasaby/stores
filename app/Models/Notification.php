@@ -42,4 +42,27 @@ class Notification extends MainModel
     }
 
 
+    public function scopeFilter($query, $request = null)
+    {
+        $request = $request ?? request();
+
+        $query->orderBy('created_at', 'desc');
+
+        if ($request->filled('user_id') && $request->user_id != 'all') {
+            $query->where('user_id', $request->user_id);
+        }
+
+        if ($request->filled('date_start')) {
+            $query->whereDate('created_at', '>=', $request->date_start);
+        }
+
+        if ($request->filled('date_end')) {
+            $query->whereDate('created_at', '<=', $request->date_end);
+        }
+
+        return $query;
+    }
+
+
+
 }

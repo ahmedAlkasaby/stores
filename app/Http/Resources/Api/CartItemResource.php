@@ -15,7 +15,6 @@ class CartItemResource extends JsonResource
             'product_id' => $this->product_id,
             'amount' => $this->amount,
             'product' => new ProductResource($this->whenLoaded('product')),
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }
 }

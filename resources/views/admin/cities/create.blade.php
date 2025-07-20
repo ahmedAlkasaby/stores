@@ -17,29 +17,8 @@
         'enctype' => true,
     ])
 
-    @include('admin.layouts.forms.head', [
-        'show_name' => true,
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'order_id',
-        'min' => 0,
-        'placeholder' => __('site.order_id'),
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'shipping',
-        'min' => 0,
-        'placeholder' => __('site.shipping'),
-    ])
-    @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'active',
-        'select_function' => [false => __('site.not_active'), true => __('site.active')],
-        'select_value' => $city->active ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-    ])
-    @include('admin.layouts.forms.footer')
-    @include('admin.layouts.forms.close')
-    </div>
+    @include("admin.cities.includes.form-fields")
+
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset('js/showImage.js') }}"></script>

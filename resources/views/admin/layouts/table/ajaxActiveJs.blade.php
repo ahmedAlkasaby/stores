@@ -1,51 +1,39 @@
-@php
-    $function = $function ?? 'active';
-@endphp
-
-
 <script>
     var $jq = jQuery.noConflict();
 
-    $jq(document).ready(function() {
+    $jq(document).ready(function () {
         var csrfToken = $jq('meta[name="csrf-token"]').attr('content');
+
         $jq.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': csrfToken
             }
         });
 
-
-        // Pass the Blade PHP variable into JS safely
-        var model = "{{ $model }}";
-        var funcName = "{{ $function }}";
-
-        $jq('.' + funcName + '-' + model).on('click', function(e) {
+        $jq(document).on('click', 'button[data-full-class]', function (e) {
             e.preventDefault();
 
             var button = $jq(this);
-            var modelId = button.data(model + '-id');
+            var fullClass = button.data('full-class'); 
+            var [funcName, model] = fullClass.split('-');
 
+            var modelId = button.data('id');
             var url = button.data('url');
-
-
-
 
             $jq.ajax({
                 url: url,
                 type: 'GET',
-                success: function(response) {
+                success: function (response) {
                     if (response.active) {
                         button.removeClass('btn-danger').addClass('btn-success');
-                        button.find('i').removeClass('fa-circle-xmark').addClass(
-                        'fa-check');
+                        button.find('i').removeClass('fa-circle-xmark').addClass('fa-check');
                     } else {
                         button.removeClass('btn-success').addClass('btn-danger');
-                        button.find('i').removeClass('fa-check').addClass(
-                        'fa-circle-xmark');
+                        button.find('i').removeClass('fa-check').addClass('fa-circle-xmark');
                     }
                 },
-                error: function(xhr) {
-                    alert('There was an error. Please try again.');
+                error: function () {
+                    alert('Error happened');
                 }
             });
         });

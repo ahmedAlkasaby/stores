@@ -73,8 +73,13 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::apiResource('orders',OrderController::class)->only(['index','show','store','update']);
         Route::group(['prefix'=>'profile'],function(){
             Route::get('/',[ProfileController::class, 'index']);
+            Route::put('/',[ProfileController::class, 'update']);
             Route::post('change/address',[ProfileController::class, 'changeAddress']);
             Route::post('change/password',[ProfileController::class, 'changePassword']);
+            Route::post('change/image',[ProfileController::class, 'changeImage']);
+            Route::post('change/available',[ProfileController::class, 'changeAvailable']);
+            Route::post('change/theme',[ProfileController::class, 'changeTheme']);
+            Route::post('change/lang',[ProfileController::class, 'changeLang']);
         });
 
     });

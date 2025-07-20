@@ -12,13 +12,13 @@ class CityController extends MainController
 {
     public function index()
     {
-        $cities=City::withCount('regions')->filter()->paginate($this->perPage);
+        $cities=City::filter()->paginate($this->perPage);
         return $this->sendData(new CityCollection($cities));
     }
 
     public function show(string $id)
     {
-        $city=City::withCount('regions')->filter()->find($id);
+        $city=City::filter()->find($id);
         if (!$city) {
             return $this->messageError(__('api.city_not_found'));
         }

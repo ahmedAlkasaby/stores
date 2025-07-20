@@ -16,34 +16,7 @@
         'model_id' => $city->id,
         'enctype' => true,
     ])
-    @include('admin.layouts.forms.head', [
-        'show_name' => true,
-        'name_ar' => $city->nameLang('ar'),
-        'name_en' => $city->nameLang('en'),
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'order_id',
-        'min' => 0,
-        'placeholder' => __('site.order_id'),
-        'number_value' => $city->order_id ?? null,
-    ]) 
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'shipping',
-        'min' => 0,
-        'placeholder' => __('site.shipping'),
-        'number_value' => $city->shipping ?? null,
-    ])
-    @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'active',
-        'select_function' => [0 => __('site.not_active'), 1 => __('site.active')],
-        'select_value' => $city->active ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-    ])
-
-    @include('admin.layouts.forms.footer')
-    @include('admin.layouts.forms.close')
-    </div>
+    @include("admin.cities.includes.form-fields")
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset('js/showImage.js') }}"></script>

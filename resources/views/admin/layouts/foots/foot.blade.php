@@ -14,7 +14,9 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
+@if($class!="home")
 <script src="{{ url('admin/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+@endif
 
 <script src="{{ url('admin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 <script src="{{ url('admin/assets/vendor/libs/swiper/swiper.js') }}"></script>

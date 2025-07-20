@@ -32,7 +32,10 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         'phone',
         'vip',
         'notify',
-        "image"
+        "image",
+        'date_of_birth',
+        'type',
+        'gender',
     ];
 
 
@@ -64,6 +67,7 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
 
     public function devices()
     {

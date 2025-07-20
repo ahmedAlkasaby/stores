@@ -14,9 +14,12 @@ class Slider extends MainModel
         'order_id',
         'product_id',
         'image',
+        "type",
     ];
 
-
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
     public function scopeFilter($query, $request=null, $type_app='app')
     {
         $request = $request ?? request();

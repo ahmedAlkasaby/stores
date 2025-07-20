@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\dashboard;
+namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -36,23 +36,19 @@ class CategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.ar.required' => __('site.name_ar_required'),
-            'name.en.required' => __('site.name_en_required'),
-            'name.ar.string' => __('site.name_ar_string'),
-            'name.en.string' => __('site.name_en_string'),
-            'name.ar.max' => __('site.name_ar_max'),
-            'name.en.max' => __('site.name_en_max'),
-            'description.ar.string' => __('site.description_ar_string'),
-            'description.en.string' => __('site.description_en_string'),
-            'description.ar.max' => __('site.description_ar_max'),
-            'description.en.max' => __('site.description_en_max'),
-            'image.image' => __('site.image_image'),
-            'image.mimes' => __('site.image_mimes'),
-            'image.max' => __('site.image_max'),
-            'parent_id.exists' => __('site.parent_id_exists'),
-            'active.boolean' => __('site.active_boolean'),
-            'order_id.integer' => __('site.order_id_integer'),
-            'order_id.min' => __('site.order_id_min'),
+            "parent_id.exists" => __("validation.exists", ["attribute" => "parent_id"]),
+            "service_id.exists" => __("validation.exists", ["attribute" => "service_id"]),
+            "active.boolean" => __("validation.boolean", ["attribute" => "active"]),
+            "order_id.integer" => __("validation.integer", ["attribute" => "order_id"]),
+            "order_id.min" => __("validation.min.numeric", ["attribute" => "order_id", "min" => 0]),
+            "image.image" => __("validation.image", ["attribute" => "image"]),
+            "name.ar.required" => __("validation.required", ["attribute" => __("site.name")]),
+            "name.en.required" => __("validation.required", ["attribute" => __("site.name")]),
+            "name.ar.string" => __("validation.string", ["attribute" =>  __("site.name")]),
+            "name.en.string" => __("validation.string", ["attribute" =>  __("site.name")]),
+            "name.ar.max" => __("validation.max.string", ["attribute" =>  __("site.name"), "max" => 255]),
+            "name.en.max" => __("validation.max.string", ["attribute" =>  __("site.name"), "max" => 255]),
+
 
         ];
     }

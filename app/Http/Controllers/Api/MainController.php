@@ -9,9 +9,10 @@ use App\Http\Controllers\Controller;
 class MainController extends Controller
 {
     protected $perPage ;
-    public function __construct(Request $request)
+    
+    public function __construct()
     {
-        $this->perPage = $request->get('per_page', 10);
+        $this->perPage = request()->get('per_page', 10);
         if($this->perPage > 50){
             $this->perPage = 50;
         }

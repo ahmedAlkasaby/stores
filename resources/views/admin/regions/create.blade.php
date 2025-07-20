@@ -17,38 +17,9 @@
         'enctype' => true,
     ])
 
-    @include('admin.layouts.forms.head', [
-        'show_name' => true,
-    ])
-    @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'city_id',
-        'select_function' => $cities->mapWithKeys(function ($city) {
-            return [$city->id => $city->nameLang()];
-        }),
-        'select_value' => $region->active ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'order_id',
-        'min' => 0,
-        'placeholder' => __('site.order_id'),
-    ])
-    @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'shipping',
-        'min' => 0,
-        'placeholder' => __('site.shipping'),
-    ])
-    @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'active',
-        'select_function' => [false => __('site.not_active'), true => __('site.active')],
-        'select_value' => $region->active ?? null,
-        'select_class' => 'select2',
-        'select2' => true,
-    ])
-    @include('admin.layouts.forms.footer')
-    @include('admin.layouts.forms.close')
-    </div>
+   @include("admin.regions.includes.form-fields")
+@endsection
+
 @section('jsFiles')
     <script src="{{ asset('admin/assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset('js/showImage.js') }}"></script>
@@ -58,5 +29,4 @@
     <script src="{{ asset('admin/assets/js/form-wizard-validation.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-@endsection
 @endsection

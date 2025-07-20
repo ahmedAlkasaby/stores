@@ -12,6 +12,7 @@ class Order extends MainModel
 
     protected $fillable = [
         'user_id',
+        'address_id',
         'status',
         'payment_id',
         'delivery_time_id',
@@ -20,8 +21,8 @@ class Order extends MainModel
         'notes',
     ];
 
-    protected $casts=[
-        'status'=>StatusOrderEnum::class,
+    protected $casts = [
+        'status' => StatusOrderEnum::class,
     ];
 
 
@@ -31,9 +32,14 @@ class Order extends MainModel
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id', 'id');
+    }
+
     public function delivery()
     {
-        return $this->belongsTo(User::class,'delivery_id','id');
+        return $this->belongsTo(User::class, 'delivery_id', 'id');
     }
 
     public function deliveryTime()
@@ -58,49 +64,125 @@ class Order extends MainModel
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-    public function region()
-    {
-        return $this->belongsTo(Region::class, 'region_id', 'id');
-    }
 
-    public function orderPrice(){
-        $price=0;
-        $orderItems=$this->orderItems;
+
+    public function orderPrice()
+    {
+        $price = 0;
+        $orderItems = $this->orderItems;
         foreach ($orderItems as $item) {
             $price += $item->price * $item->amount;
         }
         return $price;
     }
 
-    public function orderDiscount(){
-        $discount=0;
-        $orderItems=$this->orderItems;
+    public function orderDiscount()
+    {
+        $discount = 0;
+        $orderItems = $this->orderItems;
         foreach ($orderItems as $item) {
             $discount += $item->discount * $item->amount;
         }
         return $discount;
     }
-    public function orderShippingProducts(){
-        $shipping=0;
-        $orderItems=$this->orderItems;
+    public function orderShippingProducts()
+    {
+        $shipping = 0;
+        $orderItems = $this->orderItems;
         foreach ($orderItems as $item) {
             $shipping += $item->shipping_cost * $item->amount;
         }
         return $shipping;
     }
-
-    public function getShippingAddress()
-    {
-        $auth=Auth::guard('api')->user();
-        $user=User::find($auth->id);
-        $address=$user->addresses()->where('active',1)->first();
-        $shipping=$address->city->shipping;
-        if ($address->region_id){
-            $shipping += $address->region->shipping;
-        }
-        return $shipping;
+    public function orderTotal(){
+        return $this->orderPrice() - $this->orderDiscount() + $this->orderShippingProducts();
     }
+    public function scopeApplySearch($query, $request)
+    {
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
+        }
+    }
+    public function scopeApplyDeliveryTime($query, $request)
+    {
+        if ($request->has('delivery_time') && $request->delivery_time != "all") {
+            $query->where('delivery_time_id', $request->delivery_time);
+        }
+    }
+    public function scopeApplyPayment($query, $request)
+    {
+        if ($request->has('payment') && $request->payment != "all") {
+            $query->where('payment_id', $request->payment);
+        }
+    }
+    public function scopeApplyDelivery($query, $request)
+    {
+        if ($request->has('delivery') && $request->delivery != "all") {
+            $query->where('delivery_id', $request->delivery);
+        }
+    }
+    public function scopeApplyCity($query, $request)
+    {
+        if ($request->has('city_id') && $request->city_id != "all") {
+            $query->where('city_id', $request->city_id);
+        }
+    }
+    public function scopeApplyRegion($query, $request)
+    {
+        if ($request->has('region_id') && $request->region_id != "all") {
+            $query->where('region_id', $request->region_id);
+        }
+    }
+    public function scopeApplyStatus($query, $request)
+    {
+        if ($request->has('status') && $request->status != "all") {
+            $query->where('status', $request->status);
+        }
+    }
+    public function scopeApplyDateFilters($query, $request)
+    {
+        if ($request->filled('date_start')) {
+            $query->where('created_at', '>=', $request->date_start);
+        }
 
+        if ($request->filled('date_end')) {
+            $query->where('created_at', '<=', $request->date_end);
+        }
 
+        return $query;
+    }
+    public function scopeApplyPriceFilters($query, $request)
+    {
+        $orders = Order::with('orderItems')->get();
 
+        $filtered = $orders->filter(function ($order) use ($request) {
+            $total = $order->orderPrice() + $order->orderShippingProducts() - $order->orderDiscount();
+
+            if ($request->filled('min_price') && $total < $request->min_price) return false;
+            if ($request->filled('max_price') && $total > $request->max_price) return false;
+
+            return true;
+        });
+
+        return $query->whereIn('id', $filtered->pluck('id'));
+    }
+    public function scopeFilter($query, $request = null)
+    {
+
+        $request = $request ?? request();
+        return $query
+            // ->applySearch($request)
+            ->applyDeliveryTime($request)
+            ->applyPayment($request)
+            ->applyDelivery($request)
+            // ->applyCity($request)
+            // ->applyRegion($request)
+            ->applyStatus($request)
+            // ->applyDateFilters($request)
+            // ->applyPriceFilters($request)
+        ;
+    }
 }

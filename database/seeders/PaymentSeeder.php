@@ -8,9 +8,7 @@ use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         for ($i=0; $i < 5; $i++) {
@@ -35,3 +33,8 @@ class PaymentSeeder extends Seeder
 
     }
 }
+
+
+
+
+

@@ -25,7 +25,10 @@ class UserResource extends JsonResource
             'type' => $this->type,
             'active' => $this->active,
             'vip' => $this->vip,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'gender' => $this->gender,
+            'date_of_birth' => formatDate($this->date_of_birth),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

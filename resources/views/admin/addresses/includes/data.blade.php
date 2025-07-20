@@ -1,8 +1,8 @@
 <tr>
 
     <td class="text-lg-center">{{ $address->user->name }}</td>
-    <td class="text-lg-center">{{ $address->city->nameLang() ?? __('site.null')  }}</td>
-    <td class="text-lg-center">{{ $address->region->nameLang() ?? __('site.null') }}</td>
+    <td class="text-lg-center">{{ $address->city?->nameLang() ?? __('site.null')  }}</td>
+    <td class="text-lg-center">{{ $address->region?->nameLang() ?? __('site.null') }}</td>
     <td class="text-lg-center">{{ $address->address }}</td>
     {{-- location --}}
     <td class="text-lg-center">

@@ -18,7 +18,7 @@
     <script src="{{ asset('admin/assets/js/modal-add-new-address.js') }}"></script>
 @endsection
 @section('jsFiles')
-    <script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
-    @include('admin.layouts.table.dataTableJs', ['table' => $pages->count() > 0])
-    @include('admin.layouts.table.ajaxSeenjs', ['model' => 'pages'])
+<script src="{{ asset('admin/assets/vendor/libs/select2/select2.js') }}"></script>
+@include('admin.layouts.table.dataTableJs', ['table' => $pages->count() > 0])
+@include('admin.layouts.table.ajaxActiveJs', ['model' => 'pages'])
 @endsection

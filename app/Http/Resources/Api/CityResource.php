@@ -19,7 +19,6 @@ class CityResource extends JsonResource
             'name'=>$this->nameLang(),
             'shipping'=>$this->shipping,
             'active'=>$this->active,
-            'regions_count'=>$this->when(isset($this->regions_count),$this->regions_count)
         ];
     }
 }

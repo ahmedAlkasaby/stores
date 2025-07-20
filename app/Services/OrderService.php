@@ -84,6 +84,14 @@ class OrderService{
         return true;
     }
 
+
+    public function getAddressId(){
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $address=$user->addresses()->where('active',1)->first();
+        return $address->id;
+    }
+
     public function notificationAfterOrder()
     {
         $admins=User::where('type','admin')->where('notify',1)->where('active',1)->get();

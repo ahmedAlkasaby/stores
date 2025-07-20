@@ -1,6 +1,6 @@
 <tr>
     <td class="text-lg-center">{{ $category->nameLang() }}</td>
-    <td class="text-lg-center">{{ $category->store?->nameLang() }}</td>
+    <td class="text-lg-center">{{ $category->service?->nameLang() }}</td>
     <td class="text-lg-center">{{ $category->order_id ?? 0 }}</td>
     <td class="text-lg-center">{{ $category->parent?->nameLang() ?? __("site.null") }}</td>
     <td class="text-center">

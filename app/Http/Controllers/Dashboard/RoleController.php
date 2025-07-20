@@ -57,6 +57,8 @@ class RoleController extends MainController
         $role->update($request->only(['name', 'display_name']));
         if($request->input('permissions')){
             $role->syncPermissions($request->permissions);
+        }else{
+            $role->syncPermissions([]);
         }
         return redirect()->route('dashboard.roles.index')->with('success', __('site.updated_successfully'));
     }

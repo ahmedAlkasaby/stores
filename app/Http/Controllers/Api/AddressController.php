@@ -34,8 +34,8 @@ class AddressController extends MainController
 
     public function show(string $id)
     {
-        $userId=Auth::guard('api')->user();
-        $address = Address::where('user_id', $userId)->where('id', $id)
+        $user=Auth::guard('api')->user();
+        $address = Address::where('user_id', $user->id)->where('id', $id)
                     ->with('city', 'region')
                     ->first();
         if(!$address){

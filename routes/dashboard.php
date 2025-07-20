@@ -1,31 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\ActivityLogController;
+use App\Http\Controllers\Dashboard\AdditionController;
+use App\Http\Controllers\Dashboard\AddressController;
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\CityController;
+use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\dashboard\CouponController;
+use App\Http\Controllers\dashboard\DeliveryTimeController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\dashboard\OrderController;
 use App\Http\Controllers\dashboard\PageController;
+use App\Http\Controllers\Dashboard\PaymentController;
+use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\dashboard\RegionController;
+use App\Http\Controllers\dashboard\ReviewController;
 use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\ServiceController;
+use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\SizeController;
+use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Dashboard\BrandController;
-use App\Http\Controllers\Dashboard\StoreController;
-use App\Http\Controllers\dashboard\RegionController;
-use App\Http\Controllers\Dashboard\AddressController;
-use App\Http\Controllers\Dashboard\ContactController;
-use App\Http\Controllers\Dashboard\PaymentController;
-use App\Http\Controllers\Dashboard\ProfileController;
-use App\Http\Controllers\dashboard\SettingController;
-use App\Http\Controllers\Dashboard\AdditionController;
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\dashboard\DeliveryTimeController;
-use App\Http\Controllers\dashboard\StoreTypeController;
-
-
-
-
-
+use App\Http\Controllers\Dashboard\WishlistController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -46,14 +48,9 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::resource('users', UserController::class);
     Route::get('users/active/{user}', [UserController::class, 'active'])->name('users.active');
 
-
-    // Resource routes for store types
-    Route::resource('store_types', StoreTypeController::class);
-    Route::get('store_types/active/{storeType}', [StoreTypeController::class, 'active'])->name('store_types.active');
-
     // Resource routes for stores
-    Route::resource('stores', StoreController::class);
-    Route::get('stores/active/{store}', [StoreController::class, 'active'])->name('stores.active');
+    Route::resource('services', ServiceController::class);
+    Route::get('services/active/{service}', [ServiceController::class, 'active'])->name('services.active');
 
     // Resource routes for sizes
     Route::resource('sizes', SizeController::class);
@@ -72,7 +69,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('units/restore/{unit}', [UnitController::class, 'restore'])->name('units.restore');
     Route::delete('units/force_delete/{unit}', [UnitController::class, 'forceDelete'])->name('units.force_delete');
     Route::get('units/toggle_active/{unit}', [UnitController::class, 'active'])->name('units.active');
-    // Resource routes for additions 
+    // Resource routes for additions
     Route::resource('additions', AdditionController::class);
     Route::get('additions/restore/{addition}', [AdditionController::class, 'restore'])->name('additions.restore');
     Route::delete('additions/force_delete/{addition}', [AdditionController::class, 'forceDelete'])->name('additions.force_delete');
@@ -118,5 +115,41 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     //Resourse route for addresses
     Route::resource('addresses', AddressController::class);
+
+    //Resource route for Slider
+    Route::resource('sliders', SliderController::class);
+    Route::get('sliders/active/{slider}', [SliderController::class, 'active'])->name('sliders.active');
+
+    //Resourse route for Favourites
+    Route::resource('wishlists', WishlistController::class);
+
+     //Resource route for Orders
+    Route::resource('orders', OrderController::class);
+    Route::get('orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::post('orders/change_status/{order}', [OrderController::class, 'changeStatus'])->name('orders.change_status');
+
+    //Resource route for Coupons
+    Route::resource('coupons', CouponController::class);
+    Route::get('coupons/active/{coupon}', [CouponController::class, 'active'])->name('coupons.active');
+    Route::get('coupons/finish/{coupon}', [CouponController::class, 'finish'])->name('coupons.finish');
+
+    // Pesdource Route for Products
+    Route::resource('products', ProductController::class);
+    Route::get('products/active/{product}', [ProductController::class, 'active'])->name('products.active');
+    Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
+    Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
+    Route::get('getCategoryByService/{id}', [ProductController::class, 'getCategoryByService']);
+
+    //Resource route for reviews
+    Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+
+    //Resource route for activity_logs
+   Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
+
+   Route::resource('notifications', NotificationController::class)->only(['index','create','store']);
+
+
+
+
 
 });

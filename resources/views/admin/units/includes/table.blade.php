@@ -2,7 +2,9 @@
     'TitleTable' => __('site.units'),
     'routeToCreate' => route('dashboard.units.create'),
     'filter' => true,
+    "model" => "units",
 ])
+
 @include('admin.layouts.table.thead_info', [
     'columns' => ['ID', 'site.name', 'site.order_id', 'site.status', 'site.action'],
 ])

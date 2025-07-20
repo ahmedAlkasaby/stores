@@ -29,12 +29,12 @@ class HomeCollection extends ResourceCollection
         $services=Service::filter()->paginate(10);
         $data=['categories','service','unit','size','brand','children'];
 
-        $featureProducts=Product::with($data)->where('feature',1)->filter()->paginate(10);
-        $newProducts=Product::with($data)->where('new',1)->filter()->paginate(10);
-        $specialProducts=Product::with($data)->where('special',1)->filter()->paginate(10);
-        $saleProducts=Product::with($data)->where('sale',1)->filter()->paginate(10);
-        $filterProducts=Product::with($data)->where('filter',1)->filter()->paginate(10);
-        $offerProducts=Product::with($data)->where('offer',1)->filter()->paginate(10);
+        $featureProducts=Product::with($data)->where('feature',1)->active()->paginate(10);
+        $newProducts=Product::with($data)->where('new',1)->active()->paginate(10);
+        $specialProducts=Product::with($data)->where('special',1)->active()->paginate(10);
+        $saleProducts=Product::with($data)->where('sale',1)->active()->paginate(10);
+        $filterProducts=Product::with($data)->where('filter',1)->active()->paginate(10);
+        $offerProducts=Product::with($data)->where('offer',1)->active()->paginate(10);
 
 
 
@@ -86,8 +86,6 @@ class HomeCollection extends ResourceCollection
             'saleProducts'=>ProductResource::collection($saleProducts),
             'filterProducts'=>ProductResource::collection($filterProducts),
             'offerProducts'=>ProductResource::collection($offerProducts),
-
-
         ];
     }
 }

@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-          for ($i = 0; $i < 30; $i++) {
-            User::create([
+          for ($i = 0; $i < 10; $i++) {
+            $user = User::create([
               'first_name'=>fake()->firstName(),
               'last_name'=>fake()->lastName(),
               'email'=> fake()->unique()->safeEmail(),
@@ -23,6 +23,13 @@ class UserSeeder extends Seeder
               'lang'=>'en',
               'theme'=>'light',
               'type'=>fake()->randomElement(['admin', 'client','delivery']),
+           ]);
+
+           $user->devices()->create([
+               'token'=>fake()->uuid(),
+               'device_type'=>fake()->randomElement(['android', 'apple', 'huawei']),
+               'imei'=>fake()->uuid(),
+    
            ]);
         }
     }

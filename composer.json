@@ -21,6 +21,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
+        "beyondcode/laravel-query-detector": "^2.1",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
@@ -30,12 +31,19 @@
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
+
+        "files": [
+            "app/Helpers/GlobalHelper.php"
+          ],
+
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
-        
+
+
+
     },
     "autoload-dev": {
         "psr-4": {
