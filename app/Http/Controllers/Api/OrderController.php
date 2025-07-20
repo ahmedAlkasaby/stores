@@ -82,8 +82,10 @@ class OrderController extends MainController
         if (!$order) {
             return $this->messageError(__('api.order_not_found'));
         }
-        $order->update($data);
-        $this->orderService->notificationAfterOrder($order->status);
+        DB::transaction(function () use ($order, $data) {
+            $order->update($data);
+            $this->orderService->notificationAfterOrder($order->status->value);
+        });
 
         return $this->messageSuccess(__('api.order_updated'));
     }
