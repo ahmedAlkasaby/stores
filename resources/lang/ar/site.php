@@ -623,8 +623,8 @@ return [
     'device'=>'جهاز',
     'not_found_category_in_this_service'=>'لا يوجد اقسام داخل هده الخدمه',
     'read_at'=>'تم القراءة',
-    'max_hour_product_in_carts' => 'الحد الاقصى للمنتجات في السلة',
-    'min_amount_product_notify' => 'الحد الادنى للكمية في المنتج',
+    'max_hour_product_in_carts' => ' (ساعات) الحد الاقصى للمنتج  في السلة',
+    'min_amount_product_notify' => ' (للتبيه) الحد الادنى للكمية في المنتج',
 
 ];
 
