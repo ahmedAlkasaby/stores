@@ -25,7 +25,7 @@ class ProductController extends MainController
     public function __construct(ImageHandlerService $imageService, ProductService $productService)
     {
         parent::__construct();
-        $this->setClass('ptoducts');
+        $this->setClass('products');
         $this->imageService = $imageService;
         $this->productService = $productService;
     }

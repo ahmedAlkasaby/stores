@@ -71,7 +71,7 @@ return [
     "add_english_details" => "إضافة تفاصيل باللغة الإنجليزية",
     "en" => "EN",
     "ar" => "ع",
-    "woudyan" => "وديان",
+    "Popo" => "بوبو",
     "store_type_created_successfully" => "تم إنشاء نوع المتجر بنجاح",
     "store_type_updated_successfully" => "تم تحديث نوع المتجر بنجاح",
     "store_type_deleted_successfully" => "تم حذف نوع المتجر بنجاح",

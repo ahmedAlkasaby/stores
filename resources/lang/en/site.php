@@ -72,7 +72,7 @@ return [
     "add_english_details" => "Add English Details",
     "en" => "EN",
     "ar" => "AR",
-    "woudyan" => "Woudyan",
+    "Popo" => "Popo",
     'store_type_created_successfully' => 'Store type created successfully',
     'store_type_updated_successfully' => 'Store type updated successfully',
     'store_type_deleted_successfully' => 'Store type deleted successfully',
