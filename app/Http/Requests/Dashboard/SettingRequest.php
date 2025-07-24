@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Dashboard;
 
+use App\Helpers\ResultHelper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SettingRequest extends FormRequest
@@ -27,10 +28,11 @@ class SettingRequest extends FormRequest
             "site_email" => "required|email",
             "min_order" => "required|numeric",
             "max_order" => "required|numeric",
-            "min_order_for_shipping_free" => "required|numeric",
             "delivery_cost" => "required|numeric",
             "site_open" => "required|boolean",
             "logo" => "nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048",
+            'result' => 'required|integer|in:' . implode(',', array_keys(ResultHelper::getResultOptions())),
+
         ];
     }
     public function message(){

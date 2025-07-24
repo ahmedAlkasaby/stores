@@ -605,6 +605,7 @@ return [
     'read_at'=>'Read At',
     'max_hour_product_in_carts' => 'Maximum Hour Product In Carts',
     'min_amount_product_notify' => 'Minimum Amount Product Notify',
+    'result' => 'Result',
 
 
 

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('site_title');
             $table->string('site_phone');
             $table->string('site_email');
-            $table->integer('min_order');
-            $table->integer('max_order');
-            $table->integer('min_order_for_shipping_free');
-            $table->integer('delivery_cost');
+            $table->decimal('min_order');
+            $table->decimal('max_order');
+            $table->decimal('min_order_for_shipping_free')->nullable();
+            $table->decimal('delivery_cost');
             $table->boolean('site_open');
             $table->boolean('active');
             $table->integer('result')->default(100);
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('telegram')->nullable();
-            $table->integer('max_hour_product_in_carts')->default(1);
+            $table->decimal('max_hour_product_in_carts')->default(1);
             $table->integer('min_amount_product_notify')->default(1);
 
             $table->softDeletes();
