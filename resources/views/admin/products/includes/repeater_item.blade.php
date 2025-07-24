@@ -17,9 +17,8 @@
             'select_function' => ['' => __('site.select_option')] + $sizes->mapWithKeys(fn($size) =>
                 [$size->id => $size->nameLang()])->toArray(),
             'select_value' => $child?->size_id,
-            'select_class' => 'select2',
-            'select2' => true,
             'label_req' => true,
+            'select2' => false,
         ])
     </div>
 
@@ -30,6 +29,7 @@
             'placeholder' => __('site.amount'),
             'number_value' => $child?->amount,
             'label_req' => true,
+
         ])
     </div>
 
@@ -48,8 +48,7 @@
             'select_name' => 'children[][offer]',
             'select_function' => ['' => __('site.select_option')] + booleantype(),
             'select_value' => $child?->offer,
-            'select_class' => 'select2',
-            'select2' => true,
+            'select2' => false
         ])
     </div>
 
