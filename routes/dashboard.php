@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\AddressController;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\CacheController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\ContactController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -148,6 +150,12 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
    Route::resource('notifications', NotificationController::class)->only(['index','create','store']);
 
+  
+
+    // Cache management
+    Route::get('cache/clear', [CacheController::class, 'index'])->name('cache');
+
+    
 
 
 

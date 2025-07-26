@@ -108,6 +108,7 @@ class ProductController extends MainController
     public function edit(string $id)
     {
         $product = Product::with('children')->findOrFail($id);
+
         $services=Service::active()->get();
         $brands=Brand::active()->get();
         $units=Unit::active()->get();

@@ -3,7 +3,6 @@
 @section('styles')
     @include('admin.layouts.table.datatablesCss')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
-
 @endsection
 @section('content')
     @include('admin.layouts.messages.success')
@@ -15,6 +14,7 @@
     @include('admin.products.includes.filter')
 
 @endsection
+
 @section('mainFiles')
     <script src="{{ asset('admin/assets/js/modal-add-new-address.js') }}"></script>
 @endsection
