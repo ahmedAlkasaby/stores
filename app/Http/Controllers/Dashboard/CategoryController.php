@@ -21,9 +21,9 @@ class CategoryController extends MainController
     }
     public function index()
     {
-        $categories = Category::with('service')->with("parent")->filter(request(), "dashboard")->paginate($this->perPage);
-        $services = Service::all();
-        $allCategories = Category::all();
+        $categories = Category::with(['service','parent'])->filter(request(), "dashboard")->paginate($this->perPage);
+        $services = Service::active()->get();
+        $allCategories = Category::active()->get();
 
         return view('admin.categories.index', compact('categories', 'services', 'allCategories'));
     }
@@ -31,8 +31,8 @@ class CategoryController extends MainController
 
     public function create()
     {
-        $services = Service::all();
-        $categories = Category::all();
+         $services = Service::active()->get();
+        $categories = Category::active()->get();
         return view('admin.categories.create', compact('services', 'categories'));
     }
 
@@ -51,8 +51,8 @@ class CategoryController extends MainController
     public function show(string $id)
     {
         $category = Category::findOrFail($id);
-        $services = Service::all();
-        $categories = Category::all();
+        $services = Service::active()->get();
+        $categories = Category::active()->get();
 
         return view('admin.categories.show', compact('category', "services", "categories"));
     }
@@ -61,8 +61,8 @@ class CategoryController extends MainController
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
-        $services = Service::all();
-        $categories = Category::all();
+        $services = Service::active()->get();
+        $categories = Category::active()->get();
 
         return view('admin.categories.edit', compact('category', "services", "categories"));
     }
