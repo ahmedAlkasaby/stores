@@ -3,6 +3,8 @@ namespace App\Traits;
 
 use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 trait ActivityLogTrait{
 
@@ -66,6 +68,8 @@ trait ActivityLogTrait{
 
     protected function logActivity(string $action, array $changes = null): void
     {
+        $this->clearDataCache();
+        
         if (! $this->shouldLogActivity()) return;
 
         $user = Auth::user();
@@ -81,4 +85,19 @@ trait ActivityLogTrait{
         ]);
 
     }
+
+    protected function clearDataCache(): void
+    {
+        $prefix = config('cache.prefix') . 'data_';
+    
+        $cacheKeys = DB::table('cache')
+            ->where('key', 'like', $prefix . '%')
+            ->pluck('key');
+
+    
+        foreach ($cacheKeys as $key) {
+            DB::table('cache')->where('key', $key)->delete();            
+        }
+    }
+
 }
