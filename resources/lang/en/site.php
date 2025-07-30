@@ -608,6 +608,7 @@ return [
     'result' => 'Result',
     'optimize_cache_successfully' => 'Cache optimized successfully',
     'optimize' => 'Optimize',
+    'cant_delete_category_with_products_and_children'=> 'Can\'t delete category with products and children',
 
 
 

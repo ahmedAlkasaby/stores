@@ -26,7 +26,7 @@
         'select_name' => 'parent_id',
         'select_function' =>
             ['null' => __('site.null')] +
-                $categories->mapWithKeys(fn($category) => [$category->id => $category->nameLang()])->toArray() ??
+                $parentCategories->mapWithKeys(fn($category) => [$category->id => $category->nameLang()])->toArray() ??
             null,
         'select_value' => $category->parent_id ?? null,
         'select_class' => 'select2',

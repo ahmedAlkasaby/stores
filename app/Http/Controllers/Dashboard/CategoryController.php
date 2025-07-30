@@ -23,17 +23,17 @@ class CategoryController extends MainController
     {
         $categories = Category::with(['service','parent'])->filter(request(), "dashboard")->paginate($this->perPage);
         $services = Service::active()->get();
-        $allCategories = Category::active()->get();
+        $parentCategories = Category::activeParents()->get();
 
-        return view('admin.categories.index', compact('categories', 'services', 'allCategories'));
+        return view('admin.categories.index', compact('categories', 'services', 'parentCategories'));
     }
 
 
     public function create()
     {
-         $services = Service::active()->get();
-        $categories = Category::active()->get();
-        return view('admin.categories.create', compact('services', 'categories'));
+        $services = Service::active()->get();
+        $parentCategories = Category::activeParents()->get();
+        return view('admin.categories.create', compact('services', 'parentCategories'));
     }
 
 
@@ -52,9 +52,9 @@ class CategoryController extends MainController
     {
         $category = Category::findOrFail($id);
         $services = Service::active()->get();
-        $categories = Category::active()->get();
+        $parentCategories = Category::activeParents()->get();
 
-        return view('admin.categories.show', compact('category', "services", "categories"));
+        return view('admin.categories.show', compact('category', "services", "parentCategories"));
     }
 
 
@@ -62,9 +62,9 @@ class CategoryController extends MainController
     {
         $category = Category::findOrFail($id);
         $services = Service::active()->get();
-        $categories = Category::active()->get();
+        $parentCategories = Category::activeParents()->get();
 
-        return view('admin.categories.edit', compact('category', "services", "categories"));
+        return view('admin.categories.edit', compact('category', "services", "parentCategories"));
     }
 
     public function update(CategoryRequest $request, string $id)
@@ -80,14 +80,14 @@ class CategoryController extends MainController
         return redirect()->route('dashboard.categories.index')->with('success', __('site.category_updated_successfully'));
     }
 
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        // if (Category::find($id)->products()->count() > 0) {
-        // return redirect()->route('dashboard.categories.index')->with('error', __('site.category_has_products'));
-        // }
-        $category = Category::findOrFail($id);
-        $this->imageService->deleteImage($category->image);
 
+        if ($category->products()->count() > 0 || $category->children()->count() > 0) {
+            return back()->with('error', __('site.cant_delete_category_with_products_and_children'));
+        }
+       
+        $this->imageService->deleteImage($category->image);
         $category->delete();
         return redirect()->route('dashboard.categories.index')->with('success', __('site.category_deleted_successfully'));
     }
