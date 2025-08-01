@@ -31,6 +31,10 @@ use App\Http\Controllers\Dashboard\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('test_broad_cast', function () {
+    return view('test_broad_cast');
+})->name('test.broad.cast');
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [AuthController::class, 'viewLogin'])->name('login.view');
