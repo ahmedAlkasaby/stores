@@ -10,6 +10,13 @@
       0 => 'Barryvdh\\Debugbar\\ServiceProvider',
     ),
   ),
+  'beyondcode/laravel-query-detector' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BeyondCode\\QueryDetector\\QueryDetectorServiceProvider',
+    ),
+  ),
   'ichtrojan/laravel-otp' => 
   array (
     'aliases' => 
