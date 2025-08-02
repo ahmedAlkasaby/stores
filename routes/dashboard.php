@@ -31,11 +31,19 @@ use App\Http\Controllers\Dashboard\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('test_broad_cast', function () {
-    return view('test_broad_cast');
-})->name('test.broad.cast');
 
 
+
+
+// Route::get('test_broad_cast_event', function () {
+//     event(new \App\Events\BroadCastTestEvent('Hello, this is a test message!'));
+//     return 'Event has been broadcasted!';
+// })->name('test.broad.cast.event');
+
+// Route::get('test_broad_cast', function () {
+//     return view('test_broad_cast');
+// })->name('test.broad.cast');
+Route::get('notification/profile', [NotificationController::class, 'profile'])->name('notification.profile');
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [AuthController::class, 'viewLogin'])->name('login.view');
     Route::post('login', [AuthController::class, 'login'])->name('login.login');
