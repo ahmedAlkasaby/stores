@@ -17,6 +17,8 @@
     @include('admin.layouts.tables.actions', [
         'model' => 'delivery_times',
         'edit' => true,
+        "delete" => true,
+        'show' => true,
         'item' => $delivery_time,
     ])
 </tr>
