@@ -41,13 +41,16 @@
             ])
         </div>
         <div class="col-sm-6">
-            @include('admin.layouts.forms.fields.number', [
-                'number_name' => 'min_order_for_shipping_free',
-                'min' => 0,
-                'placeholder' => __('site.min_order_for_shipping_free'),
-                'number_value' => $min_order_for_shipping_free ?? null,
-            ])
+            @include('admin.layouts.forms.fields.select', [
+               'select_name' => 'result',
+               'select_function' => \App\Helpers\ResultHelper::getResultOptions(),
+               'select_value' => $setting->result ?? null,
+               'select_class' => 'select2',
+               'select2' => true,
+           ])
+
         </div>
+
 
         <div class="col-sm-6">
             @include('admin.layouts.forms.fields.number', [
@@ -78,7 +81,7 @@
         <div class="col-sm-6">
             @include('admin.layouts.forms.fields.select', [
                 'select_name' => 'site_open',
-                'select_function' => [0 => __('site.no'), 1 => __('site.yes')],
+                'select_function' =>booleanType(),
                 'select_value' => $site_open ?? null,
                 'select_class' => 'select2',
                 'select2' => true,
