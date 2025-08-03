@@ -27,7 +27,7 @@
 @yield('mainFiles')
 
 
-@include('admin.layouts.pusher_script')
+@include('admin.layouts.notification_scripts')
 <!-- Page JS -->
 
 

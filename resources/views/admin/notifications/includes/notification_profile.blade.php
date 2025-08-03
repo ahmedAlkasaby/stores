@@ -25,7 +25,8 @@
                                         <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                        <a href=""data-notification-id="{{ $notification->id }}"
+                                             class="dropdown-notifications-read"><span
                                                 class="badge badge-dot"></span></a>
                                         <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
                                                 class="ti ti-x"></span></a>

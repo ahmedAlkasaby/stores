@@ -23,3 +23,25 @@
     });
 
 </script>
+<script>
+    $(document).on('click', '.dropdown-notifications-read', function (e) {
+        e.preventDefault();
+
+        const $el = $(this);
+        const notificationId = $el.data('notification-id');
+
+        $.ajax({
+            url: `/dashboard/notifications/mark_as_read/${notificationId}`,
+            method: 'GET',
+            success: function (response) {
+                if (response.success) {
+                    $el.find('.badge-dot').remove();
+                    console.log('Notification marked as read');
+                }
+            },
+            error: function (xhr) {
+                console.error('Something went wrong!', xhr);
+            }
+        });
+    });
+</script>

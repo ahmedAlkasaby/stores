@@ -87,11 +87,13 @@ class NotificationController extends MainController
         return redirect()->route('dashboard.notifications.index')->with('success', __('site.deleted_successfully'));
     }
 
-    public function profile()
+  
+
+
+    public function markAsRead($id)
     {
-        $notifications = auth()->user()->notificationsUnread()->get();
-        $notificationCount = $notifications->count();
-      
-        return view('admin.notifications.includes.notification_profile', compact('notifications', 'notificationCount'));
+        $notification = Notification::findOrFail($id);
+        $notification->markAsRead();
+        return response()->json(['success' => true]);
     }
 }
