@@ -67,6 +67,10 @@
             </li>
             <!-- / Style Switcher-->
 
+            <!-- Notification -->
+            @include('admin.notifications.includes.notification_profile',['notifications' => auth()->user()->notificationsUnread()->get(), 'notificationCount' => auth()->user()->notificationsUnread()->count()])
+            <!--/ Notification -->
+
             {{-- Short Cuts --}}
             <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -85,15 +89,16 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-files fs-4"></i>
                                 </span>
-                                <a href="{{ route('dashboard.pages.index') }}" class="stretched-link">{{ __('site.pages') }}</a>
-                                <small class="text-muted mb-0">{{ __("site.pages_management") }}</small>
+                                <a href="{{ route('dashboard.pages.index') }}"
+                                    class="stretched-link">{{ __('site.pages') }}</a>
+                                <small class="text-muted mb-0">{{ __('site.pages_management') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-file-invoice fs-4"></i>
                                 </span>
                                 <a href="" class="stretched-link">{{ __('site.products') }}</a>
-                                <small class="text-muted mb-0">{{ __("site.products_management") }}</small>
+                                <small class="text-muted mb-0">{{ __('site.products_management') }}</small>
                             </div>
                         </div>
                         <div class="row row-bordered overflow-visible g-0">
@@ -101,16 +106,17 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-users fs-4"></i>
                                 </span>
-                                <a href="{{ route('dashboard.users.index',['type' => 'client']) }}"
+                                <a href="{{ route('dashboard.users.index', ['type' => 'client']) }}"
                                     class="stretched-link">{{ __('site.clients') }}</a>
-                                <small class="text-muted mb-0">{{ __("site.clients_management") }}</small>
+                                <small class="text-muted mb-0">{{ __('site.clients_management') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-lock fs-4"></i>
                                 </span>
-                                <a href="{{ ("dashboard.roles.index") }}" class="stretched-link">{{ __('site.roles') }}</a>
-                                <small class="text-muted mb-0">{{ __("site.roles_management") }}</small>
+                                <a href="{{ 'dashboard.roles.index' }}"
+                                    class="stretched-link">{{ __('site.roles') }}</a>
+                                <small class="text-muted mb-0">{{ __('site.roles_management') }}</small>
                             </div>
                         </div>
                         <div class="row row-bordered overflow-visible g-0">
@@ -118,15 +124,17 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-chart-bar fs-4"></i>
                                 </span>
-                                <a href="{{ route('dashboard.home.index') }}" class="stretched-link">{{ __('site.dashboard') }}</a>
-                                <small class="text-muted mb-0">{{ __("site.dashboard") }}</small>
+                                <a href="{{ route('dashboard.home.index') }}"
+                                    class="stretched-link">{{ __('site.dashboard') }}</a>
+                                <small class="text-muted mb-0">{{ __('site.dashboard') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-2">
                                     <i class="ti ti-settings fs-4"></i>
                                 </span>
-                                <a href="{{ route('dashboard.settings.show', 1) }}" class="stretched-link">{{ __('site.settings') }}</a>
-                                <small class="text-muted mb-0">{{ __("site.settings") }}</small>
+                                <a href="{{ route('dashboard.settings.show', 1) }}"
+                                    class="stretched-link">{{ __('site.settings') }}</a>
+                                <small class="text-muted mb-0">{{ __('site.settings') }}</small>
                             </div>
                         </div>
                         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -149,7 +157,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="{{ route('dashboard.users.edit', ['user' => auth()->user()->id]) }}">
+                        <a class="dropdown-item"
+                            href="{{ route('dashboard.users.edit', ['user' => auth()->user()->id]) }}">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">

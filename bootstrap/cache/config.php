@@ -43,8 +43,9 @@
       21 => 'Illuminate\\View\\ViewServiceProvider',
       22 => 'App\\Providers\\AppServiceProvider',
       23 => 'App\\Providers\\AuthServiceProvider',
-      24 => 'App\\Providers\\EventServiceProvider',
-      25 => 'App\\Providers\\RouteServiceProvider',
+      24 => 'App\\Providers\\BroadcastServiceProvider',
+      25 => 'App\\Providers\\EventServiceProvider',
+      26 => 'App\\Providers\\RouteServiceProvider',
     ),
     'aliases' => 
     array (
@@ -138,19 +139,19 @@
   ),
   'broadcasting' => 
   array (
-    'default' => 'log',
+    'default' => 'pusher',
     'connections' => 
     array (
       'pusher' => 
       array (
         'driver' => 'pusher',
-        'key' => '',
-        'secret' => '',
-        'app_id' => '',
+        'key' => '53267465306fb166c540',
+        'secret' => '4ac351bd09fe2b3e2005',
+        'app_id' => '2031106',
         'options' => 
         array (
-          'cluster' => 'mt1',
-          'host' => 'api-mt1.pusher.com',
+          'cluster' => 'eu',
+          'host' => 'api-eu.pusher.com',
           'port' => '443',
           'scheme' => 'https',
           'encrypted' => true,
