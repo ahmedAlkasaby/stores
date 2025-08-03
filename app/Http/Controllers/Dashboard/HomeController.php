@@ -56,8 +56,7 @@ class HomeController extends MainController
     
     public function getMonthlyOrders()
     {
-        $doneOrders = Order::with('orderItems')->where('status', StatusOrderEnum::Delivered)->get();
-
+        $doneOrders = Order::where('status', StatusOrderEnum::Delivered)->with('orderItems')->get();
         $monthlyProfits = array_fill(1, 12, 0);
 
         foreach ($doneOrders as $order) {

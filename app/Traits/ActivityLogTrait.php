@@ -2,7 +2,10 @@
 namespace App\Traits;
 
 use App\Models\ActivityLog;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 trait ActivityLogTrait{
 
@@ -66,6 +69,7 @@ trait ActivityLogTrait{
 
     protected function logActivity(string $action, array $changes = null): void
     {
+        
         if (! $this->shouldLogActivity()) return;
 
         $user = Auth::user();
@@ -81,4 +85,7 @@ trait ActivityLogTrait{
         ]);
 
     }
+
+   
+
 }

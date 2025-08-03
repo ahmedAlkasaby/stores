@@ -626,6 +626,8 @@ return [
     'max_hour_product_in_carts' => ' (ساعات) الحد الاقصى للمنتج  في السلة',
     'min_amount_product_notify' => ' (للتبيه) الحد الادنى للكمية في المنتج',
     'result' => 'عدد النتايج في الصفحه الواحده',
-
+    'optimize_cache_successfully' => 'تم تحسين الكاش بنجاح',
+    'optimize'=>'تحسين',
+    'cant_delete_category_with_products_and_children'=>'لا يمكن حذف القسم لانه لديه منتجات واطفال',
 ];
 

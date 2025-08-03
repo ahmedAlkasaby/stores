@@ -33,6 +33,13 @@ class Category extends MainModel
         return $this->belongsToMany(Product::class);
     }
 
+    public function scopeActiveParents($query){
+        return $query->where('active', 1)
+                     ->whereNull('parent_id')
+                     ->whereHas('children')
+                     ->orderBy('order_id', 'asc');
+    }
+
 
     public function scopeActive($query)
     {

@@ -26,6 +26,16 @@ class CategoryResource extends JsonResource
             'service_id' => $this->service_id,
             'service' => new ServiceResource($this->whenLoaded('service')),
             'parent' => new CategoryResource($this->whenLoaded('parent')),
+            'children' => $this->whenLoaded('children', function () {
+                 return CategoryResource::collection(
+                     $this->children
+                         ->where('active', 1)
+                         ->sortBy('order_id')
+                         ->values()
+                 );
+             }),
+
+
         ];
     }
 }
