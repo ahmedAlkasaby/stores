@@ -65,21 +65,25 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
         Route::post('rest/password',[RestPasswordController::class,'RestPassword']);
     });
     Route::group(['middleware'=>['auth-api']],function(){
-        Route::get('notifications',[NotificationController::class,'index']);
+        Route::resource('notifications',NotificationController::class)->only(['index','destroy']);
+        Route::put('notifications/read-all',[NotificationController::class,'readAll']);
+        Route::put('notifications/read/{id}',[NotificationController::class,'read']);
         Route::get('wishlists',[WishListController::class,'index']);
         Route::post('wishlists',[WishListController::class,'toggle']);
-        Route::apiResource('cart_items',CartItemController::class)->only(['index','show','store','destroy']);
+        Route::apiResource('cart_items',CartItemController::class)->except(('update'));
         Route::apiResource('addresses',AddressController::class);
-        Route::apiResource('orders',OrderController::class)->only(['index','show','store','update']);
+        Route::apiResource('orders',OrderController::class)->except('destroy');
         Route::group(['prefix'=>'profile'],function(){
             Route::get('/',[ProfileController::class, 'index']);
             Route::put('/',[ProfileController::class, 'update']);
-            Route::post('change/address',[ProfileController::class, 'changeAddress']);
-            Route::post('change/password',[ProfileController::class, 'changePassword']);
-            Route::post('change/image',[ProfileController::class, 'changeImage']);
-            Route::post('change/available',[ProfileController::class, 'changeAvailable']);
-            Route::post('change/theme',[ProfileController::class, 'changeTheme']);
-            Route::post('change/lang',[ProfileController::class, 'changeLang']);
+            Route::group(['prefix'=>'change'],function(){
+                Route::post('address',[ProfileController::class, 'changeAddress']);
+                Route::post('password',[ProfileController::class, 'changePassword']);
+                Route::post('image',[ProfileController::class, 'changeImage']);
+                Route::post('available',[ProfileController::class, 'changeAvailable']);
+                Route::post('theme',[ProfileController::class, 'changeTheme']);
+                Route::post('lang',[ProfileController::class, 'changeLang']);
+            });
         });
 
     });

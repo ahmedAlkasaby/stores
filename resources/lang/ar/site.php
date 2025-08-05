@@ -633,5 +633,10 @@ return [
     "comment" => "تعليق",
     "view_all" => "عرض الكل",
     "order" => "طلب",
+    'notification_read_successfully' => 'تم قراءة الاشعار بنجاح',
+    'notifications_read_successfully' => 'تم قراءة جميع الاشعارات بنجاح',
+    'no_unread_notifications' => 'لا يوجد اشعارات غير مقروءة',
+    'notification_not_found' => 'الاشعار غير موجود',
+    'notification_deleted_successfully' => 'تم حذف الاشعار بنجاح',
 ];
 

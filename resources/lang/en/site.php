@@ -613,6 +613,9 @@ return [
     "comment" => "Comment",
     "view_all" => "View All",
     "order" => "Order",
-
-
+    'notification_read_successfully' => 'Notification read successfully',
+    'notifications_read_successfully' => 'Notifications read successfully',
+    'no_unread_notifications' => 'No unread notifications',
+    'notification_not_found' => 'Notification not found',
+    'notification_deleted_successfully' => 'Notification deleted successfully',
 ];
