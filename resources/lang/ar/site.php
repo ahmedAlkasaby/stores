@@ -629,5 +629,8 @@ return [
     'optimize_cache_successfully' => 'تم تحسين الكاش بنجاح',
     'optimize'=>'تحسين',
     'cant_delete_category_with_products_and_children'=>'لا يمكن حذف القسم لانه لديه منتجات واطفال',
+    "rate" => "تقييم",
+    "comment" => "تعليق",
+    "view_all" => "عرض الكل",
 ];
 

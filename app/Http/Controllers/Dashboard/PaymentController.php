@@ -51,7 +51,8 @@ class PaymentController extends MainController
      */
     public function show(string $id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+        return view('admin.payments.show', compact('payment'));
     }
 
     /**
@@ -83,7 +84,9 @@ class PaymentController extends MainController
      */
     public function destroy(string $id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+        $payment->delete();
+        return redirect()->route('dashboard.payments.index')->with('success', __('site.payment_deleted_successfully'));
     }
 
     public function active(Payment $payment)

@@ -8,6 +8,7 @@
         'model' => 'roles',
         'edit' => true,
         'delete' => true,
+        "show" => true,
         'item' => $role,
     ])
 </tr>

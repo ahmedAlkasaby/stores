@@ -26,6 +26,7 @@
     "model" => "users",
     "edit" => true,
     "delete" => true,
+    "show" => true,
     "item" => $user,
     ])
 </tr>
