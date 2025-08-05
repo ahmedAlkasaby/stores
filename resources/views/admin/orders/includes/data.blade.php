@@ -15,7 +15,7 @@
 
     <td class="text-lg-center">{{ $order->price }}</td>
     <td class="text-lg-center">{{ $order->discount }}</td>
-    <td class="text-lg-center">{{ $order->shipping_products }}</td>
+    <td class="text-lg-center">{{ $order->shipping() }}</td>
     <td class="text-lg-center">{{ $order->orderTotal() }}</td>
     @php
         $availableStatuses = collect(App\Helpers\StatusOrderHelper::getAvailableTransitions($order->status))

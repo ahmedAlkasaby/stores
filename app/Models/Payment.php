@@ -24,6 +24,6 @@ class Payment extends MainModel
 
     public function orders()
     {
-        return $this->hasMany(Order::class, 'payment_id', 'id');
+        return $this->hasMany(Order::class);
     }
 }

@@ -44,29 +44,29 @@ class Order extends MainModel
 
     public function delivery()
     {
-        return $this->belongsTo(User::class, 'delivery_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function deliveryTime()
     {
-        return $this->belongsTo(DeliveryTime::class, 'delivery_time_id', 'id');
+        return $this->belongsTo(DeliveryTime::class);
     }
 
 
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
+        return $this->belongsTo(Product::class);
     }
 
     public function payment()
     {
-        return $this->belongsTo(Payment::class, 'payment_id', 'id');
+        return $this->belongsTo(Payment::class);
     }
 
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class, 'order_id', 'id');
+        return $this->hasMany(OrderItem::class);
     }
 
 

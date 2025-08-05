@@ -68,7 +68,10 @@
             <!-- / Style Switcher-->
 
             <!-- Notification -->
-            @include('admin.notifications.includes.notification_profile',['notifications' => auth()->user()->notificationsUnread()->get(), 'notificationCount' => auth()->user()->notificationsUnread()->count()])
+            @include('admin.notifications.includes.notification_profile', [
+                'notifications' => auth()->user()->notificationsUnread()->get(),
+                'notificationCount' => auth()->user()->notificationsUnread()->count(),
+            ])
             <!--/ Notification -->
 
             {{-- Short Cuts --}}
@@ -152,7 +155,11 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src={{ url('admin/assets/img/avatars/1.png') }} alt class="h-auto rounded-circle" />
+                        @if (auth()->user()->image)
+                            <img src={{ url(auth()->user()->image) }} alt class="h-auto rounded-circle" />
+                        @else
+                            <img src={{ url('admin/assets/img/avatars/1.png') }} alt class="h-auto rounded-circle" />
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

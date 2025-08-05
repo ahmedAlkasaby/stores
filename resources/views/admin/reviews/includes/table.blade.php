@@ -5,7 +5,7 @@
 ])
 
 @include('admin.layouts.table.thead_info', [
-    'columns' => [ "site.user","site.product","site.order", 'site.rate',"site.comment", 'site.status'],
+    'columns' => [ "site.user","site.product","site.order", 'site.rate',"site.comment", 'site.status', 'site.action'],
 ])
 
 <tbody>

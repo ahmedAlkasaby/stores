@@ -40,7 +40,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top">
-                        <a href="{{ route('dashboard.notifications.index') }}"
+                        <a href="javascript:void(0);"
                             class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
                             {{ __('site.view_all') }}
                         </a>

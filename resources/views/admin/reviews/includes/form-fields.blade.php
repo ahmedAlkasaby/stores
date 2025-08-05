@@ -29,15 +29,15 @@
     @include('admin.layouts.forms.fields.select', [
         'select_name' => 'product_id',
         'select_function' => ['null' => __('site.null')] + $products,
-        'select_value' => $review->product ?? null,
+        'select_value' => $review->reviewable_id ?? null,
         'select_class' => 'select2',
         'select2' => true,
         'select_id' => 'product_id',
     ])
     @include('admin.layouts.forms.fields.select', [
-        'select_name' => 'rating',
+        'select_name' => 'rate',
         'select_function' => [ 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5],
-        'select_value' => $review->review ?? null,
+        'select_value' => $review->rate ?? null,
         'select_class' => 'select2',
         'select2' => true,
     ])

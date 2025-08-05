@@ -19,11 +19,11 @@ class Service  extends MainModel
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'service_id', 'id');
+        return $this->hasMany(Category::class);
     }
     public function products()
     {
-        return $this->hasMany(Product::class, 'service_id', 'id');
+        return $this->hasMany(Product::class);
     }
 
 

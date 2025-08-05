@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\ActivityLogController;
 use App\Http\Controllers\Dashboard\AdditionController;
 use App\Http\Controllers\Dashboard\AddressController;
+use App\Http\Controllers\Dashboard\AjaxController;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CacheController;
@@ -59,52 +60,43 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::resource('roles', RoleController::class);
     // Resource routes for users
     Route::resource('users', UserController::class);
-    Route::get('users/active/{user}', [UserController::class, 'active'])->name('users.active');
 
     // Resource routes for stores
     Route::resource('services', ServiceController::class);
-    Route::get('services/active/{service}', [ServiceController::class, 'active'])->name('services.active');
 
     // Resource routes for sizes
     Route::resource('sizes', SizeController::class);
     Route::get('sizes/restore/{size}', [SizeController::class, 'restore'])->name('sizes.restore');
     Route::delete('sizes/force_delete/{size}', [SizeController::class, 'forceDelete'])->name('sizes.force_delete');
-    Route::get("sizes/active/{size}", [SizeController::class, 'active'])->name('sizes.active');
 
     // Resource routes for brands
     Route::resource('brands', BrandController::class);
     Route::get('brands/restore/{brand}', [BrandController::class, 'restore'])->name('brands.restore');
     Route::delete('brands/force_delete/{brand}', [BrandController::class, 'forceDelete'])->name('brands.force_delete');
-    Route::get('brands/active/{brand}', [BrandController::class, 'active'])->name('brands.active');
 
     // Resource routes for units
     Route::resource('units', UnitController::class);
     Route::get('units/restore/{unit}', [UnitController::class, 'restore'])->name('units.restore');
     Route::delete('units/force_delete/{unit}', [UnitController::class, 'forceDelete'])->name('units.force_delete');
-    Route::get('units/toggle_active/{unit}', [UnitController::class, 'active'])->name('units.active');
     // Resource routes for additions
     Route::resource('additions', AdditionController::class);
     Route::get('additions/restore/{addition}', [AdditionController::class, 'restore'])->name('additions.restore');
     Route::delete('additions/force_delete/{addition}', [AdditionController::class, 'forceDelete'])->name('additions.force_delete');
-    Route::get('additions/active/{addition}', [AdditionController::class, 'active'])->name('additions.active');
 
     //Resource routes for categories
     Route::resource('categories', CategoryController::class);
     Route::get('categories/restore/{category}', [CategoryController::class, 'restore'])->name('categories.restore');
     Route::delete('categories/force_delete/{category}', [CategoryController::class, 'forceDelete'])->name('categories.force_delete');
-    Route::get('categories/active/{category}', [CategoryController::class, 'active'])->name('categories.active');
 
     //Resource routes for cities
     Route::resource('cities', CityController::class);
     Route::get('cities/restore/{city}', [CityController::class, 'restore'])->name('cities.restore');
     Route::delete('cities/force_delete/{city}', [CityController::class, 'forceDelete'])->name('cities.force_delete');
-    Route::get('cities/active/{city}', [CityController::class, 'active'])->name('cities.active');
 
     //Resource routes for regions
     Route::resource('regions', RegionController::class);
     Route::get('regions/restore/{region}', [RegionController::class, 'restore'])->name('regions.restore');
     Route::delete('regions/force_delete/{region}', [RegionController::class, 'forceDelete'])->name('regions.force_delete');
-    Route::get('regions/active/{region}', [RegionController::class, 'active'])->name('regions.active');
 
     //Resource routes for settings
     Route::resource('settings', SettingController::class);
@@ -116,39 +108,33 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     //Resource Route for delivery_times
     Route::resource('delivery_times', DeliveryTimeController::class);
-    Route::get('delivery_times/active/{delivery_time}', [DeliveryTimeController::class, 'active'])->name('delivery_times.active');
 
     //Resourse route for pages
     Route::resource('pages', PageController::class);
-    Route::get('pages/active/{page}', [PageController::class, 'active'])->name('pages.active');
 
     //Resourse route for payments
     Route::resource('payments', PaymentController::class);
-    Route::get('payments/active/{payment}', [PaymentController::class, 'active'])->name('payments.active');
 
     //Resourse route for addresses
     Route::resource('addresses', AddressController::class);
 
     //Resource route for Slider
     Route::resource('sliders', SliderController::class);
-    Route::get('sliders/active/{slider}', [SliderController::class, 'active'])->name('sliders.active');
 
     //Resourse route for Favourites
     Route::resource('wishlists', WishlistController::class);
 
-     //Resource route for Orders
+    //Resource route for Orders
     Route::resource('orders', OrderController::class);
     Route::get('orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
     Route::post('orders/change_status/{order}', [OrderController::class, 'changeStatus'])->name('orders.change_status');
 
     //Resource route for Coupons
     Route::resource('coupons', CouponController::class);
-    Route::get('coupons/active/{coupon}', [CouponController::class, 'active'])->name('coupons.active');
     Route::get('coupons/finish/{coupon}', [CouponController::class, 'finish'])->name('coupons.finish');
 
     // Pesdource Route for Products
     Route::resource('products', ProductController::class);
-    Route::get('products/active/{product}', [ProductController::class, 'active'])->name('products.active');
     Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
     Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
     Route::get('getCategoryByService/{id}', [ProductController::class, 'getCategoryByService']);
@@ -157,20 +143,32 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::resource('reviews', ReviewController::class);
 
     //Resource route for activity_logs
-   Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
+    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
 
     //Resource route for notifications
-    Route::resource('notifications', NotificationController::class)->only(['index','create','store','show']);
+    Route::resource('notifications', NotificationController::class)->only(['index', 'create', 'store', 'show']);
     Route::get('notifications/mark_as_read/{id}', [NotificationController::class, 'markAsRead']);
 
-  
+
 
     // Cache management
     Route::get('cache/clear', [CacheController::class, 'index'])->name('cache');
 
-    
-
-
-
-
+    //toggle
+    Route::get('users/active/{user}', [AjaxController::class, 'userActive'])->name('users.active');
+    Route::get('services/active/{service}', [AjaxController::class, 'serviceActive'])->name('services.active');
+    Route::get("sizes/active/{size}", [AjaxController::class, 'sizeActive'])->name('sizes.active');
+    Route::get('brands/active/{brand}', [AjaxController::class, 'abrandActive'])->name('brands.active');
+    Route::get('units/active/{unit}', [AjaxController::class, 'unitActive'])->name('units.active');
+    Route::get('additions/active/{addition}', [AjaxController::class, 'additionActive'])->name('additions.active');
+    Route::get('categories/active/{category}', [AjaxController::class, 'categoryActive'])->name('categories.active');
+    Route::get('cities/active/{city}', [AjaxController::class, 'cityActive'])->name('cities.active');
+    Route::get('regions/active/{region}', [AjaxController::class, 'regionActive'])->name('regions.active');
+    Route::get('delivery_times/active/{delivery_time}', [AjaxController::class, 'active'])->name('delivery_times.active');
+    Route::get('pages/active/{page}', [AjaxController::class, 'pageActive'])->name('pages.active');
+    Route::get('payments/active/{payment}', [AjaxController::class, 'paymentActive'])->name('payments.active');
+    Route::get('sliders/active/{slider}', [AjaxController::class, 'sliderActive'])->name('sliders.active');
+    Route::get('coupons/active/{coupon}', [AjaxController::class, 'couponActive'])->name('coupons.active');
+    Route::get('products/active/{product}', [AjaxController::class, 'productActive'])->name('products.active');
+    Route::get('reviews/active/{review}', [AjaxController::class, 'reviewActive'])->name('reviews.active');
 });
