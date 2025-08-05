@@ -40,9 +40,9 @@
                         </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top">
-                        <a href="javascript:void(0);"
+                        <a href="{{ route('dashboard.notifications.index') }}"
                             class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
-                            View all notifications
+                            {{ __('site.view_all') }}
                         </a>
                     </li>
                 </ul>

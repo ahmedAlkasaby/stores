@@ -34,7 +34,11 @@ class NotificationController extends MainController
         return view('admin.notifications.index', compact('notifications', 'users'));
     }
 
-
+    public function show(string $id)
+    {
+        $notification = Notification::findOrFail($id);
+        return view('admin.notifications.show', compact('notification'));
+    }
     public function create()
     {
         $types = ActionNotificationHelper::getTypes();
@@ -47,10 +51,10 @@ class NotificationController extends MainController
 
     public function store(Request $request)
     {
-        
+
         if ($request->type == 'all' || $request->type == 'database') {
-            $notification=Notification::create($request->all());
-            event (new NotificationEvent($notification));
+            $notification = Notification::create($request->all());
+            event(new NotificationEvent($notification));
         }
         if ($request->type == 'all' || $request->type == 'firebase') {
             $dataFirebase = [
@@ -66,8 +70,8 @@ class NotificationController extends MainController
             $user = User::find($request->user_id);
             if ($user->devices()->count() > 0) {
                 foreach ($user->devices as $device) {
-                    if($request->type == 'all' || $device->type == $request->type){
-                        
+                    if ($request->type == 'all' || $device->type == $request->type) {
+
                         $this->firebaseNotification->sendNotificationWithDevice(
                             $device,
                             $request->name['ar'],
@@ -87,7 +91,7 @@ class NotificationController extends MainController
         return redirect()->route('dashboard.notifications.index')->with('success', __('site.deleted_successfully'));
     }
 
-  
+
 
 
     public function markAsRead($id)

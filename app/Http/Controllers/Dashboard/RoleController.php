@@ -40,7 +40,12 @@ class RoleController extends MainController
     }
 
 
-
+    public function show(string $id){
+        $role = Role::with('permissions')->findOrFail($id);
+        $permissions = Permission::get();
+        $groupedPermissions = collect($permissions)->groupBy('description');
+        return view('admin.roles.show', compact('role', 'groupedPermissions'));
+    }
 
     public function edit(string $id)
     {

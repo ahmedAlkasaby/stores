@@ -15,6 +15,8 @@
     @include('admin.layouts.tables.actions', [
     "model" => "payments",
     "edit" => true,
+    "show" => true,
+    "delete" => true,
     "item" => $payment,
     ])
 </tr>

@@ -154,13 +154,13 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('getCategoryByService/{id}', [ProductController::class, 'getCategoryByService']);
 
     //Resource route for reviews
-    Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    Route::resource('reviews', ReviewController::class);
 
     //Resource route for activity_logs
    Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
 
     //Resource route for notifications
-    Route::resource('notifications', NotificationController::class)->only(['index','create','store']);
+    Route::resource('notifications', NotificationController::class)->only(['index','create','store','show']);
     Route::get('notifications/mark_as_read/{id}', [NotificationController::class, 'markAsRead']);
 
   

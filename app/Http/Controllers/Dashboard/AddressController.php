@@ -42,7 +42,7 @@ class AddressController extends MainController
      */
     public function store(AddressRequest $request)
     {
-        $address = Address::create($request->all());
+         Address::create($request->all());
         return redirect()->route('dashboard.addresses.index')->with('success', __('site.address_created_successfully'));
     }
 
@@ -51,7 +51,10 @@ class AddressController extends MainController
      */
     public function show(string $id)
     {
-        //
+         $users = User::all()->mapWithKeys(fn($user) => [$user->id => $user->name])->toArray();
+        $cities = City::all()->mapWithKeys(fn($city) => [$city->id => $city->namelang()])->toArray();
+        $regions = Region::all()->mapWithKeys(fn($region) => [$region->id => $region->namelang()])->toArray();
+        return view('admin.addresses.show', compact('users', 'cities', 'regions'));
     }
 
     /**
@@ -81,6 +84,8 @@ class AddressController extends MainController
      */
     public function destroy(string $id)
     {
-        //
+        $address = Address::findOrFail($id);
+        $address->delete();
+        return redirect()->route('dashboard.addresses.index')->with('success', __('site.address_deleted_successfully'));
     }
 }
