@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
+use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Product;
@@ -16,42 +17,129 @@ class OrderSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Faker::create();
+        $faker = \Faker\Factory::create();
 
-        $userIds = User::where('type', 'client')->pluck('id')->toArray();
+        // تحميل البيانات مرة واحدة لتقليل استعلامات قاعدة البيانات
+        $users = User::with(['addresses.city', 'addresses.region', 'cartItems.product'])
+            ->where('type', 'client')
+            ->get();
+
+        $products = Product::all()->keyBy('id');
+        $productIds = $products->keys()->toArray();
+
         $paymentIds = Payment::pluck('id')->toArray();
-        $productIds = Product::pluck('id')->toArray();
 
         for ($i = 0; $i < 20; $i++) {
-            $user =User::where('type','client')->inRandomOrder()->first();
-            $order=$user->orders()->create([
-                'status'     => $faker->randomElement(['request', 'pending', 'approved', 'rejected','preparing','preparingFinished','deliveryGo','delivered','canceled','returned']),
-                'payment_id' => $faker->randomElement($paymentIds),
-                'shipping_address'   => $faker->randomFloat(2, 10, 50),
-                'shipping_address'   => $faker->randomFloat(2, 10, 50),
-                'notes'      => $faker->optional()->sentence(),
-                'created_at' => $faker->dateTimeBetween('-2 months', 'now'),
-                'address_id'=>$user->addresses()->first()->id,
+            // اختيار مستخدم عشوائي
+            $user = $users->random();
+
+            $usedCombinations = [];
+
+            for ($j = 0; $j < 3; $j++) {
+                $productId = $faker->randomElement($productIds);
+
+                // منع التكرار لنفس المستخدم ونفس المنتج
+                if (isset($usedCombinations[$user->id][$productId])) {
+                    continue;
+                }
+
+                CartItem::updateOrCreate(
+                    ['user_id' => $user->id, 'product_id' => $productId],
+                    ['amount' => rand(1, 3)]
+                );
+
+                $usedCombinations[$user->id][$productId] = true;
+            }
+
+            // تحديث cartItems في حالة حصل تغييرات
+            $user->load('cartItems.product', 'addresses.city', 'addresses.region');
+
+            // إنشاء الطلب
+            $order = $user->orders()->create([
+                'status'              => $faker->randomElement([
+                    'request',
+                    'pending',
+                    'approved',
+                    'rejected',
+                    'preparing',
+                    'preparingFinished',
+                    'deliveryGo',
+                    'delivered',
+                    'canceled',
+                    'returned'
+                ]),
+                'payment_id'          => $faker->randomElement($paymentIds),
+                'shipping_address'    => $this->getShippingAddress($user),
+                'notes'               => $faker->optional()->sentence(),
+                'created_at'          => $faker->dateTimeBetween('-2 months', 'now'),
+                'address_id'          => $user->addresses()->first()?->id,
+                'shipping_products'   => $this->getOrderShippingProducts($user),
+                'price'               => $this->getOrderPrice($user),
+                'discount'            => $this->getOrderDiscount($user),
             ]);
 
-            $itemsCount = rand(1, 5);
-
-            for ($j = 0; $j < $itemsCount; $j++) {
-                $productId = $faker->randomElement($productIds);
-                $price     = $faker->randomFloat(2, 50, 500);
-                $discount  = $faker->randomFloat(2, 0, 100);
-
+            foreach ($user->cartItems as $item) {
                 OrderItem::create([
                     'order_id'      => $order->id,
-                    'product_id'    => $productId,
-                    'amount'        => rand(1, 3),
-                    'price'         => $price,
-                    'discount'      => $discount,
-                    'shipping_cost' => $faker->randomFloat(2, 0, 20),
-                    'created_at'    => $faker->dateTimeBetween($order->created_at, 'now'),
-                    'updated_at'    => now(),
+                    'product_id'    => $item->product_id,
+                    'amount'        => $item->amount,
+                    'price'         => $item->product->price,
+                    'discount'      => $this->getDiscount($item->product),
+                    'shipping_cost' => $item->product->shipping_cost ?? 0,
                 ]);
             }
+
+            // حذف cart items بعد ما اتعمل منها Order
+            $user->cartItems()->delete();
         }
+    }
+
+    public function getOrderShippingProducts(User $user): float
+    {
+        return $user->cartItems->sum(fn($item) => $item->product->shipping_cost);
+    }
+
+    public function getOrderPrice(User $user): float
+    {
+        return $user->totalPriceInCart(); // يفترض إنها دالة جاهزة
+    }
+
+    public function getOrderDiscount(User $user): float
+    {
+        return $user->cartItems->sum(fn($item) => $this->getDiscount($item->product));
+    }
+
+    public function getShippingAddress(User $user): float
+    {
+        $address = $user->addresses()->where('active', 1)->first();
+        if (! $address) return 0;
+
+        $shipping = $address->city->shipping ?? 0;
+        if ($address->region_id) {
+            $shipping += $address->region->shipping ?? 0;
+        }
+        return $shipping;
+    }
+
+    public function getDiscount(Product $product): float
+    {
+        if (! $product->offer) return 0;
+
+        if ($product->offer_price) {
+            return $product->price - $product->offer_price;
+        }
+
+        if ($product->offer_amount) {
+            $amount = $product->offer_amount;
+            $price = $product->price;
+            $totalPrice = (100 * $price) / (100 - $amount);
+            return $totalPrice - $price;
+        }
+
+        if ($product->offer_percent) {
+            return ($product->price * $product->offer_percent) / 100;
+        }
+
+        return 0;
     }
 }

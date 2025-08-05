@@ -18,6 +18,9 @@ class Order extends MainModel
         'delivery_time_id',
         'delivery_id',
         'shipping_address',
+        'price',
+        'discount',
+        'shipping_products',
         'notes',
     ];
 
@@ -27,14 +30,16 @@ class Order extends MainModel
 
 
 
+
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function address()
     {
-        return $this->belongsTo(Address::class, 'address_id', 'id');
+        return $this->belongsTo(Address::class);
     }
 
     public function delivery()
@@ -66,36 +71,15 @@ class Order extends MainModel
 
 
 
-    public function orderPrice()
-    {
-        $price = 0;
-        $orderItems = $this->orderItems;
-        foreach ($orderItems as $item) {
-            $price += $item->price * $item->amount;
-        }
-        return $price;
-    }
+    
 
-    public function orderDiscount()
-    {
-        $discount = 0;
-        $orderItems = $this->orderItems;
-        foreach ($orderItems as $item) {
-            $discount += $item->discount * $item->amount;
-        }
-        return $discount;
+    public function shipping(){
+        return $this->shipping_address+$this->shipping_products;
     }
-    public function orderShippingProducts()
-    {
-        $shipping = 0;
-        $orderItems = $this->orderItems;
-        foreach ($orderItems as $item) {
-            $shipping += $item->shipping_cost * $item->amount;
-        }
-        return $shipping;
-    }
+  
+    
     public function orderTotal(){
-        return $this->orderPrice() - $this->orderDiscount() + $this->orderShippingProducts();
+        return $this->price - $this->discount + $this->shipping();
     }
     public function scopeApplySorting($query, $request)
     {

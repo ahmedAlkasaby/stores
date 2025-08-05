@@ -47,6 +47,9 @@ class OrderController extends MainController
         DB::transaction(function () use ($user, $data) {
             $data['shipping_address'] = $this->orderService->getShippingAddress();
             $data['address_id'] = $this->orderService->getAddressId();
+            $data['price'] = $this->orderService->getOrderPrice();
+            $data['dicount'] = $this->orderService->getOrderDiscount();
+            $data['shipping_products'] = $this->orderService->getOrderShippingProducts();
             $order = $user->orders()->create($data);
             $items = $user->cartItems()->with('product')->get();
             $this->orderService->createOrderItems($items, $order);

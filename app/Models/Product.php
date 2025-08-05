@@ -86,26 +86,26 @@ class Product extends MainModel
 
     public function service()
     {
-        return $this->belongsTo(Service::class, 'service_id', 'id');
+        return $this->belongsTo(Service::class);
     }
 
 
     public function unit()
     {
-        return $this->belongsTo(Unit::class, 'unit_id', 'id');
+        return $this->belongsTo(Unit::class);
     }
     public function size()
     {
-        return $this->belongsTo(Size::class, 'size_id', 'id');
+        return $this->belongsTo(Size::class);
     }
     public function brand()
     {
-        return $this->belongsTo(Brand::class, 'brand_id', 'id');
+        return $this->belongsTo(Brand::class);
     }
 
     public function parent()
     {
-        return $this->belongsTo(Product::class, 'parent_id', 'id');
+        return $this->belongsTo(Product::class,'parent_id', 'id');
     }
     public function children()
     {
@@ -115,12 +115,10 @@ class Product extends MainModel
     public function wishlists()
     {
         return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withTimestamps();
-        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withTimestamps();
     }
 
     public function cartItems()
     {
-        return $this->hasMany(CartItem::class, 'product_id', 'id');
         return $this->hasMany(CartItem::class, 'product_id', 'id');
     }
 
