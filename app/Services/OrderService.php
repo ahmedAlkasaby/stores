@@ -120,5 +120,34 @@ class OrderService{
 
     }
 
+    
+    public function getOrderPrice()
+    {
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $totalPrice=$user->totalPriceInCart();
+        return $totalPrice;
+    }
+
+    public function getOrderDiscount()
+    {
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $totalDiscount = 0;
+        foreach ($user->cartItems as $item) {
+            $totalDiscount += $this->getDiscount($item->product_id);
+        }
+        return $totalDiscount;
+    }
+
+    public function getOrderShippingProducts(){
+        $auth=Auth::guard('api')->user();
+        $user=User::find($auth->id);
+        $totalShipping = 0;
+        foreach ($user->cartItems as $item) {
+            $totalShipping += $item->product->shipping_cost;
+        }
+        return $totalShipping;
+    }
 }
 
