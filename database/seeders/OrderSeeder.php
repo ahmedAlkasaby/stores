@@ -84,7 +84,7 @@ class OrderSeeder extends Seeder
                     'product_id'    => $item->product_id,
                     'amount'        => $item->amount,
                     'price'         => $item->product->price,
-                    'discount'      => $this->getDiscount($item->product),
+                    'discount'      => $this->getDiscount($item->product_id),
                     'shipping_cost' => $item->product->shipping_cost ?? 0,
                 ]);
             }
@@ -106,7 +106,7 @@ class OrderSeeder extends Seeder
 
     public function getOrderDiscount(User $user): float
     {
-        return $user->cartItems->sum(fn($item) => $this->getDiscount($item->product));
+        return $user->cartItems->sum(fn($item) => $this->getDiscount($item->product_id));
     }
 
     public function getShippingAddress(User $user): float
@@ -121,25 +121,21 @@ class OrderSeeder extends Seeder
         return $shipping;
     }
 
-    public function getDiscount(Product $product): float
+   public function getDiscount($productId)
     {
-        if (! $product->offer) return 0;
-
-        if ($product->offer_price) {
-            return $product->price - $product->offer_price;
+        $product=Product::find($productId);
+        if (! $product->offer){
+            return 0;
         }
-
-        if ($product->offer_amount) {
-            $amount = $product->offer_amount;
-            $price = $product->price;
-            $totalPrice = (100 * $price) / (100 - $amount);
-            return $totalPrice - $price;
+        if ($product->offer_price){
+            return $product->offer_price-$product->price;
+        }elseif ($product->offer_amount) {
+            $amount=$product->offer_amount;
+            $price=$product->price;
+            $totalPrice=(100*$price)/(100-$amount);
+            return ($totalPrice-$price);
+        }elseif ($product->offer_percent){
+            return $product->offer_percent;
         }
-
-        if ($product->offer_percent) {
-            return ($product->price * $product->offer_percent) / 100;
-        }
-
-        return 0;
     }
 }
