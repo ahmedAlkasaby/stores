@@ -27,6 +27,7 @@
         'model' => 'sliders',
         'edit' => true,
         "delete"=>true,
+        'show' => true,
         'item' => $slider,
     ])
 </tr>

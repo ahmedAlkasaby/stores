@@ -44,7 +44,10 @@ class DeliveryTimeController extends MainController
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {}
+    public function show(string $id) {
+        $delivery_time = DeliveryTime::findOrFail($id);
+        return view('admin.delivery_times.edit', compact('delivery_time'));
+    }
 
     /**
      * Show the form for editing the specified resource.

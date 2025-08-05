@@ -20,6 +20,9 @@ return new class extends Migration
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->foreignId('delivery_time_id')->nullable()->constrained('delivery_times')->onDelete('cascade');
             $table->decimal('shipping_address')->default(25);
+            $table->decimal('price', 10, 2)->default(0);
+            $table->decimal('discount', 10, 2)->default(0);
+            $table->decimal('shipping_products', 10, 2)->default(0);
             $table->text('notes')->nullable();
             $table->softDeletes();
             $table->timestamps();

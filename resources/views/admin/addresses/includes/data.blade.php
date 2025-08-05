@@ -1,7 +1,7 @@
 <tr>
 
     <td class="text-lg-center">{{ $address->user->name }}</td>
-    <td class="text-lg-center">{{ $address->city?->nameLang() ?? __('site.null')  }}</td>
+    <td class="text-lg-center">{{ $address->city?->nameLang() ?? __('site.null') }}</td>
     <td class="text-lg-center">{{ $address->region?->nameLang() ?? __('site.null') }}</td>
     <td class="text-lg-center">{{ $address->address }}</td>
     {{-- location --}}
@@ -19,6 +19,8 @@
     @include('admin.layouts.tables.actions', [
         'model' => 'addresses',
         'edit' => true,
+        'show' => true,
+        'delete' => true,
         'item' => $address,
     ])
 </tr>

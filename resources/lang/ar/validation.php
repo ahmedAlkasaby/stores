@@ -427,5 +427,17 @@ return [
     'duplicate_size' => 'الحجم مستخدم من قبل، اختر حجم مختلف',
     'check_form_before_submit' => '⚠️ تأكد من إدخال البيانات بشكل صحيح قبل الحفظ',
 
+    "product_id_required" => "معرف المنتج مطلوب",
+    "product_id_exists" => "معرف المنتج غير موجود",
+    "user_id_required" => "معرف المستخدم مطلوب",
+    "user_id_exists" => "معرف المستخدم غير موجود",
+    "rate_required" => "التقييم مطلوب",
+    "rate_integer" => "يجب أن يكون التقييم عددًا صحيحًا",
+    "rate_min" => "يجب أن يكون التقييم على الأقل 1",
+    "rate_max" => "يجب أن يكون التقييم على الأكثر 5",
+    "comment_required" => "التعليق مطلوب",
+    "comment_string" => "يجب أن يكون التعليق نصًا",
+    "active_required" => "الحالة مطلوبة",
+    "active_boolean" => "يجب أن تكون الحالة منطقية",
 
 ];

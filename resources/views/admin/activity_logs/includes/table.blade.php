@@ -1,6 +1,6 @@
 @include('admin.layouts.table.header', [
     'TitleTable' => __('site.activity_logs'),
-    'filter' => true,
+    // 'filter' => true,
     'model'=>'activity_logs',
 ])
 
