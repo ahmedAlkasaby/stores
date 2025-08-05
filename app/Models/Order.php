@@ -17,7 +17,7 @@ class Order extends MainModel
         'payment_id',
         'delivery_time_id',
         'delivery_id',
-        'shipping_address',
+        'shipping_address',  
         'notes',
     ];
 
@@ -29,12 +29,12 @@ class Order extends MainModel
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function address()
     {
-        return $this->belongsTo(Address::class, 'address_id', 'id');
+        return $this->belongsTo(Address::class);
     }
 
     public function delivery()
