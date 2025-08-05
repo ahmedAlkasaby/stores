@@ -1,6 +1,6 @@
 <tr>
     <td class="text-lg-center">{{ $activityLog->user->name }}</td>
-    <td class="text-lg-center">{{ $activityLog->action }}</td>
+    <td class="text-lg-center">{{ __('site.'.$activityLog->action) }}</td>
     <td class="text-lg-center">
         @php
         $routeName = 'dashboard.' . $activityLog->findTable() . '.show';

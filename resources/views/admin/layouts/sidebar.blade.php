@@ -246,6 +246,13 @@
                 </ul>
             </li>
         @endif
+        
+        <li class="menu-item ">
+            <a href="{{ route('dashboard.cache', ['redirect' => url()->current()]) }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-bookmark"></i>
+                <div>{{ __('site.optimize') }}</div>
+            </a>
+        </li>
 
 
 

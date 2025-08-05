@@ -12,7 +12,8 @@ class FirebaseNotificationService
 
     public function __construct(string $projectId)
     {
-        $service_account_path =  base_path(env('FIREBASE_CREDENTIALS'));
+        $service_account_path =  base_path(config('firebase.acount_path'));
+       
 
         $factory = (new Factory)->withServiceAccount($service_account_path)->withProjectId($projectId);
         $this->messaging = $factory->createMessaging();

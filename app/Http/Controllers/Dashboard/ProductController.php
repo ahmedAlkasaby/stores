@@ -32,7 +32,9 @@ class ProductController extends MainController
 
     public function index(Request $request)
     {
-        $products=Product::with(['categories','service','unit','size','brand','children'])->filter($request,'admin')->paginate($this->perPage);
+        $data=['categories','service','unit','size','brand','children','parent'];
+        $products=Product::with($data)->filter($request,'admin')->paginate($this->perPage);
+
         $units=Unit::active()->get()->mapWithKeys(function ($unit) {
             return [$unit->id => $unit->nameLang()];
         })->toArray();
@@ -108,6 +110,7 @@ class ProductController extends MainController
     public function edit(string $id)
     {
         $product = Product::with('children')->findOrFail($id);
+
         $services=Service::active()->get();
         $brands=Brand::active()->get();
         $units=Unit::active()->get();

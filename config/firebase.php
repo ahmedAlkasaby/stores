@@ -11,7 +11,9 @@ return [
 
     'default' => env('FIREBASE_PROJECT', 'app'),
 
-    'project_id' => env('FIREBASE_PROJECT_ID'), // تأكد من إضافة هذا في ملف .env أيضًا
+    'project_id' => env('FIREBASE_PROJECT_ID'), 
+
+    'acount_path'=>env('FIREBASE_CREDENTIALS'),
 
     /*
      * ------------------------------------------------------------------------

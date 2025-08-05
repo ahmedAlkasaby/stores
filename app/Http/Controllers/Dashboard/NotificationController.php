@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\NotificationEvent;
 use App\Helpers\ActionNotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
@@ -48,7 +49,8 @@ class NotificationController extends MainController
     {
         
         if ($request->type == 'all' || $request->type == 'database') {
-            Notification::create($request->all());
+            $notification=Notification::create($request->all());
+            event (new NotificationEvent($notification));
         }
         if ($request->type == 'all' || $request->type == 'firebase') {
             $dataFirebase = [
@@ -83,5 +85,15 @@ class NotificationController extends MainController
     {
         Notification::filter()->forceDelete();
         return redirect()->route('dashboard.notifications.index')->with('success', __('site.deleted_successfully'));
+    }
+
+  
+
+
+    public function markAsRead($id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->markAsRead();
+        return response()->json(['success' => true]);
     }
 }

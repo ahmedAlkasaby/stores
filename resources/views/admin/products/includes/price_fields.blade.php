@@ -54,12 +54,12 @@
         ])
     </div>
     <div class="col-md-6">
-        @include('admin.layouts.forms.fields.number', [
-        'number_name' => 'code',
-        'min' => 0,
-        'placeholder' => __('site.code'),
-        'number_value' => $product->code ?? null,
-        'label_req' => true,
+         @include('admin.layouts.forms.fields.text', [
+                'text_name' => 'code',
+                'text_value' =>  $product->code ?? null,
+                'label_name' => __('site.code'),
+                'label_req' => true,
         ])
+       
     </div>
 </div>

@@ -605,6 +605,10 @@ return [
     'read_at'=>'Read At',
     'max_hour_product_in_carts' => 'Maximum Hour Product In Carts',
     'min_amount_product_notify' => 'Minimum Amount Product Notify',
+    'result' => 'Result',
+    'optimize_cache_successfully' => 'Cache optimized successfully',
+    'optimize' => 'Optimize',
+    'cant_delete_category_with_products_and_children'=> 'Can\'t delete category with products and children',
 
 
 

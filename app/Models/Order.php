@@ -97,14 +97,20 @@ class Order extends MainModel
     public function orderTotal(){
         return $this->orderPrice() - $this->orderDiscount() + $this->orderShippingProducts();
     }
-    public function scopeApplySearch($query, $request)
+    public function scopeApplySorting($query, $request)
     {
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%');
-            });
+        $query->orderBy('id', 'desc');
+        if ($request->filled('sort_by')) {
+            switch ($request->sort_by) {
+                case 'latest':
+                    $query->orderByDesc('id');
+                    break;
+                case 'oldest':
+                    $query->orderBy('id', 'asc');
+                    break;   
+            }
         }
+        return $query;
     }
     public function scopeApplyDeliveryTime($query, $request)
     {
@@ -174,13 +180,14 @@ class Order extends MainModel
 
         $request = $request ?? request();
         return $query
-            // ->applySearch($request)
+            ->applySorting($request)
             ->applyDeliveryTime($request)
             ->applyPayment($request)
             ->applyDelivery($request)
             // ->applyCity($request)
             // ->applyRegion($request)
             ->applyStatus($request)
+
             // ->applyDateFilters($request)
             // ->applyPriceFilters($request)
         ;

@@ -172,7 +172,6 @@
             initEmpty: false,
             show: function () {
                 $(this).slideDown();
-                $(this).find('.select2').select2({ dropdownParent: $('body') });
                 updateOfferFields($(this));
             },
             hide: function (deleteElement) {
@@ -183,8 +182,6 @@
                 }
             }
         });
-
-        $('.select2').select2({ dropdownParent: $('body') });
 
         $(document).on('change', '[name*="[offer]"]', function () {
             updateOfferFields($(this).closest('[data-repeater-item]'));
