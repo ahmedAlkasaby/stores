@@ -27,40 +27,45 @@
         console.log(usersWithOrders);
     </script>
 
-    <script>
-        $(document).ready(function() {
-            function toggleFields() {
-                const type = $('#type').val();
-                $('#order_id').closest('.form-group').show();
-                $('#product_id').closest('.form-group').show();
+    {{-- <script>
+    $(document).ready(function () {
+        function toggleFields() {
+            const type = $('#type').val();
+            $('#order_id').closest('.form-group').show();
+            $('#product_id').closest('.form-group').show();
 
-                if (type === 'order') {
-                    $('#product_id').closest('.form-group').hide();
-                    $('#product_id').val(null);
-                    populateOrders();
-                } else if (type === 'product') {
-                    $('#order_id').closest('.form-group').hide();
-                    $('#order_id').val(null);
-                }
+            if (type === 'order') {
+                $('#product_id').closest('.form-group').hide();
+                populateOrders();
+            } else if (type === 'product') {
+                $('#order_id').closest('.form-group').hide();
+            }
+        }
+
+        function populateOrders() {
+            const userId = $('#user_id').val();
+            const user = usersWithOrders.find(u => u.id == userId);
+            console.log(user);
+            if (!user || !user.orders.length) {
+                $('#order_id').html('<option value="">لا توجد طلبات</option>');
+                return;
             }
 
-            function populateOrders() {
-                const userId = $('#user_id').val();
-                const user = usersWithOrders.find(u => u.id == userId);
-                user.orders.forEach(order => {
-                    options += `<option value="${order.id}">${order.id}}</option>`;
-                });
-
-                $('#order_id').html(options);
-            }
-
-            $('#type, #user_id').on('change', function() {
-                toggleFields();
+            let options = '<option value="">اختر طلب</option>';
+            user.orders.forEach(order => {
+                options += `<option value="${order.id}">#${order.id} - ${order.name ?? ''}</option>`;
             });
+            console.log(options);
+            $('#order_id').html(options);
+        }
 
+        $('#type, #user_id').on('change', function () {
             toggleFields();
         });
-    </script>
+
+        toggleFields();
+    });
+</script> --}}
 
 
 

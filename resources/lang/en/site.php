@@ -612,6 +612,7 @@ return [
     "rate" => "Rate",
     "comment" => "Comment",
     "view_all" => "View All",
+    "order" => "Order",
 
 
 ];

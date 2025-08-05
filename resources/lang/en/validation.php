@@ -401,6 +401,18 @@ return [
     'duplicate_size' => 'This size is already used. Please select a different size.',
     'check_form_before_submit' => '⚠️ Please make sure all fields are filled correctly before saving.',
 
+    "product_id_required"=>"Product id is required",
+    "product_id_exists"=>"Product id is not exists",
+    "user_id_required"=>"User id is required",
+    "user_id_exists"=>"User id is not exists",
+    "rate_required"=>"Rate is required",
+    "rate_integer"=>"Rate must be integer",
+    "rate_min"=>"Rate must be at least 1",
+    "rate_max"=>"Rate must be at most 5",
+    "comment_required"=>"Comment is required",
+    "comment_string"=>"Comment must be string",
+    "active_required"=>"Active is required",
+    "active_boolean"=>"Active must be boolean",
 
 
 
