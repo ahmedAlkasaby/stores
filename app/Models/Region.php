@@ -33,11 +33,9 @@ class Region extends MainModel
             $query->where('active', $type_app=='app' ? 1 : $request->active);
         }
 
-        if ($request->has('search')) {
-            $query->where(function($q) use($request){
-                $q->where('name','like','%'.$request->search.'%');
-            });
-        }
+       if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
 
         if($request->has('city_id')){
             $query->where('city_id',$request->city_id);

@@ -28,6 +28,14 @@ class Address extends MainModel
         'type'=>TypeAddressEnum::class,
     ];
 
+    protected $searchable = [
+        'address',
+        'phone',
+        'user.name',
+        'city.name',
+        'region.name',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

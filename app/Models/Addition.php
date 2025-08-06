@@ -38,7 +38,7 @@ class Addition extends MainModel
         }
 
         if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
+            $query->mainSearch($request->input('search'));
         }
         if ($request->filled('type') && $request->type != 'all') {
             $query->where('type', $request->type);

@@ -23,12 +23,9 @@ class Size extends MainModel
     {
 
         $request=$request??request();
-        if ($request->has('search')) {
-            $query->where(function($q) use($request){
-                $q->where('name','like','%'.$request->search.'%')
-                   ->orWhere('description','like','%'.$request->search.'%');
-            });
-        }
+        if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
         if(request()->has('active') && request()->active != 'all'){
             $query->where('active',request()->active);
         }

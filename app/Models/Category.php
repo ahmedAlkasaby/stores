@@ -65,12 +65,9 @@ class Category extends MainModel
             $query->where('parent_id', $request->parent_id);
         }
 
-        if ($request->has('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                   ->orWhere('description', 'like', '%' . $request->search . '%');
-            });
-        }
+       if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
 
         if ($request->has('service_id')&& $request->service_id != "all") {
             $query->where('service_id', $request->service_id);

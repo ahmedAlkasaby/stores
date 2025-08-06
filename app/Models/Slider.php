@@ -27,6 +27,9 @@ class Slider extends MainModel
         $query->orderBy('order_id','asc');
 
         $query->where('active', $type_app=='app' ? 1 : $request->active);
+        if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
 
 
     }

@@ -29,6 +29,10 @@ class Page extends MainModel
             $query->where('active', $type_app=='app' ? 1 : $request->active);
         }
 
+       if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
+
         if($request->has('type')){
             $query->where('type', $request->type);
         }

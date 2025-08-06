@@ -51,12 +51,9 @@ class Service  extends MainModel
 
 
 
-        if ($request->has('search')) {
-            $query->where(function($q) use($request){
-                $q->where('name','like','%'.$request->search.'%')
-                   ->orWhere('description','like','%'.$request->search.'%');
-            });
-        }
+        if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
 
 
         if ($request->filled('sort_by')) {

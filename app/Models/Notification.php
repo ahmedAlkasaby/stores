@@ -48,6 +48,9 @@ class Notification extends MainModel
 
         $query->orderBy('id', 'desc');
 
+       if ($request->filled('search')) {
+    $query->mainSearch($request->input('search'));
+}
         if ($request->filled('user_id') && $request->user_id != 'all') {
             $query->where('user_id', $request->user_id);
         }

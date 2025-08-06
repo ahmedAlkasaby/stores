@@ -66,6 +66,13 @@ class Product extends MainModel
         'order_id',
     ];
 
+    protected $searchable = [
+        'name',
+        'description',
+        'code',
+        'price'
+    ];
+
 
     public function setDateStartAttribute($value)
     {
@@ -163,19 +170,7 @@ class Product extends MainModel
     }
 
 
-    public function scopeApplySearch($query, $request)
-    {
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('description', 'like', '%' . $search . '%')
-                    ->orWhere('price', 'like', '%' . $search . '%');
-            });
-        }
-
-        return $query;
-    }
+   
 
     public function scopeApplyServiceFilters($query, $request)
     {
@@ -337,7 +332,7 @@ class Product extends MainModel
 
         return $query
             ->applyBasicFilters($request, $type_app)
-            ->applySearch($request)
+            ->mainSearch($request->input('search'))
             ->applyServiceFilters($request)
             ->applyCategoryFilter($request)
             ->applyPriceFilters($request)
