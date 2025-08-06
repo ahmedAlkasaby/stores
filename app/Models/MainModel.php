@@ -65,5 +65,17 @@ class MainModel extends Model
         return $query;
     }
 
+    public function scopeMainApplyDynamicFilters($query, $filters = [])
+    {
+        foreach ($filters as $column => $value) {
+            if (!is_null($value) && $value !== 'all') {
+                $query->where($column, $value);
+            }
+        }
+    
+        return $query;
+    }
+
+
    
 }

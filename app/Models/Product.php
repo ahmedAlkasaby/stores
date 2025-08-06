@@ -172,15 +172,7 @@ class Product extends MainModel
 
    
 
-    public function scopeApplyServiceFilters($query, $request)
-    {
-        if ($request->filled('service_id')) {
-            $query->where('service_id', $request->service_id);
-        }
-
-        return $query;
-    }
-
+   
     public function scopeApplyCategoryFilter($query, $request)
     {
         if ($request->filled('category_id') && $request->category_id != 'all') {
@@ -205,71 +197,14 @@ class Product extends MainModel
         return $query;
     }
 
-    public function scopeApplyFeatureFilter($query, $request)
-    {
-        if ($request->filled('feature') && $request->feature != 'all') {
-            $query->where('feature', $request->feature);
-        }
+    
+  
+ 
+   
+   
+   
 
-        return $query;
-    }
-    public function scopeApplyNewFilter($query, $request)
-    {
-        if ($request->filled('new') && $request->new != 'all') {
-            $query->where('new', $request->new);
-        }
-        return $query;
-    }
-    public function scopeApplySpecialFilter($query, $request)
-    {
-        if ($request->filled('special') && $request->special != 'all') {
-            $query->where('special', $request->special);
-        }
-        return $query;
-    }
-    public function scopeApplyFilterFilter($query, $request)
-    {
-        if ($request->filled('filter') && $request->filter != 'all') {
-            $query->where('filter', $request->filter);
-        }
-        return $query;
-    }
-    public function scopeApplySaleFilter($query, $request)
-    {
-        if ($request->filled('sale') && $request->sale != 'all') {
-            $query->where('sale', $request->sale);
-        }
-        return $query;
-    }
-    public function scopeApplyStockFilter($query, $request)
-    {
-        if ($request->filled('stock') && $request->stock != 'all') {
-            $query->where('stock', $request->stock);
-        }
-        return $query;
-    }
-    public function scopeApplyFreeShippingFilter($query, $request)
-    {
-        if ($request->filled('free_shipping') && $request->free_shipping != 'all') {
-            $query->where('free_shipping', $request->free_shipping);
-        }
-        return $query;
-    }
-    public function scopeApplyReturnedFilter($query, $request)
-    {
-        if ($request->filled('returned') && $request->returned != 'all') {
-            $query->where('returned', $request->returned);
-        }
-        return $query;
-    }
-
-    public function scopeApplyLateFilter($query, $request)
-    {
-        if ($request->filled('late')) {
-            $query->where('late', $request->late);
-        }
-        return $query;
-    }
+   
 
     public function scopeApplyDateFilters($query, $request)
     {
@@ -284,21 +219,9 @@ class Product extends MainModel
         return $query;
     }
 
-    public function scopeApplyUnitFilter($query, $request)
-    {
-        if ($request->filled('unit') && $request->unit != 'all') {
-            $query->where('unit_id', $request->unit);
-        }
-        return $query;
-    }
+   
 
-    public function scopeApplyBrandFilter($query, $request)
-    {
-        if ($request->filled('brand') && $request->brand != 'all') {
-            $query->where('brand_id', $request->brand);
-        }
-        return $query;
-    }
+   
 
     public function scopeApplySorting($query, $request)
     {
@@ -330,21 +253,15 @@ class Product extends MainModel
     {
         $request = $request ?? request();
 
+        $filters = $request->only(['service_id', 'brand_id', 'unit_id', 'feature', 'new', 'special', 'filter', 'sale', 'late', 'stock', 'free_shipping', 'returned']);
+
+
         return $query
             ->applyBasicFilters($request, $type_app)
             ->mainSearch($request->input('search'))
-            ->applyServiceFilters($request)
+            ->mainApplyDynamicFilters($filters)
             ->applyCategoryFilter($request)
             ->applyPriceFilters($request)
-            ->applyFeatureFilter($request)
-            ->applyNewFilter($request)
-            ->applySpecialFilter($request)
-            ->applyFilterFilter($request)
-            ->applySaleFilter($request)
-            ->applyLateFilter($request)
-            ->applyStockFilter($request)
-            ->applyFreeShippingFilter($request)
-            ->applyReturnedFilter($request)
             ->applySorting($request)
             ->applyDateFilters($request)
         ;

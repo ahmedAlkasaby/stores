@@ -29,18 +29,11 @@ class Region extends MainModel
 
         $query->orderBy('order_id','asc');
 
-        if($request->has('active') && $request->active !=='all'){
-            $query->where('active', $type_app=='app' ? 1 : $request->active);
-        }
+        $filters = $request->only(['active','city_id']);
 
-       if ($request->filled('search')) {
-    $query->mainSearch($request->input('search'));
-}
+        $query->mainApplyDynamicFilters($filters);
 
-        if($request->has('city_id')){
-            $query->where('city_id',$request->city_id);
-        }
-
+        $query->mainSearch($request->input('search'));
        return $query;
     }
 

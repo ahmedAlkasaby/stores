@@ -45,15 +45,13 @@ class Notification extends MainModel
     public function scopeFilter($query, $request = null)
     {
         $request = $request ?? request();
+        $filters = $request->only(['user_id']);
 
         $query->orderBy('id', 'desc');
 
-       if ($request->filled('search')) {
-    $query->mainSearch($request->input('search'));
-}
-        if ($request->filled('user_id') && $request->user_id != 'all') {
-            $query->where('user_id', $request->user_id);
-        }
+        $query->mainSearch($request->input('search'));
+
+        $query->mainApplyDynamicFilters($filters);
 
         if ($request->filled('date_start')) {
             $query->whereDate('created_at', '>=', $request->date_start);

@@ -23,12 +23,11 @@ class Size extends MainModel
     {
 
         $request=$request??request();
-        if ($request->filled('search')) {
-    $query->mainSearch($request->input('search'));
-}
-        if(request()->has('active') && request()->active != 'all'){
-            $query->where('active',request()->active);
-        }
+        $filters = $request->only(['active']);
+
+        $query->mainSearch($request->input('search'));
+
+        $query->mainApplyDynamicFilters($filters);
         if($request->has("deleted") ){
             $query->onlyTrashed();
         }
