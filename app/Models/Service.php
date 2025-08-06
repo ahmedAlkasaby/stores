@@ -45,18 +45,15 @@ class Service  extends MainModel
 
         $query->orderBy('order_id','asc');
 
-        if($request->has('active') && $request->active !=='all'){
-            $query->where('active', $type_app=='app' ? 1 : $request->active);
-        }
+        $filters = $request->only(['active', 'type']);
 
+        
+        
+        
+        $query->mainSearch($request->input('search'));
+        
+        $query->mainApplyDynamicFilters($filters);
 
-
-        if ($request->has('search')) {
-            $query->where(function($q) use($request){
-                $q->where('name','like','%'.$request->search.'%')
-                   ->orWhere('description','like','%'.$request->search.'%');
-            });
-        }
 
 
         if ($request->filled('sort_by')) {

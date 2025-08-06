@@ -26,25 +26,12 @@ class Brand extends MainModel
     {
 
         $request = $request ?? request();
+        $filters = $request->only(['active']);
 
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%');
-            });
-        }
+       $query->mainSearch($request->input('search'));
 
-        if ($request->filled('active') && $request->active != 'all') {
-            $query->where('active', $request->active);
-        }
-
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
-        }
-
-        if ($request->filled('order_id')) {
-            $query->where('order_id', $request->order_id);
-        }
+        $query->mainApplyDynamicFilters($filters);
+    
 
         if ($request->has('deleted')&& $request->deleted == 1) {
             $query->onlyTrashed();

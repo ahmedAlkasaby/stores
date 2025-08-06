@@ -17,22 +17,13 @@ class City extends MainModel
     {
 
         $request=$request??request();
+        $filters = $request->only(['active']);
 
         $query->orderBy('order_id','asc');
 
-        if($request->has('active') && $request->active !=='all'){
-            $query->where('active', $type_app=='app' ? 1 : $request->active);
-        }
+        $query->mainApplyDynamicFilters($filters);
 
-        if ($request->has('search')) {
-            $query->where(function($q) use($request){
-                $q->where('name','like','%'.$request->search.'%');
-            });
-        }
-
-
-
-
+        $query->mainSearch($request->input('search'));
 
        return $query;
     }

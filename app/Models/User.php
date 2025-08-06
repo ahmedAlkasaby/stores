@@ -49,6 +49,13 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         'password' => 'hashed',
     ];
 
+    protected $seachable = [
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+    ];
+
 
     public function getJWTIdentifier()
     {
@@ -80,14 +87,10 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
         if($request->has('type')){
             $query->where('type',$request->type);
         }
-        if($request->has('search')){
-            $query->where(function($q) use($request){
-                $q->where('first_name','like','%'.$request->search.'%')
-                  ->orWhere('last_name','like','%'.$request->search.'%')
-                  ->orWhere('email','like','%'.$request->search.'%')
-                  ->orWhere('phone','like','%'.$request->search.'%');
-            });
+        if ($request->filled('search')) {
+            $query->mainSearch($request->input('search'));
         }
+
         if($request->has('active')){
             $query->where('active',$request->active);
         }

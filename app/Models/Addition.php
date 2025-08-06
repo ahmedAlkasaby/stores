@@ -17,6 +17,12 @@ class Addition extends MainModel
         'description',
         'active',
     ];
+
+    protected $searchable = [
+        'name',
+        'description',
+        'price'
+    ];
     public function products()
     {
         return $this->belongsToMany(Product::class);
@@ -25,28 +31,10 @@ class Addition extends MainModel
     {
 
         $request = $request ?? request();
+        $filters = $request->only(['active','type', 'price']);
 
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        if ($request->filled('active') && $request->active != 'all') {
-            $query->where('active', $request->active);
-        }
-
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
-        }
-        if ($request->filled('type') && $request->type != 'all') {
-            $query->where('type', $request->type);
-        }
-
-        if ($request->filled('price') && $request->type != 'free') {
-            $query->where('price', $request->price);
-        }
+       $query->mainSearch($request->input('search'));
+        $query->mainApplyDynamicFilters($filters);
 
 
         if ($request->has('deleted') && $request->deleted == 1) {
