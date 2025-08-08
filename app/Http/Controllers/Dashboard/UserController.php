@@ -87,14 +87,5 @@ class UserController extends MainController
         //
     }
 
-    public function active(User $user)
-    {
-        $user->update([
-            'active' => ! ($user->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $user->active,
-        ]);
-    }
+    
 }

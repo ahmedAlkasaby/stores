@@ -93,14 +93,5 @@ class AdditionController extends MainController
         $addition->delete();
         return redirect()->route('dashboard.additions.index')->with('success', __('site.addition_deleted_successfully'));
     }
-    public function active(Addition $Addition)
-    {
-        $Addition->update([
-            'active' => ! ($Addition->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $Addition->active,
-        ]);
-    }
+   
 }

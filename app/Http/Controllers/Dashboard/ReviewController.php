@@ -46,10 +46,5 @@ class ReviewController extends MainController
 
         return redirect()->route('dashboard.reviews.index')->with('success', __('site.created'));
     }
-    public function active(Review $review)
-    {
-        $review->active = !$review->active;
-        $review->save();
-        return response()->json(['success' => true]);
-    }
+    
 }

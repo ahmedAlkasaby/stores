@@ -77,14 +77,5 @@ class DeliveryTimeController extends MainController
         $delivery_time->delete();
         return redirect()->route('dashboard.delivery_times.index');
     }
-    public function active(string $id)
-    {
-        $delivery_time = DeliveryTime::findOrFail($id);
-        $delivery_time->active = !$delivery_time->active;
-        $delivery_time->save();
-        return response()->json([
-            'success' => true,
-            'active' => $delivery_time->active,
-        ]);
-    }
+    
 }

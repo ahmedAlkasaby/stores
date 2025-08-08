@@ -62,40 +62,5 @@ class OrderController extends MainController
         return view('admin.orders.show', compact('order'));
     }
 
-    public function cancel(string $id)
-    {
-        $order = Order::findOrFail($id);
-        $order->status = 'canceled';
-
-        $availableTransitions = collect(StatusOrderHelper::getAvailableTransitions($order->status))
-            ->mapWithKeys(fn($status) => [$status->value => $status->label()])
-            ->toArray();
-        $order->save();
-        return response()->json([
-            'success' => true,
-            "transitions" => $availableTransitions,
-            "current" => $order->status
-        ]);
-    }
-
-    public function changeStatus(Request $request, Order $order)
-    {
-        $newStatus = StatusOrderEnum::from($request->status);
-
-        $order->status = $newStatus;
-        $order->save();
-
-
-        $availableTransitions = collect(StatusOrderHelper::getAvailableTransitions($newStatus))
-            ->mapWithKeys(fn($status) => [$status->value => $status->label()])
-            ->toArray();
-
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Status updated.',
-            'transitions' => $availableTransitions,
-            'current' => $newStatus->value
-        ]);
-    }
+    
 }

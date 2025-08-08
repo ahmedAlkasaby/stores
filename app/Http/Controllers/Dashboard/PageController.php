@@ -89,13 +89,5 @@ class PageController extends MainController
         return redirect()->route('dashboard.pages.index')->with('success', __('site.page_deleted_successfully'));
     }
 
-    public function active(Page $page)
-    {
-        $page->active = !$page->active;
-        $page->save();
-        return response()->json([
-            'success' => true,
-            'active' => $page->active,
-        ]);
-    }
+    
 }

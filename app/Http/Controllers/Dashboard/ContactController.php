@@ -69,15 +69,7 @@ class ContactController extends MainController
      * Remove the specified resource from storage.
      */
 
-    public function seen(Contact $contact)
-    {
-        $contact->seen = true;
-        $contact->save();
-        return response()->json([
-            'success' => true,
-            'seen' => $contact->seen,
-        ]);
-    }
+    
     public function sendMessage($id, Request $request)
     {
         $request->validate([

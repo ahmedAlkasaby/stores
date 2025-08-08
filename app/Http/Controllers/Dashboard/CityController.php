@@ -89,14 +89,5 @@ class CityController extends MainController
         return redirect()->route('dashboard.cities.index')->with('success', __('site.city_deleted_successfully'));
     }
 
-    public function active(City $city)
-    {
-        $city->update([
-            'active' => !($city->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $city->active,
-        ]);
-    }
+    
 }

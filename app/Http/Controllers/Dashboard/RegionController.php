@@ -89,12 +89,5 @@ class RegionController extends MainController
         return redirect()->route('dashboard.regions.index')->with('success', __('site.region_deleted_successfully'));
     }
 
-    public function active(Region $region)
-    {
-        $region->active = !$region->active;
-        return response()->json([
-            'success' => true,
-            'active' => $region->active,
-        ]);
-    }
+    
 }

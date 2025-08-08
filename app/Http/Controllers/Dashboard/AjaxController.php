@@ -3,24 +3,28 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\City;
+use App\Models\Page;
 use App\Models\Size;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\Brand;
-use App\Traits\Toggle;
-use App\Models\Service;
-use App\Models\Addition;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Coupon;
-use App\Models\DeliveryTime;
-use App\Models\Page;
-use App\Models\Payment;
-use App\Models\Product;
 use App\Models\Region;
 use App\Models\Review;
 use App\Models\Slider;
+use App\Traits\Toggle;
+use App\Models\Contact;
+use App\Models\Payment;
+use App\Models\Product;
+use App\Models\Service;
+use App\Models\Addition;
+use App\Models\Category;
+use App\Models\DeliveryTime;
+use Illuminate\Http\Request;
+use App\Enums\StatusOrderEnum;
+use App\Helpers\StatusOrderHelper;
+use App\Http\Controllers\Controller;
 
 class AjaxController extends Controller
 {
@@ -104,5 +108,80 @@ class AjaxController extends Controller
     {
         return $this->active($review);
     }
+    public function cancel(string $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'canceled';
 
+        $availableTransitions = collect(StatusOrderHelper::getAvailableTransitions($order->status))
+            ->mapWithKeys(fn($status) => [$status->value => $status->label()])
+            ->toArray();
+        $order->save();
+        return response()->json([
+            'success' => true,
+            "transitions" => $availableTransitions,
+            "current" => $order->status
+        ]);
+    }
+
+    public function changeStatus(Request $request, Order $order)
+    {
+        $newStatus = StatusOrderEnum::from($request->status);
+
+        $order->status = $newStatus;
+        $order->save();
+
+
+        $availableTransitions = collect(StatusOrderHelper::getAvailableTransitions($newStatus))
+            ->mapWithKeys(fn($status) => [$status->value => $status->label()])
+            ->toArray();
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated.',
+            'transitions' => $availableTransitions,
+            'current' => $newStatus->value
+        ]);
+    }
+    public function seen(Contact $contact)
+    {
+        $contact->seen = true;
+        $contact->save();
+        return response()->json([
+            'success' => true,
+            'seen' => $contact->seen,
+        ]);
+    }
+    public function finish(Coupon $coupon)
+    {
+        $coupon->update([
+            'finish' => !($coupon->finish),
+        ]);
+        return response()->json([
+            'success' => true,
+            'finish' => $coupon->finish,
+        ]);
+    }
+    public function feature(Product $product)
+    {
+        $product->update([
+            'feature' => ! ($product->feature),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $product->feature,
+        ]);
+    }
+
+    public function returned(Product $product)
+    {
+        $product->update([
+            'returned' => ! ($product->returned),
+        ]);
+        return response()->json([
+            'success' => true,
+            'active' => $product->returned,
+        ]);
+    }
 }

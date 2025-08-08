@@ -89,13 +89,5 @@ class PaymentController extends MainController
         return redirect()->route('dashboard.payments.index')->with('success', __('site.payment_deleted_successfully'));
     }
 
-    public function active(Payment $payment)
-    {
-        $payment->active = !$payment->active;
-        $payment->save();
-        return response()->json([
-            'success' => true,
-            'active' => $payment->active,
-        ]);
-    }
+    
 }

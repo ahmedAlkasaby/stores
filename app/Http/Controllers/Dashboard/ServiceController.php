@@ -85,14 +85,5 @@ class ServiceController extends MainController
 
 
 
-    public function active(Service $service)
-    {
-        $service->update([
-            'active' => !($service->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $service->active,
-        ]);
-    }
+    
 }

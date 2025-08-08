@@ -61,25 +61,7 @@ class CouponController extends MainController
      */
    
 
-    public function active(Coupon $coupon)
-    {
-        $coupon->update([
-            'active' => !($coupon->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $coupon->active,
-        ]);
-    }
+    
 
-    public function finish(Coupon $coupon)
-    {
-        $coupon->update([
-            'finish' => !($coupon->finish),
-        ]);
-        return response()->json([
-            'success' => true,
-            'finish' => $coupon->finish,
-        ]);
-    }
+    
 }

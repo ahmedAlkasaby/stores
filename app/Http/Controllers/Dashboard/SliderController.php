@@ -86,14 +86,5 @@ class SliderController extends MainController
         return redirect()->route('dashboard.sliders.index')->with('success', __('site.slider_deleted_successfully'));
     }
 
-    public function active(Slider $slider)
-    {
-        $slider->update([
-            'active' => !($slider->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $slider->active,
-        ]);
-    }
+    
 }

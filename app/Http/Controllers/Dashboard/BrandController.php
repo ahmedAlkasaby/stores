@@ -89,14 +89,5 @@ class BrandController extends MainController
         $brand->delete();
         return redirect()->route('dashboard.brands.index')->with('success', __('site.brand_deleted_successfully'));
     }
-    public function active(Brand $brand)
-    {
-        $brand->update([
-            'active' => !($brand->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $brand->active,
-        ]);
-    }
+    
 }

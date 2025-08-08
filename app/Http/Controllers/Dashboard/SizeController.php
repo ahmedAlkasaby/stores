@@ -67,14 +67,5 @@ class SizeController extends MainController
         return redirect()->route('dashboard.sizes.index')->with('success', __('site.size_deleted'));
     }
 
-    public function active(Size $Size)
-    {
-        $Size->update([
-            'active' => ! ($Size->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $Size->active,
-        ]);
-    }
+    
 }

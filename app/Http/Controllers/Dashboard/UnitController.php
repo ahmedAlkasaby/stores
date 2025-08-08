@@ -85,14 +85,5 @@ class UnitController extends MainController
 
     
     
-    public function active(Unit $Unit)
-    {
-        $Unit->update([
-            'active' => ! ($Unit->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $Unit->active,
-        ]);
-    }
+    
 }

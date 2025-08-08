@@ -177,37 +177,8 @@ class ProductController extends MainController
     {
         //
     }
-    public function active(Product $product)
-    {
-        $product->update([
-            'active' => ! ($product->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $product->active,
-        ]);
-    }
-    public function feature(Product $product)
-    {
-        $product->update([
-            'feature' => ! ($product->feature),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $product->feature,
-        ]);
-    }
-
-    public function returned(Product $product)
-    {
-        $product->update([
-            'returned' => ! ($product->returned),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $product->returned,
-        ]);
-    }
+    
+    
 
 
     public function getCategoryByService($id)

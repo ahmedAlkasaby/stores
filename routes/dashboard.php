@@ -103,7 +103,6 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     //contacts
     Route::resource('contacts', ContactController::class);
-    Route::get('contacts/active/{contact}', [ContactController::class, 'seen'])->name('contacts.seen');
     Route::post("messages/send/{contact}", [ContactController::class, "sendMessage"])->name("contacts.sendMessage");
 
     //Resource Route for delivery_times
@@ -126,17 +125,12 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     //Resource route for Orders
     Route::resource('orders', OrderController::class);
-    Route::get('orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
-    Route::post('orders/change_status/{order}', [OrderController::class, 'changeStatus'])->name('orders.change_status');
 
     //Resource route for Coupons
     Route::resource('coupons', CouponController::class);
-    Route::get('coupons/finish/{coupon}', [CouponController::class, 'finish'])->name('coupons.finish');
 
     // Pesdource Route for Products
     Route::resource('products', ProductController::class);
-    Route::get('products/feature/{product}', [ProductController::class, 'feature'])->name('products.feature');
-    Route::get('products/returned/{product}', [ProductController::class, 'returned'])->name('products.returned');
     Route::get('getCategoryByService/{id}', [ProductController::class, 'getCategoryByService']);
 
     //Resource route for reviews
@@ -158,7 +152,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('users/active/{user}', [AjaxController::class, 'userActive'])->name('users.active');
     Route::get('services/active/{service}', [AjaxController::class, 'serviceActive'])->name('services.active');
     Route::get("sizes/active/{size}", [AjaxController::class, 'sizeActive'])->name('sizes.active');
-    Route::get('brands/active/{brand}', [AjaxController::class, 'abrandActive'])->name('brands.active');
+    Route::get('brands/active/{brand}', [AjaxController::class, 'brandActive'])->name('brands.active');
     Route::get('units/active/{unit}', [AjaxController::class, 'unitActive'])->name('units.active');
     Route::get('additions/active/{addition}', [AjaxController::class, 'additionActive'])->name('additions.active');
     Route::get('categories/active/{category}', [AjaxController::class, 'categoryActive'])->name('categories.active');
@@ -171,4 +165,11 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('coupons/active/{coupon}', [AjaxController::class, 'couponActive'])->name('coupons.active');
     Route::get('products/active/{product}', [AjaxController::class, 'productActive'])->name('products.active');
     Route::get('reviews/active/{review}', [AjaxController::class, 'reviewActive'])->name('reviews.active');
+
+    Route::get('contacts/active/{contact}', [AjaxController::class, 'seen'])->name('contacts.seen');
+    Route::get('orders/cancel/{order}', [AjaxController::class, 'cancel'])->name('orders.cancel');
+    Route::post('orders/change_status/{order}', [AjaxController::class, 'changeStatus'])->name('orders.change_status');
+    Route::get('coupons/finish/{coupon}', [AjaxController::class, 'finish'])->name('coupons.finish');
+    Route::get('products/feature/{product}', [AjaxController::class, 'feature'])->name('products.feature');
+    Route::get('products/returned/{product}', [AjaxController::class, 'returned'])->name('products.returned');
 });

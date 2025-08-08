@@ -93,14 +93,5 @@ class CategoryController extends MainController
     }
 
 
-    public function active(Category $Category)
-    {
-        $Category->update([
-            'active' => ! ($Category->active),
-        ]);
-        return response()->json([
-            'success' => true,
-            'active' => $Category->active,
-        ]);
-    }
+    
 }
