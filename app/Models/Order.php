@@ -96,42 +96,7 @@ class Order extends MainModel
         }
         return $query;
     }
-    public function scopeApplyDeliveryTime($query, $request)
-    {
-        if ($request->has('delivery_time') && $request->delivery_time != "all") {
-            $query->where('delivery_time_id', $request->delivery_time);
-        }
-    }
-    public function scopeApplyPayment($query, $request)
-    {
-        if ($request->has('payment') && $request->payment != "all") {
-            $query->where('payment_id', $request->payment);
-        }
-    }
-    public function scopeApplyDelivery($query, $request)
-    {
-        if ($request->has('delivery') && $request->delivery != "all") {
-            $query->where('delivery_id', $request->delivery);
-        }
-    }
-    public function scopeApplyCity($query, $request)
-    {
-        if ($request->has('city_id') && $request->city_id != "all") {
-            $query->where('city_id', $request->city_id);
-        }
-    }
-    public function scopeApplyRegion($query, $request)
-    {
-        if ($request->has('region_id') && $request->region_id != "all") {
-            $query->where('region_id', $request->region_id);
-        }
-    }
-    public function scopeApplyStatus($query, $request)
-    {
-        if ($request->has('status') && $request->status != "all") {
-            $query->where('status', $request->status);
-        }
-    }
+   
     public function scopeApplyDateFilters($query, $request)
     {
         if ($request->filled('date_start')) {
@@ -146,34 +111,38 @@ class Order extends MainModel
     }
     public function scopeApplyPriceFilters($query, $request)
     {
-        $orders = Order::with('orderItems')->get();
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
 
-        $filtered = $orders->filter(function ($order) use ($request) {
-            $total = $order->orderPrice() + $order->orderShippingProducts() - $order->orderDiscount();
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
 
-            if ($request->filled('min_price') && $total < $request->min_price) return false;
-            if ($request->filled('max_price') && $total > $request->max_price) return false;
+        return $query;
+    }
 
-            return true;
+    public function scopeApplyAddressFilters($query, $request){
+        $query->whereHas('address', function ($q) use ($request) {
+            if ($request->filled('city_id')) {
+                $q->where('city_id', $request->city_id);
+            }
+            if ($request->filled('region_id')) {
+                $q->where('region_id', $request->region_id);
+            }
         });
-
-        return $query->whereIn('id', $filtered->pluck('id'));
     }
     public function scopeFilter($query, $request = null)
     {
 
         $request = $request ?? request();
+        $filters = $request->only(['user_id', 'status', 'delivery_time_id', 'payment_id', 'delivery_id']);
         return $query
             ->applySorting($request)
-            ->applyDeliveryTime($request)
-            ->applyPayment($request)
-            ->applyDelivery($request)
-            // ->applyCity($request)
-            // ->applyRegion($request)
-            ->applyStatus($request)
-
-            // ->applyDateFilters($request)
-            // ->applyPriceFilters($request)
+            ->mainApplyDynamicFilters($filters)
+            ->appllyPriceFilters($request)
+            ->applyDateFilters($request)
+            ->applyAddressFilters($request)
         ;
     }
 }

@@ -10,6 +10,12 @@ if (!function_exists('statusType')) {
         ];
     }
 }
+if (!function_exists('filterBoolien')) {
+    function filterBoolien()
+    {
+        return ['all' => __('site.all'), '1' => __('site.yes'), '0' => __('site.no')];
+    }
+}
 
 if (!function_exists('currencyFormat')) {
     function currencyFormat($amount, $decimals = 2)
