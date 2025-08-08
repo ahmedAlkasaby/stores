@@ -1,5 +1,4 @@
 <tr>
-    <td class="text-lg-center">{{ $brand->id }}</td>
     <td class="text-lg-center">{{ $brand->nameLang() }}</td>
     <td class="text-lg-center">{{ $brand->order_id?? 0 }}</td>
     {{-- image --}}

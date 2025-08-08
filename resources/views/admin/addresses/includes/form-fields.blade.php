@@ -26,12 +26,8 @@
     <div class="col-md-6">
         @include('admin.layouts.forms.fields.select', [
             'select_name' => 'type',
-            'select_function' => [
-                'home' => __('site.home'),
-                'work' => __('site.work'),
-                'other' => __('site.other'),
-            ],
-            'select_value' => $address->type ?? null,
+            'select_function' => collect(\App\Enums\TypeAddressEnum::cases())->mapWithKeys(fn($case) => [$case->value => $case->label()])->toArray(),
+            'select_value' => $address->type?->value ?? null,
             'select_class' => 'select2',
             'select2' => true,
         ])

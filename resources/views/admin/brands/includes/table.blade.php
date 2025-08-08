@@ -6,7 +6,7 @@
 ])
 
 @include('admin.layouts.table.thead_info', [
-    'columns' => ['ID', 'site.name', 'site.order_id', 'site.image', 'site.status', 'site.action'],
+    'columns' => [ 'site.name', 'site.order_id', 'site.image', 'site.status', 'site.action'],
 ])
 
 <tbody class="table-border-bottom-0">

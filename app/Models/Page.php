@@ -18,7 +18,11 @@ class Page extends MainModel
         'order_id',
     ];
 
-
+    protected $casts = [
+        'name' => \App\Casts\UnescapedJson::class,
+        'description' => \App\Casts\UnescapedJson::class,
+        "title" => \App\Casts\UnescapedJson::class
+    ];
     public function scopeFilter($query, $request = null, $type_app = 'app')
     {
         $request=$request??request();
@@ -31,6 +35,17 @@ class Page extends MainModel
 
         $query->mainSearch($request->input('search'));
 
+    }
+    public function titleLang($lang = null)
+    {
+        $data = $this->title;
+        if ($lang === null) {
+            $user = Auth::guard('api')->user();
+            $langUser = $user ? $user->lang : app()->getLocale();
+            $defaultLang = app()->getLocale();
+            return $data[$langUser] ?? $data[$defaultLang] ?? null;
+        }
+        return $data[$lang] ?? null;
     }
 
 

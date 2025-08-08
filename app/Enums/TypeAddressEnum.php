@@ -14,8 +14,8 @@ enum TypeAddressEnum: string
     {
         return __('api.' . $this->value);
     }
-
-  
-
-
+    public static function values(): array
+    {
+        return array_map(fn(self $case) => $case->value, self::cases());
+    }
 }

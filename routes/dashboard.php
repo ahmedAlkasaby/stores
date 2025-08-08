@@ -158,7 +158,7 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('categories/active/{category}', [AjaxController::class, 'categoryActive'])->name('categories.active');
     Route::get('cities/active/{city}', [AjaxController::class, 'cityActive'])->name('cities.active');
     Route::get('regions/active/{region}', [AjaxController::class, 'regionActive'])->name('regions.active');
-    Route::get('delivery_times/active/{delivery_time}', [AjaxController::class, 'active'])->name('delivery_times.active');
+    Route::get('delivery_times/active/{delivery_time}', [AjaxController::class, 'deliveryTimeActive'])->name('delivery_times.active');
     Route::get('pages/active/{page}', [AjaxController::class, 'pageActive'])->name('pages.active');
     Route::get('payments/active/{payment}', [AjaxController::class, 'paymentActive'])->name('payments.active');
     Route::get('sliders/active/{slider}', [AjaxController::class, 'sliderActive'])->name('sliders.active');

@@ -31,9 +31,9 @@ class Addition extends MainModel
     {
 
         $request = $request ?? request();
-        $filters = $request->only(['active','type', 'price']);
+        $filters = $request->only(['active', 'type', 'price']);
 
-       $query->mainSearch($request->input('search'));
+        $query->mainSearch($request->input('search'));
         $query->mainApplyDynamicFilters($filters);
 
 

@@ -24,4 +24,5 @@ class Review extends MainModel
     {
         return $this->morphTo();
     }
+    
 }

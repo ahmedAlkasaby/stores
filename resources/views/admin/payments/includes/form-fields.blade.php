@@ -6,13 +6,13 @@
         'content_ar' => $payment?->descriptionLang('ar') ?? null,
         'content_en' => $payment?->descriptionLang('en') ?? null,
     ])
-    @include('admin.layouts.forms.fields.select', [
+    {{-- @include('admin.layouts.forms.fields.select', [
         'select_name' => 'type',
         'select_function' => \App\Helpers\PaymentHelper::getPaymentTypes(),
         'select_value' => $payment->active ?? null,
         'select_class' => 'select2',
         'select2' => true,
-    ])
+    ]) --}}
 
     @include('admin.layouts.forms.fields.dropzone', [
         'name' => 'image',

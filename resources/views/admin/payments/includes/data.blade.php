@@ -1,6 +1,6 @@
 <tr>
     <td class="text-lg-center">{{ $payment->nameLang() }}</td>
-    <td class="text-lg-center">{{ $payment->type }}</td>
+    {{-- <td class="text-lg-center">{{ $payment->type }}</td> --}}
     
     {{-- active --}}
     @include('admin.layouts.tables.active', [

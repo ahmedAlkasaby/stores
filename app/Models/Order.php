@@ -140,7 +140,7 @@ class Order extends MainModel
         return $query
             ->applySorting($request)
             ->mainApplyDynamicFilters($filters)
-            ->appllyPriceFilters($request)
+            // ->appllyPriceFilters($request)
             ->applyDateFilters($request)
             ->applyAddressFilters($request)
         ;
