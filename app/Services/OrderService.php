@@ -58,6 +58,8 @@ class OrderService{
                'discount'=>$this->getDiscount($item->product_id),
                'shipping_cost' => $item->product->shipping_cost ?? 0,
            ]);
+           $product = Product::find($item->product_id);
+           $product->decrement('amount', $item->amount);
        }
     }
 
