@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
            'last_name'=>'Alkasaby',
            'email'=>'alkasaby145@gmail.com',
            'password'=>'ahmed145',
-              'phone'=>'01000000000',
+           'phone'=>'01000000000',
            'lang'=>'en',
            'theme'=>'light',
            'type'=>'admin'
