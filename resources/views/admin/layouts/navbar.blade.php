@@ -80,9 +80,13 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" aria-expanded="false">
                     <i class="fas fa-laptop-medical"></i>
-                    <span class="badge bg-danger rounded-pill badge-notifications">
+                    @if (auth()->user()->sessions->count() > 1)
+                        
+                    <span id="session-count" class="badge bg-danger rounded-pill badge-notifications">
                         {{ auth()->user()->sessions->count() }}
                     </span>
+                    @endif
+
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 400px;">
                     <h6 class="dropdown-header">@lang('site.active_sessions')</h6>
@@ -93,7 +97,7 @@
                                     <th>@lang('site.ip')</th>
                                     <th>@lang('site.browser')</th>
                                     <th>@lang('site.device')</th>
-                                    <th>@lang('site.time')</th>
+                                    <th>@lang('site.last_activity')</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -112,7 +116,10 @@
                                         <td>{{ $session->last_activity }}</td>
                                         <td>
                                             @if (!$session->is_this_device)
-                                                <button class="btn btn-sm btn-danger">{{ __('site.logout') }}</button>
+                                                <button class="btn btn-sm btn-danger logout-session"
+                                                    data-id="{{ $session->id }}">
+                                                    {{ __('site.logout') }}
+                                                </button>
                                             @else
                                                 <span class="badge bg-secondary">{{ __('site.this_device') }}</span>
                                             @endif
