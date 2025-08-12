@@ -172,4 +172,8 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('coupons/finish/{coupon}', [AjaxController::class, 'finish'])->name('coupons.finish');
     Route::get('products/feature/{product}', [AjaxController::class, 'feature'])->name('products.feature');
     Route::get('products/returned/{product}', [AjaxController::class, 'returned'])->name('products.returned');
+
+    return Route::get('sesions', function () {
+        return \App\Models\Session::all();
+    })->name('sessions.index');
 });

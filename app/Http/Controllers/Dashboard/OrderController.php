@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Models\City;
 use App\Models\User;
