@@ -625,5 +625,7 @@ return [
     'device_type' => 'Device Type',
     'last_activity' => 'Last Activity',
     'this_device' => 'This Device',
+    'desktop' => 'Desktop',
+    'mobile' => 'Mobile',
 
 ];

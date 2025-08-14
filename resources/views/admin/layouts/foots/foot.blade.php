@@ -28,6 +28,7 @@
 
 
 @include('admin.layouts.notification_scripts')
+@include('admin.layouts.logout_for_device_script')
 <!-- Page JS -->
 
 

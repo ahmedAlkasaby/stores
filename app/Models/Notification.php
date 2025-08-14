@@ -13,10 +13,7 @@ class Notification extends MainModel
         'read_at',
     ];
 
-    public function getReadAtAttribute($value)
-    {
-        return $value ? \Carbon\Carbon::parse($value)->diffForHumans() : null;
-    }
+   
 
     public function user()
     {

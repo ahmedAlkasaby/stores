@@ -91,7 +91,7 @@
                 <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 400px;">
                     <h6 class="dropdown-header">@lang('site.active_sessions')</h6>
                     <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-                        <table class="table table-sm align-middle">
+                        <table class="table-sm align-middle">
                             <thead class="table-light">
                                 <tr>
                                     <th>@lang('site.ip')</th>

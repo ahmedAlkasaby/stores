@@ -69,6 +69,11 @@ class Order extends MainModel
         return $this->hasMany(OrderItem::class);
     }
 
+    public function statusTrackingOrders()
+    {
+        return $this->hasMany(StatusTrackingOrder::class,'order_id', 'id');
+    }
+
 
 
     

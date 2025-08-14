@@ -645,5 +645,7 @@ return [
     'device_type' => 'نوع الجهاز',
     'last_activity' => 'اخر نشاط',
     'this_device' => 'هذا الجهاز',
+    'desktop' => 'سطح المكتب',
+    'mobile' => 'جوال',
 ];
 
