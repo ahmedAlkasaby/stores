@@ -13,6 +13,8 @@ class Notification extends MainModel
         'read_at',
     ];
 
+   
+
     public function user()
     {
         return $this->belongsTo(User::class);

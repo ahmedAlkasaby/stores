@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\City;
-use App\Models\Page;
-use App\Models\Size;
-use App\Models\Unit;
-use App\Models\User;
-use App\Models\Brand;
-use App\Models\Order;
-use App\Models\Coupon;
-use App\Models\Region;
-use App\Models\Review;
-use App\Models\Slider;
-use App\Traits\Toggle;
-use App\Models\Contact;
-use App\Models\Payment;
-use App\Models\Product;
-use App\Models\Service;
-use App\Models\Addition;
-use App\Models\Category;
-use App\Models\DeliveryTime;
-use Illuminate\Http\Request;
 use App\Enums\StatusOrderEnum;
 use App\Helpers\StatusOrderHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Addition;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\City;
+use App\Models\Contact;
+use App\Models\Coupon;
+use App\Models\DeliveryTime;
+use App\Models\Order;
+use App\Models\Page;
+use App\Models\Payment;
+use App\Models\Product;
+use App\Models\Region;
+use App\Models\Review;
+use App\Models\Service;
+use App\Models\Size;
+use App\Models\Slider;
+use App\Models\Unit;
+use App\Models\User;
+use App\Traits\Toggle;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
@@ -182,6 +183,16 @@ class AjaxController extends Controller
         return response()->json([
             'success' => true,
             'active' => $product->returned,
+        ]);
+    }
+
+    public function destroySession($id)
+    {
+        DB::table('sessions')->where('id', $id)->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Session deleted successfully'
         ]);
     }
 }

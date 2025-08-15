@@ -1,10 +1,4 @@
- <?php
- $tax = 0;
- foreach ($order->orderItems as $orderItem) {
-     $tax = $tax + $orderItem->shipping_cost;
- }
- 
- ?>
+
  <div class="col-12 col-lg-8">
      <div class="card mb-4">
          <div class="card-header d-flex justify-content-between align-items-center">
@@ -46,7 +40,7 @@
                              </td>
                              <td class="text-lg-center">
                                  <span>
-                                     {{ $orderItem->product->price }}
+                                     {{ $orderItem->price }}
                                  </span>
                              </td>
                              <td class="text-lg-center">
@@ -57,7 +51,7 @@
                              <td class="text-lg-center">
                                  <h6 class="mb-0">
 
-                                     {{ $orderItem->product->price * $orderItem->amount }}
+                                     {{ $orderItem->price * $orderItem->amount }}
                                  </h6>
                              </td>
                          </tr>
@@ -71,31 +65,26 @@
                          <span class="w-px-100 text-heading">{{ __('site.subtotal') }}:</span>
                          <h6 class="mb-0">
 
-                             {{ $order->orderPrice() }}</h6>
+                             {{ $order->price }}</h6>
                      </div>
                      <div class="d-flex justify-content-between mb-2">
                          <span class="w-px-100 text-heading">{{ __('site.discount') }}:</span>
                          <h6 class="mb-0">
 
-                             {{ $order->orderDiscount() }}</h6>
+                             {{ $order->discount }}</h6>
                      </div>
                      <div class="d-flex justify-content-between mb-2">
                          <span class="w-px-100 text-heading">{{ __('site.shipping') }}:</span>
                          <h6 class="mb-0">
 
-                             {{ $order->orderShippingProducts() }}</h6>
+                             {{ $order->shipping() }}</h6>
                      </div>
-                     <div class="d-flex justify-content-between mb-2">
-                         <span class="w-px-100 text-heading">{{ __('site.tax') }}:</span>
-                         <h6 class="mb-0">
-
-                             {{ $tax }}</h6>
-                     </div>
+                    
 
                      <div class="d-flex justify-content-between">
                          <h6 class="w-px-100 mb-0">{{ __('site.total') }}:</h6>
                          <h6 class="mb-0">
-                             {{ $order->orderTotal() + $tax }}</h6>
+                             {{ $order->orderTotal()  }}</h6>
                          EGP
                      </div>
                  </div>

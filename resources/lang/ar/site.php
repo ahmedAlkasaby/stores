@@ -638,5 +638,14 @@ return [
     'no_unread_notifications' => 'لا يوجد اشعارات غير مقروءة',
     'notification_not_found' => 'الاشعار غير موجود',
     'notification_deleted_successfully' => 'تم حذف الاشعار بنجاح',
+    'are_you_sure_you_want_to_logout_this_device' => 'هل انت متاكد من تسجيل الخروج من هذا الجهاز؟',
+    'active_sessions' => 'الجلسات النشطة',
+    'ip'=> 'Ip Address',
+    'browser' => 'المتصفح',
+    'device_type' => 'نوع الجهاز',
+    'last_activity' => 'اخر نشاط',
+    'this_device' => 'هذا الجهاز',
+    'desktop' => 'سطح المكتب',
+    'mobile' => 'جوال',
 ];
 

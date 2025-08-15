@@ -618,4 +618,14 @@ return [
     'no_unread_notifications' => 'No unread notifications',
     'notification_not_found' => 'Notification not found',
     'notification_deleted_successfully' => 'Notification deleted successfully',
+    'are_you_sure_you_want_to_logout_this_device' => 'Are you sure you want to logout this device?',
+    'active_sessions' => 'Active Sessions',
+    'ip' => 'IP Address',
+    'browser' => 'Browser',
+    'device_type' => 'Device Type',
+    'last_activity' => 'Last Activity',
+    'this_device' => 'This Device',
+    'desktop' => 'Desktop',
+    'mobile' => 'Mobile',
+
 ];

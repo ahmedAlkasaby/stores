@@ -2,14 +2,14 @@
         <div class="d-flex flex-column justify-content-center gap-2 gap-sm-0">
             <h5 class="mb-1 mt-3 d-flex flex-wrap gap-2 align-items-end">
                 {{ $order->user->name }}
-                @if($order->status == 'cancelled' )
+                @if($order->status->value == 'cancelled' || $order->status->value == 'returned' || $order->status->value == 'rejected')
                 <span class="badge bg-label-alert
                 ">
-                {{ $order->status }}
+                {{ $order->status->label() }}
             </span>
             @else
             <span class="badge bg-label-success">
-                {{ $order->status }}
+                {{ $order->status->label() }}
             </span>
             @endif
             </h5>

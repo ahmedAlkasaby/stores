@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Coupon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Requests\dashboard\CouponRequest;
 

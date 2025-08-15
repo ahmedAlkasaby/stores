@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
+use App\Observers\OrderObserver;
 use App\Services\FirebaseNotificationService;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
          $this->app->singleton(FirebaseNotificationService::class, function ($app) {
-            $projectId = config('firebase.project_id'); // الحصول على projectId من ملف الإعدادات
+            $projectId = config('firebase.project_id'); 
             return new FirebaseNotificationService($projectId);
         });
     }
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Order::observe(OrderObserver::class);
+
     }
 }
