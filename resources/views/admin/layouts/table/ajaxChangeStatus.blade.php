@@ -26,7 +26,7 @@
                             `<option value="${value}" ${isSelected}>${label}</option>`);
                     });
                     console.log(("#cancel-" + orderId));
-                    if (['canceled', 'rejected', 'returned'].includes(newStatus)) {
+                    if (['canceled', 'rejected', 'returned', 'delivered'].includes(newStatus)) {
                         $("#cancel-" + orderId).remove();
                     }
 

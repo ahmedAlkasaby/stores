@@ -40,7 +40,7 @@ class StatusOrderHelper
                 StatusOrderEnum::PreparingFinished
             ]),
 
-            StatusOrderEnum::Delivered->value => [],
+            StatusOrderEnum::Delivered->value => [StatusOrderEnum::Delivered],
 
             StatusOrderEnum::Canceled->value => StatusOrderEnum::only([
                 StatusOrderEnum::Canceled,

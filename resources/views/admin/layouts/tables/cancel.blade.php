@@ -11,7 +11,6 @@ use App\Enums\StatusOrderEnum;
                 StatusOrderEnum::Preparing,
                 StatusOrderEnum::PreparingFinished,
                 StatusOrderEnum::DeliveryGo,
-                StatusOrderEnum::Delivered,
             ]))
         <button type="button"
             class="btn {{ $item->active ? 'btn-success' : 'btn-danger' }}  cancel-orders waves-effect waves-light"

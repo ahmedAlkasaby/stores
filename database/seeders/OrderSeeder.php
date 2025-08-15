@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\StatusOrderEnum;
 use App\Models\Address;
 use App\Models\CartItem;
 use App\Models\Order;
@@ -56,18 +57,7 @@ class OrderSeeder extends Seeder
 
             // إنشاء الطلب
             $order = $user->orders()->create([
-                'status'              => $faker->randomElement([
-                    'request',
-                    'pending',
-                    'approved',
-                    'rejected',
-                    'preparing',
-                    'preparingFinished',
-                    'deliveryGo',
-                    'delivered',
-                    'canceled',
-                    'returned'
-                ]),
+                'status'              => $faker->randomElement(StatusOrderEnum::cases()),
                 'payment_id'          => $faker->randomElement($paymentIds),
                 'shipping_address'    => $this->getShippingAddress($user),
                 'notes'               => $faker->optional()->sentence(),
