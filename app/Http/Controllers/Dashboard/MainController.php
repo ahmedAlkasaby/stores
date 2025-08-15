@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use App\Facades\SettingFacade as AppSettings;
 
 
 class MainController extends Controller
@@ -16,9 +17,8 @@ class MainController extends Controller
 
     public function __construct()
     {
-        $setting=Setting::where('active',1)->first();
-
-        $this->result=$setting->result;
+        $this->setSettingsInView();
+        $this->result=AppSettings::get('result');
         $this->perPage = request()->get('per_page', $this->result);
         if ($this->perPage > 250) {
             $this->perPage = 250;
@@ -30,6 +30,12 @@ class MainController extends Controller
     {
         $this->class = $class;
         View::share('class', $class); // عشان يكون متاح في كل الـ views
+    }
+
+    protected function setSettingsInView()
+    {
+        $settings = AppSettings::all();
+        View::share('settings', $settings);
     }
 
 }
