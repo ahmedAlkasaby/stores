@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('site.favourties'))
+@section('title', __('site.wishlists'))
 @section('styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/select2/select2.css') }}" />
     @include('admin.layouts.table.datatablesCss')
