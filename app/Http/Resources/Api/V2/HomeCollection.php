@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Facades\SettingFacade as AppSettings;
+
 
 class HomeCollection extends ResourceCollection
 {
@@ -31,7 +33,8 @@ class HomeCollection extends ResourceCollection
         $user = $auth ? User::find($auth->id) : null;
     
         $generalData = Cache::remember('data_home_general', now()->addHours(2), function () {
-            $setting = Setting::where('active', 1)->first();
+            $setting= AppSettings::all();
+
             $sliders = Slider::filter()->paginate(10);
             $sliderFeature = Slider::where('feature', 1)->filter()->paginate(10);
             $categories = Category::with('children')->filter()->paginate(10);
