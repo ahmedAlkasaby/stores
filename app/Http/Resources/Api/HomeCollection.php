@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use App\Facades\SettingFacade as AppSettings;
+
 
 class HomeCollection extends ResourceCollection
 {
@@ -22,7 +24,7 @@ class HomeCollection extends ResourceCollection
     {
         $auth = Auth::guard('api')->user();
         $user =$auth ? User::find($auth->id) : null;
-        $setting= Setting::where('active',1)->first();
+        $setting= AppSettings::all();
         $sliders=Slider::filter()->paginate(10);
         $sliderFeature=Slider::where('feature',1)->filter()->paginate(10);
         $categories=Category::with('children')->filter()->paginate(10);
