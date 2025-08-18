@@ -19,5 +19,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/bootstrap/cache/*.php
+/bootstrap/cache
 /public/uploads
