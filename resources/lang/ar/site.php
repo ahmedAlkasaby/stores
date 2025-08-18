@@ -647,5 +647,6 @@ return [
     'this_device' => 'هذا الجهاز',
     'desktop' => 'سطح المكتب',
     'mobile' => 'جوال',
+    'trash_buckets' => 'سلة المهملات',
 ];
 

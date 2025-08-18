@@ -69,3 +69,16 @@ if (!function_exists('getThemes')) {
     }
 }
 
+if (! function_exists('getTableName')) {
+    function getTableName($modelType)
+    {
+        $className = class_basename($modelType); 
+
+       
+        return __(
+            'site.' . \Illuminate\Support\Str::plural(strtolower($className))
+        );
+    }
+}
+
+

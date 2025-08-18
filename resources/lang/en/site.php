@@ -627,5 +627,6 @@ return [
     'this_device' => 'This Device',
     'desktop' => 'Desktop',
     'mobile' => 'Mobile',
+    'trash_buckets' => 'Trash Buckets',
 
 ];
