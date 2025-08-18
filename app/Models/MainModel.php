@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\ActivityLogTrait;
+use App\Traits\HasTrash;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MainModel extends Model
 {
-    use HasFactory, SoftDeletes, ActivityLogTrait;
+    use HasFactory, SoftDeletes, ActivityLogTrait,HasTrash;
 
     protected $casts = [
         'name' => \App\Casts\UnescapedJson::class,

@@ -26,10 +26,12 @@ use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\dashboard\SettingController;
 use App\Http\Controllers\Dashboard\SizeController;
 use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\TrashBucketController;
 use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -138,6 +140,9 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
 
     //Resource route for activity_logs
     Route::get('activity_logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
+
+    Route::get('trash_buckets', [TrashBucketController::class, 'index'])->name('trash_buckets.index');
+
 
     //Resource route for notifications
     Route::resource('notifications', NotificationController::class)->only(['index', 'create', 'store', 'show']);
