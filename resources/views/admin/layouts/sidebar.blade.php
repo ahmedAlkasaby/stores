@@ -246,6 +246,15 @@
                 </ul>
             </li>
         @endif
+
+         @if (auth()->user()->hasPermission('trash_buckets.index'))
+            <li class="menu-item @if ($class == 'trash_buckets') active @endif">
+                <a href="{{ route('dashboard.trash_buckets.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-trash"></i>
+                    <div>{{ __('site.trash_buckets') }}</div>
+                </a>
+            </li>
+        @endif
         
         <li class="menu-item ">
             <a href="{{ route('dashboard.cache', ['redirect' => url()->current()]) }}" class="menu-link">

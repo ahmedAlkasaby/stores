@@ -40,6 +40,7 @@ return [
             "reviews" => 'i,sh,s,u,a,d',
             'activity_logs' => 'i',
             'notifications' => 'i,s,sh',
+            'trash_buckets'=>'i',
 
 
         ],
