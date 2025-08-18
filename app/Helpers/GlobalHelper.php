@@ -40,3 +40,32 @@ if (!function_exists('booleanType')) {
         ];
     }
 }
+
+if (!function_exists('getLangs')) {
+    function getLangs()
+    {
+        return [
+            'ar' => __('site.arabic'),
+            'en' => __('site.english'),
+        ];
+    }
+}
+
+if (!function_exists('getThemes')) {
+      function getThemes()
+    {
+        return [
+            'light' => [
+                'theme'      => 'light',
+                'icon_class' => 'ti ti-sun me-2',
+                'value'      => __('site.light'),
+            ],
+            'dark' => [
+                'theme'      => 'dark',
+                'icon_class' => 'ti ti-moon me-2',
+                'value'      => __('site.dark'),
+            ],
+        ];
+    }
+}
+
