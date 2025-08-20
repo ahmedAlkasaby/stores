@@ -39,7 +39,7 @@ trait ActivityLogTrait{
         $changes = $this->getChanges();
         $original = $this->getOriginal();
 
-        unset($changes['updated_at']);
+        unset($changes['updated_at'], $changes['deleted_at']);
 
 
         if (empty($changes)) return;
