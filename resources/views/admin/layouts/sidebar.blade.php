@@ -262,15 +262,6 @@
                 <div>{{ __('site.optimize') }}</div>
             </a>
         </li>
-
-
-
-
-
-
-
-
-
     </ul>
 </aside>
 <!-- / Menu -->
