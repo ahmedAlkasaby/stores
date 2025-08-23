@@ -52,7 +52,9 @@ return [
     'profile_updated'=>'Profile Updated Successfully',
     'lang_updated'=>'Language Updated Successfully',
     'theme_updated'=>'Theme Updated Successfully',
-    
+    'payment_initiated'=>'Payment Initiated Successfully',
+    'payment_success'=>'Payment Success',
+    'payment_failed'=>'Payment Failed',
 
 
 ];
