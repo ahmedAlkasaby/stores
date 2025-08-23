@@ -36,7 +36,7 @@ class PaymobController extends MainController
         $response = $this->paymob->callBack($request);
         if ($response) {
 
-            return $this->messageSuccess(__('api.payment_success')); ;
+            return $this->messageSuccess(__('api.payment_success')); 
         }
         return $this->messageError(__('api.payment_failed'));
     }
