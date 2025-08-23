@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\PaymobController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegionController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Api\StoreTypeController;
 use App\Http\Controllers\Api\WishListController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -85,6 +87,12 @@ Route::group(['middleware'=>['userLangApi','checkSettingOpen']],function(){
                 Route::post('lang',[ProfileController::class, 'changeLang']);
             });
         });
+
+        Route::group(['prefix'=>'paymob'],function(){
+            Route::get('initiate',[PaymobController::class,'initiate']);
+            Route::post('callback',[PaymobController::class,'callBack']);
+        });
+
 
     });
 

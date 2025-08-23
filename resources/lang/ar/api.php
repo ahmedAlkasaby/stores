@@ -51,6 +51,10 @@ return [
     'notify_updated'=>'تم تحديث الاشعارات بنجاح',
     'profile_updated'=>'تم تحديث الملف الشخصي بنجاح',
     'lang_updated'=>'تم تحديث اللغة بنجاح',
+    'payment_initiated'=>'تم بدء عملية الدفع',
+    'payment_success'=>'تم الدفع بنجاح',
+    'payment_failed'=>'فشلت عملية الدفع',
+ 
     
 
 

@@ -79,7 +79,7 @@ class OrderService{
             return __('api.address_not_found');
         }
 
-         if($totalPrice < $setting->min_order){
+        if($totalPrice < $setting->min_order){
             return __('api.min_order',['min_order' => $setting->min_order]);
         }
 
@@ -150,6 +150,16 @@ class OrderService{
             $totalShipping += $item->product->shipping_cost;
         }
         return $totalShipping;
+    }
+
+
+    public function getTotalOrderPrice(){
+        $totalPrice=$this->getOrderPrice();
+        $totalDiscount=$this->getOrderDiscount();
+        $totalShippingProducts=$this->getOrderShippingProducts();
+        $totalShippingAddress=$this->getShippingAddress();
+        $total=($totalPrice - $totalDiscount) + $totalShippingProducts + $totalShippingAddress;
+        return $total;
     }
 }
 
