@@ -133,6 +133,8 @@ class Product extends MainModel
     {
         return $query
             ->where('active', true)
+            ->where('amount', '>', 0)
+            ->where('stock',true)
             ->where(function ($q) {
                 $q->whereNull('date_start')
                   ->orWhereDate('date_start', '<=', now());
