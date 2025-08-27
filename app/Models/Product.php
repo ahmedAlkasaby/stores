@@ -276,8 +276,7 @@ class Product extends MainModel
     {
         $userId = Auth::guard('api')->id();
         if ($userId) {
-            return CartItem::where('product_id', $this->id)
-                ->where('user_id', $userId)
+            return $this->cartItems->where('user_id', $userId)
                 ->sum('amount');
         }
         return 0;
@@ -286,31 +285,33 @@ class Product extends MainModel
     public function checkProductInCart(): bool
     {
         $userId = Auth::guard('api')->id();
-        return $userId && CartItem::where('product_id', $this->id)->where('user_id', $userId)->exists();
+        if (!$userId) return false;
+        return $this->cartItems->where('user_id', $userId)->isNotEmpty();
     }
 
     public function checkProductInWishlists(): bool
     {
         $userId = Auth::guard('api')->id();
-        return $userId && $this->wishlists()->where('user_id', $userId)->exists();
+        if (!$userId) return false;
+        return $this->wishlists->where('id', $userId)->isNotEmpty();
     }
+
 
     public function productIdInCart()
     {
         $userId = Auth::guard('api')->id();
         if ($userId) {
-            return CartItem::where('product_id', $this->id)
-                ->where('user_id', $userId)
-                ->pluck('id')
-                ->first();
+            $cartItem = $this->cartItems->where('user_id', $userId)->first();
+            return $cartItem ? $cartItem->id : 0;
         }
         return 0;
     }
 
 
+
     public function amountInAllCarts()
     {
-        return $this->cartItems()->sum('amount');
+        return $this->cartItems->sum('amount');
     }
 
 
@@ -326,7 +327,7 @@ class Product extends MainModel
 
     public function averageRating()
     {
-        return $this->reviews()->where('active', true)->avg('rating') ?? 0;
+        return $this->reviews->where('active', true)->avg('rating') ?? 0;
     }
 
 
