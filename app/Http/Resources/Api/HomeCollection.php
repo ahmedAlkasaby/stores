@@ -29,14 +29,15 @@ class HomeCollection extends ResourceCollection
         $sliderFeature=Slider::where('feature',1)->filter()->paginate(10);
         $categories=Category::with('children')->filter()->paginate(10);
         $services=Service::filter()->paginate(10);
-        $data=['categories','service','unit','size','brand','children'];
+         $data=['categories','service','unit','size','brand','wishlists','cartItems','reviews'];
 
-        $featureProducts=Product::with($data)->where('feature',1)->active()->paginate(10);
-        $newProducts=Product::with($data)->where('new',1)->active()->paginate(10);
-        $specialProducts=Product::with($data)->where('special',1)->active()->paginate(10);
-        $saleProducts=Product::with($data)->where('sale',1)->active()->paginate(10);
-        $filterProducts=Product::with($data)->where('filter',1)->active()->paginate(10);
-        $offerProducts=Product::with($data)->where('offer',1)->active()->paginate(10);
+
+        $featureProducts=Product::with($data)->withMin('children','price')->withMax('children','price')->where('feature',1)->active()->paginate(10);
+        $newProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('new',1)->active()->paginate(10);
+        $specialProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('special',1)->active()->paginate(10);
+        $saleProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('sale',1)->active()->paginate(10);
+        $filterProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('filter',1)->active()->paginate(10);
+        $offerProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('offer',1)->active()->paginate(10);
 
 
 
@@ -65,7 +66,7 @@ class HomeCollection extends ResourceCollection
             'min_order_for_shipping_free'=> $setting->min_order_for_shipping_free,
             'cart_total'=>$user ? $user->totalPriceInCart() : 0,
             'product_min'=>Product::filter()->min('price'),
-            'product_max'=> Product::filter()->min('price'),
+            'product_max'=> Product::filter()->max('price'),
             'site_title'=> $setting->site_title,
             'site_phone'=> $setting->site_phone,
             'site_email'=> $setting->site_email,
