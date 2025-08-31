@@ -27,6 +27,8 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->boolean('vip')->default(false);
             $table->boolean('notify')->default(true);
+            $table->timestamp('last_seen_at')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\CacheController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\dashboard\CityController;
 use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\ConversationController;
 use App\Http\Controllers\dashboard\CouponController;
 use App\Http\Controllers\dashboard\DeliveryTimeController;
 use App\Http\Controllers\Dashboard\HomeController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Dashboard\UnitController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -172,6 +174,10 @@ Route::group(['middleware' => ['auth', 'admin', 'check.permission']], function (
     Route::get('products/feature/{product}', [AjaxController::class, 'feature'])->name('products.feature');
     Route::get('products/returned/{product}', [AjaxController::class, 'returned'])->name('products.returned');
     Route::delete('sessions/{id}', [AjaxController::class, 'destroySession']);
+
+    //Chats
+    Route::get('chats', [ConversationController::class, 'chats']);
+    Route::get('chats/{userTwoId}', [ConversationController::class, 'openChat']);
 
    
 });

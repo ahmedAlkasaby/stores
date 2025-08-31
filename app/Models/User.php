@@ -171,6 +171,27 @@ class User extends Authenticatable implements JWTSubject,LaratrustUser
 
     }
 
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class, 'user_one_id')
+            ->orWhere('user_two_id', $this->id);
+    }
+    
+    public function contacts()
+    {
+        $usersWithConversations = Conversation::where('user_one_id', $this->id)
+            ->orWhere('user_two_id', $this->id)
+            ->pluck('user_one_id')
+            ->merge(Conversation::where('user_one_id', $this->id)
+                ->orWhere('user_two_id', $this->id)
+                ->pluck('user_two_id'))
+            ->unique()
+            ->toArray();
+
+        return User::where('type','admin')->where('id', '!=', $this->id)
+            ->whereNotIn('id', $usersWithConversations);
+    }
+
 
 
 
