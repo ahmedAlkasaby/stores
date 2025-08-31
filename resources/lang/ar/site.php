@@ -648,5 +648,18 @@ return [
     'desktop' => 'سطح المكتب',
     'mobile' => 'جوال',
     'trash_buckets' => 'سلة المهملات',
+
+    // ترجمات الشات
+    'conversations' => 'المحادثات',
+    'no_conversations' => 'لا توجد محادثات',
+    'contacts' => 'جهات الاتصال',
+    'no_contacts' => 'لا توجد جهات اتصال',
+    'no_messages' => 'لا توجد رسائل',
+    'select_contact' => 'اختر جهة اتصال للمحادثة',
+    'type_message' => 'اكتب رسالتك هنا',
+    'send' => 'إرسال',
+    'chats' => 'المحادثات',
+    'online' => 'متصل',
+    'offline' => 'غير متصل',
 ];
 

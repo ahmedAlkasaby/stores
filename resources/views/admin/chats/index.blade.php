@@ -2,6 +2,15 @@
 @section('title', __('site.chats'))
 @section('styles')
     <link rel="stylesheet" href={{ asset('admin/assets/vendor/css/pages/app-chat.css') }} />
+    <style>
+        .chat-contact-list-item.active {
+            background-color: rgba(var(--bs-primary-rgb), 0.1);
+        }
+
+        .chat-contact-list-item.active a {
+            color: var(--bs-primary);
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -37,11 +46,13 @@
                             @if ($conversations->count() > 0)
 
                                 @foreach ($conversations as $conversation)
-                                    <li class="chat-contact-list-item {{ isset($conversationId) && $conversationId == $conversation->getId() ? 'active' : '' }}">
-                                        <a href="/dashboard/chats/{{ $conversation->getId() }}" class="d-flex align-items-center">
+                                    <li
+                                        class="chat-contact-list-item {{ isset($conversationId) && $conversationId == $conversation->getId() ? 'active' : '' }}">
+                                        <a href="/dashboard/chats/{{ $conversation->getId() }}"
+                                            class="d-flex align-items-center">
                                             <div
                                                 class="flex-shrink-0 avatar {{ $conversation->isOnline() ? 'avatar-online' : 'avatar-offline' }}">
-                                                <img src="{{ $conversation->getAvatar() }}" alt="Avatar"
+                                                <img src="{{ asset($conversation->getAvatar()) }}" alt="Avatar"
                                                     class="rounded-circle" />
                                             </div>
                                             <div class="chat-contact-info flex-grow-1 ms-2">
@@ -49,11 +60,12 @@
                                                     {{ $conversation->getName() }}
                                                 </h6>
                                                 <p class="chat-contact-status text-muted text-truncate mb-0">
-                                                    {{ $conversation->last_message_at ?? 'No messages yet' }}
+                                                    {{ $conversation->last_message_at ?? __('site.no_messages_yet') }}
                                                 </p>
                                             </div>
 
-                                            <small class="text-muted mb-auto">{{ $conversation->getLastMessageTime() }}</small>
+                                            <small
+                                                class="text-muted mb-auto">{{ $conversation->getLastMessageTime() }}</small>
                                         </a>
                                     </li>
                                 @endforeach
@@ -100,8 +112,10 @@
 
                 <!-- Chat History -->
                 <div class="col app-chat-history bg-body">
-                    <div class="chat-history-wrapper">
-                        <div class="chat-history-body bg-body">
+                    <div class="chat-history-wrapper d-flex flex-column h-100"> <!-- أضفنا d-flex و flex-column و h-100 -->
+
+                        <!-- رسائل الدردشة -->
+                        <div class="chat-history-body bg-body flex-grow-1"> <!-- أضفنا flex-grow-1 -->
                             <ul class="list-unstyled chat-history">
                                 @if (isset($conversationId))
                                     @if ($messages->count() > 0)
@@ -128,42 +142,34 @@
                                             </li>
                                         @endforeach
                                     @else
-                                        <li class="chat-contact-list-item chat-list-item-0">
+                                        <li class="chat-message text-center">
                                             <h6 class="text-muted mb-0">@lang('site.no_messages')</h6>
                                         </li>
                                     @endif
-                                    <!-- Chat message form -->
-                                    <div class="chat-history-footer shadow-sm">
-                                        <form class="form-send-message d-flex justify-content-between align-items-center">
-                                            <input class="form-control message-input border-0 me-3 shadow-none"
-                                                placeholder="Type your message here" />
-                                            <div class="message-actions d-flex align-items-center">
-                                                <i class="speech-to-text ti ti-microphone ti-sm cursor-pointer"></i>
-                                                <label for="attach-doc" class="form-label mb-0">
-                                                    <i class="ti ti-photo ti-sm cursor-pointer mx-3"></i>
-                                                    <input type="file" id="attach-doc" hidden />
-                                                </label>
-                                                <button class="btn btn-primary d-flex send-msg-btn">
-                                                    <i class="ti ti-send me-md-1 me-0"></i>
-                                                    <span class="align-middle d-md-inline-block d-none">Send</span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                @else
-                                    <div class="col app-chat-conversation d-flex align-items-center justify-content-center flex-column"
-                                        id="app-chat-conversation">
-                                        <div class="bg-label-primary p-8 rounded-circle">
-                                            <i class="icon-base ti tabler-message-2 icon-50px"></i>
-                                        </div>
-                                        <p class="my-4">@lang('site.select_contact')</p>
-                                      
-                                    </div>
-
                                 @endif
                             </ul>
                         </div>
 
+                        <!-- نموذج إرسال الرسائل - سيظل دائماً في الأسفل -->
+                        @if (isset($conversationId))
+                            <div class="chat-history-footer shadow-sm mt-auto"> <!-- أضفنا mt-auto -->
+                                <form class="form-send-message d-flex justify-content-between align-items-center">
+                                    <input class="form-control message-input border-0 me-3 shadow-none"
+                                        placeholder="Type your message here" />
+                                    <div class="message-actions d-flex align-items-center">
+                                        <i class="speech-to-text ti ti-microphone ti-sm cursor-pointer"></i>
+                                        <label for="attach-doc" class="form-label mb-0">
+                                            <i class="ti ti-photo ti-sm cursor-pointer mx-3"></i>
+                                            <input type="file" id="attach-doc" hidden />
+                                        </label>
+                                        <button class="btn btn-primary d-flex send-msg-btn">
+                                            <i class="ti ti-send me-md-1 me-0"></i>
+                                            <span class="align-middle d-md-inline-block d-none">Send</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <!-- /Chat History -->

@@ -629,4 +629,16 @@ return [
     'mobile' => 'Mobile',
     'trash_buckets' => 'Trash Buckets',
 
+    // Chat translations
+    'conversations' => 'Conversations',
+    'no_conversations' => 'No conversations found',
+    'contacts' => 'Contacts',
+    'no_contacts' => 'No contacts found',
+    'no_messages' => 'No messages',
+    'select_contact' => 'Select a contact to start chatting',
+    'type_message' => 'Type your message here',
+    'send' => 'Send',
+    'chats' => 'Chats',
+    'online' => 'Online',
+    'offline' => 'Offline',
 ];
