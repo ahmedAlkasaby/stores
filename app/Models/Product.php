@@ -325,6 +325,11 @@ class Product extends MainModel
         return $this->morphMany(Review::class, 'reviewable');
     }
 
+    public function activeReviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable')->where('active', true);
+    }
+
     public function averageRating()
     {
         return $this->reviews->where('active', true)->avg('rating') ?? 0;

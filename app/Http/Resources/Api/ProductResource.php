@@ -61,12 +61,9 @@ class ProductResource extends JsonResource
             'returned' => $this->returned,
 
 
-            'reviews_count' => $this->whenLoaded('reviews', function () {
-                return $this->reviews->count();
-            }),
-            'average_rating' => $this->whenLoaded('reviews', function () {
-                return $this->averageRating();
-            }),
+            'reviews_count'  => $this->reviews_count ?? 0,
+            'average_rating' => $this->active_reviews_avg_rating ?? 0,
+
 
 
 
