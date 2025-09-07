@@ -41,14 +41,8 @@ class ProductResource extends JsonResource
             'skip' => $this->skip,
             'max_order' => $this->max_order,
             'amount' => $this->amount,
-            'amount_in_all_carts' => $this->whenLoaded('cartItems', function () {
-                return $this->amountInAllCarts();
-            }),
-            'available_amount' => $this->whenLoaded('cartItems', function () {
-                return $this->availableAmount();
-            }),
-
-
+            'amount_in_all_carts' => $this->amount_in_all_carts ?? 0,
+            'available_amount'    => $this->amount - ($this->amount_in_all_carts ?? 0),
             'active' => $this->active,
             'feature' => $this->feature,
             'new' => $this->new,

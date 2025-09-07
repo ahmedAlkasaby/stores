@@ -17,6 +17,8 @@ class HomeController extends MainController
         ->withMax('children','price')
         ->withCount('activeReviews')
         ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')
+
 
         ->filter()->paginate($this->perPage);
 

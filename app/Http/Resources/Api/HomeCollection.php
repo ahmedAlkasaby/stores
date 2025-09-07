@@ -29,15 +29,45 @@ class HomeCollection extends ResourceCollection
         $sliderFeature=Slider::where('feature',1)->filter()->paginate(10);
         $categories=Category::with('children')->filter()->paginate(10);
         $services=Service::filter()->paginate(10);
-         $data=['categories','service','unit','size','brand','wishlists','cartItems','reviews'];
+        $data=['categories','service','unit','size','brand','wishlists'];
 
 
-        $featureProducts=Product::with($data)->withMin('children','price')->withMax('children','price')->where('feature',1)->active()->paginate(10);
-        $newProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('new',1)->active()->paginate(10);
-        $specialProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('special',1)->active()->paginate(10);
-        $saleProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('sale',1)->active()->paginate(10);
-        $filterProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('filter',1)->active()->paginate(10);
-        $offerProducts=Product::with($data)->withMax('children','price')->withMin('children','price')->where('offer',1)->active()->paginate(10);
+        $featureProducts=Product::with($data)
+         ->withMin('children','price')
+        ->withMax('children','price')
+        ->withCount('activeReviews')
+        ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')->where('feature',1)->active()->paginate(10);
+        $newProducts=Product::with($data)
+         ->withMin('children','price')
+        ->withMax('children','price')
+        ->withCount('activeReviews')
+        ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')->where('new',1)->active()->paginate(10);
+        $specialProducts=Product::with($data)
+         ->withMin('children','price')
+        ->withMax('children','price')
+        ->withCount('activeReviews')
+        ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')->where('special',1)->active()->paginate(10);
+        $saleProducts=Product::with($data)
+         ->withMin('children','price')
+        ->withMax('children','price')
+        ->withCount('activeReviews')
+        ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')->where('sale',1)->active()->paginate(10);
+        $filterProducts=Product::with($data)
+         ->withMin('children','price')
+        ->withMax('children','price')
+        ->withCount('activeReviews')
+        ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')->where('filter',1)->active()->paginate(10);
+        $offerProducts=Product::with($data)
+         ->withMin('children','price')
+        ->withMax('children','price')
+        ->withCount('activeReviews')
+        ->withAvg('activeReviews','rating')
+        ->withSum('cartItems as amount_in_all_carts', 'amount')->where('offer',1)->active()->paginate(10);
 
 
 
