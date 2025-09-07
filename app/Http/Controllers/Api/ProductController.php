@@ -14,7 +14,15 @@ class ProductController extends MainController
 
     public function index(ProductRequest $request)
     {
-        $products =Product::with(['categories','service','unit','size','brand','children.size'])->filter($request)->paginate($this->perPage);
+        $data = ['categories', 'service', 'unit', 'size', 'brand', 'wishlists', 'cartItems'];
+        $products = Product::with($data)
+            ->withMin('children', 'price')
+            ->withMax('children', 'price')
+            ->withCount('activeReviews')
+            ->withAvg('activeReviews', 'rating')
+            ->withSum('cartItems as amount_in_all_carts', 'amount')
+            ->filter($request)->paginate($this->perPage);
+
         return $this->sendData(new ProductCollection($products));
     }
 
@@ -22,16 +30,20 @@ class ProductController extends MainController
 
     public function show(string $id)
     {
-        $product = Product::with(['categories','service','unit','size','brand','children.size'])
-                    ->active()
-                    ->where('id', $id)
-                    ->first();
+        $data = ['categories', 'service', 'unit', 'size', 'brand', 'wishlists', 'cartItems', 'children.size', 'parent'];
+
+        $product = Product::with($data)
+            ->withMin('children', 'price')
+            ->withMax('children', 'price')
+            ->withCount('activeReviews')
+            ->withAvg('activeReviews', 'rating')
+            ->withSum('cartItems as amount_in_all_carts', 'amount')
+            ->active()
+            ->where('id', $id)
+            ->first();
         if (!$product) {
             return $this->sendError(__('site.not_found_product'), 404);
         }
         return $this->sendData(new ProductResource($product));
-
     }
-
-
 }

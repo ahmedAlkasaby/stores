@@ -29,7 +29,7 @@ class HomeCollection extends ResourceCollection
         $sliderFeature=Slider::where('feature',1)->filter()->paginate(10);
         $categories=Category::with('children')->filter()->paginate(10);
         $services=Service::filter()->paginate(10);
-        $data=['categories','service','unit','size','brand','wishlists'];
+        $data=['categories','service','unit','size','brand','wishlists','cartItems'];
 
 
         $featureProducts=Product::with($data)

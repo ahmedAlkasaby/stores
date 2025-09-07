@@ -18,8 +18,6 @@ class HomeController extends MainController
         ->withCount('activeReviews')
         ->withAvg('activeReviews','rating')
         ->withSum('cartItems as amount_in_all_carts', 'amount')
-
-
         ->filter()->paginate($this->perPage);
 
         $data=new HomeCollection($products);
