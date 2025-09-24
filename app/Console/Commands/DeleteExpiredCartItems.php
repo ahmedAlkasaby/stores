@@ -17,7 +17,7 @@ class DeleteExpiredCartItems extends Command
     {
         $setting = Setting::where('active', 1)->first();
 
-        $hours = $setting?->max_time_product_in_carts ?? 1;
+        $hours = $setting?->max_hour_product_in_carts ?? 1;
 
         $threshold = now()->subHours($hours);
 
